@@ -12,6 +12,12 @@
 	<dict>
 		<key>35DCDBCB-98F8-437D-88CE-193AD837EF3D</key>
 		<string>https://github.com/andyapps/ListenBooks.git</string>
+		<key>46D03AED-5D7C-40B3-9E8E-3D08479439C9</key>
+		<string>https://github.com/ricobeck/KFEpubKit.git</string>
+		<key>CA8F51C8-EDC5-4A4C-A936-5028BE8DC2FE</key>
+		<string>https://github.com/robbiehanson/KissXML.git</string>
+		<key>E9B2F330-416D-44B6-8B4F-725472D3CAE1</key>
+		<string>https://github.com/soffes/ssziparchive.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>ListenBooks.xcodeproj/project.xcworkspace</string>
@@ -19,6 +25,12 @@
 	<dict>
 		<key>35DCDBCB-98F8-437D-88CE-193AD837EF3D</key>
 		<string>../..</string>
+		<key>46D03AED-5D7C-40B3-9E8E-3D08479439C9</key>
+		<string>../../Vendor/KFEpubKit</string>
+		<key>CA8F51C8-EDC5-4A4C-A936-5028BE8DC2FE</key>
+		<string>../../Vendor/KissXML</string>
+		<key>E9B2F330-416D-44B6-8B4F-725472D3CAE1</key>
+		<string>../../Vendor/ssziparchive</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/andyapps/ListenBooks.git</string>
@@ -32,9 +44,33 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>46D03AED-5D7C-40B3-9E8E-3D08479439C9</string>
+			<key>IDESourceControlWCCName</key>
+			<string>KFEpubKit</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>CA8F51C8-EDC5-4A4C-A936-5028BE8DC2FE</string>
+			<key>IDESourceControlWCCName</key>
+			<string>KissXML</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>35DCDBCB-98F8-437D-88CE-193AD837EF3D</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ListenBooks</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>E9B2F330-416D-44B6-8B4F-725472D3CAE1</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ssziparchive</string>
 		</dict>
 	</array>
 </dict>

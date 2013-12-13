@@ -19,6 +19,31 @@
 		84E29EE0185B39AF006853C8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E29EBC185B39AF006853C8 /* Cocoa.framework */; };
 		84E29EE8185B39AF006853C8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84E29EE6185B39AF006853C8 /* InfoPlist.strings */; };
 		84E29EEA185B39AF006853C8 /* ListenBooksTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E29EE9185B39AF006853C8 /* ListenBooksTests.m */; };
+		84E29F05185B5BCE006853C8 /* KFEpubConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E29EFA185B5BCE006853C8 /* KFEpubConstants.m */; };
+		84E29F06185B5BCE006853C8 /* KFEpubContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E29EFC185B5BCE006853C8 /* KFEpubContentModel.m */; };
+		84E29F07185B5BCE006853C8 /* KFEpubController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E29EFE185B5BCE006853C8 /* KFEpubController.m */; };
+		84E29F08185B5BCE006853C8 /* KFEpubExtractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E29F00185B5BCE006853C8 /* KFEpubExtractor.m */; };
+		84E29F09185B5BCE006853C8 /* KFEpubKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E29F02185B5BCE006853C8 /* KFEpubKit.m */; };
+		84E29F0A185B5BCE006853C8 /* KFEpubParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E29F04185B5BCE006853C8 /* KFEpubParser.m */; };
+		84E29F0D185B5BF1006853C8 /* tolstoy-war-and-peace.epub in Resources */ = {isa = PBXBuildFile; fileRef = 84E29F0C185B5BF1006853C8 /* tolstoy-war-and-peace.epub */; };
+		84E29F1E185B5DD7006853C8 /* DDXMLElementAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E29F11185B5DD7006853C8 /* DDXMLElementAdditions.m */; };
+		84E29F1F185B5DD7006853C8 /* NSString+DDXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E29F14185B5DD7006853C8 /* NSString+DDXML.m */; };
+		84E29F20185B5DD7006853C8 /* DDXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E29F17185B5DD7006853C8 /* DDXMLDocument.m */; };
+		84E29F21185B5DD7006853C8 /* DDXMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E29F19185B5DD7006853C8 /* DDXMLElement.m */; };
+		84E29F22185B5DD7006853C8 /* DDXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E29F1B185B5DD7006853C8 /* DDXMLNode.m */; };
+		84E29F30185B6175006853C8 /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 84E29F26185B6175006853C8 /* ioapi.c */; };
+		84E29F31185B6175006853C8 /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = 84E29F28185B6175006853C8 /* mztools.c */; };
+		84E29F32185B6175006853C8 /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = 84E29F2A185B6175006853C8 /* unzip.c */; };
+		84E29F33185B6175006853C8 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 84E29F2C185B6175006853C8 /* zip.c */; };
+		84E29F34185B6175006853C8 /* SSZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E29F2F185B6175006853C8 /* SSZipArchive.m */; };
+		84E29F36185B618B006853C8 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E29F35185B618B006853C8 /* libxml2.dylib */; };
+		84E29F38185B64D2006853C8 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E29F37185B64D2006853C8 /* libz.dylib */; };
+		84E29F3F185B6CD5006853C8 /* invalid-manifest.opf in Resources */ = {isa = PBXBuildFile; fileRef = 84E29F39185B6CD5006853C8 /* invalid-manifest.opf */; };
+		84E29F40185B6CD5006853C8 /* invalid-toc.opf in Resources */ = {isa = PBXBuildFile; fileRef = 84E29F3A185B6CD5006853C8 /* invalid-toc.opf */; };
+		84E29F41185B6CD5006853C8 /* tolstoy-war-and-peace.epub in Resources */ = {isa = PBXBuildFile; fileRef = 84E29F3B185B6CD5006853C8 /* tolstoy-war-and-peace.epub */; };
+		84E29F42185B6CD5006853C8 /* valid-comments.opf in Resources */ = {isa = PBXBuildFile; fileRef = 84E29F3C185B6CD5006853C8 /* valid-comments.opf */; };
+		84E29F43185B6CD5006853C8 /* valid.opf in Resources */ = {isa = PBXBuildFile; fileRef = 84E29F3D185B6CD5006853C8 /* valid.opf */; };
+		84E29F44185B6CD5006853C8 /* Winnie-the-Pooh.epub in Resources */ = {isa = PBXBuildFile; fileRef = 84E29F3E185B6CD5006853C8 /* Winnie-the-Pooh.epub */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +78,50 @@
 		84E29EE7185B39AF006853C8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		84E29EE9185B39AF006853C8 /* ListenBooksTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ListenBooksTests.m; sourceTree = "<group>"; };
 		84E29EF3185B3BFB006853C8 /* ListenBooks.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ListenBooks.entitlements; sourceTree = "<group>"; };
+		84E29EF9185B5BCE006853C8 /* KFEpubConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFEpubConstants.h; sourceTree = "<group>"; };
+		84E29EFA185B5BCE006853C8 /* KFEpubConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFEpubConstants.m; sourceTree = "<group>"; };
+		84E29EFB185B5BCE006853C8 /* KFEpubContentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFEpubContentModel.h; sourceTree = "<group>"; };
+		84E29EFC185B5BCE006853C8 /* KFEpubContentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFEpubContentModel.m; sourceTree = "<group>"; };
+		84E29EFD185B5BCE006853C8 /* KFEpubController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFEpubController.h; sourceTree = "<group>"; };
+		84E29EFE185B5BCE006853C8 /* KFEpubController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFEpubController.m; sourceTree = "<group>"; };
+		84E29EFF185B5BCE006853C8 /* KFEpubExtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFEpubExtractor.h; sourceTree = "<group>"; };
+		84E29F00185B5BCE006853C8 /* KFEpubExtractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFEpubExtractor.m; sourceTree = "<group>"; };
+		84E29F01185B5BCE006853C8 /* KFEpubKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFEpubKit.h; sourceTree = "<group>"; };
+		84E29F02185B5BCE006853C8 /* KFEpubKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFEpubKit.m; sourceTree = "<group>"; };
+		84E29F03185B5BCE006853C8 /* KFEpubParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFEpubParser.h; sourceTree = "<group>"; };
+		84E29F04185B5BCE006853C8 /* KFEpubParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFEpubParser.m; sourceTree = "<group>"; };
+		84E29F0C185B5BF1006853C8 /* tolstoy-war-and-peace.epub */ = {isa = PBXFileReference; lastKnownFileType = file; name = "tolstoy-war-and-peace.epub"; path = "Vendor/KFEpubKit/KFEpubKit/Resources/tolstoy-war-and-peace.epub"; sourceTree = "<group>"; };
+		84E29F10185B5DD7006853C8 /* DDXMLElementAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLElementAdditions.h; sourceTree = "<group>"; };
+		84E29F11185B5DD7006853C8 /* DDXMLElementAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLElementAdditions.m; sourceTree = "<group>"; };
+		84E29F13185B5DD7006853C8 /* NSString+DDXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DDXML.h"; sourceTree = "<group>"; };
+		84E29F14185B5DD7006853C8 /* NSString+DDXML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DDXML.m"; sourceTree = "<group>"; };
+		84E29F15185B5DD7006853C8 /* DDXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXML.h; sourceTree = "<group>"; };
+		84E29F16185B5DD7006853C8 /* DDXMLDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLDocument.h; sourceTree = "<group>"; };
+		84E29F17185B5DD7006853C8 /* DDXMLDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLDocument.m; sourceTree = "<group>"; };
+		84E29F18185B5DD7006853C8 /* DDXMLElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLElement.h; sourceTree = "<group>"; };
+		84E29F19185B5DD7006853C8 /* DDXMLElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLElement.m; sourceTree = "<group>"; };
+		84E29F1A185B5DD7006853C8 /* DDXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLNode.h; sourceTree = "<group>"; };
+		84E29F1B185B5DD7006853C8 /* DDXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLNode.m; sourceTree = "<group>"; };
+		84E29F1D185B5DD7006853C8 /* DDXMLPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLPrivate.h; sourceTree = "<group>"; };
+		84E29F25185B6175006853C8 /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
+		84E29F26185B6175006853C8 /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
+		84E29F27185B6175006853C8 /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
+		84E29F28185B6175006853C8 /* mztools.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mztools.c; sourceTree = "<group>"; };
+		84E29F29185B6175006853C8 /* mztools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mztools.h; sourceTree = "<group>"; };
+		84E29F2A185B6175006853C8 /* unzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unzip.c; sourceTree = "<group>"; };
+		84E29F2B185B6175006853C8 /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
+		84E29F2C185B6175006853C8 /* zip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zip.c; sourceTree = "<group>"; };
+		84E29F2D185B6175006853C8 /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
+		84E29F2E185B6175006853C8 /* SSZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSZipArchive.h; sourceTree = "<group>"; };
+		84E29F2F185B6175006853C8 /* SSZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSZipArchive.m; sourceTree = "<group>"; };
+		84E29F35185B618B006853C8 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		84E29F37185B64D2006853C8 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		84E29F39185B6CD5006853C8 /* invalid-manifest.opf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "invalid-manifest.opf"; path = "Vendor/KFEpubKit/EpubKitTests/Resources/invalid-manifest.opf"; sourceTree = "<group>"; };
+		84E29F3A185B6CD5006853C8 /* invalid-toc.opf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "invalid-toc.opf"; path = "Vendor/KFEpubKit/EpubKitTests/Resources/invalid-toc.opf"; sourceTree = "<group>"; };
+		84E29F3B185B6CD5006853C8 /* tolstoy-war-and-peace.epub */ = {isa = PBXFileReference; lastKnownFileType = file; name = "tolstoy-war-and-peace.epub"; path = "Vendor/KFEpubKit/EpubKitTests/Resources/tolstoy-war-and-peace.epub"; sourceTree = "<group>"; };
+		84E29F3C185B6CD5006853C8 /* valid-comments.opf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "valid-comments.opf"; path = "Vendor/KFEpubKit/EpubKitTests/Resources/valid-comments.opf"; sourceTree = "<group>"; };
+		84E29F3D185B6CD5006853C8 /* valid.opf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = valid.opf; path = Vendor/KFEpubKit/EpubKitTests/Resources/valid.opf; sourceTree = "<group>"; };
+		84E29F3E185B6CD5006853C8 /* Winnie-the-Pooh.epub */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Winnie-the-Pooh.epub"; path = "Vendor/KFEpubKit/EpubKitTests/Resources/Winnie-the-Pooh.epub"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +129,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84E29F38185B64D2006853C8 /* libz.dylib in Frameworks */,
+				84E29F36185B618B006853C8 /* libxml2.dylib in Frameworks */,
 				84E29EBD185B39AF006853C8 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -82,6 +153,8 @@
 				84E29EC2185B39AF006853C8 /* ListenBooks */,
 				84E29EE3185B39AF006853C8 /* ListenBooksTests */,
 				84E29EBB185B39AF006853C8 /* Frameworks */,
+				84E29F0B185B5BDE006853C8 /* Resources */,
+				84E29EF7185B5BAF006853C8 /* Vendor */,
 				84E29EBA185B39AF006853C8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -98,6 +171,8 @@
 		84E29EBB185B39AF006853C8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				84E29F37185B64D2006853C8 /* libz.dylib */,
+				84E29F35185B618B006853C8 /* libxml2.dylib */,
 				84E29EBC185B39AF006853C8 /* Cocoa.framework */,
 				84E29EDE185B39AF006853C8 /* XCTest.framework */,
 				84E29EBE185B39AF006853C8 /* Other Frameworks */,
@@ -157,6 +232,121 @@
 				84E29EE6185B39AF006853C8 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		84E29EF7185B5BAF006853C8 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				84E29F23185B6175006853C8 /* SSZipArchive */,
+				84E29F0E185B5DD7006853C8 /* KissXML */,
+				84E29EF8185B5BCE006853C8 /* KFEpubKit */,
+			);
+			name = Vendor;
+			sourceTree = "<group>";
+		};
+		84E29EF8185B5BCE006853C8 /* KFEpubKit */ = {
+			isa = PBXGroup;
+			children = (
+				84E29EF9185B5BCE006853C8 /* KFEpubConstants.h */,
+				84E29EFA185B5BCE006853C8 /* KFEpubConstants.m */,
+				84E29EFB185B5BCE006853C8 /* KFEpubContentModel.h */,
+				84E29EFC185B5BCE006853C8 /* KFEpubContentModel.m */,
+				84E29EFD185B5BCE006853C8 /* KFEpubController.h */,
+				84E29EFE185B5BCE006853C8 /* KFEpubController.m */,
+				84E29EFF185B5BCE006853C8 /* KFEpubExtractor.h */,
+				84E29F00185B5BCE006853C8 /* KFEpubExtractor.m */,
+				84E29F01185B5BCE006853C8 /* KFEpubKit.h */,
+				84E29F02185B5BCE006853C8 /* KFEpubKit.m */,
+				84E29F03185B5BCE006853C8 /* KFEpubParser.h */,
+				84E29F04185B5BCE006853C8 /* KFEpubParser.m */,
+			);
+			name = KFEpubKit;
+			path = Vendor/KFEpubKit/KFEpubKit/Sources;
+			sourceTree = "<group>";
+		};
+		84E29F0B185B5BDE006853C8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				84E29F39185B6CD5006853C8 /* invalid-manifest.opf */,
+				84E29F3A185B6CD5006853C8 /* invalid-toc.opf */,
+				84E29F3B185B6CD5006853C8 /* tolstoy-war-and-peace.epub */,
+				84E29F3C185B6CD5006853C8 /* valid-comments.opf */,
+				84E29F3D185B6CD5006853C8 /* valid.opf */,
+				84E29F3E185B6CD5006853C8 /* Winnie-the-Pooh.epub */,
+				84E29F0C185B5BF1006853C8 /* tolstoy-war-and-peace.epub */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		84E29F0E185B5DD7006853C8 /* KissXML */ = {
+			isa = PBXGroup;
+			children = (
+				84E29F0F185B5DD7006853C8 /* Additions */,
+				84E29F12185B5DD7006853C8 /* Categories */,
+				84E29F15185B5DD7006853C8 /* DDXML.h */,
+				84E29F16185B5DD7006853C8 /* DDXMLDocument.h */,
+				84E29F17185B5DD7006853C8 /* DDXMLDocument.m */,
+				84E29F18185B5DD7006853C8 /* DDXMLElement.h */,
+				84E29F19185B5DD7006853C8 /* DDXMLElement.m */,
+				84E29F1A185B5DD7006853C8 /* DDXMLNode.h */,
+				84E29F1B185B5DD7006853C8 /* DDXMLNode.m */,
+				84E29F1C185B5DD7006853C8 /* Private */,
+			);
+			name = KissXML;
+			path = Vendor/KissXML/KissXML;
+			sourceTree = "<group>";
+		};
+		84E29F0F185B5DD7006853C8 /* Additions */ = {
+			isa = PBXGroup;
+			children = (
+				84E29F10185B5DD7006853C8 /* DDXMLElementAdditions.h */,
+				84E29F11185B5DD7006853C8 /* DDXMLElementAdditions.m */,
+			);
+			path = Additions;
+			sourceTree = "<group>";
+		};
+		84E29F12185B5DD7006853C8 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				84E29F13185B5DD7006853C8 /* NSString+DDXML.h */,
+				84E29F14185B5DD7006853C8 /* NSString+DDXML.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		84E29F1C185B5DD7006853C8 /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				84E29F1D185B5DD7006853C8 /* DDXMLPrivate.h */,
+			);
+			path = Private;
+			sourceTree = "<group>";
+		};
+		84E29F23185B6175006853C8 /* SSZipArchive */ = {
+			isa = PBXGroup;
+			children = (
+				84E29F24185B6175006853C8 /* minizip */,
+				84E29F2E185B6175006853C8 /* SSZipArchive.h */,
+				84E29F2F185B6175006853C8 /* SSZipArchive.m */,
+			);
+			name = SSZipArchive;
+			path = Vendor/ssziparchive/SSZipArchive;
+			sourceTree = "<group>";
+		};
+		84E29F24185B6175006853C8 /* minizip */ = {
+			isa = PBXGroup;
+			children = (
+				84E29F25185B6175006853C8 /* crypt.h */,
+				84E29F26185B6175006853C8 /* ioapi.c */,
+				84E29F27185B6175006853C8 /* ioapi.h */,
+				84E29F28185B6175006853C8 /* mztools.c */,
+				84E29F29185B6175006853C8 /* mztools.h */,
+				84E29F2A185B6175006853C8 /* unzip.c */,
+				84E29F2B185B6175006853C8 /* unzip.h */,
+				84E29F2C185B6175006853C8 /* zip.c */,
+				84E29F2D185B6175006853C8 /* zip.h */,
+			);
+			path = minizip;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -245,8 +435,15 @@
 			files = (
 				84E29EC7185B39AF006853C8 /* InfoPlist.strings in Resources */,
 				84E29ED8185B39AF006853C8 /* Images.xcassets in Resources */,
+				84E29F43185B6CD5006853C8 /* valid.opf in Resources */,
+				84E29F40185B6CD5006853C8 /* invalid-toc.opf in Resources */,
 				84E29ECD185B39AF006853C8 /* Credits.rtf in Resources */,
+				84E29F41185B6CD5006853C8 /* tolstoy-war-and-peace.epub in Resources */,
 				84E29ED3185B39AF006853C8 /* MainMenu.xib in Resources */,
+				84E29F3F185B6CD5006853C8 /* invalid-manifest.opf in Resources */,
+				84E29F0D185B5BF1006853C8 /* tolstoy-war-and-peace.epub in Resources */,
+				84E29F42185B6CD5006853C8 /* valid-comments.opf in Resources */,
+				84E29F44185B6CD5006853C8 /* Winnie-the-Pooh.epub in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,9 +462,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84E29F21185B5DD7006853C8 /* DDXMLElement.m in Sources */,
 				84E29ED0185B39AF006853C8 /* AppDelegate.m in Sources */,
+				84E29F31185B6175006853C8 /* mztools.c in Sources */,
+				84E29F33185B6175006853C8 /* zip.c in Sources */,
+				84E29F34185B6175006853C8 /* SSZipArchive.m in Sources */,
 				84E29EC9185B39AF006853C8 /* main.m in Sources */,
+				84E29F07185B5BCE006853C8 /* KFEpubController.m in Sources */,
+				84E29F09185B5BCE006853C8 /* KFEpubKit.m in Sources */,
+				84E29F1E185B5DD7006853C8 /* DDXMLElementAdditions.m in Sources */,
+				84E29F06185B5BCE006853C8 /* KFEpubContentModel.m in Sources */,
+				84E29F22185B5DD7006853C8 /* DDXMLNode.m in Sources */,
+				84E29F05185B5BCE006853C8 /* KFEpubConstants.m in Sources */,
+				84E29F30185B6175006853C8 /* ioapi.c in Sources */,
+				84E29F32185B6175006853C8 /* unzip.c in Sources */,
+				84E29F0A185B5BCE006853C8 /* KFEpubParser.m in Sources */,
+				84E29F1F185B5DD7006853C8 /* NSString+DDXML.m in Sources */,
 				84E29ED6185B39AF006853C8 /* ListenBooks.xcdatamodeld in Sources */,
+				84E29F20185B5DD7006853C8 /* DDXMLDocument.m in Sources */,
+				84E29F08185B5BCE006853C8 /* KFEpubExtractor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,7 +541,7 @@
 		84E29EEB185B39AF006853C8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -356,8 +569,15 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/include/libxml2,
+					Vendor/KissXML,
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-lxml2";
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -365,7 +585,7 @@
 		84E29EEC185B39AF006853C8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -388,7 +608,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/include/libxml2,
+					Vendor/KissXML,
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				OTHER_LDFLAGS = "-lxml2";
 				SDKROOT = macosx;
 			};
 			name = Release;

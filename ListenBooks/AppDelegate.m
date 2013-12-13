@@ -17,6 +17,23 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     // Insert code here to initialize your application
+    
+    NSURL *epubURL = [[NSBundle mainBundle] URLForResource:@"Winnie-the-Pooh" withExtension:@"epub"];
+    NSURL *documentsURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+    self.epubController = [[KFEpubController alloc] initWithEpubURL:epubURL andDestinationFolder:documentsURL];
+    self.epubController.delegate = self;
+    [self.epubController openAsynchronous:YES];
+    
+}
+
+- (void)epubController:(KFEpubController *)controller didOpenEpub:(KFEpubContentModel *)contentModel
+{
+    NSLog(@"opened: %@", [contentModel.metaData description]);
+}
+
+- (void)epubController:(KFEpubController *)controller didFailWithError:(NSError *)error
+{
+    
 }
 
 // Returns the directory the application uses to store the Core Data store file. This code uses a directory named "cc.andyapps.ListenBooks" in the user's Application Support directory.
