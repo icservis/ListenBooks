@@ -1,0 +1,6 @@
+[submodule "Vendor/SFBAudioEngine"]
+	path = Vendor/SFBAudioEngine
+	url = https://github.com/sbooth/SFBAudioEngine.git
+[submodule "Vendor/KFEpubKit"]
+	path = Vendor/KFEpubKit
+	url = https://github.com/ricobeck/KFEpubKit.git
