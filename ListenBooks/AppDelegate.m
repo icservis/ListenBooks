@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "KFToolbar.h"
+#import "KFToolbarItem.h"
 
 @implementation AppDelegate
 
@@ -20,7 +22,69 @@
     NSLog(@"applicationFilesDirectory: %@", [self applicationFilesDirectory]);
     NSLog(@"applicationDocumentsDirectory: %@", [self applicationDocumentsDirectory]);
     NSLog(@"applicationCacheDirectory: %@", [self applicationCacheDirectory]);
+    
+
+    [self setupToolBar];
 }
+
+#pragma mark - KFToolBar
+
+- (void)setupToolBar
+{
+    KFToolbarItem *addItem = [KFToolbarItem toolbarItemWithIcon:[NSImage imageNamed:NSImageNameAddTemplate] tag:0];
+    addItem.toolTip = @"Add";
+    addItem.keyEquivalent = @"q";
+    
+    
+    KFToolbarItem *actionItem = [KFToolbarItem toolbarItemWithType:NSMomentaryPushInButton icon:[NSImage imageNamed:NSImageNameActionTemplate] tag:1];
+    actionItem.toolTip = @"Action";
+    actionItem.keyEquivalent = @"a";
+    
+    KFToolbarItem *bookmarksItem = [KFToolbarItem toolbarItemWithType:NSToggleButton icon:[NSImage imageNamed:NSImageNameBookmarksTemplate] tag:2];
+    bookmarksItem.toolTip = @"Bookmarks";
+    
+    
+    KFToolbarItem *iconItem = [KFToolbarItem toolbarItemWithType:NSToggleButton icon:[NSImage imageNamed:NSImageNameIconViewTemplate] tag:3];
+    iconItem.toolTip = @"List";
+    iconItem.state = NSOffState;
+    
+    KFToolbarItem *flowItem = [KFToolbarItem toolbarItemWithType:NSToggleButton icon:[NSImage imageNamed:NSImageNameFlowViewTemplate] tag:4];
+    flowItem.toolTip = @"View";
+    flowItem.state = NSOnState;
+    
+    self.toolBar.leftItems = @[addItem, actionItem, bookmarksItem];
+    self.toolBar.rightItems = @[flowItem, iconItem];
+    
+    [self.toolBar setItemSelectionHandler:^(KFToolbarItemSelectionType selectionType, KFToolbarItem *toolbarItem, NSUInteger tag)
+     {
+         NSLog(@"tag: %lu", (unsigned long)tag);
+         switch (tag)
+         {
+             case 0:
+                 break;
+                 
+             case 1:
+                 [actionItem.button setMenu:self.actionMenu];
+                 break;
+                 
+             case 2:
+                 break;
+                 
+             case 3:
+                 flowItem.state = !iconItem.state;
+                 break;
+                 
+             case 4:
+                 iconItem.state = !flowItem.state;
+                 break;
+                 
+             default:
+                 break;
+         }
+     }];
+}
+
+#pragma mark - CoreData
 
 - (NSURL *)applicationDocumentsDirectory
 {
