@@ -5,32 +5,36 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>3A616D7D-20F9-4C6F-9B47-57C9D32D064C</string>
+	<string>B2B9D45D-2C50-41F7-A86E-39FC62E79197</string>
 	<key>IDESourceControlProjectName</key>
 	<string>ListenBooks</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>069DC333-A449-4FD5-A114-8A2D65D19CC5</key>
+		<string>https://github.com/robbiehanson/KissXML.git</string>
 		<key>35DCDBCB-98F8-437D-88CE-193AD837EF3D</key>
 		<string>https://github.com/andyapps/ListenBooks.git</string>
-		<key>46D03AED-5D7C-40B3-9E8E-3D08479439C9</key>
-		<string>https://github.com/ricobeck/KFEpubKit.git</string>
-		<key>CA8F51C8-EDC5-4A4C-A936-5028BE8DC2FE</key>
-		<string>https://github.com/robbiehanson/KissXML.git</string>
-		<key>E9B2F330-416D-44B6-8B4F-725472D3CAE1</key>
+		<key>5719B9E6-BC59-49BF-B43F-3E81366AAF4E</key>
 		<string>https://github.com/soffes/ssziparchive.git</string>
+		<key>80080660-E6CB-4B4F-8864-BC7C36A7AF73</key>
+		<string>https://github.com/ricobeck/KFToolbar.git</string>
+		<key>8CE2ECA8-B1D1-45E9-9CCF-743DB5C9D296</key>
+		<string>https://github.com/ricobeck/KFEpubKit.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>ListenBooks.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+		<key>069DC333-A449-4FD5-A114-8A2D65D19CC5</key>
+		<string>../../Vendor/KissXML</string>
 		<key>35DCDBCB-98F8-437D-88CE-193AD837EF3D</key>
 		<string>../..</string>
-		<key>46D03AED-5D7C-40B3-9E8E-3D08479439C9</key>
-		<string>../../Vendor/KFEpubKit</string>
-		<key>CA8F51C8-EDC5-4A4C-A936-5028BE8DC2FE</key>
-		<string>../../Vendor/KissXML</string>
-		<key>E9B2F330-416D-44B6-8B4F-725472D3CAE1</key>
+		<key>5719B9E6-BC59-49BF-B43F-3E81366AAF4E</key>
 		<string>../../Vendor/ssziparchive</string>
+		<key>80080660-E6CB-4B4F-8864-BC7C36A7AF73</key>
+		<string>../../Vendor/KFToolbar</string>
+		<key>8CE2ECA8-B1D1-45E9-9CCF-743DB5C9D296</key>
+		<string>../../Vendor/KFEpubKit</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/andyapps/ListenBooks.git</string>
@@ -44,7 +48,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>46D03AED-5D7C-40B3-9E8E-3D08479439C9</string>
+			<string>8CE2ECA8-B1D1-45E9-9CCF-743DB5C9D296</string>
 			<key>IDESourceControlWCCName</key>
 			<string>KFEpubKit</string>
 		</dict>
@@ -52,7 +56,15 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>CA8F51C8-EDC5-4A4C-A936-5028BE8DC2FE</string>
+			<string>80080660-E6CB-4B4F-8864-BC7C36A7AF73</string>
+			<key>IDESourceControlWCCName</key>
+			<string>KFToolbar</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>069DC333-A449-4FD5-A114-8A2D65D19CC5</string>
 			<key>IDESourceControlWCCName</key>
 			<string>KissXML</string>
 		</dict>
@@ -68,7 +80,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>E9B2F330-416D-44B6-8B4F-725472D3CAE1</string>
+			<string>5719B9E6-BC59-49BF-B43F-3E81366AAF4E</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ssziparchive</string>
 		</dict>

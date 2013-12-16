@@ -2,7 +2,7 @@
 //  AppDelegate.m
 //  ListenBooks
 //
-//  Created by Libor Kučera on 13.12.13.
+//  Created by Libor Kučera on 14.12.13.
 //  Copyright (c) 2013 IC Servis. All rights reserved.
 //
 
@@ -17,23 +17,23 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     // Insert code here to initialize your application
-    
-    NSURL *epubURL = [[NSBundle mainBundle] URLForResource:@"Winnie-the-Pooh" withExtension:@"epub"];
-    NSURL *documentsURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-    self.epubController = [[KFEpubController alloc] initWithEpubURL:epubURL andDestinationFolder:documentsURL];
-    self.epubController.delegate = self;
-    [self.epubController openAsynchronous:YES];
-    
+    NSLog(@"applicationFilesDirectory: %@", [self applicationFilesDirectory]);
+    NSLog(@"applicationDocumentsDirectory: %@", [self applicationDocumentsDirectory]);
+    NSLog(@"applicationCacheDirectory: %@", [self applicationCacheDirectory]);
 }
 
-- (void)epubController:(KFEpubController *)controller didOpenEpub:(KFEpubContentModel *)contentModel
+- (NSURL *)applicationDocumentsDirectory
 {
-    NSLog(@"opened: %@", [contentModel.metaData description]);
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSURL *appDocumemtsURL = [[fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+    return appDocumemtsURL;
 }
 
-- (void)epubController:(KFEpubController *)controller didFailWithError:(NSError *)error
+- (NSURL *)applicationCacheDirectory
 {
-    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSURL *appCacheURL = [[fileManager URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask] lastObject];
+    return [appCacheURL URLByAppendingPathComponent:@"cc.andyapps.ListenBooks"];
 }
 
 // Returns the directory the application uses to store the Core Data store file. This code uses a directory named "cc.andyapps.ListenBooks" in the user's Application Support directory.

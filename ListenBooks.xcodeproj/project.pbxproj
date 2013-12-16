@@ -7,396 +7,473 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		84E29EBD185B39AF006853C8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E29EBC185B39AF006853C8 /* Cocoa.framework */; };
-		84E29EC7185B39AF006853C8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84E29EC5185B39AF006853C8 /* InfoPlist.strings */; };
-		84E29EC9185B39AF006853C8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E29EC8185B39AF006853C8 /* main.m */; };
-		84E29ECD185B39AF006853C8 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 84E29ECB185B39AF006853C8 /* Credits.rtf */; };
-		84E29ED0185B39AF006853C8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E29ECF185B39AF006853C8 /* AppDelegate.m */; };
-		84E29ED3185B39AF006853C8 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84E29ED1185B39AF006853C8 /* MainMenu.xib */; };
-		84E29ED6185B39AF006853C8 /* ListenBooks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84E29ED4185B39AF006853C8 /* ListenBooks.xcdatamodeld */; };
-		84E29ED8185B39AF006853C8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84E29ED7185B39AF006853C8 /* Images.xcassets */; };
-		84E29EDF185B39AF006853C8 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E29EDE185B39AF006853C8 /* XCTest.framework */; };
-		84E29EE0185B39AF006853C8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E29EBC185B39AF006853C8 /* Cocoa.framework */; };
-		84E29EE8185B39AF006853C8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84E29EE6185B39AF006853C8 /* InfoPlist.strings */; };
-		84E29EEA185B39AF006853C8 /* ListenBooksTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E29EE9185B39AF006853C8 /* ListenBooksTests.m */; };
-		84E29F05185B5BCE006853C8 /* KFEpubConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E29EFA185B5BCE006853C8 /* KFEpubConstants.m */; };
-		84E29F06185B5BCE006853C8 /* KFEpubContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E29EFC185B5BCE006853C8 /* KFEpubContentModel.m */; };
-		84E29F07185B5BCE006853C8 /* KFEpubController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E29EFE185B5BCE006853C8 /* KFEpubController.m */; };
-		84E29F08185B5BCE006853C8 /* KFEpubExtractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E29F00185B5BCE006853C8 /* KFEpubExtractor.m */; };
-		84E29F09185B5BCE006853C8 /* KFEpubKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E29F02185B5BCE006853C8 /* KFEpubKit.m */; };
-		84E29F0A185B5BCE006853C8 /* KFEpubParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E29F04185B5BCE006853C8 /* KFEpubParser.m */; };
-		84E29F0D185B5BF1006853C8 /* tolstoy-war-and-peace.epub in Resources */ = {isa = PBXBuildFile; fileRef = 84E29F0C185B5BF1006853C8 /* tolstoy-war-and-peace.epub */; };
-		84E29F1E185B5DD7006853C8 /* DDXMLElementAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E29F11185B5DD7006853C8 /* DDXMLElementAdditions.m */; };
-		84E29F1F185B5DD7006853C8 /* NSString+DDXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E29F14185B5DD7006853C8 /* NSString+DDXML.m */; };
-		84E29F20185B5DD7006853C8 /* DDXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E29F17185B5DD7006853C8 /* DDXMLDocument.m */; };
-		84E29F21185B5DD7006853C8 /* DDXMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E29F19185B5DD7006853C8 /* DDXMLElement.m */; };
-		84E29F22185B5DD7006853C8 /* DDXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E29F1B185B5DD7006853C8 /* DDXMLNode.m */; };
-		84E29F30185B6175006853C8 /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 84E29F26185B6175006853C8 /* ioapi.c */; };
-		84E29F31185B6175006853C8 /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = 84E29F28185B6175006853C8 /* mztools.c */; };
-		84E29F32185B6175006853C8 /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = 84E29F2A185B6175006853C8 /* unzip.c */; };
-		84E29F33185B6175006853C8 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 84E29F2C185B6175006853C8 /* zip.c */; };
-		84E29F34185B6175006853C8 /* SSZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E29F2F185B6175006853C8 /* SSZipArchive.m */; };
-		84E29F36185B618B006853C8 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E29F35185B618B006853C8 /* libxml2.dylib */; };
-		84E29F38185B64D2006853C8 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E29F37185B64D2006853C8 /* libz.dylib */; };
-		84E29F3F185B6CD5006853C8 /* invalid-manifest.opf in Resources */ = {isa = PBXBuildFile; fileRef = 84E29F39185B6CD5006853C8 /* invalid-manifest.opf */; };
-		84E29F40185B6CD5006853C8 /* invalid-toc.opf in Resources */ = {isa = PBXBuildFile; fileRef = 84E29F3A185B6CD5006853C8 /* invalid-toc.opf */; };
-		84E29F41185B6CD5006853C8 /* tolstoy-war-and-peace.epub in Resources */ = {isa = PBXBuildFile; fileRef = 84E29F3B185B6CD5006853C8 /* tolstoy-war-and-peace.epub */; };
-		84E29F42185B6CD5006853C8 /* valid-comments.opf in Resources */ = {isa = PBXBuildFile; fileRef = 84E29F3C185B6CD5006853C8 /* valid-comments.opf */; };
-		84E29F43185B6CD5006853C8 /* valid.opf in Resources */ = {isa = PBXBuildFile; fileRef = 84E29F3D185B6CD5006853C8 /* valid.opf */; };
-		84E29F44185B6CD5006853C8 /* Winnie-the-Pooh.epub in Resources */ = {isa = PBXBuildFile; fileRef = 84E29F3E185B6CD5006853C8 /* Winnie-the-Pooh.epub */; };
+		8444EA93185F83A400F90B48 /* KFToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8444EA90185F83A400F90B48 /* KFToolbar.m */; };
+		8444EA94185F83A400F90B48 /* KFToolbarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8444EA92185F83A400F90B48 /* KFToolbarItem.m */; };
+		8444EAA2185F83D900F90B48 /* KFEpubConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 8444EA97185F83D900F90B48 /* KFEpubConstants.m */; };
+		8444EAA3185F83D900F90B48 /* KFEpubContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8444EA99185F83D900F90B48 /* KFEpubContentModel.m */; };
+		8444EAA4185F83D900F90B48 /* KFEpubController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8444EA9B185F83D900F90B48 /* KFEpubController.m */; };
+		8444EAA5185F83D900F90B48 /* KFEpubExtractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8444EA9D185F83D900F90B48 /* KFEpubExtractor.m */; };
+		8444EAA6185F83D900F90B48 /* KFEpubKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 8444EA9F185F83D900F90B48 /* KFEpubKit.m */; };
+		8444EAA7185F83D900F90B48 /* KFEpubParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8444EAA1185F83D900F90B48 /* KFEpubParser.m */; };
+		8444EAB5185F840800F90B48 /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 8444EAAB185F840800F90B48 /* ioapi.c */; };
+		8444EAB6185F840800F90B48 /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = 8444EAAD185F840800F90B48 /* mztools.c */; };
+		8444EAB7185F840800F90B48 /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = 8444EAAF185F840800F90B48 /* unzip.c */; };
+		8444EAB8185F840800F90B48 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 8444EAB1185F840800F90B48 /* zip.c */; };
+		8444EAB9185F840800F90B48 /* SSZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 8444EAB4185F840800F90B48 /* SSZipArchive.m */; };
+		8444EACA185F841700F90B48 /* DDXMLElementAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8444EABD185F841700F90B48 /* DDXMLElementAdditions.m */; };
+		8444EACB185F841700F90B48 /* NSString+DDXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 8444EAC0185F841700F90B48 /* NSString+DDXML.m */; };
+		8444EACC185F841700F90B48 /* DDXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 8444EAC3185F841700F90B48 /* DDXMLDocument.m */; };
+		8444EACD185F841700F90B48 /* DDXMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 8444EAC5185F841700F90B48 /* DDXMLElement.m */; };
+		8444EACE185F841700F90B48 /* DDXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8444EAC7185F841700F90B48 /* DDXMLNode.m */; };
+		8444EAD0185F847500F90B48 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8444EACF185F847500F90B48 /* libxml2.dylib */; };
+		8444EAD2185F8D2300F90B48 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8444EAD1185F8D2300F90B48 /* libz.dylib */; };
+		8478C3E3185CA73F00B06779 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8478C3E2185CA73F00B06779 /* Cocoa.framework */; };
+		8478C3ED185CA73F00B06779 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8478C3EB185CA73F00B06779 /* InfoPlist.strings */; };
+		8478C3EF185CA73F00B06779 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8478C3EE185CA73F00B06779 /* main.m */; };
+		8478C3F3185CA73F00B06779 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 8478C3F1185CA73F00B06779 /* Credits.rtf */; };
+		8478C3F6185CA73F00B06779 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8478C3F5185CA73F00B06779 /* AppDelegate.m */; };
+		8478C3F9185CA73F00B06779 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8478C3F7185CA73F00B06779 /* MainMenu.xib */; };
+		8478C3FC185CA73F00B06779 /* ListenBooks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8478C3FA185CA73F00B06779 /* ListenBooks.xcdatamodeld */; };
+		8478C3FE185CA73F00B06779 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8478C3FD185CA73F00B06779 /* Images.xcassets */; };
+		8478C405185CA74000B06779 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8478C404185CA74000B06779 /* XCTest.framework */; };
+		8478C406185CA74000B06779 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8478C3E2185CA73F00B06779 /* Cocoa.framework */; };
+		8478C40E185CA74000B06779 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8478C40C185CA74000B06779 /* InfoPlist.strings */; };
+		8478C410185CA74000B06779 /* ListenBooksTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8478C40F185CA74000B06779 /* ListenBooksTests.m */; };
+		8478C418185CA74000B06779 /* ListenBooksImporter.mdimporter in Resources */ = {isa = PBXBuildFile; fileRef = 8478C415185CA74000B06779 /* ListenBooksImporter.mdimporter */; };
+		8478C41A185CA74000B06779 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8478C419185CA74000B06779 /* CoreServices.framework */; };
+		8478C41C185CA74000B06779 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8478C41B185CA74000B06779 /* CoreFoundation.framework */; };
+		8478C41E185CA74000B06779 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8478C41D185CA74000B06779 /* CoreData.framework */; };
+		8478C420185CA74000B06779 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8478C41F185CA74000B06779 /* Foundation.framework */; };
+		8478C426185CA74000B06779 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8478C424185CA74000B06779 /* InfoPlist.strings */; };
+		8478C428185CA74000B06779 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 8478C427185CA74000B06779 /* main.c */; };
+		8478C42A185CA74000B06779 /* GetMetadataForFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 8478C429185CA74000B06779 /* GetMetadataForFile.m */; };
+		8478C42D185CA74000B06779 /* MySpotlightImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8478C42C185CA74000B06779 /* MySpotlightImporter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		84E29EE1185B39AF006853C8 /* PBXContainerItemProxy */ = {
+		8478C407185CA74000B06779 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 84E29EB1185B39AF006853C8 /* Project object */;
+			containerPortal = 8478C3D7185CA73F00B06779 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 84E29EB8185B39AF006853C8;
+			remoteGlobalIDString = 8478C3DE185CA73F00B06779;
 			remoteInfo = ListenBooks;
+		};
+		8478C416185CA74000B06779 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8478C3D7185CA73F00B06779 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8478C414185CA74000B06779;
+			remoteInfo = ListenBooksImporter;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		84E29EB9185B39AF006853C8 /* ListenBooks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ListenBooks.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		84E29EBC185B39AF006853C8 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
-		84E29EBF185B39AF006853C8 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
-		84E29EC0185B39AF006853C8 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		84E29EC1185B39AF006853C8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		84E29EC4185B39AF006853C8 /* ListenBooks-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ListenBooks-Info.plist"; sourceTree = "<group>"; };
-		84E29EC6185B39AF006853C8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		84E29EC8185B39AF006853C8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		84E29ECA185B39AF006853C8 /* ListenBooks-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ListenBooks-Prefix.pch"; sourceTree = "<group>"; };
-		84E29ECC185B39AF006853C8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		84E29ECE185B39AF006853C8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		84E29ECF185B39AF006853C8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		84E29ED2185B39AF006853C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		84E29ED5185B39AF006853C8 /* ListenBooks.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ListenBooks.xcdatamodel; sourceTree = "<group>"; };
-		84E29ED7185B39AF006853C8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		84E29EDD185B39AF006853C8 /* ListenBooksTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ListenBooksTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		84E29EDE185B39AF006853C8 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		84E29EE5185B39AF006853C8 /* ListenBooksTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ListenBooksTests-Info.plist"; sourceTree = "<group>"; };
-		84E29EE7185B39AF006853C8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		84E29EE9185B39AF006853C8 /* ListenBooksTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ListenBooksTests.m; sourceTree = "<group>"; };
-		84E29EF3185B3BFB006853C8 /* ListenBooks.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ListenBooks.entitlements; sourceTree = "<group>"; };
-		84E29EF9185B5BCE006853C8 /* KFEpubConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFEpubConstants.h; sourceTree = "<group>"; };
-		84E29EFA185B5BCE006853C8 /* KFEpubConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFEpubConstants.m; sourceTree = "<group>"; };
-		84E29EFB185B5BCE006853C8 /* KFEpubContentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFEpubContentModel.h; sourceTree = "<group>"; };
-		84E29EFC185B5BCE006853C8 /* KFEpubContentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFEpubContentModel.m; sourceTree = "<group>"; };
-		84E29EFD185B5BCE006853C8 /* KFEpubController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFEpubController.h; sourceTree = "<group>"; };
-		84E29EFE185B5BCE006853C8 /* KFEpubController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFEpubController.m; sourceTree = "<group>"; };
-		84E29EFF185B5BCE006853C8 /* KFEpubExtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFEpubExtractor.h; sourceTree = "<group>"; };
-		84E29F00185B5BCE006853C8 /* KFEpubExtractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFEpubExtractor.m; sourceTree = "<group>"; };
-		84E29F01185B5BCE006853C8 /* KFEpubKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFEpubKit.h; sourceTree = "<group>"; };
-		84E29F02185B5BCE006853C8 /* KFEpubKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFEpubKit.m; sourceTree = "<group>"; };
-		84E29F03185B5BCE006853C8 /* KFEpubParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFEpubParser.h; sourceTree = "<group>"; };
-		84E29F04185B5BCE006853C8 /* KFEpubParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFEpubParser.m; sourceTree = "<group>"; };
-		84E29F0C185B5BF1006853C8 /* tolstoy-war-and-peace.epub */ = {isa = PBXFileReference; lastKnownFileType = file; name = "tolstoy-war-and-peace.epub"; path = "Vendor/KFEpubKit/KFEpubKit/Resources/tolstoy-war-and-peace.epub"; sourceTree = "<group>"; };
-		84E29F10185B5DD7006853C8 /* DDXMLElementAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLElementAdditions.h; sourceTree = "<group>"; };
-		84E29F11185B5DD7006853C8 /* DDXMLElementAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLElementAdditions.m; sourceTree = "<group>"; };
-		84E29F13185B5DD7006853C8 /* NSString+DDXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DDXML.h"; sourceTree = "<group>"; };
-		84E29F14185B5DD7006853C8 /* NSString+DDXML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DDXML.m"; sourceTree = "<group>"; };
-		84E29F15185B5DD7006853C8 /* DDXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXML.h; sourceTree = "<group>"; };
-		84E29F16185B5DD7006853C8 /* DDXMLDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLDocument.h; sourceTree = "<group>"; };
-		84E29F17185B5DD7006853C8 /* DDXMLDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLDocument.m; sourceTree = "<group>"; };
-		84E29F18185B5DD7006853C8 /* DDXMLElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLElement.h; sourceTree = "<group>"; };
-		84E29F19185B5DD7006853C8 /* DDXMLElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLElement.m; sourceTree = "<group>"; };
-		84E29F1A185B5DD7006853C8 /* DDXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLNode.h; sourceTree = "<group>"; };
-		84E29F1B185B5DD7006853C8 /* DDXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLNode.m; sourceTree = "<group>"; };
-		84E29F1D185B5DD7006853C8 /* DDXMLPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLPrivate.h; sourceTree = "<group>"; };
-		84E29F25185B6175006853C8 /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
-		84E29F26185B6175006853C8 /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
-		84E29F27185B6175006853C8 /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
-		84E29F28185B6175006853C8 /* mztools.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mztools.c; sourceTree = "<group>"; };
-		84E29F29185B6175006853C8 /* mztools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mztools.h; sourceTree = "<group>"; };
-		84E29F2A185B6175006853C8 /* unzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unzip.c; sourceTree = "<group>"; };
-		84E29F2B185B6175006853C8 /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
-		84E29F2C185B6175006853C8 /* zip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zip.c; sourceTree = "<group>"; };
-		84E29F2D185B6175006853C8 /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
-		84E29F2E185B6175006853C8 /* SSZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSZipArchive.h; sourceTree = "<group>"; };
-		84E29F2F185B6175006853C8 /* SSZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSZipArchive.m; sourceTree = "<group>"; };
-		84E29F35185B618B006853C8 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
-		84E29F37185B64D2006853C8 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		84E29F39185B6CD5006853C8 /* invalid-manifest.opf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "invalid-manifest.opf"; path = "Vendor/KFEpubKit/EpubKitTests/Resources/invalid-manifest.opf"; sourceTree = "<group>"; };
-		84E29F3A185B6CD5006853C8 /* invalid-toc.opf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "invalid-toc.opf"; path = "Vendor/KFEpubKit/EpubKitTests/Resources/invalid-toc.opf"; sourceTree = "<group>"; };
-		84E29F3B185B6CD5006853C8 /* tolstoy-war-and-peace.epub */ = {isa = PBXFileReference; lastKnownFileType = file; name = "tolstoy-war-and-peace.epub"; path = "Vendor/KFEpubKit/EpubKitTests/Resources/tolstoy-war-and-peace.epub"; sourceTree = "<group>"; };
-		84E29F3C185B6CD5006853C8 /* valid-comments.opf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "valid-comments.opf"; path = "Vendor/KFEpubKit/EpubKitTests/Resources/valid-comments.opf"; sourceTree = "<group>"; };
-		84E29F3D185B6CD5006853C8 /* valid.opf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = valid.opf; path = Vendor/KFEpubKit/EpubKitTests/Resources/valid.opf; sourceTree = "<group>"; };
-		84E29F3E185B6CD5006853C8 /* Winnie-the-Pooh.epub */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Winnie-the-Pooh.epub"; path = "Vendor/KFEpubKit/EpubKitTests/Resources/Winnie-the-Pooh.epub"; sourceTree = "<group>"; };
+		8444EA8F185F83A400F90B48 /* KFToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFToolbar.h; sourceTree = "<group>"; };
+		8444EA90185F83A400F90B48 /* KFToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFToolbar.m; sourceTree = "<group>"; };
+		8444EA91185F83A400F90B48 /* KFToolbarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFToolbarItem.h; sourceTree = "<group>"; };
+		8444EA92185F83A400F90B48 /* KFToolbarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFToolbarItem.m; sourceTree = "<group>"; };
+		8444EA96185F83D900F90B48 /* KFEpubConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFEpubConstants.h; sourceTree = "<group>"; };
+		8444EA97185F83D900F90B48 /* KFEpubConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFEpubConstants.m; sourceTree = "<group>"; };
+		8444EA98185F83D900F90B48 /* KFEpubContentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFEpubContentModel.h; sourceTree = "<group>"; };
+		8444EA99185F83D900F90B48 /* KFEpubContentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFEpubContentModel.m; sourceTree = "<group>"; };
+		8444EA9A185F83D900F90B48 /* KFEpubController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFEpubController.h; sourceTree = "<group>"; };
+		8444EA9B185F83D900F90B48 /* KFEpubController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFEpubController.m; sourceTree = "<group>"; };
+		8444EA9C185F83D900F90B48 /* KFEpubExtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFEpubExtractor.h; sourceTree = "<group>"; };
+		8444EA9D185F83D900F90B48 /* KFEpubExtractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFEpubExtractor.m; sourceTree = "<group>"; };
+		8444EA9E185F83D900F90B48 /* KFEpubKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFEpubKit.h; sourceTree = "<group>"; };
+		8444EA9F185F83D900F90B48 /* KFEpubKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFEpubKit.m; sourceTree = "<group>"; };
+		8444EAA0185F83D900F90B48 /* KFEpubParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFEpubParser.h; sourceTree = "<group>"; };
+		8444EAA1185F83D900F90B48 /* KFEpubParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFEpubParser.m; sourceTree = "<group>"; };
+		8444EAAA185F840800F90B48 /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
+		8444EAAB185F840800F90B48 /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
+		8444EAAC185F840800F90B48 /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
+		8444EAAD185F840800F90B48 /* mztools.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mztools.c; sourceTree = "<group>"; };
+		8444EAAE185F840800F90B48 /* mztools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mztools.h; sourceTree = "<group>"; };
+		8444EAAF185F840800F90B48 /* unzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unzip.c; sourceTree = "<group>"; };
+		8444EAB0185F840800F90B48 /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
+		8444EAB1185F840800F90B48 /* zip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zip.c; sourceTree = "<group>"; };
+		8444EAB2185F840800F90B48 /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
+		8444EAB3185F840800F90B48 /* SSZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSZipArchive.h; sourceTree = "<group>"; };
+		8444EAB4185F840800F90B48 /* SSZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSZipArchive.m; sourceTree = "<group>"; };
+		8444EABC185F841700F90B48 /* DDXMLElementAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLElementAdditions.h; sourceTree = "<group>"; };
+		8444EABD185F841700F90B48 /* DDXMLElementAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLElementAdditions.m; sourceTree = "<group>"; };
+		8444EABF185F841700F90B48 /* NSString+DDXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DDXML.h"; sourceTree = "<group>"; };
+		8444EAC0185F841700F90B48 /* NSString+DDXML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DDXML.m"; sourceTree = "<group>"; };
+		8444EAC1185F841700F90B48 /* DDXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXML.h; sourceTree = "<group>"; };
+		8444EAC2185F841700F90B48 /* DDXMLDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLDocument.h; sourceTree = "<group>"; };
+		8444EAC3185F841700F90B48 /* DDXMLDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLDocument.m; sourceTree = "<group>"; };
+		8444EAC4185F841700F90B48 /* DDXMLElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLElement.h; sourceTree = "<group>"; };
+		8444EAC5185F841700F90B48 /* DDXMLElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLElement.m; sourceTree = "<group>"; };
+		8444EAC6185F841700F90B48 /* DDXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLNode.h; sourceTree = "<group>"; };
+		8444EAC7185F841700F90B48 /* DDXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLNode.m; sourceTree = "<group>"; };
+		8444EAC9185F841700F90B48 /* DDXMLPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLPrivate.h; sourceTree = "<group>"; };
+		8444EACF185F847500F90B48 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		8444EAD1185F8D2300F90B48 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		8478C3DF185CA73F00B06779 /* ListenBooks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ListenBooks.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8478C3E2185CA73F00B06779 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		8478C3E5185CA73F00B06779 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		8478C3E6185CA73F00B06779 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		8478C3E7185CA73F00B06779 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		8478C3EA185CA73F00B06779 /* ListenBooks-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ListenBooks-Info.plist"; sourceTree = "<group>"; };
+		8478C3EC185CA73F00B06779 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8478C3EE185CA73F00B06779 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8478C3F0185CA73F00B06779 /* ListenBooks-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ListenBooks-Prefix.pch"; sourceTree = "<group>"; };
+		8478C3F2185CA73F00B06779 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		8478C3F4185CA73F00B06779 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		8478C3F5185CA73F00B06779 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		8478C3F8185CA73F00B06779 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		8478C3FB185CA73F00B06779 /* ListenBooks.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ListenBooks.xcdatamodel; sourceTree = "<group>"; };
+		8478C3FD185CA73F00B06779 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		8478C403185CA74000B06779 /* ListenBooksTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ListenBooksTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8478C404185CA74000B06779 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		8478C40B185CA74000B06779 /* ListenBooksTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ListenBooksTests-Info.plist"; sourceTree = "<group>"; };
+		8478C40D185CA74000B06779 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8478C40F185CA74000B06779 /* ListenBooksTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ListenBooksTests.m; sourceTree = "<group>"; };
+		8478C415185CA74000B06779 /* ListenBooksImporter.mdimporter */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ListenBooksImporter.mdimporter; sourceTree = BUILT_PRODUCTS_DIR; };
+		8478C419185CA74000B06779 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
+		8478C41B185CA74000B06779 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		8478C41D185CA74000B06779 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		8478C41F185CA74000B06779 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		8478C423185CA74000B06779 /* ListenBooksImporter-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ListenBooksImporter-Info.plist"; sourceTree = "<group>"; };
+		8478C425185CA74000B06779 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8478C427185CA74000B06779 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		8478C429185CA74000B06779 /* GetMetadataForFile.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetMetadataForFile.m; sourceTree = "<group>"; };
+		8478C42B185CA74000B06779 /* MySpotlightImporter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MySpotlightImporter.h; sourceTree = "<group>"; };
+		8478C42C185CA74000B06779 /* MySpotlightImporter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MySpotlightImporter.m; sourceTree = "<group>"; };
+		8478C42E185CA74000B06779 /* Importer Read Me.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Importer Read Me.txt"; sourceTree = "<group>"; };
+		8478C42F185CA74000B06779 /* ListenBooksImporter-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ListenBooksImporter-Prefix.pch"; sourceTree = "<group>"; };
+		8478C43B185CA80200B06779 /* ListenBooks.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ListenBooks.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		84E29EB6185B39AF006853C8 /* Frameworks */ = {
+		8478C3DC185CA73F00B06779 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84E29F38185B64D2006853C8 /* libz.dylib in Frameworks */,
-				84E29F36185B618B006853C8 /* libxml2.dylib in Frameworks */,
-				84E29EBD185B39AF006853C8 /* Cocoa.framework in Frameworks */,
+				8444EAD2185F8D2300F90B48 /* libz.dylib in Frameworks */,
+				8444EAD0185F847500F90B48 /* libxml2.dylib in Frameworks */,
+				8478C3E3185CA73F00B06779 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		84E29EDA185B39AF006853C8 /* Frameworks */ = {
+		8478C400185CA74000B06779 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84E29EE0185B39AF006853C8 /* Cocoa.framework in Frameworks */,
-				84E29EDF185B39AF006853C8 /* XCTest.framework in Frameworks */,
+				8478C406185CA74000B06779 /* Cocoa.framework in Frameworks */,
+				8478C405185CA74000B06779 /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8478C412185CA74000B06779 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8478C41C185CA74000B06779 /* CoreFoundation.framework in Frameworks */,
+				8478C41E185CA74000B06779 /* CoreData.framework in Frameworks */,
+				8478C41A185CA74000B06779 /* CoreServices.framework in Frameworks */,
+				8478C420185CA74000B06779 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		84E29EB0185B39AF006853C8 = {
+		8444EA8D185F838100F90B48 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
-				84E29EC2185B39AF006853C8 /* ListenBooks */,
-				84E29EE3185B39AF006853C8 /* ListenBooksTests */,
-				84E29EBB185B39AF006853C8 /* Frameworks */,
-				84E29F0B185B5BDE006853C8 /* Resources */,
-				84E29EF7185B5BAF006853C8 /* Vendor */,
-				84E29EBA185B39AF006853C8 /* Products */,
-			);
-			sourceTree = "<group>";
-		};
-		84E29EBA185B39AF006853C8 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				84E29EB9185B39AF006853C8 /* ListenBooks.app */,
-				84E29EDD185B39AF006853C8 /* ListenBooksTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		84E29EBB185B39AF006853C8 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				84E29F37185B64D2006853C8 /* libz.dylib */,
-				84E29F35185B618B006853C8 /* libxml2.dylib */,
-				84E29EBC185B39AF006853C8 /* Cocoa.framework */,
-				84E29EDE185B39AF006853C8 /* XCTest.framework */,
-				84E29EBE185B39AF006853C8 /* Other Frameworks */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		84E29EBE185B39AF006853C8 /* Other Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				84E29EBF185B39AF006853C8 /* AppKit.framework */,
-				84E29EC0185B39AF006853C8 /* CoreData.framework */,
-				84E29EC1185B39AF006853C8 /* Foundation.framework */,
-			);
-			name = "Other Frameworks";
-			sourceTree = "<group>";
-		};
-		84E29EC2185B39AF006853C8 /* ListenBooks */ = {
-			isa = PBXGroup;
-			children = (
-				84E29EF3185B3BFB006853C8 /* ListenBooks.entitlements */,
-				84E29ECE185B39AF006853C8 /* AppDelegate.h */,
-				84E29ECF185B39AF006853C8 /* AppDelegate.m */,
-				84E29ED1185B39AF006853C8 /* MainMenu.xib */,
-				84E29ED7185B39AF006853C8 /* Images.xcassets */,
-				84E29ED4185B39AF006853C8 /* ListenBooks.xcdatamodeld */,
-				84E29EC3185B39AF006853C8 /* Supporting Files */,
-			);
-			path = ListenBooks;
-			sourceTree = "<group>";
-		};
-		84E29EC3185B39AF006853C8 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				84E29EC4185B39AF006853C8 /* ListenBooks-Info.plist */,
-				84E29EC5185B39AF006853C8 /* InfoPlist.strings */,
-				84E29EC8185B39AF006853C8 /* main.m */,
-				84E29ECA185B39AF006853C8 /* ListenBooks-Prefix.pch */,
-				84E29ECB185B39AF006853C8 /* Credits.rtf */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		84E29EE3185B39AF006853C8 /* ListenBooksTests */ = {
-			isa = PBXGroup;
-			children = (
-				84E29EE9185B39AF006853C8 /* ListenBooksTests.m */,
-				84E29EE4185B39AF006853C8 /* Supporting Files */,
-			);
-			path = ListenBooksTests;
-			sourceTree = "<group>";
-		};
-		84E29EE4185B39AF006853C8 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				84E29EE5185B39AF006853C8 /* ListenBooksTests-Info.plist */,
-				84E29EE6185B39AF006853C8 /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		84E29EF7185B5BAF006853C8 /* Vendor */ = {
-			isa = PBXGroup;
-			children = (
-				84E29F23185B6175006853C8 /* SSZipArchive */,
-				84E29F0E185B5DD7006853C8 /* KissXML */,
-				84E29EF8185B5BCE006853C8 /* KFEpubKit */,
+				8444EABA185F841700F90B48 /* KissXML */,
+				8444EAA8185F840800F90B48 /* SSZipArchive */,
+				8444EA95185F83D900F90B48 /* KFEpubParser */,
+				8444EA8E185F83A400F90B48 /* KFToolBar */,
 			);
 			name = Vendor;
 			sourceTree = "<group>";
 		};
-		84E29EF8185B5BCE006853C8 /* KFEpubKit */ = {
+		8444EA8E185F83A400F90B48 /* KFToolBar */ = {
 			isa = PBXGroup;
 			children = (
-				84E29EF9185B5BCE006853C8 /* KFEpubConstants.h */,
-				84E29EFA185B5BCE006853C8 /* KFEpubConstants.m */,
-				84E29EFB185B5BCE006853C8 /* KFEpubContentModel.h */,
-				84E29EFC185B5BCE006853C8 /* KFEpubContentModel.m */,
-				84E29EFD185B5BCE006853C8 /* KFEpubController.h */,
-				84E29EFE185B5BCE006853C8 /* KFEpubController.m */,
-				84E29EFF185B5BCE006853C8 /* KFEpubExtractor.h */,
-				84E29F00185B5BCE006853C8 /* KFEpubExtractor.m */,
-				84E29F01185B5BCE006853C8 /* KFEpubKit.h */,
-				84E29F02185B5BCE006853C8 /* KFEpubKit.m */,
-				84E29F03185B5BCE006853C8 /* KFEpubParser.h */,
-				84E29F04185B5BCE006853C8 /* KFEpubParser.m */,
+				8444EA8F185F83A400F90B48 /* KFToolbar.h */,
+				8444EA90185F83A400F90B48 /* KFToolbar.m */,
+				8444EA91185F83A400F90B48 /* KFToolbarItem.h */,
+				8444EA92185F83A400F90B48 /* KFToolbarItem.m */,
 			);
-			name = KFEpubKit;
+			name = KFToolBar;
+			path = Vendor/KFToolbar/KFToolbar/Sources;
+			sourceTree = "<group>";
+		};
+		8444EA95185F83D900F90B48 /* KFEpubParser */ = {
+			isa = PBXGroup;
+			children = (
+				8444EA96185F83D900F90B48 /* KFEpubConstants.h */,
+				8444EA97185F83D900F90B48 /* KFEpubConstants.m */,
+				8444EA98185F83D900F90B48 /* KFEpubContentModel.h */,
+				8444EA99185F83D900F90B48 /* KFEpubContentModel.m */,
+				8444EA9A185F83D900F90B48 /* KFEpubController.h */,
+				8444EA9B185F83D900F90B48 /* KFEpubController.m */,
+				8444EA9C185F83D900F90B48 /* KFEpubExtractor.h */,
+				8444EA9D185F83D900F90B48 /* KFEpubExtractor.m */,
+				8444EA9E185F83D900F90B48 /* KFEpubKit.h */,
+				8444EA9F185F83D900F90B48 /* KFEpubKit.m */,
+				8444EAA0185F83D900F90B48 /* KFEpubParser.h */,
+				8444EAA1185F83D900F90B48 /* KFEpubParser.m */,
+			);
+			name = KFEpubParser;
 			path = Vendor/KFEpubKit/KFEpubKit/Sources;
 			sourceTree = "<group>";
 		};
-		84E29F0B185B5BDE006853C8 /* Resources */ = {
+		8444EAA8185F840800F90B48 /* SSZipArchive */ = {
 			isa = PBXGroup;
 			children = (
-				84E29F39185B6CD5006853C8 /* invalid-manifest.opf */,
-				84E29F3A185B6CD5006853C8 /* invalid-toc.opf */,
-				84E29F3B185B6CD5006853C8 /* tolstoy-war-and-peace.epub */,
-				84E29F3C185B6CD5006853C8 /* valid-comments.opf */,
-				84E29F3D185B6CD5006853C8 /* valid.opf */,
-				84E29F3E185B6CD5006853C8 /* Winnie-the-Pooh.epub */,
-				84E29F0C185B5BF1006853C8 /* tolstoy-war-and-peace.epub */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		84E29F0E185B5DD7006853C8 /* KissXML */ = {
-			isa = PBXGroup;
-			children = (
-				84E29F0F185B5DD7006853C8 /* Additions */,
-				84E29F12185B5DD7006853C8 /* Categories */,
-				84E29F15185B5DD7006853C8 /* DDXML.h */,
-				84E29F16185B5DD7006853C8 /* DDXMLDocument.h */,
-				84E29F17185B5DD7006853C8 /* DDXMLDocument.m */,
-				84E29F18185B5DD7006853C8 /* DDXMLElement.h */,
-				84E29F19185B5DD7006853C8 /* DDXMLElement.m */,
-				84E29F1A185B5DD7006853C8 /* DDXMLNode.h */,
-				84E29F1B185B5DD7006853C8 /* DDXMLNode.m */,
-				84E29F1C185B5DD7006853C8 /* Private */,
-			);
-			name = KissXML;
-			path = Vendor/KissXML/KissXML;
-			sourceTree = "<group>";
-		};
-		84E29F0F185B5DD7006853C8 /* Additions */ = {
-			isa = PBXGroup;
-			children = (
-				84E29F10185B5DD7006853C8 /* DDXMLElementAdditions.h */,
-				84E29F11185B5DD7006853C8 /* DDXMLElementAdditions.m */,
-			);
-			path = Additions;
-			sourceTree = "<group>";
-		};
-		84E29F12185B5DD7006853C8 /* Categories */ = {
-			isa = PBXGroup;
-			children = (
-				84E29F13185B5DD7006853C8 /* NSString+DDXML.h */,
-				84E29F14185B5DD7006853C8 /* NSString+DDXML.m */,
-			);
-			path = Categories;
-			sourceTree = "<group>";
-		};
-		84E29F1C185B5DD7006853C8 /* Private */ = {
-			isa = PBXGroup;
-			children = (
-				84E29F1D185B5DD7006853C8 /* DDXMLPrivate.h */,
-			);
-			path = Private;
-			sourceTree = "<group>";
-		};
-		84E29F23185B6175006853C8 /* SSZipArchive */ = {
-			isa = PBXGroup;
-			children = (
-				84E29F24185B6175006853C8 /* minizip */,
-				84E29F2E185B6175006853C8 /* SSZipArchive.h */,
-				84E29F2F185B6175006853C8 /* SSZipArchive.m */,
+				8444EAA9185F840800F90B48 /* minizip */,
+				8444EAB3185F840800F90B48 /* SSZipArchive.h */,
+				8444EAB4185F840800F90B48 /* SSZipArchive.m */,
 			);
 			name = SSZipArchive;
 			path = Vendor/ssziparchive/SSZipArchive;
 			sourceTree = "<group>";
 		};
-		84E29F24185B6175006853C8 /* minizip */ = {
+		8444EAA9185F840800F90B48 /* minizip */ = {
 			isa = PBXGroup;
 			children = (
-				84E29F25185B6175006853C8 /* crypt.h */,
-				84E29F26185B6175006853C8 /* ioapi.c */,
-				84E29F27185B6175006853C8 /* ioapi.h */,
-				84E29F28185B6175006853C8 /* mztools.c */,
-				84E29F29185B6175006853C8 /* mztools.h */,
-				84E29F2A185B6175006853C8 /* unzip.c */,
-				84E29F2B185B6175006853C8 /* unzip.h */,
-				84E29F2C185B6175006853C8 /* zip.c */,
-				84E29F2D185B6175006853C8 /* zip.h */,
+				8444EAAA185F840800F90B48 /* crypt.h */,
+				8444EAAB185F840800F90B48 /* ioapi.c */,
+				8444EAAC185F840800F90B48 /* ioapi.h */,
+				8444EAAD185F840800F90B48 /* mztools.c */,
+				8444EAAE185F840800F90B48 /* mztools.h */,
+				8444EAAF185F840800F90B48 /* unzip.c */,
+				8444EAB0185F840800F90B48 /* unzip.h */,
+				8444EAB1185F840800F90B48 /* zip.c */,
+				8444EAB2185F840800F90B48 /* zip.h */,
 			);
 			path = minizip;
+			sourceTree = "<group>";
+		};
+		8444EABA185F841700F90B48 /* KissXML */ = {
+			isa = PBXGroup;
+			children = (
+				8444EABB185F841700F90B48 /* Additions */,
+				8444EABE185F841700F90B48 /* Categories */,
+				8444EAC1185F841700F90B48 /* DDXML.h */,
+				8444EAC2185F841700F90B48 /* DDXMLDocument.h */,
+				8444EAC3185F841700F90B48 /* DDXMLDocument.m */,
+				8444EAC4185F841700F90B48 /* DDXMLElement.h */,
+				8444EAC5185F841700F90B48 /* DDXMLElement.m */,
+				8444EAC6185F841700F90B48 /* DDXMLNode.h */,
+				8444EAC7185F841700F90B48 /* DDXMLNode.m */,
+				8444EAC8185F841700F90B48 /* Private */,
+			);
+			name = KissXML;
+			path = Vendor/KissXML/KissXML;
+			sourceTree = "<group>";
+		};
+		8444EABB185F841700F90B48 /* Additions */ = {
+			isa = PBXGroup;
+			children = (
+				8444EABC185F841700F90B48 /* DDXMLElementAdditions.h */,
+				8444EABD185F841700F90B48 /* DDXMLElementAdditions.m */,
+			);
+			path = Additions;
+			sourceTree = "<group>";
+		};
+		8444EABE185F841700F90B48 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				8444EABF185F841700F90B48 /* NSString+DDXML.h */,
+				8444EAC0185F841700F90B48 /* NSString+DDXML.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		8444EAC8185F841700F90B48 /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				8444EAC9185F841700F90B48 /* DDXMLPrivate.h */,
+			);
+			path = Private;
+			sourceTree = "<group>";
+		};
+		8478C3D6185CA73F00B06779 = {
+			isa = PBXGroup;
+			children = (
+				8478C3E8185CA73F00B06779 /* ListenBooks */,
+				8478C409185CA74000B06779 /* ListenBooksTests */,
+				8478C421185CA74000B06779 /* ListenBooksImporter */,
+				8478C3E1185CA73F00B06779 /* Frameworks */,
+				8444EA8D185F838100F90B48 /* Vendor */,
+				8478C3E0185CA73F00B06779 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8478C3E0185CA73F00B06779 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8478C3DF185CA73F00B06779 /* ListenBooks.app */,
+				8478C403185CA74000B06779 /* ListenBooksTests.xctest */,
+				8478C415185CA74000B06779 /* ListenBooksImporter.mdimporter */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8478C3E1185CA73F00B06779 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8444EAD1185F8D2300F90B48 /* libz.dylib */,
+				8444EACF185F847500F90B48 /* libxml2.dylib */,
+				8478C3E2185CA73F00B06779 /* Cocoa.framework */,
+				8478C404185CA74000B06779 /* XCTest.framework */,
+				8478C419185CA74000B06779 /* CoreServices.framework */,
+				8478C41B185CA74000B06779 /* CoreFoundation.framework */,
+				8478C41D185CA74000B06779 /* CoreData.framework */,
+				8478C41F185CA74000B06779 /* Foundation.framework */,
+				8478C3E4185CA73F00B06779 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8478C3E4185CA73F00B06779 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8478C3E5185CA73F00B06779 /* AppKit.framework */,
+				8478C3E6185CA73F00B06779 /* CoreData.framework */,
+				8478C3E7185CA73F00B06779 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		8478C3E8185CA73F00B06779 /* ListenBooks */ = {
+			isa = PBXGroup;
+			children = (
+				8478C43B185CA80200B06779 /* ListenBooks.entitlements */,
+				8478C3F4185CA73F00B06779 /* AppDelegate.h */,
+				8478C3F5185CA73F00B06779 /* AppDelegate.m */,
+				8478C3F7185CA73F00B06779 /* MainMenu.xib */,
+				8478C3FD185CA73F00B06779 /* Images.xcassets */,
+				8478C3FA185CA73F00B06779 /* ListenBooks.xcdatamodeld */,
+				8478C3E9185CA73F00B06779 /* Supporting Files */,
+			);
+			path = ListenBooks;
+			sourceTree = "<group>";
+		};
+		8478C3E9185CA73F00B06779 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8478C3EA185CA73F00B06779 /* ListenBooks-Info.plist */,
+				8478C3EB185CA73F00B06779 /* InfoPlist.strings */,
+				8478C3EE185CA73F00B06779 /* main.m */,
+				8478C3F0185CA73F00B06779 /* ListenBooks-Prefix.pch */,
+				8478C3F1185CA73F00B06779 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8478C409185CA74000B06779 /* ListenBooksTests */ = {
+			isa = PBXGroup;
+			children = (
+				8478C40F185CA74000B06779 /* ListenBooksTests.m */,
+				8478C40A185CA74000B06779 /* Supporting Files */,
+			);
+			path = ListenBooksTests;
+			sourceTree = "<group>";
+		};
+		8478C40A185CA74000B06779 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8478C40B185CA74000B06779 /* ListenBooksTests-Info.plist */,
+				8478C40C185CA74000B06779 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8478C421185CA74000B06779 /* ListenBooksImporter */ = {
+			isa = PBXGroup;
+			children = (
+				8478C429185CA74000B06779 /* GetMetadataForFile.m */,
+				8478C42B185CA74000B06779 /* MySpotlightImporter.h */,
+				8478C42C185CA74000B06779 /* MySpotlightImporter.m */,
+				8478C42E185CA74000B06779 /* Importer Read Me.txt */,
+				8478C422185CA74000B06779 /* Supporting Files */,
+			);
+			path = ListenBooksImporter;
+			sourceTree = "<group>";
+		};
+		8478C422185CA74000B06779 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8478C423185CA74000B06779 /* ListenBooksImporter-Info.plist */,
+				8478C424185CA74000B06779 /* InfoPlist.strings */,
+				8478C427185CA74000B06779 /* main.c */,
+				8478C42F185CA74000B06779 /* ListenBooksImporter-Prefix.pch */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		84E29EB8185B39AF006853C8 /* ListenBooks */ = {
+		8478C3DE185CA73F00B06779 /* ListenBooks */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 84E29EED185B39AF006853C8 /* Build configuration list for PBXNativeTarget "ListenBooks" */;
+			buildConfigurationList = 8478C435185CA74000B06779 /* Build configuration list for PBXNativeTarget "ListenBooks" */;
 			buildPhases = (
-				84E29EB5185B39AF006853C8 /* Sources */,
-				84E29EB6185B39AF006853C8 /* Frameworks */,
-				84E29EB7185B39AF006853C8 /* Resources */,
+				8478C3DB185CA73F00B06779 /* Sources */,
+				8478C3DC185CA73F00B06779 /* Frameworks */,
+				8478C3DD185CA73F00B06779 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				8478C417185CA74000B06779 /* PBXTargetDependency */,
 			);
 			name = ListenBooks;
 			productName = ListenBooks;
-			productReference = 84E29EB9185B39AF006853C8 /* ListenBooks.app */;
+			productReference = 8478C3DF185CA73F00B06779 /* ListenBooks.app */;
 			productType = "com.apple.product-type.application";
 		};
-		84E29EDC185B39AF006853C8 /* ListenBooksTests */ = {
+		8478C402185CA74000B06779 /* ListenBooksTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 84E29EF0185B39AF006853C8 /* Build configuration list for PBXNativeTarget "ListenBooksTests" */;
+			buildConfigurationList = 8478C438185CA74000B06779 /* Build configuration list for PBXNativeTarget "ListenBooksTests" */;
 			buildPhases = (
-				84E29ED9185B39AF006853C8 /* Sources */,
-				84E29EDA185B39AF006853C8 /* Frameworks */,
-				84E29EDB185B39AF006853C8 /* Resources */,
+				8478C3FF185CA74000B06779 /* Sources */,
+				8478C400185CA74000B06779 /* Frameworks */,
+				8478C401185CA74000B06779 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				84E29EE2185B39AF006853C8 /* PBXTargetDependency */,
+				8478C408185CA74000B06779 /* PBXTargetDependency */,
 			);
 			name = ListenBooksTests;
 			productName = ListenBooksTests;
-			productReference = 84E29EDD185B39AF006853C8 /* ListenBooksTests.xctest */;
+			productReference = 8478C403185CA74000B06779 /* ListenBooksTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		8478C414185CA74000B06779 /* ListenBooksImporter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8478C432185CA74000B06779 /* Build configuration list for PBXNativeTarget "ListenBooksImporter" */;
+			buildPhases = (
+				8478C411185CA74000B06779 /* Sources */,
+				8478C412185CA74000B06779 /* Frameworks */,
+				8478C413185CA74000B06779 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ListenBooksImporter;
+			productName = ListenBooksImporter;
+			productReference = 8478C415185CA74000B06779 /* ListenBooksImporter.mdimporter */;
+			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		84E29EB1185B39AF006853C8 /* Project object */ = {
+		8478C3D7185CA73F00B06779 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "IC Servis";
 				TargetAttributes = {
-					84E29EB8185B39AF006853C8 = {
+					8478C3DE185CA73F00B06779 = {
 						DevelopmentTeam = 499QMERYRP;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
@@ -404,12 +481,12 @@
 							};
 						};
 					};
-					84E29EDC185B39AF006853C8 = {
-						TestTargetID = 84E29EB8185B39AF006853C8;
+					8478C402185CA74000B06779 = {
+						TestTargetID = 8478C3DE185CA73F00B06779;
 					};
 				};
 			};
-			buildConfigurationList = 84E29EB4185B39AF006853C8 /* Build configuration list for PBXProject "ListenBooks" */;
+			buildConfigurationList = 8478C3DA185CA73F00B06779 /* Build configuration list for PBXProject "ListenBooks" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -417,120 +494,148 @@
 				en,
 				Base,
 			);
-			mainGroup = 84E29EB0185B39AF006853C8;
-			productRefGroup = 84E29EBA185B39AF006853C8 /* Products */;
+			mainGroup = 8478C3D6185CA73F00B06779;
+			productRefGroup = 8478C3E0185CA73F00B06779 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				84E29EB8185B39AF006853C8 /* ListenBooks */,
-				84E29EDC185B39AF006853C8 /* ListenBooksTests */,
+				8478C3DE185CA73F00B06779 /* ListenBooks */,
+				8478C402185CA74000B06779 /* ListenBooksTests */,
+				8478C414185CA74000B06779 /* ListenBooksImporter */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		84E29EB7185B39AF006853C8 /* Resources */ = {
+		8478C3DD185CA73F00B06779 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84E29EC7185B39AF006853C8 /* InfoPlist.strings in Resources */,
-				84E29ED8185B39AF006853C8 /* Images.xcassets in Resources */,
-				84E29F43185B6CD5006853C8 /* valid.opf in Resources */,
-				84E29F40185B6CD5006853C8 /* invalid-toc.opf in Resources */,
-				84E29ECD185B39AF006853C8 /* Credits.rtf in Resources */,
-				84E29F41185B6CD5006853C8 /* tolstoy-war-and-peace.epub in Resources */,
-				84E29ED3185B39AF006853C8 /* MainMenu.xib in Resources */,
-				84E29F3F185B6CD5006853C8 /* invalid-manifest.opf in Resources */,
-				84E29F0D185B5BF1006853C8 /* tolstoy-war-and-peace.epub in Resources */,
-				84E29F42185B6CD5006853C8 /* valid-comments.opf in Resources */,
-				84E29F44185B6CD5006853C8 /* Winnie-the-Pooh.epub in Resources */,
+				8478C3ED185CA73F00B06779 /* InfoPlist.strings in Resources */,
+				8478C3FE185CA73F00B06779 /* Images.xcassets in Resources */,
+				8478C3F3185CA73F00B06779 /* Credits.rtf in Resources */,
+				8478C418185CA74000B06779 /* ListenBooksImporter.mdimporter in Resources */,
+				8478C3F9185CA73F00B06779 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		84E29EDB185B39AF006853C8 /* Resources */ = {
+		8478C401185CA74000B06779 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84E29EE8185B39AF006853C8 /* InfoPlist.strings in Resources */,
+				8478C40E185CA74000B06779 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8478C413185CA74000B06779 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8478C426185CA74000B06779 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		84E29EB5185B39AF006853C8 /* Sources */ = {
+		8478C3DB185CA73F00B06779 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84E29F21185B5DD7006853C8 /* DDXMLElement.m in Sources */,
-				84E29ED0185B39AF006853C8 /* AppDelegate.m in Sources */,
-				84E29F31185B6175006853C8 /* mztools.c in Sources */,
-				84E29F33185B6175006853C8 /* zip.c in Sources */,
-				84E29F34185B6175006853C8 /* SSZipArchive.m in Sources */,
-				84E29EC9185B39AF006853C8 /* main.m in Sources */,
-				84E29F07185B5BCE006853C8 /* KFEpubController.m in Sources */,
-				84E29F09185B5BCE006853C8 /* KFEpubKit.m in Sources */,
-				84E29F1E185B5DD7006853C8 /* DDXMLElementAdditions.m in Sources */,
-				84E29F06185B5BCE006853C8 /* KFEpubContentModel.m in Sources */,
-				84E29F22185B5DD7006853C8 /* DDXMLNode.m in Sources */,
-				84E29F05185B5BCE006853C8 /* KFEpubConstants.m in Sources */,
-				84E29F30185B6175006853C8 /* ioapi.c in Sources */,
-				84E29F32185B6175006853C8 /* unzip.c in Sources */,
-				84E29F0A185B5BCE006853C8 /* KFEpubParser.m in Sources */,
-				84E29F1F185B5DD7006853C8 /* NSString+DDXML.m in Sources */,
-				84E29ED6185B39AF006853C8 /* ListenBooks.xcdatamodeld in Sources */,
-				84E29F20185B5DD7006853C8 /* DDXMLDocument.m in Sources */,
-				84E29F08185B5BCE006853C8 /* KFEpubExtractor.m in Sources */,
+				8444EACE185F841700F90B48 /* DDXMLNode.m in Sources */,
+				8444EAA7185F83D900F90B48 /* KFEpubParser.m in Sources */,
+				8478C3F6185CA73F00B06779 /* AppDelegate.m in Sources */,
+				8444EAA5185F83D900F90B48 /* KFEpubExtractor.m in Sources */,
+				8444EACB185F841700F90B48 /* NSString+DDXML.m in Sources */,
+				8444EAB8185F840800F90B48 /* zip.c in Sources */,
+				8444EAB9185F840800F90B48 /* SSZipArchive.m in Sources */,
+				8478C3EF185CA73F00B06779 /* main.m in Sources */,
+				8444EAA6185F83D900F90B48 /* KFEpubKit.m in Sources */,
+				8444EACD185F841700F90B48 /* DDXMLElement.m in Sources */,
+				8444EA93185F83A400F90B48 /* KFToolbar.m in Sources */,
+				8444EAB5185F840800F90B48 /* ioapi.c in Sources */,
+				8444EACC185F841700F90B48 /* DDXMLDocument.m in Sources */,
+				8444EAA3185F83D900F90B48 /* KFEpubContentModel.m in Sources */,
+				8444EAB7185F840800F90B48 /* unzip.c in Sources */,
+				8444EA94185F83A400F90B48 /* KFToolbarItem.m in Sources */,
+				8444EAA2185F83D900F90B48 /* KFEpubConstants.m in Sources */,
+				8444EACA185F841700F90B48 /* DDXMLElementAdditions.m in Sources */,
+				8444EAA4185F83D900F90B48 /* KFEpubController.m in Sources */,
+				8478C3FC185CA73F00B06779 /* ListenBooks.xcdatamodeld in Sources */,
+				8444EAB6185F840800F90B48 /* mztools.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		84E29ED9185B39AF006853C8 /* Sources */ = {
+		8478C3FF185CA74000B06779 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84E29EEA185B39AF006853C8 /* ListenBooksTests.m in Sources */,
+				8478C410185CA74000B06779 /* ListenBooksTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8478C411185CA74000B06779 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8478C42D185CA74000B06779 /* MySpotlightImporter.m in Sources */,
+				8478C428185CA74000B06779 /* main.c in Sources */,
+				8478C42A185CA74000B06779 /* GetMetadataForFile.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		84E29EE2185B39AF006853C8 /* PBXTargetDependency */ = {
+		8478C408185CA74000B06779 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 84E29EB8185B39AF006853C8 /* ListenBooks */;
-			targetProxy = 84E29EE1185B39AF006853C8 /* PBXContainerItemProxy */;
+			target = 8478C3DE185CA73F00B06779 /* ListenBooks */;
+			targetProxy = 8478C407185CA74000B06779 /* PBXContainerItemProxy */;
+		};
+		8478C417185CA74000B06779 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8478C414185CA74000B06779 /* ListenBooksImporter */;
+			targetProxy = 8478C416185CA74000B06779 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		84E29EC5185B39AF006853C8 /* InfoPlist.strings */ = {
+		8478C3EB185CA73F00B06779 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				84E29EC6185B39AF006853C8 /* en */,
+				8478C3EC185CA73F00B06779 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		84E29ECB185B39AF006853C8 /* Credits.rtf */ = {
+		8478C3F1185CA73F00B06779 /* Credits.rtf */ = {
 			isa = PBXVariantGroup;
 			children = (
-				84E29ECC185B39AF006853C8 /* en */,
+				8478C3F2185CA73F00B06779 /* en */,
 			);
 			name = Credits.rtf;
 			sourceTree = "<group>";
 		};
-		84E29ED1185B39AF006853C8 /* MainMenu.xib */ = {
+		8478C3F7185CA73F00B06779 /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				84E29ED2185B39AF006853C8 /* Base */,
+				8478C3F8185CA73F00B06779 /* Base */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
-		84E29EE6185B39AF006853C8 /* InfoPlist.strings */ = {
+		8478C40C185CA74000B06779 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				84E29EE7185B39AF006853C8 /* en */,
+				8478C40D185CA74000B06779 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		8478C424185CA74000B06779 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8478C425185CA74000B06779 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -538,10 +643,10 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		84E29EEB185B39AF006853C8 /* Debug */ = {
+		8478C430185CA74000B06779 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -573,7 +678,7 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/usr/include/libxml2,
-					Vendor/KissXML,
+					"Vendor/**",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
@@ -582,10 +687,10 @@
 			};
 			name = Debug;
 		};
-		84E29EEC185B39AF006853C8 /* Release */ = {
+		8478C431185CA74000B06779 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -612,7 +717,7 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/usr/include/libxml2,
-					Vendor/KissXML,
+					"Vendor/**",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OTHER_LDFLAGS = "-lxml2";
@@ -620,7 +725,43 @@
 			};
 			name = Release;
 		};
-		84E29EEE185B39AF006853C8 /* Debug */ = {
+		8478C433185CA74000B06779 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ListenBooksImporter/ListenBooksImporter-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "ListenBooksImporter/ListenBooksImporter-Info.plist";
+				INSTALL_PATH = "@executable_path/../Contents/Library/Spotlight";
+				LIBRARY_STYLE = BUNDLE;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = mdimporter;
+			};
+			name = Debug;
+		};
+		8478C434185CA74000B06779 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ListenBooksImporter/ListenBooksImporter-Prefix.pch";
+				INFOPLIST_FILE = "ListenBooksImporter/ListenBooksImporter-Info.plist";
+				INSTALL_PATH = "@executable_path/../Contents/Library/Spotlight";
+				LIBRARY_STYLE = BUNDLE;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = mdimporter;
+			};
+			name = Release;
+		};
+		8478C436185CA74000B06779 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -635,7 +776,7 @@
 			};
 			name = Debug;
 		};
-		84E29EEF185B39AF006853C8 /* Release */ = {
+		8478C437185CA74000B06779 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -650,7 +791,7 @@
 			};
 			name = Release;
 		};
-		84E29EF1185B39AF006853C8 /* Debug */ = {
+		8478C439185CA74000B06779 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ListenBooks.app/Contents/MacOS/ListenBooks";
@@ -672,7 +813,7 @@
 			};
 			name = Debug;
 		};
-		84E29EF2185B39AF006853C8 /* Release */ = {
+		8478C43A185CA74000B06779 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ListenBooks.app/Contents/MacOS/ListenBooks";
@@ -693,29 +834,38 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		84E29EB4185B39AF006853C8 /* Build configuration list for PBXProject "ListenBooks" */ = {
+		8478C3DA185CA73F00B06779 /* Build configuration list for PBXProject "ListenBooks" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				84E29EEB185B39AF006853C8 /* Debug */,
-				84E29EEC185B39AF006853C8 /* Release */,
+				8478C430185CA74000B06779 /* Debug */,
+				8478C431185CA74000B06779 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		84E29EED185B39AF006853C8 /* Build configuration list for PBXNativeTarget "ListenBooks" */ = {
+		8478C432185CA74000B06779 /* Build configuration list for PBXNativeTarget "ListenBooksImporter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				84E29EEE185B39AF006853C8 /* Debug */,
-				84E29EEF185B39AF006853C8 /* Release */,
+				8478C433185CA74000B06779 /* Debug */,
+				8478C434185CA74000B06779 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		84E29EF0185B39AF006853C8 /* Build configuration list for PBXNativeTarget "ListenBooksTests" */ = {
+		8478C435185CA74000B06779 /* Build configuration list for PBXNativeTarget "ListenBooks" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				84E29EF1185B39AF006853C8 /* Debug */,
-				84E29EF2185B39AF006853C8 /* Release */,
+				8478C436185CA74000B06779 /* Debug */,
+				8478C437185CA74000B06779 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8478C438185CA74000B06779 /* Build configuration list for PBXNativeTarget "ListenBooksTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8478C439185CA74000B06779 /* Debug */,
+				8478C43A185CA74000B06779 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -723,17 +873,17 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		84E29ED4185B39AF006853C8 /* ListenBooks.xcdatamodeld */ = {
+		8478C3FA185CA73F00B06779 /* ListenBooks.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				84E29ED5185B39AF006853C8 /* ListenBooks.xcdatamodel */,
+				8478C3FB185CA73F00B06779 /* ListenBooks.xcdatamodel */,
 			);
-			currentVersion = 84E29ED5185B39AF006853C8 /* ListenBooks.xcdatamodel */;
+			currentVersion = 8478C3FB185CA73F00B06779 /* ListenBooks.xcdatamodel */;
 			path = ListenBooks.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
 /* End XCVersionGroup section */
 	};
-	rootObject = 84E29EB1185B39AF006853C8 /* Project object */;
+	rootObject = 8478C3D7185CA73F00B06779 /* Project object */;
 }

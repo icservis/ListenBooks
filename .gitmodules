@@ -10,3 +10,6 @@
 [submodule "Vendor/ssziparchive"]
 	path = Vendor/ssziparchive
 	url = https://github.com/soffes/ssziparchive.git
+[submodule "Vendor/KFToolbar"]
+	path = Vendor/KFToolbar
+	url = https://github.com/ricobeck/KFToolbar.git
