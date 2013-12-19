@@ -48,6 +48,20 @@
 		8478C428185CA74000B06779 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 8478C427185CA74000B06779 /* main.c */; };
 		8478C42A185CA74000B06779 /* GetMetadataForFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 8478C429185CA74000B06779 /* GetMetadataForFile.m */; };
 		8478C42D185CA74000B06779 /* MySpotlightImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8478C42C185CA74000B06779 /* MySpotlightImporter.m */; };
+		84E27E791862465600317411 /* BookmarksView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E27E781862465600317411 /* BookmarksView.m */; };
+		84E27E7C1862466F00317411 /* SourceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E27E7B1862466F00317411 /* SourceView.m */; };
+		84E27E8418624B6400317411 /* SourceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E27E8318624B6400317411 /* SourceController.m */; };
+		84E27E8A18624C2300317411 /* SourceTreeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E27E8918624C2300317411 /* SourceTreeController.m */; };
+		84E27E9018624C7300317411 /* BookmarksController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E27E8F18624C7300317411 /* BookmarksController.m */; };
+		84E27E9318624C9A00317411 /* BookmarksArrayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E27E9218624C9A00317411 /* BookmarksArrayController.m */; };
+		84E27E9718624D6000317411 /* BookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E27E9518624D6000317411 /* BookViewController.m */; };
+		84E27E9818624D6000317411 /* BookViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84E27E9618624D6000317411 /* BookViewController.xib */; };
+		84E27E9C18624D9A00317411 /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E27E9A18624D9A00317411 /* ListViewController.m */; };
+		84E27E9D18624D9A00317411 /* ListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84E27E9B18624D9A00317411 /* ListViewController.xib */; };
+		84E27EA21863010800317411 /* ListCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E27EA11863010800317411 /* ListCollectionView.m */; };
+		84E27EA51863013300317411 /* ListCollectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E27EA41863013300317411 /* ListCollectionController.m */; };
+		84E27EE4186301FD00317411 /* ListCollectionViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E27EE2186301FD00317411 /* ListCollectionViewItem.m */; };
+		84E27EE5186301FD00317411 /* ListCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84E27EE3186301FD00317411 /* ListCollectionViewItem.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -143,6 +157,31 @@
 		8478C42E185CA74000B06779 /* Importer Read Me.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Importer Read Me.txt"; sourceTree = "<group>"; };
 		8478C42F185CA74000B06779 /* ListenBooksImporter-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ListenBooksImporter-Prefix.pch"; sourceTree = "<group>"; };
 		8478C43B185CA80200B06779 /* ListenBooks.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ListenBooks.entitlements; sourceTree = "<group>"; };
+		84E27E771862465600317411 /* BookmarksView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarksView.h; sourceTree = "<group>"; };
+		84E27E781862465600317411 /* BookmarksView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarksView.m; sourceTree = "<group>"; };
+		84E27E7A1862466F00317411 /* SourceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourceView.h; sourceTree = "<group>"; };
+		84E27E7B1862466F00317411 /* SourceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SourceView.m; sourceTree = "<group>"; };
+		84E27E8218624B6400317411 /* SourceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourceController.h; sourceTree = "<group>"; };
+		84E27E8318624B6400317411 /* SourceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SourceController.m; sourceTree = "<group>"; };
+		84E27E8818624C2300317411 /* SourceTreeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourceTreeController.h; sourceTree = "<group>"; };
+		84E27E8918624C2300317411 /* SourceTreeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SourceTreeController.m; sourceTree = "<group>"; };
+		84E27E8E18624C7300317411 /* BookmarksController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarksController.h; sourceTree = "<group>"; };
+		84E27E8F18624C7300317411 /* BookmarksController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarksController.m; sourceTree = "<group>"; };
+		84E27E9118624C9A00317411 /* BookmarksArrayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarksArrayController.h; sourceTree = "<group>"; };
+		84E27E9218624C9A00317411 /* BookmarksArrayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarksArrayController.m; sourceTree = "<group>"; };
+		84E27E9418624D6000317411 /* BookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookViewController.h; sourceTree = "<group>"; };
+		84E27E9518624D6000317411 /* BookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookViewController.m; sourceTree = "<group>"; };
+		84E27E9618624D6000317411 /* BookViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookViewController.xib; sourceTree = "<group>"; };
+		84E27E9918624D9A00317411 /* ListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListViewController.h; sourceTree = "<group>"; };
+		84E27E9A18624D9A00317411 /* ListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListViewController.m; sourceTree = "<group>"; };
+		84E27E9B18624D9A00317411 /* ListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListViewController.xib; sourceTree = "<group>"; };
+		84E27EA01863010800317411 /* ListCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListCollectionView.h; sourceTree = "<group>"; };
+		84E27EA11863010800317411 /* ListCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListCollectionView.m; sourceTree = "<group>"; };
+		84E27EA31863013300317411 /* ListCollectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListCollectionController.h; sourceTree = "<group>"; };
+		84E27EA41863013300317411 /* ListCollectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListCollectionController.m; sourceTree = "<group>"; };
+		84E27EE1186301FD00317411 /* ListCollectionViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListCollectionViewItem.h; sourceTree = "<group>"; };
+		84E27EE2186301FD00317411 /* ListCollectionViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListCollectionViewItem.m; sourceTree = "<group>"; };
+		84E27EE3186301FD00317411 /* ListCollectionViewItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListCollectionViewItem.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -344,12 +383,11 @@
 		8478C3E8185CA73F00B06779 /* ListenBooks */ = {
 			isa = PBXGroup;
 			children = (
-				8478C43B185CA80200B06779 /* ListenBooks.entitlements */,
-				8478C3F4185CA73F00B06779 /* AppDelegate.h */,
-				8478C3F5185CA73F00B06779 /* AppDelegate.m */,
-				8478C3F7185CA73F00B06779 /* MainMenu.xib */,
-				8478C3FD185CA73F00B06779 /* Images.xcassets */,
-				8478C3FA185CA73F00B06779 /* ListenBooks.xcdatamodeld */,
+				84E27E80186249F200317411 /* Application */,
+				84E27E7E186249DA00317411 /* Models */,
+				84E27E7D186249D100317411 /* Views */,
+				84E27E8118624B3800317411 /* Conrollers */,
+				84E27E7F186249E400317411 /* Resources */,
 				8478C3E9185CA73F00B06779 /* Supporting Files */,
 			);
 			path = ListenBooks;
@@ -406,6 +444,80 @@
 				8478C42F185CA74000B06779 /* ListenBooksImporter-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		84E27E7D186249D100317411 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				84E27EE61863024A00317411 /* Xibs */,
+				84E27E771862465600317411 /* BookmarksView.h */,
+				84E27E781862465600317411 /* BookmarksView.m */,
+				84E27E7A1862466F00317411 /* SourceView.h */,
+				84E27E7B1862466F00317411 /* SourceView.m */,
+				84E27EA01863010800317411 /* ListCollectionView.h */,
+				84E27EA11863010800317411 /* ListCollectionView.m */,
+				84E27EE1186301FD00317411 /* ListCollectionViewItem.h */,
+				84E27EE2186301FD00317411 /* ListCollectionViewItem.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		84E27E7E186249DA00317411 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8478C3FA185CA73F00B06779 /* ListenBooks.xcdatamodeld */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		84E27E7F186249E400317411 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8478C3FD185CA73F00B06779 /* Images.xcassets */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		84E27E80186249F200317411 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				8478C3F4185CA73F00B06779 /* AppDelegate.h */,
+				8478C3F5185CA73F00B06779 /* AppDelegate.m */,
+				8478C43B185CA80200B06779 /* ListenBooks.entitlements */,
+			);
+			name = Application;
+			sourceTree = "<group>";
+		};
+		84E27E8118624B3800317411 /* Conrollers */ = {
+			isa = PBXGroup;
+			children = (
+				84E27E8218624B6400317411 /* SourceController.h */,
+				84E27E8318624B6400317411 /* SourceController.m */,
+				84E27E8E18624C7300317411 /* BookmarksController.h */,
+				84E27E8F18624C7300317411 /* BookmarksController.m */,
+				84E27E8818624C2300317411 /* SourceTreeController.h */,
+				84E27E8918624C2300317411 /* SourceTreeController.m */,
+				84E27E9118624C9A00317411 /* BookmarksArrayController.h */,
+				84E27E9218624C9A00317411 /* BookmarksArrayController.m */,
+				84E27E9418624D6000317411 /* BookViewController.h */,
+				84E27E9518624D6000317411 /* BookViewController.m */,
+				84E27E9918624D9A00317411 /* ListViewController.h */,
+				84E27E9A18624D9A00317411 /* ListViewController.m */,
+				84E27EA31863013300317411 /* ListCollectionController.h */,
+				84E27EA41863013300317411 /* ListCollectionController.m */,
+			);
+			name = Conrollers;
+			sourceTree = "<group>";
+		};
+		84E27EE61863024A00317411 /* Xibs */ = {
+			isa = PBXGroup;
+			children = (
+				8478C3F7185CA73F00B06779 /* MainMenu.xib */,
+				84E27E9618624D6000317411 /* BookViewController.xib */,
+				84E27E9B18624D9A00317411 /* ListViewController.xib */,
+				84E27EE3186301FD00317411 /* ListCollectionViewItem.xib */,
+			);
+			name = Xibs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -513,9 +625,12 @@
 			files = (
 				8478C3ED185CA73F00B06779 /* InfoPlist.strings in Resources */,
 				8478C3FE185CA73F00B06779 /* Images.xcassets in Resources */,
+				84E27E9D18624D9A00317411 /* ListViewController.xib in Resources */,
 				8478C3F3185CA73F00B06779 /* Credits.rtf in Resources */,
 				8478C418185CA74000B06779 /* ListenBooksImporter.mdimporter in Resources */,
+				84E27EE5186301FD00317411 /* ListCollectionViewItem.xib in Resources */,
 				8478C3F9185CA73F00B06779 /* MainMenu.xib in Resources */,
+				84E27E9818624D6000317411 /* BookViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -544,20 +659,31 @@
 			files = (
 				8444EACE185F841700F90B48 /* DDXMLNode.m in Sources */,
 				8444EAA7185F83D900F90B48 /* KFEpubParser.m in Sources */,
+				84E27E8A18624C2300317411 /* SourceTreeController.m in Sources */,
 				8478C3F6185CA73F00B06779 /* AppDelegate.m in Sources */,
 				8444EAA5185F83D900F90B48 /* KFEpubExtractor.m in Sources */,
+				84E27EE4186301FD00317411 /* ListCollectionViewItem.m in Sources */,
+				84E27E791862465600317411 /* BookmarksView.m in Sources */,
 				8444EACB185F841700F90B48 /* NSString+DDXML.m in Sources */,
 				8444EAB8185F840800F90B48 /* zip.c in Sources */,
 				8444EAB9185F840800F90B48 /* SSZipArchive.m in Sources */,
+				84E27E9718624D6000317411 /* BookViewController.m in Sources */,
+				84E27E9018624C7300317411 /* BookmarksController.m in Sources */,
+				84E27E9C18624D9A00317411 /* ListViewController.m in Sources */,
+				84E27EA21863010800317411 /* ListCollectionView.m in Sources */,
 				8478C3EF185CA73F00B06779 /* main.m in Sources */,
 				8444EAA6185F83D900F90B48 /* KFEpubKit.m in Sources */,
 				8444EACD185F841700F90B48 /* DDXMLElement.m in Sources */,
+				84E27E7C1862466F00317411 /* SourceView.m in Sources */,
+				84E27E9318624C9A00317411 /* BookmarksArrayController.m in Sources */,
+				84E27EA51863013300317411 /* ListCollectionController.m in Sources */,
 				8444EA93185F83A400F90B48 /* KFToolbar.m in Sources */,
 				8444EAB5185F840800F90B48 /* ioapi.c in Sources */,
 				8444EACC185F841700F90B48 /* DDXMLDocument.m in Sources */,
 				8444EAA3185F83D900F90B48 /* KFEpubContentModel.m in Sources */,
 				8444EAB7185F840800F90B48 /* unzip.c in Sources */,
 				8444EA94185F83A400F90B48 /* KFToolbarItem.m in Sources */,
+				84E27E8418624B6400317411 /* SourceController.m in Sources */,
 				8444EAA2185F83D900F90B48 /* KFEpubConstants.m in Sources */,
 				8444EACA185F841700F90B48 /* DDXMLElementAdditions.m in Sources */,
 				8444EAA4185F83D900F90B48 /* KFEpubController.m in Sources */,

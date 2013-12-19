@@ -10,7 +10,13 @@
 #import "KFToolbar.h"
 #import "KFToolbarItem.h"
 
+#import "ListViewController.h"
+#import "BookViewController.h"
+
 @implementation AppDelegate
+
+@synthesize listViewController = _listViewController;
+@synthesize bookViewController = _bookViewController;
 
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 @synthesize managedObjectModel = _managedObjectModel;
@@ -25,6 +31,53 @@
     
 
     [self setupToolBar];
+}
+
+#pragma mark - SubViews
+
+- (ListViewController*)listViewController
+{
+    NSLog(@"listViewController: %@", [_listViewController description]);
+    if (_listViewController == nil) {
+        _listViewController = [[ListViewController alloc] initWithNibName:@"ListViewController" bundle:nil];
+    }
+    return _listViewController;
+}
+
+- (BookViewController*)bookViewController
+{
+    NSLog(@"bookViewController: %@", [_bookViewController description]);
+    if (_bookViewController == nil) {
+        _bookViewController = [[BookViewController alloc] initWithNibName:@"BookViewController" bundle:nil];
+    }
+    return _bookViewController;
+}
+
+- (void)removeSubViewsFromContentView
+{
+    [[self.contentView subviews] enumerateObjectsUsingBlock:^(NSView* subView, NSUInteger idx, BOOL *stop) {
+        [subView removeFromSuperview];
+    }];
+}
+
+- (void)setupContentViewConstraintsForSubView:(NSView*)subView
+{
+    NSLog(@"setupContentViewConstraintsForSubView: %@", [subView description]);
+    [subView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    
+    NSLayoutConstraint *constraintLeading = [NSLayoutConstraint constraintWithItem:subView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeading multiplier:1.0f constant:0.0f];
+    [self.contentView addConstraint:constraintLeading];
+    
+    NSLayoutConstraint *constraintTrailing = [NSLayoutConstraint constraintWithItem:subView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTrailing multiplier:1.0f constant:0.0f];
+    [self.contentView addConstraint:constraintTrailing];
+    
+    NSLayoutConstraint *constraintTop = [NSLayoutConstraint constraintWithItem:subView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTop multiplier:1.0f constant:0.0f];
+    [self.contentView addConstraint:constraintTop];
+    
+    NSLayoutConstraint *constraintBottom = [NSLayoutConstraint constraintWithItem:subView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0.0f];
+    [self.contentView addConstraint:constraintBottom];
+    
 }
 
 #pragma mark - KFToolBar
@@ -44,16 +97,20 @@
     bookmarksItem.toolTip = @"Bookmarks";
     
     
-    KFToolbarItem *iconItem = [KFToolbarItem toolbarItemWithType:NSToggleButton icon:[NSImage imageNamed:NSImageNameIconViewTemplate] tag:3];
-    iconItem.toolTip = @"List";
-    iconItem.state = NSOffState;
+    KFToolbarItem *listItem = [KFToolbarItem toolbarItemWithType:NSToggleButton icon:[NSImage imageNamed:NSImageNameIconViewTemplate] tag:3];
+    listItem.toolTip = @"List";
+    listItem.state = NSOnState;
     
-    KFToolbarItem *flowItem = [KFToolbarItem toolbarItemWithType:NSToggleButton icon:[NSImage imageNamed:NSImageNameFlowViewTemplate] tag:4];
-    flowItem.toolTip = @"View";
-    flowItem.state = NSOnState;
+    KFToolbarItem *bookItem = [KFToolbarItem toolbarItemWithType:NSToggleButton icon:[NSImage imageNamed:NSImageNameFlowViewTemplate] tag:4];
+    bookItem.toolTip = @"View";
+    bookItem.state = NSOffState;
     
     self.toolBar.leftItems = @[addItem, actionItem, bookmarksItem];
-    self.toolBar.rightItems = @[flowItem, iconItem];
+    self.toolBar.rightItems = @[bookItem, listItem];
+    
+    [self removeSubViewsFromContentView];
+    [self.contentView addSubview:self.listViewController.view];
+    [self setupContentViewConstraintsForSubView:self.listViewController.view];
     
     [self.toolBar setItemSelectionHandler:^(KFToolbarItemSelectionType selectionType, KFToolbarItem *toolbarItem, NSUInteger tag)
      {
@@ -71,11 +128,17 @@
                  break;
                  
              case 3:
-                 flowItem.state = !iconItem.state;
+                 [self removeSubViewsFromContentView];
+                 [self.contentView addSubview:self.listViewController.view];
+                 [self setupContentViewConstraintsForSubView:self.listViewController.view];
+                 bookItem.state = !listItem.state;
                  break;
                  
              case 4:
-                 iconItem.state = !flowItem.state;
+                 [self removeSubViewsFromContentView];
+                 [self.contentView addSubview:self.bookViewController.view];
+                 [self setupContentViewConstraintsForSubView:self.bookViewController.view];
+                 listItem.state = !bookItem.state;
                  break;
                  
              default:
