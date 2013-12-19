@@ -62,6 +62,7 @@
 		84E27EA51863013300317411 /* ListCollectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E27EA41863013300317411 /* ListCollectionController.m */; };
 		84E27EE4186301FD00317411 /* ListCollectionViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E27EE2186301FD00317411 /* ListCollectionViewItem.m */; };
 		84E27EE5186301FD00317411 /* ListCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84E27EE3186301FD00317411 /* ListCollectionViewItem.xib */; };
+		84E27EF4186314D800317411 /* BookPageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E27EF3186314D800317411 /* BookPageController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -182,6 +183,8 @@
 		84E27EE1186301FD00317411 /* ListCollectionViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListCollectionViewItem.h; sourceTree = "<group>"; };
 		84E27EE2186301FD00317411 /* ListCollectionViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListCollectionViewItem.m; sourceTree = "<group>"; };
 		84E27EE3186301FD00317411 /* ListCollectionViewItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListCollectionViewItem.xib; sourceTree = "<group>"; };
+		84E27EF2186314D800317411 /* BookPageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookPageController.h; sourceTree = "<group>"; };
+		84E27EF3186314D800317411 /* BookPageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookPageController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -505,6 +508,8 @@
 				84E27E9A18624D9A00317411 /* ListViewController.m */,
 				84E27EA31863013300317411 /* ListCollectionController.h */,
 				84E27EA41863013300317411 /* ListCollectionController.m */,
+				84E27EF2186314D800317411 /* BookPageController.h */,
+				84E27EF3186314D800317411 /* BookPageController.m */,
 			);
 			name = Conrollers;
 			sourceTree = "<group>";
@@ -681,6 +686,7 @@
 				8444EAB5185F840800F90B48 /* ioapi.c in Sources */,
 				8444EACC185F841700F90B48 /* DDXMLDocument.m in Sources */,
 				8444EAA3185F83D900F90B48 /* KFEpubContentModel.m in Sources */,
+				84E27EF4186314D800317411 /* BookPageController.m in Sources */,
 				8444EAB7185F840800F90B48 /* unzip.c in Sources */,
 				8444EA94185F83A400F90B48 /* KFToolbarItem.m in Sources */,
 				84E27E8418624B6400317411 /* SourceController.m in Sources */,
@@ -806,7 +812,7 @@
 					/usr/include/libxml2,
 					"Vendor/**",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-lxml2";
 				SDKROOT = macosx;
@@ -845,7 +851,7 @@
 					/usr/include/libxml2,
 					"Vendor/**",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_LDFLAGS = "-lxml2";
 				SDKROOT = macosx;
 			};
@@ -897,6 +903,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ListenBooks/ListenBooks-Prefix.pch";
 				INFOPLIST_FILE = "ListenBooks/ListenBooks-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -912,6 +919,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ListenBooks/ListenBooks-Prefix.pch";
 				INFOPLIST_FILE = "ListenBooks/ListenBooks-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

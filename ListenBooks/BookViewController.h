@@ -8,6 +8,13 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface BookViewController : NSViewController
+@class BookPageController;
+
+@interface BookViewController : NSViewController <NSPageControllerDelegate>
+@property (weak) IBOutlet NSView *toolBarView;
+@property (weak) IBOutlet NSTextField *titleField;
+@property (weak) IBOutlet NSView *pageView;
+@property (strong) IBOutlet BookPageController *pageController;
+@property (unsafe_unretained) IBOutlet NSTextView *textView;
 
 @end

@@ -25,11 +25,10 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     // Insert code here to initialize your application
-    NSLog(@"applicationFilesDirectory: %@", [self applicationFilesDirectory]);
-    NSLog(@"applicationDocumentsDirectory: %@", [self applicationDocumentsDirectory]);
-    NSLog(@"applicationCacheDirectory: %@", [self applicationCacheDirectory]);
+    //NSLog(@"applicationFilesDirectory: %@", [self applicationFilesDirectory]);
+    //NSLog(@"applicationDocumentsDirectory: %@", [self applicationDocumentsDirectory]);
+    //NSLog(@"applicationCacheDirectory: %@", [self applicationCacheDirectory]);
     
-
     [self setupToolBar];
 }
 
@@ -37,7 +36,6 @@
 
 - (ListViewController*)listViewController
 {
-    NSLog(@"listViewController: %@", [_listViewController description]);
     if (_listViewController == nil) {
         _listViewController = [[ListViewController alloc] initWithNibName:@"ListViewController" bundle:nil];
     }
@@ -46,7 +44,6 @@
 
 - (BookViewController*)bookViewController
 {
-    NSLog(@"bookViewController: %@", [_bookViewController description]);
     if (_bookViewController == nil) {
         _bookViewController = [[BookViewController alloc] initWithNibName:@"BookViewController" bundle:nil];
     }
@@ -62,9 +59,7 @@
 
 - (void)setupContentViewConstraintsForSubView:(NSView*)subView
 {
-    NSLog(@"setupContentViewConstraintsForSubView: %@", [subView description]);
     [subView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    
     
     NSLayoutConstraint *constraintLeading = [NSLayoutConstraint constraintWithItem:subView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeading multiplier:1.0f constant:0.0f];
     [self.contentView addConstraint:constraintLeading];
@@ -114,7 +109,6 @@
     
     [self.toolBar setItemSelectionHandler:^(KFToolbarItemSelectionType selectionType, KFToolbarItem *toolbarItem, NSUInteger tag)
      {
-         NSLog(@"tag: %lu", (unsigned long)tag);
          switch (tag)
          {
              case 0:
