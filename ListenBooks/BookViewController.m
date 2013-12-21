@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 IC Servis. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "BookViewController.h"
 #import "BookPageViewController.h"
 
@@ -38,19 +39,63 @@
 - (void)setupBookPageControllerContent
 {
     NSLog(@"setupBookPageControllerContent");
-
-    NSAttributedString* string1 = [[NSAttributedString alloc] initWithString:@"Než jsem odlétal do USA, tak jsem panu předsedovi Sobotkovi řekl, že některá ministerstva jsou pro nás prioritní, některá velmi důležitá a některá jsou pro nás až na konci seznamu."];
-    NSAttributedString* string2 = [[NSAttributedString alloc] initWithString:@"V tom prvním návrhu bylo jedno, které ministerstvo bylo na konci seznamu a které nebylo prioritní. Když vám dám jeden návrh, který je absolutně neakceptovatelný, tak je jasné, že jsme ho nemohli přijmout. Takže kdyby si pan předseda Sobotka tuto hru odpustil, tak jsme měli pouze druhý návrh."];
-    NSAttributedString* string3 = [[NSAttributedString alloc] initWithString:@"Panu předsedovi Sobotkovi jsem řekl, že pro nás je prioritou ministerstvo zemědělství. Potom jedno ze třech ministerstev jako je místní rozvoj, průmysl a obchod, doprava. Vysokou prioritu pro nás má také ministerstvo školství a ministerstvo práce a sociálních věcí, popřípadě kultura. Ta ale byla na posledním místě."];
-    NSAttributedString* string4 = [[NSAttributedString alloc] initWithString:@"První nabídka ale zněla na kulturu a zdravotnictví, to bylo naprosto nepřijatelné. Druhá nabídka zněla, že hnutí ANO bylo ochotno se vzdát ministerstva dopravy výměnou za to, že nebudeme požadovat ministerstvo zemědělství."];
-    NSAttributedString* string5 = [[NSAttributedString alloc] initWithString:@"Já ale musím odmítnout to, že pan předseda Sobotka dává návrhy jen nám, protože součástí návrhu musí být i ANO. Nebo to dostalo posty v prvním kole a už se s nimi nesmí hýbat? Já myslím, že ten návrh nemůže být pouze pro nás, ale pro všechny tři. Ale tady je to jako by bylo ANO uspokojeno a už se s tím nemůže hýbat, zatímco s námi se hýbat může."];
-
     
-    self.data = [[NSMutableArray alloc] initWithObjects:string1, string2, string3, string4, string5, nil];
+    AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
+    self.libraryURL = [appDelegate applicationCacheDirectory];
+    NSURL *epubURL = [[NSBundle mainBundle] URLForResource:@"tolstoy-war-and-peace" withExtension:@"epub"];
+    self.epubController = [[KFEpubController alloc] initWithEpubURL:epubURL andDestinationFolder:self.libraryURL];
+    self.epubController.delegate = self;
+    [self.epubController openAsynchronous:YES];
+}
+
+#pragma mark - KFEpubDelegate
+
+- (void)epubController:(KFEpubController *)controller willOpenEpub:(NSURL *)epubURL
+{
+    NSLog(@"will open epub");
+    self.titleField.stringValue = NSLocalizedString(@"Opening Book…", nil);
+    [self.progressIndicator startAnimation:nil];
+}
+
+
+- (void)epubController:(KFEpubController *)controller didOpenEpub:(KFEpubContentModel *)contentModel
+{
+    self.contentModel = contentModel;
+    //NSLog(@"spine %@", [contentModel.spine description]);
+    //NSLog(@"guide %@", [contentModel.guide description]);
     
-    if ([self.data count] > 0) {
+    self.titleField.stringValue = [self.contentModel.metaData valueForKey:@"title"];
+    
+    
+    __block NSMutableArray* spinedData = [[NSMutableArray alloc] init];
+    [self.contentModel.spine enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        
+        NSString* media = self.contentModel.manifest[self.contentModel.spine[idx]][@"media"];
+        
+        if ([media isEqualToString:@"application/xhtml+xml"]) {
+            NSString *contentFile = self.contentModel.manifest[self.contentModel.spine[idx]][@"href"];
+            NSURL *contentURL = [self.epubController.epubContentBaseURL URLByAppendingPathComponent:contentFile];
+            NSAttributedString *attributedString = [[NSAttributedString alloc] initWithURL:contentURL documentAttributes:nil];
+            [spinedData addObject:attributedString];
+        }
+    }];
+    
+    [self.progressIndicator stopAnimation:nil];
+    
+    if ([spinedData count] > 0) {
+        self.data = [[NSMutableArray alloc] initWithArray:spinedData];
         [self.pageController setArrangedObjects:self.data];
+    } else {
+        self.data = nil;
     }
+}
+
+
+- (void)epubController:(KFEpubController *)controller didFailWithError:(NSError *)error
+{
+    NSLog(@"epubController:didFailWithError: %@", error.description);
+    self.titleField.stringValue = NSLocalizedString(@"Opening Book failed!", nil);
+    [self.progressIndicator stopAnimation:nil];
 }
 
 #pragma mark - BookPageControllerDelegate

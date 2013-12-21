@@ -19,8 +19,15 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Initialization code here.
+        
     }
     return self;
+}
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    self.textView.textContainerInset = NSMakeSize(20.0f, 20.0f);
 }
 
 @end

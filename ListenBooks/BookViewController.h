@@ -20,5 +20,6 @@
 @property (nonatomic, strong) NSURL *libraryURL;
 @property (nonatomic, strong) KFEpubController *epubController;
 @property (nonatomic, strong) KFEpubContentModel *contentModel;
+@property (weak) IBOutlet NSProgressIndicator *progressIndicator;
 
 @end

@@ -127,16 +127,16 @@
     
     KFToolbarItem *listItem = [KFToolbarItem toolbarItemWithType:NSToggleButton icon:[NSImage imageNamed:NSImageNameIconViewTemplate] tag:3];
     listItem.toolTip = @"List";
-    listItem.state = NSOnState;
+    listItem.state = NSOffState;
     
     KFToolbarItem *bookItem = [KFToolbarItem toolbarItemWithType:NSToggleButton icon:[NSImage imageNamed:NSImageNameFlowViewTemplate] tag:4];
     bookItem.toolTip = @"View";
-    bookItem.state = NSOffState;
+    bookItem.state = NSOnState;
     
     self.toolBar.leftItems = @[addItem, actionItem, bookmarksItem];
     self.toolBar.rightItems = @[bookItem, listItem];
     
-    [self selectImageViewController:nil];
+    [self selectBookViewController:bookItem];
     
     [self.toolBar setItemSelectionHandler:^(KFToolbarItemSelectionType selectionType, KFToolbarItem *toolbarItem, NSUInteger tag)
      {

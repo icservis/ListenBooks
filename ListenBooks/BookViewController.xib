@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="pageController" destination="SXf-7F-t5Y" id="US4-se-grS"/>
                 <outlet property="pageView" destination="fad-Wp-y2i" id="J70-I8-3dV"/>
+                <outlet property="progressIndicator" destination="KCn-7a-wVN" id="ZJ9-54-3ku"/>
                 <outlet property="titleField" destination="hBu-ne-cpt" id="PGm-09-8VP"/>
                 <outlet property="toolBarView" destination="djN-tN-Tfa" id="7He-ii-q1n"/>
                 <outlet property="view" destination="1" id="2"/>
@@ -43,6 +44,16 @@
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="fad-Wp-y2i">
                     <rect key="frame" x="0.0" y="0.0" width="720" height="424"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <subviews>
+                        <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="KCn-7a-wVN">
+                            <rect key="frame" x="344" y="196" width="32" height="32"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        </progressIndicator>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="centerX" secondItem="KCn-7a-wVN" secondAttribute="centerX" id="9IP-XU-Um4"/>
+                        <constraint firstAttribute="centerY" secondItem="KCn-7a-wVN" secondAttribute="centerY" id="Yhe-u4-7g6"/>
+                    </constraints>
                 </customView>
             </subviews>
             <constraints>
