@@ -50,7 +50,7 @@
 		8478C42D185CA74000B06779 /* MySpotlightImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8478C42C185CA74000B06779 /* MySpotlightImporter.m */; };
 		84DD96091864B29A00B9BD5A /* BookPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD96071864B29A00B9BD5A /* BookPageViewController.m */; };
 		84DD960A1864B29A00B9BD5A /* BookPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84DD96081864B29A00B9BD5A /* BookPageViewController.xib */; };
-		84DD96101865B8A900B9BD5A /* AutoresizingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD960F1865B8A900B9BD5A /* AutoresizingTextView.m */; };
+		84DD96101865B8A900B9BD5A /* AutoSizingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD960F1865B8A900B9BD5A /* AutoSizingTextView.m */; };
 		84DD96381865C98B00B9BD5A /* image1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 84DD962C1865C98B00B9BD5A /* image1.jpg */; };
 		84DD96391865C98B00B9BD5A /* image2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 84DD962D1865C98B00B9BD5A /* image2.jpg */; };
 		84DD963A1865C98B00B9BD5A /* image3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 84DD962E1865C98B00B9BD5A /* image3.jpg */; };
@@ -177,8 +177,8 @@
 		84DD96061864B29A00B9BD5A /* BookPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookPageViewController.h; sourceTree = "<group>"; };
 		84DD96071864B29A00B9BD5A /* BookPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookPageViewController.m; sourceTree = "<group>"; };
 		84DD96081864B29A00B9BD5A /* BookPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookPageViewController.xib; sourceTree = "<group>"; };
-		84DD960E1865B8A900B9BD5A /* AutoresizingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoresizingTextView.h; sourceTree = "<group>"; };
-		84DD960F1865B8A900B9BD5A /* AutoresizingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoresizingTextView.m; sourceTree = "<group>"; };
+		84DD960E1865B8A900B9BD5A /* AutoSizingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoSizingTextView.h; sourceTree = "<group>"; };
+		84DD960F1865B8A900B9BD5A /* AutoSizingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoSizingTextView.m; sourceTree = "<group>"; };
 		84DD962C1865C98B00B9BD5A /* image1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = image1.jpg; path = Resources/image1.jpg; sourceTree = SOURCE_ROOT; };
 		84DD962D1865C98B00B9BD5A /* image2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = image2.jpg; path = Resources/image2.jpg; sourceTree = SOURCE_ROOT; };
 		84DD962E1865C98B00B9BD5A /* image3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = image3.jpg; path = Resources/image3.jpg; sourceTree = SOURCE_ROOT; };
@@ -514,8 +514,8 @@
 				84E27EA11863010800317411 /* ListCollectionView.m */,
 				84E27EE1186301FD00317411 /* ListCollectionViewItem.h */,
 				84E27EE2186301FD00317411 /* ListCollectionViewItem.m */,
-				84DD960E1865B8A900B9BD5A /* AutoresizingTextView.h */,
-				84DD960F1865B8A900B9BD5A /* AutoresizingTextView.m */,
+				84DD960E1865B8A900B9BD5A /* AutoSizingTextView.h */,
+				84DD960F1865B8A900B9BD5A /* AutoSizingTextView.m */,
 				84DD96471865CA0E00B9BD5A /* AutoSizingImageView.h */,
 				84DD96481865CA0E00B9BD5A /* AutoSizingImageView.m */,
 			);
@@ -765,7 +765,7 @@
 				84DD96091864B29A00B9BD5A /* BookPageViewController.m in Sources */,
 				84E27E8418624B6400317411 /* SourceController.m in Sources */,
 				84DD96491865CA0E00B9BD5A /* AutoSizingImageView.m in Sources */,
-				84DD96101865B8A900B9BD5A /* AutoresizingTextView.m in Sources */,
+				84DD96101865B8A900B9BD5A /* AutoSizingTextView.m in Sources */,
 				8444EAA2185F83D900F90B48 /* KFEpubConstants.m in Sources */,
 				8444EACA185F841700F90B48 /* DDXMLElementAdditions.m in Sources */,
 				8444EAA4185F83D900F90B48 /* KFEpubController.m in Sources */,

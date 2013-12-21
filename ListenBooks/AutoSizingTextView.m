@@ -6,16 +6,15 @@
 //  Copyright (c) 2013 IC Servis. All rights reserved.
 //
 
-#import "AutoresizingTextView.h"
+#import "AutoSizingTextView.h"
 
-@implementation AutoresizingTextView
+@implementation AutoSizingTextView
 
 - (id)initWithFrame:(NSRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code here.
-        NSLog(@"initWithFrame: %@", NSStringFromRect(frame));
     }
     return self;
 }
@@ -23,19 +22,12 @@
 - (void)drawRect:(NSRect)dirtyRect
 {
 	[super drawRect:dirtyRect];
-    NSLog(@"drawRect: %@", NSStringFromRect(dirtyRect));
 	
     // Drawing code here.
-}
-
-- (void)setFrameSize:(NSSize)newSize {
     NSScrollView *scrollView = [self enclosingScrollView];
-    NSLog(@"setFrameSize: %@", NSStringFromSize(newSize));
-    if (scrollView) {
-        [super setFrameSize:scrollView.frame.size];
-    } else {
-        [super setFrameSize:newSize];
-    }
+    scrollView.frame = scrollView.superview.frame;
+    NSLog(@"drawRect: %@", NSStringFromRect(dirtyRect));
+    NSLog(@"scrollView: %@", NSStringFromRect(scrollView.frame));
 }
 
 @end

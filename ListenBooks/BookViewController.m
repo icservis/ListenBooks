@@ -32,7 +32,7 @@
 {
     [super awakeFromNib];
     NSLog(@"awakeFromNib");
-    [self setupImagePageControllerContent];
+    [self setupBookPageControllerContent];
     
 }
 
@@ -85,7 +85,6 @@
 
 #pragma mark - BookPageControllerDelegate
 
-/*
 - (NSString *)pageController:(NSPageController *)pageController identifierForObject:(id)object
 {
     NSString *identifier = @"BookPage";
@@ -126,9 +125,9 @@
 - (void)pageControllerDidEndLiveTransition:(NSPageController *)pageController {
     [pageController completeTransition];
 }
- 
- */
 
+
+/*
 - (NSString *)pageController:(NSPageController *)pageController identifierForObject:(id)object {
     return @"picture";
 }
@@ -160,5 +159,5 @@
 - (void)pageControllerDidEndLiveTransition:(NSPageController *)pageController {
     [pageController completeTransition];
 }
-
+*/
 @end

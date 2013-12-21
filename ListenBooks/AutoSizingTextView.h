@@ -8,6 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface AutoresizingTextView : NSTextView
+@interface AutoSizingTextView : NSTextView
 
 @end
