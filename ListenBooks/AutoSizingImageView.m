@@ -56,7 +56,6 @@
 //
 - (void)setFrameSize:(NSSize)newSize {
     NSScrollView *scrollView = [self enclosingScrollView];
-    NSLog(@"setFrameSize: %@", NSStringFromSize(newSize));
     if (scrollView) {
         [super setFrameSize:scrollView.frame.size];
     } else {

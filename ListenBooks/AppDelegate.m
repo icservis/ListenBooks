@@ -12,11 +12,13 @@
 
 #import "ListViewController.h"
 #import "BookViewController.h"
+#import "ImageViewController.h"
 
 @implementation AppDelegate
 
 @synthesize listViewController = _listViewController;
 @synthesize bookViewController = _bookViewController;
+@synthesize imageViewController = _imageViewController;
 
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 @synthesize managedObjectModel = _managedObjectModel;
@@ -48,6 +50,14 @@
         _bookViewController = [[BookViewController alloc] initWithNibName:@"BookViewController" bundle:nil];
     }
     return _bookViewController;
+}
+
+- (ImageViewController*)imageViewController
+{
+    if (_imageViewController == nil) {
+        _imageViewController = [[ImageViewController alloc] initWithNibName:@"ImageViewController" bundle:nil];
+    }
+    return _imageViewController;
 }
 
 - (void)removeSubViewsFromContentView
@@ -91,6 +101,13 @@
     [self setupContentViewConstraintsForSubView:self.listViewController.view];
 }
 
+- (IBAction)selectImageViewController:(id)sender
+{
+    [self removeSubViewsFromContentView];
+    [self.contentView addSubview:self.imageViewController.view];
+    [self setupContentViewConstraintsForSubView:self.imageViewController.view];
+}
+
 #pragma mark - KFToolBar
 
 - (void)setupToolBar
@@ -119,7 +136,7 @@
     self.toolBar.leftItems = @[addItem, actionItem, bookmarksItem];
     self.toolBar.rightItems = @[bookItem, listItem];
     
-    [self selectListViewController:listItem];
+    [self selectImageViewController:nil];
     
     [self.toolBar setItemSelectionHandler:^(KFToolbarItemSelectionType selectionType, KFToolbarItem *toolbarItem, NSUInteger tag)
      {

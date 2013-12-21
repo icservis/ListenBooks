@@ -26,8 +26,6 @@
     // Drawing code here.
     NSScrollView *scrollView = [self enclosingScrollView];
     scrollView.frame = scrollView.superview.frame;
-    NSLog(@"drawRect: %@", NSStringFromRect(dirtyRect));
-    NSLog(@"scrollView: %@", NSStringFromRect(scrollView.frame));
 }
 
 @end

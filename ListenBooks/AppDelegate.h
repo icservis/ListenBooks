@@ -15,6 +15,7 @@
 @class BookmarksArrayController;
 @class ListViewController;
 @class BookViewController;
+@class ImageViewController;
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
@@ -35,6 +36,7 @@
 
 @property (strong, nonatomic) IBOutlet ListViewController *listViewController;
 @property (strong, nonatomic) IBOutlet BookViewController *bookViewController;
+@property (strong, nonatomic) IBOutlet ImageViewController *imageViewController;
 
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
@@ -46,6 +48,7 @@
 - (IBAction)saveAction:(id)sender;
 - (IBAction)selectBookViewController:(id)sender;
 - (IBAction)selectListViewController:(id)sender;
+- (IBAction)selectImageViewController:(id)sender;
 
 
 @end

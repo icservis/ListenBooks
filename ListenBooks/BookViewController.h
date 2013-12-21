@@ -7,14 +7,18 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "KFEpubController.h"
+#import "KFEpubContentModel.h"
 
 @class BookPageController;
 
-@interface BookViewController : NSViewController <NSPageControllerDelegate>
+@interface BookViewController : NSViewController <NSPageControllerDelegate, KFEpubControllerDelegate>
 @property (weak) IBOutlet NSView *toolBarView;
 @property (weak) IBOutlet NSTextField *titleField;
-@property (weak) IBOutlet NSBox *pageView;
+@property (weak) IBOutlet NSView *pageView;
 @property (strong) IBOutlet NSPageController *pageController;
-@property (unsafe_unretained) IBOutlet NSTextView *textView;
+@property (nonatomic, strong) NSURL *libraryURL;
+@property (nonatomic, strong) KFEpubController *epubController;
+@property (nonatomic, strong) KFEpubContentModel *contentModel;
 
 @end
