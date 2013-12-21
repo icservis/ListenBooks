@@ -75,6 +75,22 @@
     
 }
 
+#pragma mark - Target Action
+
+- (IBAction)selectBookViewController:(id)sender
+{
+    [self removeSubViewsFromContentView];
+    [self.contentView addSubview:self.bookViewController.view];
+    [self setupContentViewConstraintsForSubView:self.bookViewController.view];
+}
+
+- (IBAction)selectListViewController:(id)sender
+{
+    [self removeSubViewsFromContentView];
+    [self.contentView addSubview:self.listViewController.view];
+    [self setupContentViewConstraintsForSubView:self.listViewController.view];
+}
+
 #pragma mark - KFToolBar
 
 - (void)setupToolBar
@@ -103,9 +119,7 @@
     self.toolBar.leftItems = @[addItem, actionItem, bookmarksItem];
     self.toolBar.rightItems = @[bookItem, listItem];
     
-    [self removeSubViewsFromContentView];
-    [self.contentView addSubview:self.listViewController.view];
-    [self setupContentViewConstraintsForSubView:self.listViewController.view];
+    [self selectListViewController:listItem];
     
     [self.toolBar setItemSelectionHandler:^(KFToolbarItemSelectionType selectionType, KFToolbarItem *toolbarItem, NSUInteger tag)
      {
@@ -122,16 +136,12 @@
                  break;
                  
              case 3:
-                 [self removeSubViewsFromContentView];
-                 [self.contentView addSubview:self.listViewController.view];
-                 [self setupContentViewConstraintsForSubView:self.listViewController.view];
+                 [self selectListViewController:listItem];
                  bookItem.state = !listItem.state;
                  break;
                  
              case 4:
-                 [self removeSubViewsFromContentView];
-                 [self.contentView addSubview:self.bookViewController.view];
-                 [self setupContentViewConstraintsForSubView:self.bookViewController.view];
+                 [self selectBookViewController:bookItem];
                  listItem.state = !bookItem.state;
                  break;
                  
@@ -140,6 +150,8 @@
          }
      }];
 }
+
+
 
 #pragma mark - CoreData
 

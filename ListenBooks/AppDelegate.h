@@ -44,5 +44,8 @@
 - (NSURL *)applicationCacheDirectory;
 
 - (IBAction)saveAction:(id)sender;
+- (IBAction)selectBookViewController:(id)sender;
+- (IBAction)selectListViewController:(id)sender;
+
 
 @end
