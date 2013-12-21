@@ -9,7 +9,6 @@
             <connections>
                 <outlet property="pageController" destination="SXf-7F-t5Y" id="US4-se-grS"/>
                 <outlet property="pageView" destination="fad-Wp-y2i" id="J70-I8-3dV"/>
-                <outlet property="textView" destination="1Zu-Et-cVb" id="zQt-6w-PKN"/>
                 <outlet property="titleField" destination="hBu-ne-cpt" id="PGm-09-8VP"/>
                 <outlet property="toolBarView" destination="djN-tN-Tfa" id="7He-ii-q1n"/>
                 <outlet property="view" destination="1" id="2"/>
@@ -44,43 +43,6 @@
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="fad-Wp-y2i">
                     <rect key="frame" x="0.0" y="0.0" width="720" height="424"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <subviews>
-                        <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A3s-05-9t7">
-                            <rect key="frame" x="0.0" y="0.0" width="720" height="424"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                            <clipView key="contentView" id="8S2-fk-StV">
-                                <rect key="frame" x="1" y="1" width="703" height="422"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <textView importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="1Zu-Et-cVb">
-                                        <rect key="frame" x="0.0" y="0.0" width="703" height="422"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <size key="minSize" width="703" height="422"/>
-                                        <size key="maxSize" width="720" height="10000000"/>
-                                        <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        <size key="minSize" width="703" height="422"/>
-                                        <size key="maxSize" width="720" height="10000000"/>
-                                    </textView>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </clipView>
-                            <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="Kcb-AV-A9K">
-                                <rect key="frame" x="-100" y="-100" width="87" height="18"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                            </scroller>
-                            <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="dzK-Gt-AqU">
-                                <rect key="frame" x="704" y="1" width="15" height="422"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                            </scroller>
-                        </scrollView>
-                    </subviews>
-                    <constraints>
-                        <constraint firstAttribute="bottom" secondItem="A3s-05-9t7" secondAttribute="bottom" id="Mh5-Al-rtk"/>
-                        <constraint firstItem="A3s-05-9t7" firstAttribute="top" secondItem="fad-Wp-y2i" secondAttribute="top" id="O4e-06-by9"/>
-                        <constraint firstAttribute="trailing" secondItem="A3s-05-9t7" secondAttribute="trailing" id="YuK-Hb-OYd"/>
-                        <constraint firstItem="A3s-05-9t7" firstAttribute="leading" secondItem="fad-Wp-y2i" secondAttribute="leading" id="vAb-in-IiT"/>
-                    </constraints>
                 </customView>
             </subviews>
             <constraints>
@@ -94,10 +56,10 @@
             </constraints>
         </customView>
         <customObject id="DFm-K4-015" customClass="AppDelegate"/>
-        <pagecontroller transitionStyle="stackBook" id="SXf-7F-t5Y" customClass="BookPageController">
+        <pagecontroller nibName="" transitionStyle="stackBook" id="SXf-7F-t5Y">
             <connections>
                 <outlet property="delegate" destination="-2" id="6vi-Id-gvd"/>
-                <outlet property="view" destination="1Zu-Et-cVb" id="EG7-vQ-yZu"/>
+                <outlet property="view" destination="fad-Wp-y2i" id="CAQ-tw-Ufh"/>
             </connections>
         </pagecontroller>
     </objects>

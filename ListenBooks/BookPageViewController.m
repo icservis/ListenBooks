@@ -1,18 +1,18 @@
 //
-//  BookPageController.m
+//  BookPageViewController.m
 //  ListenBooks
 //
-//  Created by Libor Kučera on 19.12.13.
+//  Created by Libor Kučera on 20/12/13.
 //  Copyright (c) 2013 IC Servis. All rights reserved.
 //
 
-#import "BookPageController.h"
+#import "BookPageViewController.h"
 
-@interface BookPageController ()
+@interface BookPageViewController ()
 
 @end
 
-@implementation BookPageController
+@implementation BookPageViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
