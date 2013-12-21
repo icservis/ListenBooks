@@ -66,28 +66,34 @@
     
     self.titleField.stringValue = [self.contentModel.metaData valueForKey:@"title"];
     
-    
-    __block NSMutableArray* spinedData = [[NSMutableArray alloc] init];
-    [self.contentModel.spine enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        // Do a taks in the background
         
-        NSString* media = self.contentModel.manifest[self.contentModel.spine[idx]][@"media"];
+        __block NSMutableArray* spinedData = [[NSMutableArray alloc] init];
+        [self.contentModel.spine enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            
+            NSString* media = self.contentModel.manifest[self.contentModel.spine[idx]][@"media"];
+            
+            if ([media isEqualToString:@"application/xhtml+xml"]) {
+                NSString *contentFile = self.contentModel.manifest[self.contentModel.spine[idx]][@"href"];
+                NSURL *contentURL = [self.epubController.epubContentBaseURL URLByAppendingPathComponent:contentFile];
+                NSAttributedString *attributedString = [[NSAttributedString alloc] initWithURL:contentURL documentAttributes:nil];
+                [spinedData addObject:attributedString];
+            }
+        }];
         
-        if ([media isEqualToString:@"application/xhtml+xml"]) {
-            NSString *contentFile = self.contentModel.manifest[self.contentModel.spine[idx]][@"href"];
-            NSURL *contentURL = [self.epubController.epubContentBaseURL URLByAppendingPathComponent:contentFile];
-            NSAttributedString *attributedString = [[NSAttributedString alloc] initWithURL:contentURL documentAttributes:nil];
-            [spinedData addObject:attributedString];
-        }
-    }];
-    
-    [self.progressIndicator stopAnimation:nil];
-    
-    if ([spinedData count] > 0) {
-        self.data = [[NSMutableArray alloc] initWithArray:spinedData];
-        [self.pageController setArrangedObjects:self.data];
-    } else {
-        self.data = nil;
-    }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // Finish in main queue
+            [self.progressIndicator stopAnimation:nil];
+            
+            if ([spinedData count] > 0) {
+                self.data = [[NSMutableArray alloc] initWithArray:spinedData];
+                [self.pageController setArrangedObjects:self.data];
+            } else {
+                self.data = nil;
+            }
+        });
+    });
 }
 
 
