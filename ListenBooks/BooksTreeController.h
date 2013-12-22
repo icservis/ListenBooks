@@ -1,13 +1,15 @@
 //
-//  BookmarksArrayController.m
+//  BooksTreeController.h
 //  ListenBooks
 //
 //  Created by Libor Kučera on 21/12/13.
 //  Copyright (c) 2013 IC Servis. All rights reserved.
 //
 
-#import "BookmarksArrayController.h"
+#import <Cocoa/Cocoa.h>
 
-@implementation BookmarksArrayController
+@interface BooksTreeController : NSTreeController
+
+- (void)deleteItems;
 
 @end

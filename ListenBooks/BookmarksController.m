@@ -6,7 +6,14 @@
 //  Copyright (c) 2013 IC Servis. All rights reserved.
 //
 
+#import "AppDelegate.h"
+#import "Book.h"
+#import "Bookmark.h"
 #import "BookmarksController.h"
+#import "BookmarksView.h"
+#import "BooksView.h"
+#import "BooksTreeController.h"
+#import "BookmarksArrayController.h"
 
 @implementation BookmarksController
 

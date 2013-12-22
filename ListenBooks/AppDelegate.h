@@ -7,17 +7,19 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "KFEpubController.h"
+#import "KFEpubContentModel.h"
 
 @class KFToolbar;
-@class SourceView;
+@class BooksView;
 @class BookmarksView;
-@class SourceTreeController;
+@class BooksTreeController;
 @class BookmarksArrayController;
 @class ListViewController;
 @class BookViewController;
 @class ImageViewController;
 
-@interface AppDelegate : NSObject <NSApplicationDelegate>
+@interface AppDelegate : NSObject <NSApplicationDelegate, KFEpubControllerDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
 @property (weak) IBOutlet NSSplitView *splitView;
@@ -29,9 +31,17 @@
 @property (weak) IBOutlet NSView *sourceSplitPane;
 @property (weak) IBOutlet NSView *bookmarksSplitPane;
 @property (weak) IBOutlet BookmarksView *bookmarksView;
-@property (weak) IBOutlet SourceView *sourceView;
+@property (weak) IBOutlet BooksView *booksView;
 
-@property (strong) IBOutlet SourceTreeController *sourceTreeController;
+@property (unsafe_unretained) IBOutlet NSPanel *progressWindow;
+@property (weak) IBOutlet NSProgressIndicator *progressIndicatior;
+@property (weak) IBOutlet NSTextField *progressTitle;
+@property (weak) IBOutlet NSTextField *progressInfo;
+
+@property (nonatomic, strong) KFEpubController *epubController;
+@property (nonatomic, strong) NSDateFormatter* dateFormatter;
+
+@property (strong) IBOutlet BooksTreeController *booksTreeController;
 @property (strong) IBOutlet BookmarksArrayController *bookmarksArrayController;
 
 @property (strong, nonatomic) IBOutlet ListViewController *listViewController;
@@ -44,6 +54,9 @@
 
 - (NSURL *)applicationDocumentsDirectory;
 - (NSURL *)applicationCacheDirectory;
+- (NSArray*)allowedFileTypes;
+- (IBAction)openImportDialog:(id)sender;
+- (void)unlinkBookWithUrl:(NSURL*)sandboxedFileUrl;
 
 - (IBAction)saveAction:(id)sender;
 - (IBAction)selectBookViewController:(id)sender;

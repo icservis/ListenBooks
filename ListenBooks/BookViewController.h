@@ -9,10 +9,14 @@
 #import <Cocoa/Cocoa.h>
 #import "KFEpubController.h"
 #import "KFEpubContentModel.h"
+#import "Book.h"
 
 @class BookPageController;
 
 @interface BookViewController : NSViewController <NSPageControllerDelegate, KFEpubControllerDelegate>
+
+@property (strong) Book* book;
+
 @property (weak) IBOutlet NSView *toolBarView;
 @property (weak) IBOutlet NSTextField *titleField;
 @property (weak) IBOutlet NSView *pageView;

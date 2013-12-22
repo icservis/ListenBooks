@@ -16,6 +16,9 @@
 
 @implementation AppDelegate
 
+@synthesize dateFormatter = _dateFormatter;
+@synthesize epubController = _epubController;
+
 @synthesize listViewController = _listViewController;
 @synthesize bookViewController = _bookViewController;
 @synthesize imageViewController = _imageViewController;
@@ -26,15 +29,20 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    // Insert code here to initialize your application
-    //NSLog(@"applicationFilesDirectory: %@", [self applicationFilesDirectory]);
-    //NSLog(@"applicationDocumentsDirectory: %@", [self applicationDocumentsDirectory]);
-    //NSLog(@"applicationCacheDirectory: %@", [self applicationCacheDirectory]);
-    
     [self setupToolBar];
 }
 
-#pragma mark - SubViews
+#pragma mark - Setters
+
+- (NSDateFormatter*)dateFormatter
+{
+    if (_dateFormatter == nil) {
+        _dateFormatter = [[NSDateFormatter alloc] init];
+        [_dateFormatter setTimeZone:[NSTimeZone localTimeZone]];
+        [_dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    }
+    return _dateFormatter;
+}
 
 - (ListViewController*)listViewController
 {
@@ -59,6 +67,9 @@
     }
     return _imageViewController;
 }
+
+
+#pragma mark - SubViews
 
 - (void)removeSubViewsFromContentView
 {
@@ -143,6 +154,7 @@
          switch (tag)
          {
              case 0:
+                 [self openImportDialog:addItem];
                  break;
                  
              case 1:
@@ -168,7 +180,88 @@
      }];
 }
 
+#pragma mark - Import file
 
+- (IBAction)openImportDialog:(id)sender
+{
+    NSLog(@"openImportDialog");
+    NSOpenPanel* openpanel = [NSOpenPanel openPanel];
+    [openpanel setCanChooseFiles:YES];
+    [openpanel setCanCreateDirectories:NO];
+    [openpanel setCanSelectHiddenExtension:YES];
+    [openpanel setCanChooseDirectories:NO];
+    [openpanel setAllowsMultipleSelection:NO];
+    [openpanel setResolvesAliases:YES];
+    [openpanel setAllowedFileTypes:[self allowedFileTypes]];
+    
+    [openpanel beginSheetModalForWindow:self.window completionHandler:^(NSInteger result) {
+        
+        NSLog(@"result: %ld, urls: %@", (long)result, [openpanel.URLs description]);
+        if (result == 0) {
+            return ;
+        }
+        
+        [self.progressWindow orderFront:self];
+        NSInteger filesCount = openpanel.URLs.count;
+        self.progressIndicatior.doubleValue = 0;
+        self.progressIndicatior.minValue = 0;
+        self.progressIndicatior.maxValue = filesCount;
+        self.progressIndicatior.indeterminate = NO;
+        self.progressTitle.stringValue = NSLocalizedString(@"Importing files", nil);
+        
+        NSURL* documentsDirectory = [self applicationDocumentsDirectory];
+        __block NSInteger successFilesCount = 0;
+        __block NSTextField* progressInfo = self.progressInfo;
+        __block NSProgressIndicator* progressIndicator = self.progressIndicatior;
+        __block NSMutableArray* copiedFiles = [NSMutableArray new];
+        
+        [openpanel.URLs enumerateObjectsUsingBlock:^(NSURL* fileUrl, NSUInteger idx, BOOL *stop) {
+            
+            NSURL* sandboxedFileUrl = [documentsDirectory URLByAppendingPathComponent:[fileUrl lastPathComponent]];
+            NSLog(@"sandboxedFileUrl: %@", [sandboxedFileUrl path]);
+            progressInfo.stringValue = [fileUrl lastPathComponent];
+            progressIndicator.doubleValue = idx;
+            
+            NSError* error;
+            NSFileManager* fileManager = [NSFileManager defaultManager];
+            [fileManager copyItemAtURL:fileUrl toURL:sandboxedFileUrl error:&error];
+            
+            if (error != nil) {
+                NSLog(@"copying error: %@", [error localizedDescription]);
+                self.progressInfo.stringValue = [error localizedDescription];
+            } else {
+                successFilesCount ++;
+                [copiedFiles addObject:sandboxedFileUrl];
+            }
+        }];
+        
+        self.progressIndicatior.doubleValue = 0;
+        self.progressIndicatior.indeterminate = YES;
+        self.progressInfo.stringValue = [NSString stringWithFormat:@"%@: %ld", NSLocalizedString(@"Processing file(s)", nil), successFilesCount];
+
+        [copiedFiles enumerateObjectsUsingBlock:^(NSURL* epubURL, NSUInteger idx, BOOL *stop) {
+            self.epubController = [[KFEpubController alloc] initWithEpubURL:epubURL andDestinationFolder:[self applicationCacheDirectory]];
+            self.epubController.delegate = self;
+            [self.epubController openAsynchronous:YES];
+            
+        }];
+        
+    }];
+}
+
+#pragma mark - deleting Book
+
+- (void)unlinkBookWithUrl:(NSURL*)sandboxedFileUrl
+{
+    NSError* error;
+    NSFileManager* fileManager = [NSFileManager defaultManager];
+    [fileManager removeItemAtURL:sandboxedFileUrl error:&error];
+    
+    if (error != nil) {
+        NSLog(@"deleting error: %@", [error localizedDescription]);
+    }
+    [self saveAction:nil];
+}
 
 #pragma mark - CoreData
 
@@ -299,6 +392,8 @@
     if (![[self managedObjectContext] save:&error]) {
         [[NSApplication sharedApplication] presentError:error];
     }
+    
+    NSLog(@"save");
 }
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
@@ -345,6 +440,68 @@
     }
 
     return NSTerminateNow;
+}
+
+#pragma mark - File System
+
+- (NSArray*)allowedFileTypes
+{
+    return [[NSArray alloc] initWithObjects:@"epub", nil];
+}
+
+#pragma mark - KFEpubDelegate
+
+- (void)epubController:(KFEpubController *)controller willOpenEpub:(NSURL *)epubURL
+{
+    NSLog(@"will open epub");
+    [self.progressIndicatior startAnimation:nil];
+}
+
+
+- (void)epubController:(KFEpubController *)controller didOpenEpub:(KFEpubContentModel *)contentModel
+{
+    NSLog(@"url %@", [controller.epubURL path]);
+    NSLog(@"model %@", [contentModel description]);
+    NSLog(@"meta %@", [contentModel.metaData description]);
+    NSLog(@"cover %@", contentModel.coverPath);
+    
+    Book *book = [NSEntityDescription insertNewObjectForEntityForName:@"Book" inManagedObjectContext:self.managedObjectContext];
+    book.title = [contentModel.metaData objectForKey:@"title"];
+    book.author = [contentModel.metaData objectForKey:@"author"];
+    book.subject = [contentModel.metaData objectForKey:@"subject"];
+    book.identifier = [contentModel.metaData objectForKey:@"identifier"];
+    book.language = [contentModel.metaData objectForKey:@"language"];
+    book.publisher = [contentModel.metaData objectForKey:@"publisher"];
+    book.creator = [contentModel.metaData objectForKey:@"creator"];
+    book.rights = [contentModel.metaData objectForKey:@"rights"];
+    book.source = [contentModel.metaData objectForKey:@"source"];
+    book.fileUrl = controller.epubURL;
+    book.type = [NSNumber numberWithInteger:contentModel.bookType];
+    book.encryption = [NSNumber numberWithInteger:contentModel.bookEncryption];
+    book.date = [self.dateFormatter dateFromString:[contentModel.metaData objectForKey:@"date"]];
+    
+    self.bookViewController.book = book;
+    
+    // Save the context.
+    NSError *error = nil;
+    if (![self.managedObjectContext save:&error]) {
+        // Replace this implementation with code to handle the error appropriately.
+        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+    
+    NSLog(@"book: %@", [book description]);
+    [self.progressIndicatior stopAnimation:nil];
+    [self.progressWindow close];
+}
+
+
+- (void)epubController:(KFEpubController *)controller didFailWithError:(NSError *)error
+{
+    NSLog(@"epubController:didFailWithError: %@", error.description);
+    [self.progressIndicatior stopAnimation:nil];
+    self.progressInfo.stringValue = error.localizedDescription;
 }
 
 @end

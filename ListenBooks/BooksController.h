@@ -1,5 +1,5 @@
 //
-//  BookmarksController.h
+//  SourceController.h
 //  ListenBooks
 //
 //  Created by Libor Kučera on 18.12.13.
@@ -8,17 +8,21 @@
 
 #import <Foundation/Foundation.h>
 
-@class BookmarksView;
 @class BooksView;
 @class BooksTreeController;
 @class BookmarksArrayController;
 
-@interface BookmarksController : NSObject
-
-@property (weak) IBOutlet BookmarksView *bookmarksView;
+@interface BooksController : NSObject
 @property (weak) IBOutlet BooksView *booksView;
 @property (weak) IBOutlet BooksTreeController *booksTreeController;
 @property (weak) IBOutlet BookmarksArrayController *bookmarksArrayController;
 
+- (void)copy;
+- (void)paste;
+- (void)cut;
+- (void)delete;
+- (void)edit;
+- (void)deleteItems;
+- (void)cutItems;
 
 @end

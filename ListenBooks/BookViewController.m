@@ -19,12 +19,13 @@
 
 @implementation BookViewController
 
+@synthesize book = _book;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Initialization code here.
-        NSLog(@"initWithNibName");
     }
     return self;
 }
@@ -32,20 +33,30 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    [self setupBookPageControllerContent];
-    
+    //NSURL *epubURL = [[NSBundle mainBundle] URLForResource:@"tolstoy-war-and-peace" withExtension:@"epub"];
+    //[self setupBookPageControllerContent:epubURL];
 }
 
-- (void)setupBookPageControllerContent
+- (void)setupBookPageControllerContent:(NSURL*)epubURL
 {
     NSLog(@"setupBookPageControllerContent");
     
     AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
     self.libraryURL = [appDelegate applicationCacheDirectory];
-    NSURL *epubURL = [[NSBundle mainBundle] URLForResource:@"tolstoy-war-and-peace" withExtension:@"epub"];
     self.epubController = [[KFEpubController alloc] initWithEpubURL:epubURL andDestinationFolder:self.libraryURL];
     self.epubController.delegate = self;
     [self.epubController openAsynchronous:YES];
+}
+
+- (Book*)book
+{
+    return _book;
+}
+
+- (void)setBook:(Book *)book
+{
+    _book = book;
+    [self setupBookPageControllerContent:book.fileUrl];
 }
 
 #pragma mark - KFEpubDelegate
@@ -61,6 +72,7 @@
 - (void)epubController:(KFEpubController *)controller didOpenEpub:(KFEpubContentModel *)contentModel
 {
     self.contentModel = contentModel;
+    NSLog(@"meta %@", contentModel.metaData);
     //NSLog(@"spine %@", [contentModel.spine description]);
     //NSLog(@"guide %@", [contentModel.guide description]);
     
