@@ -13,3 +13,9 @@
 [submodule "Vendor/KFToolbar"]
 	path = Vendor/KFToolbar
 	url = https://github.com/ricobeck/KFToolbar.git
+[submodule "Vendor/CocoaLumberjack"]
+	path = Vendor/CocoaLumberjack
+	url = https://github.com/CocoaLumberjack/CocoaLumberjack.git
+[submodule "Vendor/Libraries"]
+	path = Vendor/Libraries
+	url = https://github.com/icservis/Libraries.git

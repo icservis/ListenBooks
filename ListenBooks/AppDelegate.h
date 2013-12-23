@@ -38,7 +38,9 @@
 @property (weak) IBOutlet NSTextField *progressTitle;
 @property (weak) IBOutlet NSTextField *progressInfo;
 
+@property (nonatomic, strong) NSMutableArray* importedUrls;
 @property (nonatomic, strong) KFEpubController *epubController;
+@property (nonatomic, strong) KFEpubContentModel *contentModel;
 @property (nonatomic, strong) NSDateFormatter* dateFormatter;
 
 @property (strong) IBOutlet BooksTreeController *booksTreeController;

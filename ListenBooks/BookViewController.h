@@ -26,4 +26,6 @@
 @property (nonatomic, strong) KFEpubContentModel *contentModel;
 @property (weak) IBOutlet NSProgressIndicator *progressIndicator;
 
+- (void)resetPageView;
+
 @end

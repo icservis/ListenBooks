@@ -33,12 +33,11 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    [self resetPageView];
 }
 
 - (void)setupBookPageControllerContent:(NSURL*)epubURL
 {
-    NSLog(@"setupBookPageControllerContent");
+    DDLogVerbose(@"setupBookPageControllerContent");
     
     AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
     self.libraryURL = [appDelegate applicationCacheDirectory];
@@ -57,6 +56,7 @@
     if (book == nil) {
         [self resetPageView];
     } else if (![book isEqual:_book]) {
+        [self resetPageView];
         [self setupBookPageControllerContent:book.fileUrl];
     }
     _book = book;
@@ -65,6 +65,7 @@
 
 - (void)resetPageView
 {
+    DDLogVerbose(@"resetPageView");
     self.data = nil;
     self.initialSelectedObject = nil;
     self.titleField.stringValue = NSLocalizedString(@"No Selection", nil);
@@ -79,7 +80,6 @@
 
 - (void)epubController:(KFEpubController *)controller willOpenEpub:(NSURL *)epubURL
 {
-    NSLog(@"will open epub");
     self.titleField.stringValue = NSLocalizedString(@"Opening Book…", nil);
     [self.progressIndicator startAnimation:nil];
 }
@@ -88,9 +88,9 @@
 - (void)epubController:(KFEpubController *)controller didOpenEpub:(KFEpubContentModel *)contentModel
 {
     self.contentModel = contentModel;
-    NSLog(@"meta %@", contentModel.metaData);
-    //NSLog(@"spine %@", [contentModel.spine description]);
-    //NSLog(@"guide %@", [contentModel.guide description]);
+    DDLogVerbose(@"meta %@", contentModel.metaData);
+    //DDLogVerbose(@"spine %@", [contentModel.spine description]);
+    //DDLogVerbose(@"guide %@", [contentModel.guide description]);
     
     self.titleField.stringValue = [self.contentModel.metaData valueForKey:@"title"];
     
@@ -100,13 +100,19 @@
         __block NSMutableArray* spinedData = [[NSMutableArray alloc] init];
         [self.contentModel.spine enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             
+            if (self.contentModel == nil || idx >= [self.contentModel.spine count]) {
+                *stop = YES;
+            }
             NSString* media = self.contentModel.manifest[self.contentModel.spine[idx]][@"media"];
             
             if ([media isEqualToString:@"application/xhtml+xml"]) {
+                
                 NSString *contentFile = self.contentModel.manifest[self.contentModel.spine[idx]][@"href"];
                 NSURL *contentURL = [self.epubController.epubContentBaseURL URLByAppendingPathComponent:contentFile];
                 NSAttributedString *attributedString = [[NSAttributedString alloc] initWithURL:contentURL documentAttributes:nil];
-                [spinedData addObject:attributedString];
+                if (attributedString != nil) {
+                    [spinedData addObject:attributedString];
+                }
             }
         }];
         
@@ -119,6 +125,7 @@
                 [self.pageController setArrangedObjects:self.data];
             } else {
                 self.data = nil;
+                [self resetPageView];
             }
         });
     });
@@ -127,9 +134,9 @@
 
 - (void)epubController:(KFEpubController *)controller didFailWithError:(NSError *)error
 {
-    NSLog(@"epubController:didFailWithError: %@", error.description);
-    self.titleField.stringValue = NSLocalizedString(@"Opening Book failed!", nil);
+    DDLogError(@"epubController:didFailWithError: %@", error.description);
     [self.progressIndicator stopAnimation:nil];
+    [self resetPageView];
 }
 
 #pragma mark - BookPageControllerDelegate

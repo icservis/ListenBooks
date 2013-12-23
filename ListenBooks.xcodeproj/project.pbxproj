@@ -91,6 +91,18 @@
 		848C95A01866489C0020FDC9 /* Bookmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 848C959E1866489C0020FDC9 /* Bookmark.m */; };
 		848C95A31866489D0020FDC9 /* Book.m in Sources */ = {isa = PBXBuildFile; fileRef = 848C95A21866489D0020FDC9 /* Book.m */; };
 		848C95A41866489D0020FDC9 /* Book.m in Sources */ = {isa = PBXBuildFile; fileRef = 848C95A21866489D0020FDC9 /* Book.m */; };
+		84AB0426186871DD007106F4 /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AB0414186871DD007106F4 /* DDAbstractDatabaseLogger.m */; };
+		84AB0427186871DD007106F4 /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AB0416186871DD007106F4 /* DDASLLogger.m */; };
+		84AB0428186871DD007106F4 /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AB0418186871DD007106F4 /* DDFileLogger.m */; };
+		84AB0429186871DD007106F4 /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AB041B186871DD007106F4 /* DDLog.m */; };
+		84AB042A186871DD007106F4 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AB041D186871DD007106F4 /* DDTTYLogger.m */; };
+		84AB042B186871DD007106F4 /* DDContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AB0420186871DD007106F4 /* DDContextFilterLogFormatter.m */; };
+		84AB042C186871DD007106F4 /* DDDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AB0422186871DD007106F4 /* DDDispatchQueueLogFormatter.m */; };
+		84AB042D186871DD007106F4 /* DDMultiFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AB0424186871DD007106F4 /* DDMultiFormatter.m */; };
+		84AB042E186871DD007106F4 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84AB0425186871DD007106F4 /* README.txt */; };
+		84AB0492186871E9007106F4 /* ISO8601DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AB044E186871E9007106F4 /* ISO8601DateFormatter.m */; };
+		84AB0493186871E9007106F4 /* LumberjackFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AB0451186871E9007106F4 /* LumberjackFormatter.m */; };
+		84AB04AB186871E9007106F4 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 84AB048A186871E9007106F4 /* README.md */; };
 		84DD96091864B29A00B9BD5A /* BookPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD96071864B29A00B9BD5A /* BookPageViewController.m */; };
 		84DD960A1864B29A00B9BD5A /* BookPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84DD96081864B29A00B9BD5A /* BookPageViewController.xib */; };
 		84DD96101865B8A900B9BD5A /* AutoSizingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD960F1865B8A900B9BD5A /* AutoSizingTextView.m */; };
@@ -257,6 +269,30 @@
 		848C959E1866489C0020FDC9 /* Bookmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bookmark.m; sourceTree = "<group>"; };
 		848C95A11866489D0020FDC9 /* Book.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Book.h; sourceTree = "<group>"; };
 		848C95A21866489D0020FDC9 /* Book.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Book.m; sourceTree = "<group>"; };
+		84AB0413186871DD007106F4 /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
+		84AB0414186871DD007106F4 /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
+		84AB0415186871DD007106F4 /* DDASLLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDASLLogger.h; sourceTree = "<group>"; };
+		84AB0416186871DD007106F4 /* DDASLLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDASLLogger.m; sourceTree = "<group>"; };
+		84AB0417186871DD007106F4 /* DDFileLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDFileLogger.h; sourceTree = "<group>"; };
+		84AB0418186871DD007106F4 /* DDFileLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDFileLogger.m; sourceTree = "<group>"; };
+		84AB0419186871DD007106F4 /* DDLog+LOGV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DDLog+LOGV.h"; sourceTree = "<group>"; };
+		84AB041A186871DD007106F4 /* DDLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDLog.h; sourceTree = "<group>"; };
+		84AB041B186871DD007106F4 /* DDLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDLog.m; sourceTree = "<group>"; };
+		84AB041C186871DD007106F4 /* DDTTYLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDTTYLogger.h; sourceTree = "<group>"; };
+		84AB041D186871DD007106F4 /* DDTTYLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDTTYLogger.m; sourceTree = "<group>"; };
+		84AB041F186871DD007106F4 /* DDContextFilterLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDContextFilterLogFormatter.h; sourceTree = "<group>"; };
+		84AB0420186871DD007106F4 /* DDContextFilterLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDContextFilterLogFormatter.m; sourceTree = "<group>"; };
+		84AB0421186871DD007106F4 /* DDDispatchQueueLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDispatchQueueLogFormatter.h; sourceTree = "<group>"; };
+		84AB0422186871DD007106F4 /* DDDispatchQueueLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDispatchQueueLogFormatter.m; sourceTree = "<group>"; };
+		84AB0423186871DD007106F4 /* DDMultiFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDMultiFormatter.h; sourceTree = "<group>"; };
+		84AB0424186871DD007106F4 /* DDMultiFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDMultiFormatter.m; sourceTree = "<group>"; };
+		84AB0425186871DD007106F4 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		84AB044D186871E9007106F4 /* ISO8601DateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISO8601DateFormatter.h; sourceTree = "<group>"; };
+		84AB044E186871E9007106F4 /* ISO8601DateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISO8601DateFormatter.m; sourceTree = "<group>"; };
+		84AB0450186871E9007106F4 /* LumberjackFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LumberjackFormatter.h; sourceTree = "<group>"; };
+		84AB0451186871E9007106F4 /* LumberjackFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LumberjackFormatter.m; sourceTree = "<group>"; };
+		84AB048A186871E9007106F4 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		84AB04AD1868733B007106F4 /* Lumberjack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Lumberjack.h; sourceTree = "<group>"; };
 		84DD96061864B29A00B9BD5A /* BookPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookPageViewController.h; sourceTree = "<group>"; };
 		84DD96071864B29A00B9BD5A /* BookPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookPageViewController.m; sourceTree = "<group>"; };
 		84DD96081864B29A00B9BD5A /* BookPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookPageViewController.xib; sourceTree = "<group>"; };
@@ -343,6 +379,8 @@
 		8444EA8D185F838100F90B48 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				84AB042F186871E9007106F4 /* Libraries */,
+				84AB0412186871DD007106F4 /* Lumberjack */,
 				8444EABA185F841700F90B48 /* KissXML */,
 				8444EAA8185F840800F90B48 /* SSZipArchive */,
 				8444EA95185F83D900F90B48 /* KFEpubParser */,
@@ -610,6 +648,85 @@
 			name = Transformers;
 			sourceTree = "<group>";
 		};
+		84AB0412186871DD007106F4 /* Lumberjack */ = {
+			isa = PBXGroup;
+			children = (
+				84AB0413186871DD007106F4 /* DDAbstractDatabaseLogger.h */,
+				84AB0414186871DD007106F4 /* DDAbstractDatabaseLogger.m */,
+				84AB0415186871DD007106F4 /* DDASLLogger.h */,
+				84AB0416186871DD007106F4 /* DDASLLogger.m */,
+				84AB0417186871DD007106F4 /* DDFileLogger.h */,
+				84AB0418186871DD007106F4 /* DDFileLogger.m */,
+				84AB0419186871DD007106F4 /* DDLog+LOGV.h */,
+				84AB041A186871DD007106F4 /* DDLog.h */,
+				84AB041B186871DD007106F4 /* DDLog.m */,
+				84AB041C186871DD007106F4 /* DDTTYLogger.h */,
+				84AB041D186871DD007106F4 /* DDTTYLogger.m */,
+				84AB041E186871DD007106F4 /* Extensions */,
+			);
+			name = Lumberjack;
+			path = Vendor/CocoaLumberjack/Lumberjack;
+			sourceTree = "<group>";
+		};
+		84AB041E186871DD007106F4 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				84AB041F186871DD007106F4 /* DDContextFilterLogFormatter.h */,
+				84AB0420186871DD007106F4 /* DDContextFilterLogFormatter.m */,
+				84AB0421186871DD007106F4 /* DDDispatchQueueLogFormatter.h */,
+				84AB0422186871DD007106F4 /* DDDispatchQueueLogFormatter.m */,
+				84AB0423186871DD007106F4 /* DDMultiFormatter.h */,
+				84AB0424186871DD007106F4 /* DDMultiFormatter.m */,
+				84AB0425186871DD007106F4 /* README.txt */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		84AB042F186871E9007106F4 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				84AB0446186871E9007106F4 /* Classes */,
+				84AB048A186871E9007106F4 /* README.md */,
+			);
+			name = Libraries;
+			path = Vendor/Libraries;
+			sourceTree = "<group>";
+		};
+		84AB0446186871E9007106F4 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				84AB044B186871E9007106F4 /* Formatters */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		84AB044B186871E9007106F4 /* Formatters */ = {
+			isa = PBXGroup;
+			children = (
+				84AB044C186871E9007106F4 /* ISO86001DAteFormatter */,
+				84AB044F186871E9007106F4 /* LumberJackFormatter */,
+			);
+			path = Formatters;
+			sourceTree = "<group>";
+		};
+		84AB044C186871E9007106F4 /* ISO86001DAteFormatter */ = {
+			isa = PBXGroup;
+			children = (
+				84AB044D186871E9007106F4 /* ISO8601DateFormatter.h */,
+				84AB044E186871E9007106F4 /* ISO8601DateFormatter.m */,
+			);
+			path = ISO86001DAteFormatter;
+			sourceTree = "<group>";
+		};
+		84AB044F186871E9007106F4 /* LumberJackFormatter */ = {
+			isa = PBXGroup;
+			children = (
+				84AB0450186871E9007106F4 /* LumberjackFormatter.h */,
+				84AB0451186871E9007106F4 /* LumberjackFormatter.m */,
+			);
+			path = LumberJackFormatter;
+			sourceTree = "<group>";
+		};
 		84DD96441865C99200B9BD5A /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -676,6 +793,7 @@
 			children = (
 				8478C3F4185CA73F00B06779 /* AppDelegate.h */,
 				8478C3F5185CA73F00B06779 /* AppDelegate.m */,
+				84AB04AD1868733B007106F4 /* Lumberjack.h */,
 				8478C43B185CA80200B06779 /* ListenBooks.entitlements */,
 			);
 			name = Application;
@@ -833,6 +951,8 @@
 				84DD963E1865C98B00B9BD5A /* image7.jpg in Resources */,
 				84DD96421865C98B00B9BD5A /* image11.jpg in Resources */,
 				84DD963C1865C98B00B9BD5A /* image5.jpg in Resources */,
+				84AB042E186871DD007106F4 /* README.txt in Resources */,
+				84AB04AB186871E9007106F4 /* README.md in Resources */,
 				84DD963A1865C98B00B9BD5A /* image3.jpg in Resources */,
 				8478C3FE185CA73F00B06779 /* Images.xcassets in Resources */,
 				842A12281865E50300AAAD42 /* valid.opf in Resources */,
@@ -876,11 +996,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				848C9593186647370020FDC9 /* BookmarksController.m in Sources */,
+				84AB0427186871DD007106F4 /* DDASLLogger.m in Sources */,
 				848C95481866405F0020FDC9 /* BooksController.m in Sources */,
+				84AB042C186871DD007106F4 /* DDDispatchQueueLogFormatter.m in Sources */,
 				8444EACE185F841700F90B48 /* DDXMLNode.m in Sources */,
+				84AB042D186871DD007106F4 /* DDMultiFormatter.m in Sources */,
 				848C954418663FF60020FDC9 /* BookmarksArrayController.m in Sources */,
+				84AB0429186871DD007106F4 /* DDLog.m in Sources */,
 				8444EAA7185F83D900F90B48 /* KFEpubParser.m in Sources */,
 				8478C3F6185CA73F00B06779 /* AppDelegate.m in Sources */,
+				84AB0428186871DD007106F4 /* DDFileLogger.m in Sources */,
 				848C9574186647010020FDC9 /* NSTreeController_Extensions.m in Sources */,
 				8444EAA5185F83D900F90B48 /* KFEpubExtractor.m in Sources */,
 				848C9589186647240020FDC9 /* NSImageToData.m in Sources */,
@@ -897,13 +1022,16 @@
 				84E27EA21863010800317411 /* ListCollectionView.m in Sources */,
 				8478C3EF185CA73F00B06779 /* main.m in Sources */,
 				848C9587186647240020FDC9 /* ArrayCountToString.m in Sources */,
+				84AB0426186871DD007106F4 /* DDAbstractDatabaseLogger.m in Sources */,
 				848C958D186647240020FDC9 /* NumberValueIsOne.m in Sources */,
+				84AB042B186871DD007106F4 /* DDContextFilterLogFormatter.m in Sources */,
 				8444EAA6185F83D900F90B48 /* KFEpubKit.m in Sources */,
 				8444EACD185F841700F90B48 /* DDXMLElement.m in Sources */,
 				84E27E7C1862466F00317411 /* BooksView.m in Sources */,
 				84E27EA51863013300317411 /* ListCollectionController.m in Sources */,
 				848C9585186647240020FDC9 /* ArrayCountIsZero.m in Sources */,
 				848C95A31866489D0020FDC9 /* Book.m in Sources */,
+				84AB042A186871DD007106F4 /* DDTTYLogger.m in Sources */,
 				8444EA93185F83A400F90B48 /* KFToolbar.m in Sources */,
 				848C956A186647010020FDC9 /* NSArray_Extensions.m in Sources */,
 				8444EAB5185F840800F90B48 /* ioapi.c in Sources */,
@@ -915,11 +1043,13 @@
 				8444EA94185F83A400F90B48 /* KFToolbarItem.m in Sources */,
 				848C9576186647010020FDC9 /* NSTreeNode_Extensions.m in Sources */,
 				84DD96091864B29A00B9BD5A /* BookPageViewController.m in Sources */,
+				84AB0492186871E9007106F4 /* ISO8601DateFormatter.m in Sources */,
 				848C958F186647240020FDC9 /* StringToPredicateTransformer.m in Sources */,
 				848C954018663FD00020FDC9 /* BooksTreeController.m in Sources */,
 				84DD96491865CA0E00B9BD5A /* AutoSizingImageView.m in Sources */,
 				84DD96101865B8A900B9BD5A /* AutoSizingTextView.m in Sources */,
 				848C959F1866489C0020FDC9 /* Bookmark.m in Sources */,
+				84AB0493186871E9007106F4 /* LumberjackFormatter.m in Sources */,
 				8444EAA2185F83D900F90B48 /* KFEpubConstants.m in Sources */,
 				8444EACA185F841700F90B48 /* DDXMLElementAdditions.m in Sources */,
 				848C9570186647010020FDC9 /* NSIndexPath_Extensions.m in Sources */,

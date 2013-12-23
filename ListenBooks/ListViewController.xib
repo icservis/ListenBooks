@@ -82,6 +82,11 @@
         <customObject id="03C-bK-GQY" customClass="AppDelegate"/>
         <customObject id="V29-eB-nrn" customClass="ListCollectionController"/>
         <collectionViewItem id="UiN-BZ-O06" customClass="ListCollectionViewItem"/>
-        <treeController id="Eej-cV-Wic" customClass="SourceTreeController"/>
+        <treeController mode="entity" entityName="Book" fetchPredicateFormat="parent == nil" automaticallyPreparesContent="YES" childrenKeyPath="children" leafKeyPath="isLeaf" id="Eej-cV-Wic" customClass="BooksTreeController">
+            <connections>
+                <binding destination="03C-bK-GQY" name="managedObjectContext" keyPath="self.managedObjectContext" id="X3z-JD-Bdq"/>
+            </connections>
+        </treeController>
+        <userDefaultsController representsSharedInstance="YES" id="W93-as-4QL"/>
     </objects>
 </document>

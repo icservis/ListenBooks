@@ -12,6 +12,8 @@
 	<dict>
 		<key>069DC333-A449-4FD5-A114-8A2D65D19CC5</key>
 		<string>https://github.com/robbiehanson/KissXML.git</string>
+		<key>2EE5D75F-25D3-4287-B447-EA4E8A9E43D6</key>
+		<string>https://github.com/icservis/Libraries.git</string>
 		<key>35DCDBCB-98F8-437D-88CE-193AD837EF3D</key>
 		<string>https://github.com/andyapps/ListenBooks.git</string>
 		<key>5719B9E6-BC59-49BF-B43F-3E81366AAF4E</key>
@@ -20,6 +22,8 @@
 		<string>https://github.com/ricobeck/KFToolbar.git</string>
 		<key>8CE2ECA8-B1D1-45E9-9CCF-743DB5C9D296</key>
 		<string>https://github.com/ricobeck/KFEpubKit.git</string>
+		<key>F24BBBE9-1CC4-4F9C-B559-7A96CFD49F71</key>
+		<string>https://github.com/CocoaLumberjack/CocoaLumberjack.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>ListenBooks.xcodeproj/project.xcworkspace</string>
@@ -27,6 +31,8 @@
 	<dict>
 		<key>069DC333-A449-4FD5-A114-8A2D65D19CC5</key>
 		<string>../../Vendor/KissXML</string>
+		<key>2EE5D75F-25D3-4287-B447-EA4E8A9E43D6</key>
+		<string>../../Vendor/Libraries</string>
 		<key>35DCDBCB-98F8-437D-88CE-193AD837EF3D</key>
 		<string>../..</string>
 		<key>5719B9E6-BC59-49BF-B43F-3E81366AAF4E</key>
@@ -35,6 +41,8 @@
 		<string>../../Vendor/KFToolbar</string>
 		<key>8CE2ECA8-B1D1-45E9-9CCF-743DB5C9D296</key>
 		<string>../../Vendor/KFEpubKit</string>
+		<key>F24BBBE9-1CC4-4F9C-B559-7A96CFD49F71</key>
+		<string>../../Vendor/CocoaLumberjack</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/andyapps/ListenBooks.git</string>
@@ -44,6 +52,14 @@
 	<string>35DCDBCB-98F8-437D-88CE-193AD837EF3D</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>F24BBBE9-1CC4-4F9C-B559-7A96CFD49F71</string>
+			<key>IDESourceControlWCCName</key>
+			<string>CocoaLumberjack</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
@@ -67,6 +83,14 @@
 			<string>069DC333-A449-4FD5-A114-8A2D65D19CC5</string>
 			<key>IDESourceControlWCCName</key>
 			<string>KissXML</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>2EE5D75F-25D3-4287-B447-EA4E8A9E43D6</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Libraries</string>
 		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>

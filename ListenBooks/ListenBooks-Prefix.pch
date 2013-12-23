@@ -5,5 +5,23 @@
 //
 
 #ifdef __OBJC__
+
     #import <Cocoa/Cocoa.h>
+    #import "Lumberjack.h"
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Wunused-variable"
+    #ifdef DEBUG
+    static int ddLogLevel = LOG_LEVEL_VERBOSE;
+    #else
+    static int ddLogLevel = LOG_LEVEL_INFO;
+    #endif
+    #pragma GCC diagnostic pop
+
+    #import "NSArray_Extensions.h"
+    #import "NSArrayController_Extensions.h"
+    #import "NSIndexPath_Extensions.h"
+    #import "NSManagedObject_Extensions.h"
+    #import "NSTreeController_Extensions.h"
+    #import "NSTreeNode_Extensions.h"
+
 #endif

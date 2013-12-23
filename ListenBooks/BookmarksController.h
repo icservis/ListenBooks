@@ -20,5 +20,4 @@
 @property (weak) IBOutlet BooksTreeController *booksTreeController;
 @property (weak) IBOutlet BookmarksArrayController *bookmarksArrayController;
 
-
 @end

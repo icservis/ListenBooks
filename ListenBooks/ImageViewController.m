@@ -35,7 +35,7 @@
 
 - (void)setupImagePageControllerContent
 {
-    NSLog(@"setupImagePageControllerContent");
+    DDLogVerbose(@"setupImagePageControllerContent");
     NSURL *dirURL = [[NSBundle mainBundle] resourceURL];
     
     // load all the necessary image files by enumerating through the bundle's Resources folder,

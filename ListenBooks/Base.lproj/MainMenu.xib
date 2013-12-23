@@ -680,7 +680,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="209" height="376"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="systemDefault" viewBased="YES" indentationPerLevel="16" outlineTableColumn="YNz-xj-Lrp" id="1f5-sw-iLl" customClass="BooksView">
+                                                                <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="systemDefault" viewBased="YES" indentationPerLevel="16" autosaveExpandedItems="YES" outlineTableColumn="YNz-xj-Lrp" id="1f5-sw-iLl" customClass="BooksView">
                                                                     <rect key="frame" x="0.0" y="0.0" width="209" height="376"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <size key="intercellSpacing" width="3" height="0.0"/>
@@ -1036,9 +1036,11 @@
                 <outlet property="booksView" destination="1f5-sw-iLl" id="bV3-Q8-Vso"/>
             </connections>
         </customObject>
-        <treeController mode="entity" entityName="Book" automaticallyPreparesContent="YES" childrenKeyPath="children" leafKeyPath="isLeaf" id="JIz-cg-z1q" customClass="BooksTreeController">
+        <treeController mode="entity" entityName="Book" fetchPredicateFormat="parent == nil" automaticallyPreparesContent="YES" childrenKeyPath="children" leafKeyPath="isLeaf" id="JIz-cg-z1q" customClass="BooksTreeController">
             <connections>
                 <binding destination="494" name="managedObjectContext" keyPath="self.managedObjectContext" id="3eK-d6-5e6"/>
+                <outlet property="bookViewController" destination="HlQ-3S-wAo" id="F73-ET-6GU"/>
+                <outlet property="listViewController" destination="9JM-Ru-T49" id="HlN-Yk-vwu"/>
             </connections>
         </treeController>
         <arrayController mode="entity" entityName="Bookmark" automaticallyPreparesContent="YES" automaticallyRearrangesObjects="YES" id="Wjr-Iu-HEJ" customClass="BookmarksArrayController">
@@ -1063,7 +1065,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="400" height="100"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <progressIndicator maxValue="100" indeterminate="YES" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="q2a-FS-yay">
+                    <progressIndicator maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="q2a-FS-yay">
                         <rect key="frame" x="20" y="40" width="360" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <constraints>
@@ -1111,6 +1113,8 @@
                 </constraints>
             </view>
         </window>
+        <viewController id="HlQ-3S-wAo" customClass="BookViewController"/>
+        <viewController id="9JM-Ru-T49" customClass="ListViewController"/>
     </objects>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>

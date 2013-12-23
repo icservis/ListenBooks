@@ -34,7 +34,6 @@
 
 - (void)delete
 {
-    NSLog(@"delete");
     [self deleteItems];
 }
 
@@ -44,7 +43,6 @@
 
 - (void)deleteItems
 {
-    NSLog(@"deleteItems");
     [self.booksTreeController deleteItems];
 }
 
@@ -145,15 +143,17 @@
 
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification
 {
-    NSLog(@"notification");
     [self.bookmarksArrayController rearrangeObjects];
     
     NSUInteger currentIndex = [self.booksView selectedRow];
     NSTreeNode* currentNode = [self.booksView itemAtRow:currentIndex];
     Book* currentBook = [currentNode representedObject];
+    DDLogVerbose(@"currentBook: %@", [currentBook description]);
     
     AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
-    appDelegate.bookViewController.book = currentBook;
+    if ([appDelegate.importedUrls count] == 0 && currentBook != nil && ![currentBook isEqual:appDelegate.bookViewController.book]) {
+        appDelegate.bookViewController.book = currentBook;
+    }
 }
 
 

@@ -9,17 +9,19 @@
 #import "AppDelegate.h"
 #import "Book.h"
 #import "BooksTreeController.h"
+#import "BookViewController.h"
 #import "NSTreeController_Extensions.h"
 
 @implementation BooksTreeController
 
 - (void)deleteItems
 {
-    NSLog(@"deleteItems");
+    DDLogVerbose(@"deleteItems");
+    AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
+    
     [[self selectedNodes] enumerateObjectsUsingBlock:^(NSTreeNode* node, NSUInteger idx, BOOL *stop) {
         
         Book* book = [node representedObject];
-        AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
         [appDelegate unlinkBookWithUrl:book.fileUrl];
         
         NSArray* childIndexPaths = [node childIndexPaths];
@@ -28,6 +30,11 @@
     }];
     
     [super remove:self];
+    
+    DDLogVerbose(@"count: %ld", (long)[[self arrangedObjects] count]);
+    if ([[self arrangedObjects] count] == 0) {
+        [self.bookViewController resetPageView];
+    }
 }
 
 @end

@@ -98,7 +98,6 @@
 
 -(void)alertDidEnd:(NSAlert*)alert returnCode:(NSInteger)returnCode contextInfo:(void*)contextInfo
 {
-    NSLog(@"returnCode: %ld", returnCode);
     if (returnCode ==  NSAlertFirstButtonReturn)
     {
         [self.booksController deleteItems];
