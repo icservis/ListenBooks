@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 IC Servis. All rights reserved.
 //
 
+#import "AppDelegate.h"
+#import "BooksTreeController.h"
 #import "ListCollectionView.h"
 #import "ListCollectionItemView.h"
 #import "ListCollectionViewItem.h"
@@ -29,18 +31,37 @@
     // Drawing code here.
 }
 
+
 -(void)mouseDown:(NSEvent *)theEvent
 {
     [super mouseDown:theEvent];
     
     NSUInteger indexOfItem = [self.superview.subviews indexOfObject:self];
-    DDLogVerbose(@"theEvent: %@, index: %lu", [theEvent description], (unsigned long)indexOfItem);
+    DDLogVerbose(@"theEvent: %@, index: %lu, title: %@", [theEvent description], (unsigned long)indexOfItem, self.book.title);
+    
+    ListCollectionView* listCollectionView = (ListCollectionView*)self.superview;
     
     if (theEvent.clickCount == 2) {
-        
+        [listCollectionView itemDoubleClicked:self];
     } else if (theEvent.clickCount == 1) {
-        
+        [listCollectionView itemSelected:self];
     }
+}
+
+- (void)keyDown:(NSEvent *)theEvent
+{
+    [super keyDown:theEvent];
+    
+    NSUInteger indexOfItem = [self.superview.subviews indexOfObject:self];
+    DDLogVerbose(@"theEvent: %@, index: %lu, title: %@", [theEvent description], (unsigned long)indexOfItem, self.book.title);
+}
+
+- (void)rightMouseUp:(NSEvent *)theEvent
+{
+    [super rightMouseUp:theEvent];
+    
+    NSUInteger indexOfItem = [self.superview.subviews indexOfObject:self];
+    DDLogVerbose(@"theEvent: %@, index: %lu, title: %@", [theEvent description], (unsigned long)indexOfItem, self.book.title);
 }
 
 @end

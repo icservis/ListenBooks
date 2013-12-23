@@ -7,11 +7,14 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "Book.h"
 
 @interface ListCollectionItemView : NSView
 @property (weak) IBOutlet NSImageView *imageView;
 @property (weak) IBOutlet NSTextField *titleField;
 @property (weak) IBOutlet NSTextField *authorField;
-@property (weak) IBOutlet NSMenu *contextMenu;
+@property (weak) IBOutlet NSBox *boxView;
+
+@property (strong) Book* book;
 
 @end

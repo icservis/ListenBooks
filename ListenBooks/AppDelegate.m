@@ -17,7 +17,12 @@
 #import "BooksTreeController.h"
 #import "BookmarksArrayController.h"
 
-@implementation AppDelegate
+static CGFloat const bookmarksPaneMinHeight = 17;
+
+@implementation AppDelegate {
+    CGFloat _inputViewWidth;
+    CGFloat _bookmarksSplitPaneHeight;
+}
 
 @synthesize dateFormatter = _dateFormatter;
 @synthesize epubController = _epubController;
@@ -118,16 +123,32 @@
 
 - (IBAction)selectBookViewController:(id)sender
 {
+    [self.splitView adjustSubviews];
+    [self.inputView setHidden:NO];
+    [self.splitView setPosition:_inputViewWidth ofDividerAtIndex:0];
+    
     [self removeSubViewsFromContentView];
     [self.contentView addSubview:self.bookViewController.view];
     [self setupContentViewConstraintsForSubView:self.bookViewController.view];
+    KFToolbarItem *bookItem = self.toolBar.rightItems[0];
+    bookItem.state = NSOnState;
+    KFToolbarItem *listItem = self.toolBar.rightItems[1];
+    listItem.state = NSOffState;
 }
 
 - (IBAction)selectListViewController:(id)sender
 {
+    [self.splitView adjustSubviews];
+    [self.inputView setHidden:YES];
+    [self.splitView setPosition:0 ofDividerAtIndex:0];
+    
     [self removeSubViewsFromContentView];
     [self.contentView addSubview:self.listViewController.view];
     [self setupContentViewConstraintsForSubView:self.listViewController.view];
+    KFToolbarItem *bookItem = self.toolBar.rightItems[0];
+    bookItem.state = NSOffState;
+    KFToolbarItem *listItem = self.toolBar.rightItems[1];
+    listItem.state = NSOnState;
 }
 
 - (IBAction)selectImageViewController:(id)sender
@@ -135,6 +156,30 @@
     [self removeSubViewsFromContentView];
     [self.contentView addSubview:self.imageViewController.view];
     [self setupContentViewConstraintsForSubView:self.imageViewController.view];
+}
+
+- (IBAction)toggleBookMarksPane:(id)sender
+{
+    DDLogVerbose(@"_bookmarksSplitPaneHeight: %.0f",_bookmarksSplitPaneHeight);
+    [self.subSplitView adjustSubviews];
+    if ([self checkBookmarksPane]) {
+        DDLogVerbose(@"Open");
+        //[self.bookmarksSplitPane setHidden:YES];
+        [self.subSplitView setPosition:bookmarksPaneMinHeight ofDividerAtIndex:0];
+    } else {
+        DDLogVerbose(@"Close");
+        //[self.bookmarksSplitPane setHidden:NO];
+        [self.subSplitView setPosition:_bookmarksSplitPaneHeight ofDividerAtIndex:0];
+    }
+}
+
+- (BOOL)checkBookmarksPane
+{
+    if (self.bookmarksSplitPane.frame.size.height > bookmarksPaneMinHeight) {
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 #pragma mark - KFToolBar
@@ -152,15 +197,17 @@
     
     KFToolbarItem *bookmarksItem = [KFToolbarItem toolbarItemWithType:NSToggleButton icon:[NSImage imageNamed:NSImageNameBookmarksTemplate] tag:2];
     bookmarksItem.toolTip = @"Bookmarks";
-    
+    if ([self checkBookmarksPane]) {
+        bookmarksItem.state = NSOnState;
+    } else {
+        bookmarksItem.state = NSOffState;
+    }
     
     KFToolbarItem *listItem = [KFToolbarItem toolbarItemWithType:NSToggleButton icon:[NSImage imageNamed:NSImageNameIconViewTemplate] tag:3];
     listItem.toolTip = @"List";
-    listItem.state = NSOffState;
     
     KFToolbarItem *bookItem = [KFToolbarItem toolbarItemWithType:NSToggleButton icon:[NSImage imageNamed:NSImageNameFlowViewTemplate] tag:4];
     bookItem.toolTip = @"View";
-    bookItem.state = NSOnState;
     
     self.toolBar.leftItems = @[addItem, actionItem, bookmarksItem];
     self.toolBar.rightItems = @[bookItem, listItem];
@@ -180,16 +227,15 @@
                  break;
                  
              case 2:
+                 //[self toggleBookMarksPane:bookmarksItem];
                  break;
                  
              case 3:
                  [self selectListViewController:listItem];
-                 bookItem.state = !listItem.state;
                  break;
                  
              case 4:
                  [self selectBookViewController:bookItem];
-                 listItem.state = !bookItem.state;
                  break;
                  
              default:
@@ -298,6 +344,44 @@
         DDLogError(@"deleting error: %@", [error localizedDescription]);
     }
     [self saveAction:nil];
+}
+
+#pragma mark - NSSplitViewDelegate
+
+- (BOOL)splitView:(NSSplitView *)splitView canCollapseSubview:(NSView *)subview {
+    return YES;
+}
+
+- (BOOL)splitView:(NSSplitView *)splitView shouldCollapseSubview:(NSView *)subview forDoubleClickOnDividerAtIndex:(NSInteger)dividerIndex {
+    BOOL result = NO;
+    if ([splitView isEqualTo:self.splitView]) {
+        result = YES;
+    }
+    return result;
+}
+
+- (void)splitViewDidResizeSubviews:(NSNotification *)notification
+{
+    NSSplitView* splitView = (NSSplitView*)notification.object;
+    
+    if ([splitView isEqualTo:self.splitView]) {
+        CGFloat width = self.inputView.frame.size.width;
+        if (width > 0) {
+            _inputViewWidth = width;
+        }
+    }
+    
+    if ([splitView isEqualTo:self.subSplitView]) {
+        CGFloat height = self.bookmarksSplitPane.frame.size.height;
+        KFToolbarItem *bookmarksItem = self.toolBar.leftItems[2];
+        //DDLogVerbose(@"height: %.0f, splitView.frame.size.height: %.0f", height, splitView.frame.size.height);
+        if (height > bookmarksPaneMinHeight) {
+            _bookmarksSplitPaneHeight = height;
+            bookmarksItem.state = NSOnState;
+        } else {
+            bookmarksItem.state = NSOffState;
+        }
+    }
 }
 
 #pragma mark - CoreData

@@ -19,7 +19,7 @@
 @class BookViewController;
 @class ImageViewController;
 
-@interface AppDelegate : NSObject <NSApplicationDelegate, KFEpubControllerDelegate>
+@interface AppDelegate : NSObject <NSApplicationDelegate, KFEpubControllerDelegate, NSSplitViewDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
 @property (weak) IBOutlet NSSplitView *splitView;

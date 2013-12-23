@@ -945,9 +945,12 @@
                                             </customView>
                                         </subviews>
                                         <holdingPriorities>
-                                            <real value="250"/>
-                                            <real value="250"/>
+                                            <real value="443"/>
+                                            <real value="82"/>
                                         </holdingPriorities>
+                                        <connections>
+                                            <outlet property="delegate" destination="494" id="bxJ-mM-JkW"/>
+                                        </connections>
                                     </splitView>
                                 </subviews>
                                 <constraints>
@@ -966,6 +969,9 @@
                             <real value="250"/>
                             <real value="250"/>
                         </holdingPriorities>
+                        <connections>
+                            <outlet property="delegate" destination="494" id="9Ii-9u-lP3"/>
+                        </connections>
                     </splitView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="f1m-ms-A6b" customClass="KFToolbar">
                         <rect key="frame" x="0.0" y="0.0" width="720" height="32"/>
@@ -1028,6 +1034,13 @@
                 <outlet property="booksView" destination="1f5-sw-iLl" id="c3j-mX-UiG"/>
             </connections>
         </customObject>
+        <treeController mode="entity" entityName="Book" fetchPredicateFormat="parent == nil" automaticallyPreparesContent="YES" childrenKeyPath="children" leafKeyPath="isLeaf" id="JIz-cg-z1q" customClass="BooksTreeController">
+            <connections>
+                <binding destination="494" name="managedObjectContext" keyPath="self.managedObjectContext" id="3eK-d6-5e6"/>
+                <outlet property="bookViewController" destination="HlQ-3S-wAo" id="F73-ET-6GU"/>
+                <outlet property="listViewController" destination="9JM-Ru-T49" id="HlN-Yk-vwu"/>
+            </connections>
+        </treeController>
         <customObject id="KJq-QR-or6" customClass="BookmarksController">
             <connections>
                 <outlet property="bookmarksArrayController" destination="Wjr-Iu-HEJ" id="0Gc-ou-KjB"/>
@@ -1036,13 +1049,6 @@
                 <outlet property="booksView" destination="1f5-sw-iLl" id="bV3-Q8-Vso"/>
             </connections>
         </customObject>
-        <treeController mode="entity" entityName="Book" fetchPredicateFormat="parent == nil" automaticallyPreparesContent="YES" childrenKeyPath="children" leafKeyPath="isLeaf" id="JIz-cg-z1q" customClass="BooksTreeController">
-            <connections>
-                <binding destination="494" name="managedObjectContext" keyPath="self.managedObjectContext" id="3eK-d6-5e6"/>
-                <outlet property="bookViewController" destination="HlQ-3S-wAo" id="F73-ET-6GU"/>
-                <outlet property="listViewController" destination="9JM-Ru-T49" id="HlN-Yk-vwu"/>
-            </connections>
-        </treeController>
         <arrayController mode="entity" entityName="Bookmark" automaticallyPreparesContent="YES" automaticallyRearrangesObjects="YES" id="Wjr-Iu-HEJ" customClass="BookmarksArrayController">
             <connections>
                 <binding destination="JIz-cg-z1q" name="contentArrayForMultipleSelection" keyPath="selectedObjects.@distinctUnionOfSets.bookmarks" id="kGT-vl-H22"/>
