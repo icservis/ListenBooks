@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ListCollectionController : NSObject
+@interface ListCollectionController : NSObject <NSCollectionViewDelegate, NSMenuDelegate>
+
+
 
 @end

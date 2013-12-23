@@ -7,6 +7,7 @@
 //
 
 #import "ListCollectionView.h"
+#import "ListCollectionViewItem.h"
 
 @implementation ListCollectionView
 
@@ -25,5 +26,7 @@
 	
     // Drawing code here.
 }
+
+
 
 @end

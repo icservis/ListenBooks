@@ -10,8 +10,7 @@
 
 @class ListCollectionView;
 @class ListCollectionController;
-@class ListCollectionViewItem;
-@class SourceTreeController;
+@class BooksArrayController;
 
 @interface ListViewController : NSViewController
 
@@ -20,8 +19,7 @@
 @property (weak) IBOutlet ListCollectionView *listCollectionView;
 
 @property (strong) IBOutlet ListCollectionController *listCollectionController;
-@property (strong) IBOutlet ListCollectionViewItem *listCollectionViewItem;
-@property (strong) IBOutlet SourceTreeController *sourceTreeController;
+@property (strong) IBOutlet BooksArrayController *booksArrayController;
 
 
 

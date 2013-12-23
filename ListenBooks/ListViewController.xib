@@ -7,10 +7,9 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ListViewController">
             <connections>
+                <outlet property="booksArrayController" destination="DpZ-2J-lt8" id="KxV-ea-4pE"/>
                 <outlet property="listCollectionController" destination="V29-eB-nrn" id="tHf-jn-e8b"/>
-                <outlet property="listCollectionView" destination="LxV-JL-XIE" id="njU-Ge-6Me"/>
-                <outlet property="listCollectionViewItem" destination="UiN-BZ-O06" id="Brt-nI-lYM"/>
-                <outlet property="sourceTreeController" destination="Eej-cV-Wic" id="42a-Ho-PBR"/>
+                <outlet property="listCollectionView" destination="wlL-wQ-CTR" id="XCb-qU-G7D"/>
                 <outlet property="titleField" destination="som-Jn-pPL" id="ipe-lN-HOR"/>
                 <outlet property="toolBarView" destination="dcI-Lz-SsJ" id="tyv-Th-tsC"/>
                 <outlet property="view" destination="1" id="2"/>
@@ -35,58 +34,191 @@
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                         </textField>
+                        <searchField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pLh-YP-7dC">
+                            <rect key="frame" x="400" y="7" width="300" height="22"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="300" id="jWJ-3U-5k4"/>
+                            </constraints>
+                            <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="zaZ-bU-ThL">
+                                <font key="font" metaFont="system"/>
+                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                <connections>
+                                    <binding destination="DpZ-2J-lt8" name="predicate" keyPath="filterPredicate" id="xZb-v8-nve">
+                                        <dictionary key="options">
+                                            <string key="NSDisplayName">predicate</string>
+                                            <string key="NSPredicateFormat">title contains [c] $value</string>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
+                            </searchFieldCell>
+                        </searchField>
                     </subviews>
                     <constraints>
+                        <constraint firstAttribute="trailing" secondItem="pLh-YP-7dC" secondAttribute="trailing" constant="20" symbolic="YES" id="EgY-SV-Vad"/>
                         <constraint firstAttribute="height" constant="36" id="P7e-o0-zhf"/>
+                        <constraint firstItem="pLh-YP-7dC" firstAttribute="baseline" secondItem="som-Jn-pPL" secondAttribute="baseline" id="fMc-86-5Sw"/>
                         <constraint firstAttribute="centerY" secondItem="som-Jn-pPL" secondAttribute="centerY" id="hl9-8R-yEd"/>
                         <constraint firstItem="som-Jn-pPL" firstAttribute="leading" secondItem="dcI-Lz-SsJ" secondAttribute="leading" constant="20" id="wAE-Ff-QDt"/>
                     </constraints>
                 </customView>
-                <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T3Z-tT-M0F">
+                <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TD5-s4-htk">
                     <rect key="frame" x="0.0" y="0.0" width="720" height="424"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <clipView key="contentView" id="0y0-Nb-59o">
+                    <clipView key="contentView" id="aKG-SG-AnQ">
                         <rect key="frame" x="0.0" y="0.0" width="720" height="424"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView id="LxV-JL-XIE" customClass="ListCollectionView">
+                            <collectionView selectable="YES" allowsMultipleSelection="YES" id="wlL-wQ-CTR" customClass="ListCollectionView">
                                 <rect key="frame" x="0.0" y="0.0" width="720" height="424"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 <connections>
-                                    <outlet property="itemPrototype" destination="UiN-BZ-O06" id="oUU-95-Zra"/>
+                                    <binding destination="DpZ-2J-lt8" name="content" keyPath="arrangedObjects" id="OG8-CS-DlD"/>
+                                    <binding destination="DpZ-2J-lt8" name="selectionIndexes" keyPath="selectionIndexes" previousBinding="OG8-CS-DlD" id="I38-DQ-ibC"/>
+                                    <outlet property="delegate" destination="V29-eB-nrn" id="XFt-jx-mNi"/>
+                                    <outlet property="itemPrototype" destination="9eH-qb-fOc" id="pza-KC-dgb"/>
                                 </connections>
                             </collectionView>
                         </subviews>
                     </clipView>
-                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="eD0-yA-csY">
+                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="zkn-3D-8h3">
                         <rect key="frame" x="1" y="144" width="233" height="15"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
-                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Ibr-od-FHE">
+                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Rez-iO-SmD">
                         <rect key="frame" x="234" y="1" width="15" height="143"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
             </subviews>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="TD5-s4-htk" secondAttribute="bottom" id="1G5-5X-6WT"/>
                 <constraint firstItem="dcI-Lz-SsJ" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="6w8-WR-7XA"/>
-                <constraint firstItem="T3Z-tT-M0F" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="Qm6-at-eUH"/>
                 <constraint firstAttribute="trailing" secondItem="dcI-Lz-SsJ" secondAttribute="trailing" id="RYx-Ts-HQV"/>
-                <constraint firstItem="T3Z-tT-M0F" firstAttribute="top" secondItem="dcI-Lz-SsJ" secondAttribute="bottom" id="hvz-SU-m77"/>
-                <constraint firstAttribute="bottom" secondItem="T3Z-tT-M0F" secondAttribute="bottom" id="qvC-Cf-oXS"/>
+                <constraint firstItem="TD5-s4-htk" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="TJP-Ls-ppm"/>
+                <constraint firstItem="TD5-s4-htk" firstAttribute="top" secondItem="dcI-Lz-SsJ" secondAttribute="bottom" id="VY7-qD-htI"/>
+                <constraint firstAttribute="trailing" secondItem="TD5-s4-htk" secondAttribute="trailing" id="nAq-NW-5jr"/>
                 <constraint firstItem="dcI-Lz-SsJ" firstAttribute="top" secondItem="1" secondAttribute="top" id="vO3-iW-9Iy"/>
-                <constraint firstAttribute="trailing" secondItem="T3Z-tT-M0F" secondAttribute="trailing" id="wOQ-nq-bP7"/>
             </constraints>
         </customView>
         <customObject id="03C-bK-GQY" customClass="AppDelegate"/>
         <customObject id="V29-eB-nrn" customClass="ListCollectionController"/>
-        <collectionViewItem id="UiN-BZ-O06" customClass="ListCollectionViewItem"/>
-        <treeController mode="entity" entityName="Book" fetchPredicateFormat="parent == nil" automaticallyPreparesContent="YES" childrenKeyPath="children" leafKeyPath="isLeaf" id="Eej-cV-Wic" customClass="BooksTreeController">
+        <arrayController mode="entity" entityName="Book" fetchPredicateFormat="isLeaf == YES" automaticallyPreparesContent="YES" id="DpZ-2J-lt8" customClass="BooksArrayController">
             <connections>
-                <binding destination="03C-bK-GQY" name="managedObjectContext" keyPath="self.managedObjectContext" id="X3z-JD-Bdq"/>
+                <binding destination="03C-bK-GQY" name="managedObjectContext" keyPath="self.managedObjectContext" id="9F4-ZR-Afr"/>
             </connections>
-        </treeController>
+        </arrayController>
         <userDefaultsController representsSharedInstance="YES" id="W93-as-4QL"/>
+        <collectionViewItem id="9eH-qb-fOc" customClass="ListCollectionViewItem">
+            <connections>
+                <outlet property="view" destination="QUP-Va-PBM" id="OiR-6E-csU"/>
+            </connections>
+        </collectionViewItem>
+        <view id="QUP-Va-PBM" customClass="ListCollectionItemView">
+            <rect key="frame" x="0.0" y="0.0" width="120" height="160"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <box autoresizesSubviews="NO" title="Box" borderType="line" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="yFS-uQ-wir">
+                    <rect key="frame" x="-1" y="-2" width="122" height="162"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <view key="contentView">
+                        <rect key="frame" x="1" y="1" width="120" height="160"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9Vd-bH-5u0">
+                                <rect key="frame" x="42" y="18" width="36" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="17" id="FoA-eQ-CkK"/>
+                                </constraints>
+                                <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" alignment="center" title="Title" id="dUG-hy-zwE">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <binding destination="9eH-qb-fOc" name="toolTip" keyPath="self.representedObject.title" id="Kg9-3d-cka"/>
+                                    <binding destination="9eH-qb-fOc" name="value" keyPath="self.representedObject.title" id="ofj-G5-6Qj"/>
+                                </connections>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6Pr-9c-k6X">
+                                <rect key="frame" x="40" y="5" width="41" height="14"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="14" id="MJw-Hy-rws"/>
+                                </constraints>
+                                <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" title="Author" usesSingleLineMode="YES" id="NZu-er-Bj4">
+                                    <font key="font" metaFont="toolTip"/>
+                                    <color key="textColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <binding destination="9eH-qb-fOc" name="value" keyPath="self.representedObject.author" id="g7o-zy-w59"/>
+                                    <binding destination="9eH-qb-fOc" name="toolTip" keyPath="self.representedObject.author" id="jI7-Z4-dbv"/>
+                                </connections>
+                            </textField>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4Fg-0h-lIv">
+                                <rect key="frame" x="4" y="37" width="112" height="120"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="W1X-G0-WUA"/>
+                                    <constraint firstAttribute="width" constant="112" id="jZD-Xo-O1Y"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="epubBooks" id="yM2-6p-Jai"/>
+                            </imageView>
+                        </subviews>
+                    </view>
+                    <constraints>
+                        <constraint firstItem="9Vd-bH-5u0" firstAttribute="centerX" secondItem="yFS-uQ-wir" secondAttribute="centerX" id="1Hu-Qk-Nr0"/>
+                        <constraint firstItem="9Vd-bH-5u0" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="yFS-uQ-wir" secondAttribute="leading" constant="5" id="1l2-K5-wk6"/>
+                        <constraint firstItem="6Pr-9c-k6X" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="yFS-uQ-wir" secondAttribute="leading" constant="5" id="3jh-1K-WfT"/>
+                        <constraint firstItem="6Pr-9c-k6X" firstAttribute="top" secondItem="4Fg-0h-lIv" secondAttribute="bottom" constant="18" id="83f-i6-kSa"/>
+                        <constraint firstAttribute="bottom" secondItem="9Vd-bH-5u0" secondAttribute="bottom" constant="15" id="Ifw-bU-trp"/>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9Vd-bH-5u0" secondAttribute="trailing" constant="5" id="Jtf-6X-oWp"/>
+                        <constraint firstItem="9Vd-bH-5u0" firstAttribute="centerX" secondItem="4Fg-0h-lIv" secondAttribute="centerX" id="VIc-Pm-R5r"/>
+                        <constraint firstItem="9Vd-bH-5u0" firstAttribute="top" secondItem="4Fg-0h-lIv" secondAttribute="bottom" constant="2" id="Xbp-KW-wPc"/>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6Pr-9c-k6X" secondAttribute="trailing" constant="5" id="gnj-zg-aT6"/>
+                        <constraint firstItem="9Vd-bH-5u0" firstAttribute="centerX" secondItem="6Pr-9c-k6X" secondAttribute="centerX" id="omo-3a-6Js"/>
+                    </constraints>
+                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </box>
+            </subviews>
+            <constraints>
+                <constraint firstItem="yFS-uQ-wir" firstAttribute="leading" secondItem="QUP-Va-PBM" secondAttribute="leading" constant="2" id="hDc-on-kY0"/>
+                <constraint firstItem="yFS-uQ-wir" firstAttribute="centerX" secondItem="QUP-Va-PBM" secondAttribute="centerX" id="j8c-CB-RTI"/>
+                <constraint firstItem="yFS-uQ-wir" firstAttribute="top" secondItem="QUP-Va-PBM" secondAttribute="top" constant="2" id="q7l-qF-Pv9"/>
+                <constraint firstItem="yFS-uQ-wir" firstAttribute="centerY" secondItem="QUP-Va-PBM" secondAttribute="centerY" id="tbG-D8-q0h"/>
+            </constraints>
+            <connections>
+                <outlet property="authorField" destination="6Pr-9c-k6X" id="BVh-2q-MF8"/>
+                <outlet property="contextMenu" destination="RIA-og-7va" id="IiF-A2-fZ1"/>
+                <outlet property="imageView" destination="4Fg-0h-lIv" id="ttI-Go-6hq"/>
+                <outlet property="menu" destination="RIA-og-7va" id="nAu-X9-yVC"/>
+                <outlet property="titleField" destination="9Vd-bH-5u0" id="zrI-kk-zjy"/>
+            </connections>
+        </view>
+        <menu id="RIA-og-7va">
+            <items>
+                <menuItem title="Open" id="a1o-QB-jmu">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+                <menuItem title="Export" id="yCV-8a-DVv">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="pLq-9z-kat"/>
+                <menuItem title="Delete" id="NiL-PI-6DI">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+            </items>
+            <connections>
+                <outlet property="delegate" destination="V29-eB-nrn" id="Fin-tY-X5v"/>
+            </connections>
+        </menu>
     </objects>
+    <resources>
+        <image name="epubBooks" width="200" height="52"/>
+    </resources>
 </document>

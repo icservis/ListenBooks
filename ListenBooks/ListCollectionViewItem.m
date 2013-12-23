@@ -1,8 +1,8 @@
 //
-//  ListCollectionViewItem.m
+//  ListCollectionViewController.m
 //  ListenBooks
 //
-//  Created by Libor Kučera on 19.12.13.
+//  Created by Libor Kučera on 27/12/13.
 //  Copyright (c) 2013 IC Servis. All rights reserved.
 //
 
@@ -22,5 +22,6 @@
     }
     return self;
 }
+
 
 @end
