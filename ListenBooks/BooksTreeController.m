@@ -23,7 +23,6 @@
         [appDelegate unlinkBookWithUrl:book.fileUrl];
         
         NSArray* childIndexPaths = [node childIndexPaths];
-        NSLog(@"removing child nodes: %@", [childIndexPaths description]);
         [self removeObjectsAtArrangedObjectIndexPaths:childIndexPaths];
         
     }];

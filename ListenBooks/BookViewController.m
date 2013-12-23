@@ -33,8 +33,7 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    //NSURL *epubURL = [[NSBundle mainBundle] URLForResource:@"tolstoy-war-and-peace" withExtension:@"epub"];
-    //[self setupBookPageControllerContent:epubURL];
+    [self resetPageView];
 }
 
 - (void)setupBookPageControllerContent:(NSURL*)epubURL
@@ -55,8 +54,25 @@
 
 - (void)setBook:(Book *)book
 {
+    if (book == nil) {
+        [self resetPageView];
+    } else if (![book isEqual:_book]) {
+        [self setupBookPageControllerContent:book.fileUrl];
+    }
     _book = book;
-    [self setupBookPageControllerContent:book.fileUrl];
+    
+}
+
+- (void)resetPageView
+{
+    self.data = nil;
+    self.initialSelectedObject = nil;
+    self.titleField.stringValue = NSLocalizedString(@"No Selection", nil);
+    [[self.pageView subviews] enumerateObjectsUsingBlock:^(NSView* subView, NSUInteger idx, BOOL *stop) {
+        if (![subView isKindOfClass:[NSProgressIndicator class]]) {
+            [subView removeFromSuperview];
+        }
+    }];
 }
 
 #pragma mark - KFEpubDelegate

@@ -218,14 +218,25 @@
         [openpanel.URLs enumerateObjectsUsingBlock:^(NSURL* fileUrl, NSUInteger idx, BOOL *stop) {
             
             NSURL* sandboxedFileUrl = [documentsDirectory URLByAppendingPathComponent:[fileUrl lastPathComponent]];
-            NSLog(@"sandboxedFileUrl: %@", [sandboxedFileUrl path]);
             progressInfo.stringValue = [fileUrl lastPathComponent];
             progressIndicator.doubleValue = idx;
             
             NSError* error;
             NSFileManager* fileManager = [NSFileManager defaultManager];
-            [fileManager copyItemAtURL:fileUrl toURL:sandboxedFileUrl error:&error];
             
+            if ([fileManager fileExistsAtPath:[sandboxedFileUrl path]]) {
+                
+                unsigned int counter = 1;
+                while ([fileManager fileExistsAtPath:[sandboxedFileUrl path]]) {
+                    
+                    NSString* fileName = [[fileUrl lastPathComponent] stringByDeletingPathExtension];
+                    NSString* fileExtension = [fileUrl pathExtension];
+                    NSString* newFileName = [NSString stringWithFormat:@"%@-%i.%@", fileName, counter++, fileExtension];
+                    sandboxedFileUrl = [[sandboxedFileUrl URLByDeletingLastPathComponent] URLByAppendingPathComponent:newFileName];
+                };
+            }
+            [fileManager copyItemAtURL:fileUrl toURL:sandboxedFileUrl error:&error];
+
             if (error != nil) {
                 NSLog(@"copying error: %@", [error localizedDescription]);
                 self.progressInfo.stringValue = [error localizedDescription];
@@ -261,6 +272,7 @@
         NSLog(@"deleting error: %@", [error localizedDescription]);
     }
     [self saveAction:nil];
+    self.bookViewController.book = nil;
 }
 
 #pragma mark - CoreData
