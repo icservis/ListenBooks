@@ -14,6 +14,7 @@
 @class BooksView;
 @class BookmarksView;
 @class BooksTreeController;
+@class BooksArrayController;
 @class BookmarksArrayController;
 @class ListViewController;
 @class BookViewController;
@@ -45,6 +46,7 @@
 
 @property (strong) IBOutlet BooksTreeController *booksTreeController;
 @property (strong) IBOutlet BookmarksArrayController *bookmarksArrayController;
+@property (strong) IBOutlet BooksArrayController *booksArrayController;
 
 @property (strong, nonatomic) IBOutlet ListViewController *listViewController;
 @property (strong, nonatomic) IBOutlet BookViewController *bookViewController;

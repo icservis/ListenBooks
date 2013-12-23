@@ -6,7 +6,11 @@
 //  Copyright (c) 2013 IC Servis. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "ListViewController.h"
+#import "BooksArrayController.h"
+#import "BooksTreeController.h"
+#import "ListCollectionView.h"
 
 @interface ListViewController ()
 
@@ -21,6 +25,26 @@
         // Initialization code here.
     }
     return self;
+}
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+
+    AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
+    
+    [self.listCollectionView bind:NSContentBinding toObject:appDelegate.booksArrayController withKeyPath:@"arrangedObjects" options:nil];
+    [self.listCollectionView bind:NSSelectionIndexesBinding toObject:appDelegate.booksArrayController withKeyPath:@"selectionIndexes" options:nil];
+    //NSDictionary* filterOptions = [[NSDictionary alloc] initWithObjectsAndKeys:@"self.title contains[cd] $value", NSPredicateFormatBindingOption, @"predicate", NSDisplayNameBindingOption, nil];
+    //[self.searchField bind:NSFilterPredicateBinding toObject:appDelegate.booksArrayController withKeyPath:@"selection" options:filterOptions];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(contextDidChange:) name:NSManagedObjectContextObjectsDidChangeNotification object:appDelegate.managedObjectContext];
+}
+
+
+- (void)contextDidChange:(NSNotification*)notification
+{
+    DDLogVerbose(@"notification: %@", notification.object);
 }
 
 @end

@@ -19,41 +19,58 @@
 
 - (void)copy
 {
-    
+    DDLogVerbose(@"copy");
 }
 
 - (void)paste
 {
-    
+    DDLogVerbose(@"paste");
 }
 
 - (void)cut
 {
-    
+    DDLogVerbose(@"cut");
 }
 
 - (void)delete
 {
+    DDLogVerbose(@"delete");
     [self deleteItems];
 }
 
-- (void)edit{
-    
+- (void)edit
+{
+    DDLogVerbose(@"edit");
+}
+
+- (void)selectAll
+{
+    DDLogVerbose(@"selectAll");
 }
 
 - (void)deleteItems
 {
-    [self.booksTreeController deleteItems];
-}
-
-- (void)cutItems
-{
+    AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
     
+    [[self.booksTreeController selectedNodes] enumerateObjectsUsingBlock:^(NSTreeNode* node, NSUInteger idx, BOOL *stop) {
+        
+        Book* book = [node representedObject];
+        [appDelegate unlinkBookWithUrl:book.fileUrl];
+        
+        NSArray* childIndexPaths = [node childIndexPaths];
+        [self.booksTreeController removeObjectsAtArrangedObjectIndexPaths:childIndexPaths];
+        
+    }];
+    
+    [self.booksTreeController remove:self];
+    
+    DDLogVerbose(@"count: %ld", (long)[[self.booksTreeController arrangedObjects] count]);
+    if ([[self.booksTreeController arrangedObjects] count] == 0) {
+        [self.bookViewController resetPageView];
+    }
 }
 
-
-#pragma mark -
-#pragma mark Other NSOutlineView Delegate Methods
+#pragma mark - NSOutlineView Delegate Methods
 
 - (NSView*)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item
 {
@@ -148,7 +165,6 @@
     NSUInteger currentIndex = [self.booksView selectedRow];
     NSTreeNode* currentNode = [self.booksView itemAtRow:currentIndex];
     Book* currentBook = [currentNode representedObject];
-    DDLogVerbose(@"currentBook: %@", [currentBook description]);
     
     AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
     if ([appDelegate.importedUrls count] == 0 && currentBook != nil && ![currentBook isEqual:appDelegate.bookViewController.book]) {

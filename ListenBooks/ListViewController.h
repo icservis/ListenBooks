@@ -10,16 +10,15 @@
 
 @class ListCollectionView;
 @class ListCollectionController;
-@class BooksArrayController;
 
 @interface ListViewController : NSViewController
 
 @property (weak) IBOutlet NSView *toolBarView;
 @property (weak) IBOutlet NSTextField *titleField;
 @property (weak) IBOutlet ListCollectionView *listCollectionView;
+@property (weak) IBOutlet NSSearchField *searchField;
 
-@property (strong) IBOutlet ListCollectionController *listCollectionController;
-@property (strong) IBOutlet BooksArrayController *booksArrayController;
+@property (unsafe_unretained) IBOutlet ListCollectionController *listCollectionController;
 
 
 

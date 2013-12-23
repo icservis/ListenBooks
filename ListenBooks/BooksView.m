@@ -54,17 +54,17 @@
 
 - (IBAction)copy:(id)sender;
 {
-    //[self.booksController copy];
+    [self.booksController copy];
 }
 
 - (IBAction)paste:(id)sender
 {
-    //[self.booksController paste];
+    [self.booksController paste];
 }
 
 - (IBAction)cut:(id)sender
 {
-    //[self.booksController cut];
+    [self.booksController cut];
 }
 
 - (IBAction)delete:(id)sender
@@ -74,12 +74,12 @@
 
 - (void)doubleClick:(id)object
 {
-    //[self.booksController edit];
+    [self.booksController edit];
 }
 
 - (void)selectAll:(id)sender
 {
-    
+    [self.booksController selectAll];
 }
 
 #pragma mark - NSAlertViewDelegate

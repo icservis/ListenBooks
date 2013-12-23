@@ -10,31 +10,22 @@
 #import "Book.h"
 #import "BooksTreeController.h"
 #import "BookViewController.h"
+#import "ListViewController.h"
 #import "NSTreeController_Extensions.h"
 
 @implementation BooksTreeController
 
-- (void)deleteItems
+- (void)awakeFromNib
 {
-    DDLogVerbose(@"deleteItems");
+    [super awakeFromNib];
+    
     AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
-    
-    [[self selectedNodes] enumerateObjectsUsingBlock:^(NSTreeNode* node, NSUInteger idx, BOOL *stop) {
-        
-        Book* book = [node representedObject];
-        [appDelegate unlinkBookWithUrl:book.fileUrl];
-        
-        NSArray* childIndexPaths = [node childIndexPaths];
-        [self removeObjectsAtArrangedObjectIndexPaths:childIndexPaths];
-        
-    }];
-    
-    [super remove:self];
-    
-    DDLogVerbose(@"count: %ld", (long)[[self arrangedObjects] count]);
-    if ([[self arrangedObjects] count] == 0) {
-        [self.bookViewController resetPageView];
-    }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(contextDidChange:) name:NSManagedObjectContextObjectsDidChangeNotification object:appDelegate.managedObjectContext];
+}
+
+- (void)contextDidChange:(NSNotification*)notification
+{
+    DDLogVerbose(@"count: %lu", (unsigned long)[[self arrangedObjects] count]);
 }
 
 @end

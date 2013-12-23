@@ -34,6 +34,15 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
+    
+    AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(contextDidChange:) name:NSManagedObjectContextObjectsDidChangeNotification object:appDelegate.managedObjectContext];
+}
+
+- (void)contextDidChange:(NSNotification*)notification
+{
+    AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
+    DDLogVerbose(@"booksArrayController: %@", appDelegate.booksArrayController);
 }
 
 - (void)setupBookPageControllerContent:(NSURL*)epubURL
@@ -93,28 +102,30 @@
 
 - (void)epubController:(KFEpubController *)controller didOpenEpub:(KFEpubContentModel *)contentModel
 {
-    self.contentModel = contentModel;
-    DDLogVerbose(@"meta %@", contentModel.metaData);
+    
+    //DDLogVerbose(@"meta %@", contentModel.metaData);
     //DDLogVerbose(@"spine %@", [contentModel.spine description]);
     //DDLogVerbose(@"guide %@", [contentModel.guide description]);
     
-    self.titleField.stringValue = [self.contentModel.metaData valueForKey:@"title"];
+    self.titleField.stringValue = [contentModel.metaData valueForKey:@"title"];
     
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         // Do a taks in the background
         
         __block NSMutableArray* spinedData = [[NSMutableArray alloc] init];
-        [self.contentModel.spine enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [contentModel.spine enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             
-            if (self.contentModel == nil || idx >= [self.contentModel.spine count]) {
+            if ([contentModel.spine[idx] isKindOfClass:[NSNull class]] || [contentModel.manifest[contentModel.spine[idx]] isKindOfClass:[NSNull class]]) {
                 *stop = YES;
+                spinedData = nil;
             }
-            NSString* media = self.contentModel.manifest[self.contentModel.spine[idx]][@"media"];
+            
+            NSString* media = contentModel.manifest[contentModel.spine[idx]][@"media"];
             
             if ([media isEqualToString:@"application/xhtml+xml"]) {
-                
-                NSString *contentFile = self.contentModel.manifest[self.contentModel.spine[idx]][@"href"];
-                NSURL *contentURL = [self.epubController.epubContentBaseURL URLByAppendingPathComponent:contentFile];
+
+                NSString *contentFile = contentModel.manifest[contentModel.spine[idx]][@"href"];
+                NSURL *contentURL = [controller.epubContentBaseURL URLByAppendingPathComponent:contentFile];
                 NSAttributedString *attributedString = [[NSAttributedString alloc] initWithURL:contentURL documentAttributes:nil];
                 if (attributedString != nil) {
                     [spinedData addObject:attributedString];
@@ -127,9 +138,11 @@
             [self.progressIndicator stopAnimation:nil];
             
             if ([spinedData count] > 0) {
+                self.contentModel = contentModel;
                 self.data = [[NSMutableArray alloc] initWithArray:spinedData];
                 [self.pageController setArrangedObjects:self.data];
             } else {
+                self.contentModel = nil;
                 self.data = nil;
                 [self resetPageView];
             }

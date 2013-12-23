@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 IC Servis. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
 
 @class BookmarksView;
 @class BooksView;
@@ -17,7 +17,7 @@
 
 @property (weak) IBOutlet BookmarksView *bookmarksView;
 @property (weak) IBOutlet BooksView *booksView;
-@property (weak) IBOutlet BooksTreeController *booksTreeController;
-@property (weak) IBOutlet BookmarksArrayController *bookmarksArrayController;
+@property (unsafe_unretained) IBOutlet BooksTreeController *booksTreeController;
+@property (unsafe_unretained) IBOutlet BookmarksArrayController *bookmarksArrayController;
 
 @end

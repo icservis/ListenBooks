@@ -6,23 +6,26 @@
 //  Copyright (c) 2013 IC Servis. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
 
 @class BooksView;
+@class BookViewController;
 @class BooksTreeController;
 @class BookmarksArrayController;
 
-@interface BooksController : NSObject
+@interface BooksController : NSObject <NSOutlineViewDelegate>
+
 @property (weak) IBOutlet BooksView *booksView;
-@property (weak) IBOutlet BooksTreeController *booksTreeController;
-@property (weak) IBOutlet BookmarksArrayController *bookmarksArrayController;
+@property (unsafe_unretained) IBOutlet BookViewController* bookViewController;
+@property (unsafe_unretained) IBOutlet BooksTreeController *booksTreeController;
+@property (unsafe_unretained) IBOutlet BookmarksArrayController *bookmarksArrayController;
 
 - (void)copy;
 - (void)paste;
 - (void)cut;
 - (void)delete;
 - (void)edit;
+- (void)selectAll;
 - (void)deleteItems;
-- (void)cutItems;
 
 @end

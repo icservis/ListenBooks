@@ -6,8 +6,27 @@
 //  Copyright (c) 2013 IC Servis. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "BooksArrayController.h"
+#import "Book.h"
+#import "BookViewController.h"
+#import "ListViewController.h"
+#import "NSArrayController_Extensions.h"
 
 @implementation BooksArrayController
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    
+    AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(contextDidChange:) name:NSManagedObjectContextObjectsDidChangeNotification object:appDelegate.managedObjectContext];
+}
+
+- (void)contextDidChange:(NSNotification*)notification
+{
+    DDLogVerbose(@"count: %lu", (unsigned long)[[self arrangedObjects] count]);
+}
+
 
 @end

@@ -10,6 +10,7 @@
 #import "Book.h"
 
 @interface ListCollectionItemView : NSView
+
 @property (weak) IBOutlet NSImageView *imageView;
 @property (weak) IBOutlet NSTextField *titleField;
 @property (weak) IBOutlet NSTextField *authorField;

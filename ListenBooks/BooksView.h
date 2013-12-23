@@ -13,12 +13,13 @@
 
 @interface BooksView : NSOutlineView <NSAlertDelegate>
 
-@property (assign) IBOutlet BooksController* booksController;
+@property (unsafe_unretained) IBOutlet BooksController* booksController;
 @property (weak) IBOutlet BookmarksView* bookmarksView;
 
 - (IBAction)copy:(id)sender;
 - (IBAction)paste:(id)sender;
 - (IBAction)cut:(id)sender;
 - (IBAction)delete:(id)sender;
+- (IBAction)selectAll:(id)sender;
 
 @end
