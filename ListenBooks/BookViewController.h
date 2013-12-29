@@ -11,6 +11,8 @@
 #import "KFEpubContentModel.h"
 #import "Book.h"
 
+static NSString* const TextSizeDidChangeNotificaton = @"TEXT_SIZE_DID_CHANGE_NOTIFICATION";
+
 @class BookPageController;
 
 @interface BookViewController : NSViewController <NSPageControllerDelegate, KFEpubControllerDelegate>
@@ -25,6 +27,7 @@
 @property (nonatomic, strong) KFEpubController *epubController;
 @property (nonatomic, strong) KFEpubContentModel *contentModel;
 @property (weak) IBOutlet NSProgressIndicator *progressIndicator;
+@property (weak) IBOutlet NSSlider *textSizeSlider;
 
 - (void)resetPageView;
 

@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "BookViewController.h"
 #import "BookPageViewController.h"
+#import "NSTextView+Extensions.h"
 
 @interface BookViewController ()
 
@@ -74,6 +75,11 @@
             [subView removeFromSuperview];
         }
     }];
+}
+
+- (IBAction)textSizeSliderChange:(id)sender
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:TextSizeDidChangeNotificaton object:sender];
 }
 
 #pragma mark - KFEpubDelegate
@@ -158,6 +164,9 @@
 {
     // viewControllers may be reused... make sure to reset important stuff like the current magnification factor.
     
+    // Since we implement this delegate method, we are reponsible for setting the representedObject.
+    viewController.representedObject = object;
+    
     // Normally, we want to reset the magnification value to 1 as the user swipes to other images. However if the user cancels the swipe, we want to leave the original magnificaiton and scroll position alone.
     BookPageViewController* bookPageViewController = (BookPageViewController*)viewController;
     
@@ -165,10 +174,8 @@
     if (!isRepreparingOriginalView) {
         NSScrollView* scrollView = (NSScrollView*)bookPageViewController.view;
         scrollView.magnification = 1;
+        [bookPageViewController.textView changeFontSize:[self.textSizeSlider doubleValue]];
     }
-    
-    // Since we implement this delegate method, we are reponsible for setting the representedObject.
-    viewController.representedObject = object;
 }
 
 - (void)pageControllerWillStartLiveTransition:(NSPageController *)pageController

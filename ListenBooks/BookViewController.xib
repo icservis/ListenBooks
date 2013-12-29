@@ -10,6 +10,7 @@
                 <outlet property="pageController" destination="SXf-7F-t5Y" id="US4-se-grS"/>
                 <outlet property="pageView" destination="fad-Wp-y2i" id="J70-I8-3dV"/>
                 <outlet property="progressIndicator" destination="KCn-7a-wVN" id="ZJ9-54-3ku"/>
+                <outlet property="textSizeSlider" destination="P7W-rF-3uK" id="ui1-tM-MOB"/>
                 <outlet property="titleField" destination="hBu-ne-cpt" id="PGm-09-8VP"/>
                 <outlet property="toolBarView" destination="djN-tN-Tfa" id="7He-ii-q1n"/>
                 <outlet property="view" destination="1" id="2"/>
@@ -34,11 +35,24 @@
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                         </textField>
+                        <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="P7W-rF-3uK">
+                            <rect key="frame" x="523" y="4" width="179" height="26"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="175" id="uuq-Mh-uCc"/>
+                            </constraints>
+                            <sliderCell key="cell" continuous="YES" state="on" alignment="left" minValue="-3" maxValue="7" tickMarkPosition="above" numberOfTickMarks="11" allowsTickMarkValuesOnly="YES" sliderType="linear" id="bHw-RC-F5n"/>
+                            <connections>
+                                <action selector="textSizeSliderChange:" target="-2" id="RlB-1h-hvz"/>
+                            </connections>
+                        </slider>
                     </subviews>
                     <constraints>
+                        <constraint firstAttribute="centerY" secondItem="P7W-rF-3uK" secondAttribute="centerY" id="3aq-X0-ZAI"/>
                         <constraint firstItem="hBu-ne-cpt" firstAttribute="leading" secondItem="djN-tN-Tfa" secondAttribute="leading" constant="20" id="f9D-kT-aCj"/>
                         <constraint firstAttribute="height" constant="36" id="fNN-ya-vuD"/>
                         <constraint firstAttribute="centerY" secondItem="hBu-ne-cpt" secondAttribute="centerY" id="fWk-Re-ijo"/>
+                        <constraint firstAttribute="trailing" secondItem="P7W-rF-3uK" secondAttribute="trailing" constant="20" id="rY7-f0-Kv6"/>
                     </constraints>
                 </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="fad-Wp-y2i">

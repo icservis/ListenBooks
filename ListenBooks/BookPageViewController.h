@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "BookPageViewController.h"
 
 @interface BookPageViewController : NSViewController
 
