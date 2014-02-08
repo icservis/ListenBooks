@@ -11,7 +11,7 @@
 @class BooksController;
 @class BookmarksView;
 
-@interface BooksView : NSOutlineView <NSAlertDelegate>
+@interface BooksView : NSOutlineView
 
 @property (unsafe_unretained) IBOutlet BooksController* booksController;
 @property (weak) IBOutlet BookmarksView* bookmarksView;
@@ -20,6 +20,8 @@
 - (IBAction)paste:(id)sender;
 - (IBAction)cut:(id)sender;
 - (IBAction)delete:(id)sender;
-- (IBAction)selectAll:(id)sender;
+- (IBAction)edit:(id)sender;
+- (IBAction)open:(id)sender;
+//- (IBAction)selectAll:(id)sender;
 
 @end

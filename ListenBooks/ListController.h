@@ -12,7 +12,7 @@
 @class BooksTreeController;
 @class ListArrayController;
 
-@interface ListController : NSObject <NSCollectionViewDelegate, NSMenuDelegate>
+@interface ListController : NSObject <NSCollectionViewDelegate, NSMenuDelegate, NSAlertDelegate>
 
 @property (unsafe_unretained) IBOutlet BookViewController* bookViewController;
 @property (unsafe_unretained) IBOutlet BooksTreeController* booksTreeController;

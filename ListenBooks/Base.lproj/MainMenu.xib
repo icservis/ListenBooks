@@ -155,8 +155,15 @@
                                     <action selector="paste:" target="-1" id="226"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Edit" keyEquivalent="e" id="485"/>
+                            <menuItem title="Edit" keyEquivalent="e" id="485">
+                                <connections>
+                                    <action selector="edit:" target="-1" id="vew-g3-ajk"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Delete" id="202">
+                                <string key="keyEquivalent" base64-UTF8="YES">
+CA
+</string>
                                 <connections>
                                     <action selector="delete:" target="-1" id="235"/>
                                 </connections>
@@ -1108,6 +1115,7 @@
         <customObject id="420" customClass="NSFontManager"/>
         <customObject id="haP-Ld-S8C" customClass="BooksController">
             <connections>
+                <outlet property="bookViewController" destination="HlQ-3S-wAo" id="7k6-J7-kiJ"/>
                 <outlet property="bookmarksArrayController" destination="Wjr-Iu-HEJ" id="4Re-Na-BDB"/>
                 <outlet property="booksTreeController" destination="JIz-cg-z1q" id="khV-wD-e9e"/>
                 <outlet property="booksView" destination="1f5-sw-iLl" id="c3j-mX-UiG"/>

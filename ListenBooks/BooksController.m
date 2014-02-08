@@ -35,7 +35,7 @@
 - (void)delete
 {
     DDLogVerbose(@"delete");
-    [self deleteItems];
+    [self deleteAlert];
 }
 
 - (void)edit
@@ -73,6 +73,29 @@
     DDLogVerbose(@"count: %ld", (long)[[self.booksTreeController arrangedObjects] count]);
     if ([[self.booksTreeController arrangedObjects] count] == 0) {
         [self.bookViewController resetPageView];
+    }
+}
+
+#pragma mark - NSAlertViewDelegate
+
+- (void)deleteAlert
+{
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert addButtonWithTitle:NSLocalizedString(@"Delete", nil)];
+    [alert addButtonWithTitle:NSLocalizedString(@"Cancel", nil)];
+    [alert setMessageText:NSLocalizedString(@"Do you really want to delete this item(s)?", nil)];
+    [alert setInformativeText:NSLocalizedString(@"Deleting an item cannot be undone.", nil)];
+    [alert setAlertStyle:NSWarningAlertStyle];
+    [alert setDelegate:self];
+    [alert beginSheetModalForWindow:[[NSApplication sharedApplication] mainWindow] modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
+}
+
+-(void)alertDidEnd:(NSAlert*)alert returnCode:(NSInteger)returnCode contextInfo:(void*)contextInfo
+{
+    if (returnCode ==  NSAlertFirstButtonReturn)
+    {
+        [self deleteItems];
+        
     }
 }
 

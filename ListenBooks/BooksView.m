@@ -30,27 +30,10 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    [self setDoubleAction:@selector(doubleClick:)];
+    [self setDoubleAction:@selector(open:)];
 }
 
 #pragma mark - Event Handling methods
-
-// Intercept key presses
-- (void)keyDown:(NSEvent *)theEvent
-{
-	if(theEvent) {
-		switch([[theEvent characters] characterAtIndex:0])
-		{
-			case NSDeleteCharacter:
-                [self alertSheet];
-				break;
-                
-			default:
-				[super keyDown:theEvent];
-				break;
-		}
-	}
-}
 
 - (IBAction)copy:(id)sender;
 {
@@ -69,40 +52,24 @@
 
 - (IBAction)delete:(id)sender
 {
-    [self alertSheet];
+    [self.booksController delete];
 }
 
-- (void)doubleClick:(id)object
+- (IBAction)edit:(id)object
+{
+    [self.booksController edit];
+}
+
+- (IBAction)open:(id)object
 {
     [self.booksController open];
 }
 
+/*
 - (void)selectAll:(id)sender
 {
     [self.booksController selectAll];
 }
-
-#pragma mark - NSAlertViewDelegate
-
-- (void)alertSheet
-{
-    NSAlert *alert = [[NSAlert alloc] init];
-    [alert addButtonWithTitle:NSLocalizedString(@"Delete", nil)];
-    [alert addButtonWithTitle:NSLocalizedString(@"Cancel", nil)];
-    [alert setMessageText:NSLocalizedString(@"Do you really want to delete this item(s)?", nil)];
-    [alert setInformativeText:NSLocalizedString(@"Deleting an item cannot be undone.", nil)];
-    [alert setAlertStyle:NSWarningAlertStyle];
-    [alert setDelegate:self];
-    [alert beginSheetModalForWindow:[[NSApplication sharedApplication] mainWindow] modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
-}
-
--(void)alertDidEnd:(NSAlert*)alert returnCode:(NSInteger)returnCode contextInfo:(void*)contextInfo
-{
-    if (returnCode ==  NSAlertFirstButtonReturn)
-    {
-        [self.booksController deleteItems];
-        
-    }
-}
+ */
 
 @end

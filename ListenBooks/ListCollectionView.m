@@ -63,7 +63,44 @@
 
 - (void)itemDeleted:(ListCollectionItemView*)item
 {
-    [self.listController deleteItems];
+    [self.listController delete];
+}
+
+- (IBAction)copy:(id)sender;
+{
+    [self.listController copy];
+}
+
+- (IBAction)paste:(id)sender
+{
+    [self.listController paste];
+}
+
+- (IBAction)cut:(id)sender
+{
+    [self.listController cut];
+}
+
+- (IBAction)edit:(id)sender
+{
+    [self.listController edit];
+}
+
+- (IBAction)delete:(id)sender
+{
+    [self.listController delete];
+}
+
+/*
+- (IBAction)selectAll:(id)sender
+{
+    [self.listController selectAll];
+}
+ */
+
+- (IBAction)open:(id)sender
+{
+    [self.listController open];
 }
 
 @end

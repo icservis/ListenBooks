@@ -19,4 +19,12 @@
 - (void)itemDoubleClicked:(ListCollectionItemView*)item;
 - (void)itemDeleted:(ListCollectionItemView*)item;
 
+- (IBAction)copy:(id)sender;
+- (IBAction)paste:(id)sender;
+- (IBAction)cut:(id)sender;
+- (IBAction)edit:(id)sender;
+- (IBAction)delete:(id)sender;
+//- (IBAction)selectAll:(id)sender;
+- (IBAction)open:(id)sender;
+
 @end
