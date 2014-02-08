@@ -27,5 +27,6 @@
 - (void)edit;
 - (void)selectAll;
 - (void)deleteItems;
+- (void)open;
 
 @end

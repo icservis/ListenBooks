@@ -9,12 +9,12 @@
 #import <Cocoa/Cocoa.h>
 
 @class BookViewController;
-@class ListViewController;
+@class ListController;
 
-@interface BooksArrayController : NSArrayController
+@interface ListArrayController : NSArrayController
 
 @property (unsafe_unretained) IBOutlet BookViewController *bookViewController;
-@property (unsafe_unretained) IBOutlet ListViewController *listViewController;
+@property (unsafe_unretained) IBOutlet ListController *listController;
 
 
 @end

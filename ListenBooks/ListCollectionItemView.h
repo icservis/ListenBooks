@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "Book.h"
 
-@interface ListCollectionItemView : NSView
+@interface ListCollectionItemView : NSView <NSAlertDelegate>
 
 @property (weak) IBOutlet NSImageView *imageView;
 @property (weak) IBOutlet NSTextField *titleField;
@@ -17,5 +17,11 @@
 @property (weak) IBOutlet NSBox *boxView;
 
 @property (strong) Book* book;
+
+- (IBAction)copy:(id)sender;
+- (IBAction)paste:(id)sender;
+- (IBAction)cut:(id)sender;
+- (IBAction)delete:(id)sender;
+- (IBAction)selectAll:(id)sender;
 
 @end

@@ -9,7 +9,8 @@
 #import "AppDelegate.h"
 #import "ListController.h"
 #import "Book.h"
-#import "BooksArrayController.h"
+#import "BooksTreeController.h"
+#import "ListArrayController.h"
 
 @implementation ListController
 
@@ -44,19 +45,27 @@
     DDLogVerbose(@"selectAll");
 }
 
+- (void)open
+{
+    AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
+    Book* selectedObject = [[self.listArrayController selectedObjects] firstObject];
+    [self.booksTreeController setSelectedObject:selectedObject];
+    [appDelegate selectBookViewController:nil];
+}
+
 - (void)deleteItems
 {
     AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
     
-    [[self.booksArrayController selectedObjects] enumerateObjectsUsingBlock:^(Book* book, NSUInteger idx, BOOL *stop) {
+    [[self.listArrayController selectedObjects] enumerateObjectsUsingBlock:^(Book* book, NSUInteger idx, BOOL *stop) {
         
         [appDelegate unlinkBookWithUrl:book.fileUrl];
         
     }];
     
-    [self.booksArrayController remove:self];
+    [self.listArrayController remove:self];
     
-    DDLogVerbose(@"count: %ld", (long)[[self.booksArrayController arrangedObjects] count]);
+    DDLogVerbose(@"count: %ld", (long)[[self.listArrayController arrangedObjects] count]);
 }
 
 @end

@@ -23,5 +23,11 @@
     return self;
 }
 
+- (IBAction)copy:(id)sender
+{
+    DDLogVerbose(@"copy");
+}
+
+
 
 @end

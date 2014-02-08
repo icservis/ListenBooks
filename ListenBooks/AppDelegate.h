@@ -14,16 +14,17 @@
 @class BooksView;
 @class BookmarksView;
 @class BooksTreeController;
-@class BooksArrayController;
+@class ListArrayController;
 @class BookmarksArrayController;
-@class ListViewController;
 @class BookViewController;
 @class ImageViewController;
+@class ListCollectionView;
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, KFEpubControllerDelegate, NSSplitViewDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
 @property (weak) IBOutlet NSSplitView *splitView;
+@property (weak) IBOutlet NSView *detailView;
 @property (weak) IBOutlet NSView *contentView;
 @property (weak) IBOutlet NSView *inputView;
 @property (weak) IBOutlet KFToolbar *toolBar;
@@ -33,6 +34,7 @@
 @property (weak) IBOutlet NSView *bookmarksSplitPane;
 @property (weak) IBOutlet BookmarksView *bookmarksView;
 @property (weak) IBOutlet BooksView *booksView;
+@property (weak) IBOutlet ListCollectionView *listCollectionView;
 
 @property (unsafe_unretained) IBOutlet NSPanel *progressWindow;
 @property (weak) IBOutlet NSProgressIndicator *progressIndicatior;
@@ -46,9 +48,8 @@
 
 @property (strong) IBOutlet BooksTreeController *booksTreeController;
 @property (strong) IBOutlet BookmarksArrayController *bookmarksArrayController;
-@property (strong) IBOutlet BooksArrayController *booksArrayController;
+@property (strong) IBOutlet ListArrayController *listArrayController;
 
-@property (strong, nonatomic) IBOutlet ListViewController *listViewController;
 @property (strong, nonatomic) IBOutlet BookViewController *bookViewController;
 @property (strong, nonatomic) IBOutlet ImageViewController *imageViewController;
 
@@ -64,8 +65,8 @@
 
 - (IBAction)saveAction:(id)sender;
 - (IBAction)selectBookViewController:(id)sender;
-- (IBAction)selectListViewController:(id)sender;
 - (IBAction)selectImageViewController:(id)sender;
+- (IBAction)removeDetailController:(id)sender;
 
 
 @end

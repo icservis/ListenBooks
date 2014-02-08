@@ -77,9 +77,9 @@
                                 <connections>
                                     <binding destination="DpZ-2J-lt8" name="content" keyPath="arrangedObjects" id="OG8-CS-DlD"/>
                                     <binding destination="DpZ-2J-lt8" name="selectionIndexes" keyPath="selectionIndexes" previousBinding="OG8-CS-DlD" id="I38-DQ-ibC"/>
-                                    <outlet property="booksArrayController" destination="DpZ-2J-lt8" id="Ebs-Ht-puT"/>
                                     <outlet property="delegate" destination="V29-eB-nrn" id="XFt-jx-mNi"/>
                                     <outlet property="itemPrototype" destination="9eH-qb-fOc" id="pza-KC-dgb"/>
+                                    <outlet property="listArrayController" destination="DpZ-2J-lt8" id="ibh-6R-NA3"/>
                                 </connections>
                             </collectionView>
                         </subviews>
@@ -106,7 +106,7 @@
         </customView>
         <customObject id="03C-bK-GQY" customClass="AppDelegate"/>
         <customObject id="V29-eB-nrn" customClass="ListCollectionController"/>
-        <arrayController mode="entity" entityName="Book" fetchPredicateFormat="isLeaf == YES" automaticallyPreparesContent="YES" id="DpZ-2J-lt8" customClass="BooksArrayController">
+        <arrayController mode="entity" entityName="Book" fetchPredicateFormat="isLeaf == YES" automaticallyPreparesContent="YES" id="DpZ-2J-lt8" customClass="ListArrayController">
             <connections>
                 <binding destination="03C-bK-GQY" name="managedObjectContext" keyPath="self.managedObjectContext" id="9F4-ZR-Afr"/>
             </connections>

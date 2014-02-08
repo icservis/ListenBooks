@@ -9,14 +9,14 @@
 #import <Cocoa/Cocoa.h>
 
 @class BookViewController;
-@class ListViewController;
-@class BooksArrayController;
+@class BooksTreeController;
+@class ListArrayController;
 
 @interface ListController : NSObject <NSCollectionViewDelegate, NSMenuDelegate>
 
-@property (unsafe_unretained) IBOutlet ListViewController* listViewController;
 @property (unsafe_unretained) IBOutlet BookViewController* bookViewController;
-@property (unsafe_unretained) IBOutlet BooksArrayController* booksArrayController;
+@property (unsafe_unretained) IBOutlet BooksTreeController* booksTreeController;
+@property (unsafe_unretained) IBOutlet ListArrayController* listArrayController;
 
 - (void)copy;
 - (void)paste;
@@ -25,5 +25,6 @@
 - (void)edit;
 - (void)selectAll;
 - (void)deleteItems;
+- (void)open;
 
 @end

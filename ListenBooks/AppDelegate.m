@@ -28,7 +28,6 @@ static CGFloat const bookmarksPaneMinHeight = 17;
 @synthesize epubController = _epubController;
 @synthesize importedUrls = _importedUrls;
 
-@synthesize listViewController = _listViewController;
 @synthesize bookViewController = _bookViewController;
 @synthesize imageViewController = _imageViewController;
 
@@ -67,14 +66,6 @@ static CGFloat const bookmarksPaneMinHeight = 17;
     return _dateFormatter;
 }
 
-- (ListViewController*)listViewController
-{
-    if (_listViewController == nil) {
-        _listViewController = [[ListViewController alloc] initWithNibName:@"ListViewController" bundle:nil];
-    }
-    return _listViewController;
-}
-
 - (BookViewController*)bookViewController
 {
     if (_bookViewController == nil) {
@@ -94,28 +85,21 @@ static CGFloat const bookmarksPaneMinHeight = 17;
 
 #pragma mark - SubViews
 
-- (void)removeSubViewsFromContentView
-{
-    [[self.contentView subviews] enumerateObjectsUsingBlock:^(NSView* subView, NSUInteger idx, BOOL *stop) {
-        [subView removeFromSuperview];
-    }];
-}
-
 - (void)setupContentViewConstraintsForSubView:(NSView*)subView
 {
     [subView setTranslatesAutoresizingMaskIntoConstraints:NO];
     
-    NSLayoutConstraint *constraintLeading = [NSLayoutConstraint constraintWithItem:subView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeading multiplier:1.0f constant:0.0f];
-    [self.contentView addConstraint:constraintLeading];
+    NSLayoutConstraint *constraintLeading = [NSLayoutConstraint constraintWithItem:subView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.detailView attribute:NSLayoutAttributeLeading multiplier:1.0f constant:0.0f];
+    [self.detailView addConstraint:constraintLeading];
     
-    NSLayoutConstraint *constraintTrailing = [NSLayoutConstraint constraintWithItem:subView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTrailing multiplier:1.0f constant:0.0f];
-    [self.contentView addConstraint:constraintTrailing];
+    NSLayoutConstraint *constraintTrailing = [NSLayoutConstraint constraintWithItem:subView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.detailView attribute:NSLayoutAttributeTrailing multiplier:1.0f constant:0.0f];
+    [self.detailView addConstraint:constraintTrailing];
     
-    NSLayoutConstraint *constraintTop = [NSLayoutConstraint constraintWithItem:subView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTop multiplier:1.0f constant:0.0f];
-    [self.contentView addConstraint:constraintTop];
+    NSLayoutConstraint *constraintTop = [NSLayoutConstraint constraintWithItem:subView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.detailView attribute:NSLayoutAttributeTop multiplier:1.0f constant:0.0f];
+    [self.detailView addConstraint:constraintTop];
     
-    NSLayoutConstraint *constraintBottom = [NSLayoutConstraint constraintWithItem:subView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0.0f];
-    [self.contentView addConstraint:constraintBottom];
+    NSLayoutConstraint *constraintBottom = [NSLayoutConstraint constraintWithItem:subView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.detailView attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0.0f];
+    [self.detailView addConstraint:constraintBottom];
     
 }
 
@@ -123,12 +107,10 @@ static CGFloat const bookmarksPaneMinHeight = 17;
 
 - (IBAction)selectBookViewController:(id)sender
 {
-    [self.splitView adjustSubviews];
-    [self.inputView setHidden:NO];
-    [self.splitView setPosition:_inputViewWidth ofDividerAtIndex:0];
+    [self.detailView setHidden:NO];
+    [self.splitView setHidden:YES];
     
-    [self removeSubViewsFromContentView];
-    [self.contentView addSubview:self.bookViewController.view];
+    [self.detailView addSubview:self.bookViewController.view];
     [self setupContentViewConstraintsForSubView:self.bookViewController.view];
     KFToolbarItem *bookItem = self.toolBar.rightItems[0];
     bookItem.state = NSOnState;
@@ -136,26 +118,24 @@ static CGFloat const bookmarksPaneMinHeight = 17;
     listItem.state = NSOffState;
 }
 
-- (IBAction)selectListViewController:(id)sender
+- (IBAction)selectImageViewController:(id)sender
 {
-    [self.splitView adjustSubviews];
-    [self.inputView setHidden:YES];
-    [self.splitView setPosition:0 ofDividerAtIndex:0];
+    [self.detailView setHidden:NO];
+    [self.splitView setHidden:YES];
     
-    [self removeSubViewsFromContentView];
-    [self.contentView addSubview:self.listViewController.view];
-    [self setupContentViewConstraintsForSubView:self.listViewController.view];
+    [self.detailView addSubview:self.imageViewController.view];
+    [self setupContentViewConstraintsForSubView:self.imageViewController.view];
+}
+
+- (IBAction)removeDetailController:(id)sender
+{
+    [self.detailView setHidden:YES];
+    [self.splitView setHidden:NO];
+    
     KFToolbarItem *bookItem = self.toolBar.rightItems[0];
     bookItem.state = NSOffState;
     KFToolbarItem *listItem = self.toolBar.rightItems[1];
     listItem.state = NSOnState;
-}
-
-- (IBAction)selectImageViewController:(id)sender
-{
-    [self removeSubViewsFromContentView];
-    [self.contentView addSubview:self.imageViewController.view];
-    [self setupContentViewConstraintsForSubView:self.imageViewController.view];
 }
 
 - (IBAction)toggleBookMarksPane:(id)sender
@@ -212,7 +192,7 @@ static CGFloat const bookmarksPaneMinHeight = 17;
     self.toolBar.leftItems = @[addItem, actionItem, bookmarksItem];
     self.toolBar.rightItems = @[bookItem, listItem];
     
-    [self selectBookViewController:bookItem];
+    [self removeDetailController:listItem];
     
     [self.toolBar setItemSelectionHandler:^(KFToolbarItemSelectionType selectionType, KFToolbarItem *toolbarItem, NSUInteger tag)
      {
@@ -227,11 +207,11 @@ static CGFloat const bookmarksPaneMinHeight = 17;
                  break;
                  
              case 2:
-                 //[self toggleBookMarksPane:bookmarksItem];
+                 [self toggleBookMarksPane:bookmarksItem];
                  break;
                  
              case 3:
-                 [self selectListViewController:listItem];
+                 [self removeDetailController:listItem];
                  break;
                  
              case 4:

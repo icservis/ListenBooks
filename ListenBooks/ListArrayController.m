@@ -7,13 +7,13 @@
 //
 
 #import "AppDelegate.h"
-#import "BooksArrayController.h"
+#import "ListArrayController.h"
 #import "Book.h"
 #import "BookViewController.h"
-#import "ListViewController.h"
+#import "ListController.h"
 #import "NSArrayController_Extensions.h"
 
-@implementation BooksArrayController
+@implementation ListArrayController
 
 - (void)awakeFromNib
 {

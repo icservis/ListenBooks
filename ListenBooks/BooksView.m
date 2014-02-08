@@ -74,7 +74,7 @@
 
 - (void)doubleClick:(id)object
 {
-    [self.booksController edit];
+    [self.booksController open];
 }
 
 - (void)selectAll:(id)sender

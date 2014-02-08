@@ -48,6 +48,12 @@
     DDLogVerbose(@"selectAll");
 }
 
+- (void)open
+{
+    AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
+    [appDelegate selectBookViewController:nil];
+}
+
 - (void)deleteItems
 {
     AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];

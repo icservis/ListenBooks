@@ -8,8 +8,9 @@
 
 #import "AppDelegate.h"
 #import "Book.h"
-#import "BooksArrayController.h"
+#import "ListArrayController.h"
 #import "BooksTreeController.h"
+#import "ListController.h"
 #import "ListCollectionView.h"
 #import "ListCollectionViewItem.h"
 #import "ListCollectionItemView.h"
@@ -50,26 +51,19 @@
 
 - (void)itemSelected:(ListCollectionItemView*)item
 {
-    //DDLogVerbose(@"item: %@, selection: %@", [item description], [self.selectionIndexes description]);
+
 }
 
 - (void)itemDoubleClicked:(ListCollectionItemView*)item
 {
-    //DDLogVerbose(@"item: %@, indexes: %@", [item description], [self.selectionIndexes description]);
-    
     if ([self.selectionIndexes count] == 1) {
-        AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
-        Book* selectedObject = [[self.booksArrayController selectedObjects] firstObject];
-        
-        for (NSTreeNode *node in [appDelegate.booksTreeController flattenedNodes]) {
-            Book* object = [node representedObject];
-            if ([object.fileUrl isEqualTo:selectedObject.fileUrl]) {
-                [appDelegate.booksTreeController setSelectedObject:object];
-                [appDelegate selectBookViewController:nil];
-                break;
-            }
-        }
+        [self.listController open];
     }
+}
+
+- (void)itemDeleted:(ListCollectionItemView*)item
+{
+    [self.listController deleteItems];
 }
 
 @end

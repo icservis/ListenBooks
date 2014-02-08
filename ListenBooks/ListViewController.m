@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ListViewController.h"
-#import "BooksArrayController.h"
+#import "ListArrayController.h"
 #import "BooksTreeController.h"
 #import "ListCollectionView.h"
 
@@ -33,8 +33,8 @@
 
     AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
     
-    [self.listCollectionView bind:NSContentBinding toObject:appDelegate.booksArrayController withKeyPath:@"arrangedObjects" options:nil];
-    [self.listCollectionView bind:NSSelectionIndexesBinding toObject:appDelegate.booksArrayController withKeyPath:@"selectionIndexes" options:nil];
+    [self.listCollectionView bind:NSContentBinding toObject:appDelegate.listArrayController withKeyPath:@"arrangedObjects" options:nil];
+    [self.listCollectionView bind:NSSelectionIndexesBinding toObject:appDelegate.listArrayController withKeyPath:@"selectionIndexes" options:nil];
     //NSDictionary* filterOptions = [[NSDictionary alloc] initWithObjectsAndKeys:@"self.title contains[cd] $value", NSPredicateFormatBindingOption, @"predicate", NSDisplayNameBindingOption, nil];
     //[self.searchField bind:NSFilterPredicateBinding toObject:appDelegate.booksArrayController withKeyPath:@"selection" options:filterOptions];
     

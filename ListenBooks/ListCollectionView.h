@@ -8,14 +8,15 @@
 
 #import <Cocoa/Cocoa.h>
 
-@class BooksArrayController;
+@class ListController;
 @class ListCollectionItemView;
 
 @interface ListCollectionView : NSCollectionView
 
-@property (strong) IBOutlet BooksArrayController* booksArrayController;
+@property (unsafe_unretained) IBOutlet ListController* listController;
 
 - (void)itemSelected:(ListCollectionItemView*)item;
 - (void)itemDoubleClicked:(ListCollectionItemView*)item;
+- (void)itemDeleted:(ListCollectionItemView*)item;
 
 @end
