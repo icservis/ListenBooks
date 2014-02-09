@@ -18,6 +18,8 @@ static NSString* const TextSizeDidChangeNotificaton = @"TEXT_SIZE_DID_CHANGE_NOT
 @interface BookViewController : NSViewController <NSPageControllerDelegate, KFEpubControllerDelegate>
 
 @property (strong) Book* book;
+@property (strong, nonatomic) NSManagedObjectContext* managedObjectContext;
+@property (strong) NSTabViewItem* tabViewItem;
 
 @property (weak) IBOutlet NSView *toolBarView;
 @property (weak) IBOutlet NSTextField *titleField;

@@ -11,5 +11,7 @@
 @interface ImageViewController : NSViewController <NSPageControllerDelegate>
 
 @property (strong) IBOutlet NSPageController *pageController;
+@property (strong, nonatomic) NSManagedObjectContext* managedObjectContext;
+@property (strong) NSTabViewItem* tabViewItem;
 
 @end

@@ -61,7 +61,13 @@
 - (void)open
 {
     AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
-    [appDelegate selectBookViewController:nil];
+    
+    [[self.booksTreeController selectedObjects] enumerateObjectsUsingBlock:^(Book* book, NSUInteger idx, BOOL *stop) {
+        if (book.fileUrl != nil) {
+            [appDelegate addNewTabWithBook:book];
+        }
+        
+    }];
     [appDelegate.listArrayController setSelectedObjects:[self.booksTreeController selectedObjects]];
 }
 
@@ -192,15 +198,13 @@
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification
 {
     [self.bookmarksArrayController rearrangeObjects];
-    
+    /*
     NSUInteger currentIndex = [self.booksView selectedRow];
     NSTreeNode* currentNode = [self.booksView itemAtRow:currentIndex];
     Book* currentBook = [currentNode representedObject];
     
     AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
-    if ([appDelegate.importedUrls count] == 0 && currentBook != nil && ![currentBook isEqual:appDelegate.bookViewController.book]) {
-        appDelegate.bookViewController.book = currentBook;
-    }
+   */
 }
 
 

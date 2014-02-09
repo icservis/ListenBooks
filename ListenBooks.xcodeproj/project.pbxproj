@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8416258118A827CE00C42723 /* TabBarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8416258018A827CE00C42723 /* TabBarModel.m */; };
+		8416258518A828B700C42723 /* AppDelegate+TabBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8416258418A828B700C42723 /* AppDelegate+TabBarView.m */; };
 		842A12211865DC0E00AAAD42 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 842A121F1865DC0E00AAAD42 /* ImageViewController.m */; };
 		842A12221865DC0E00AAAD42 /* ImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842A12201865DC0E00AAAD42 /* ImageViewController.xib */; };
 		8444EA93185F83A400F90B48 /* KFToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8444EA90185F83A400F90B48 /* KFToolbar.m */; };
@@ -108,6 +110,7 @@
 		84DA8DB218A7640C0079BD7C /* InformationWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DA8DB018A7640C0079BD7C /* InformationWindowController.m */; };
 		84DA8DB318A7640C0079BD7C /* InformationWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84DA8DB118A7640C0079BD7C /* InformationWindowController.xib */; };
 		84DA8DB918A76D540079BD7C /* BlockAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DA8DB818A76D540079BD7C /* BlockAlert.m */; };
+		84DA8DC218A77A560079BD7C /* MMTabBarView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84DA8DC118A77A450079BD7C /* MMTabBarView.framework */; };
 		84DD96091864B29A00B9BD5A /* BookPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD96071864B29A00B9BD5A /* BookPageViewController.m */; };
 		84DD960A1864B29A00B9BD5A /* BookPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84DD96081864B29A00B9BD5A /* BookPageViewController.xib */; };
 		84DD96101865B8A900B9BD5A /* AutoSizingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD960F1865B8A900B9BD5A /* AutoSizingTextView.m */; };
@@ -147,9 +150,20 @@
 			remoteGlobalIDString = 8478C414185CA74000B06779;
 			remoteInfo = ListenBooksImporter;
 		};
+		84DA8DC018A77A450079BD7C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84DA8DBC18A77A450079BD7C /* MMTabBarView.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 06DB23A61609F5830071BDA0;
+			remoteInfo = MMTabBarView;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8416257F18A827CE00C42723 /* TabBarModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarModel.h; sourceTree = "<group>"; };
+		8416258018A827CE00C42723 /* TabBarModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarModel.m; sourceTree = "<group>"; };
+		8416258318A828B700C42723 /* AppDelegate+TabBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+TabBarView.h"; sourceTree = "<group>"; };
+		8416258418A828B700C42723 /* AppDelegate+TabBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+TabBarView.m"; sourceTree = "<group>"; };
 		842A121E1865DC0E00AAAD42 /* ImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewController.h; sourceTree = "<group>"; };
 		842A121F1865DC0E00AAAD42 /* ImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
 		842A12201865DC0E00AAAD42 /* ImageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageViewController.xib; sourceTree = "<group>"; };
@@ -305,6 +319,7 @@
 		84DA8DB118A7640C0079BD7C /* InformationWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InformationWindowController.xib; sourceTree = "<group>"; };
 		84DA8DB718A76D540079BD7C /* BlockAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockAlert.h; sourceTree = "<group>"; };
 		84DA8DB818A76D540079BD7C /* BlockAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockAlert.m; sourceTree = "<group>"; };
+		84DA8DBC18A77A450079BD7C /* MMTabBarView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MMTabBarView.xcodeproj; path = Vendor/MMTabBarView/MMTabBarView/MMTabBarView.xcodeproj; sourceTree = "<group>"; };
 		84DD96061864B29A00B9BD5A /* BookPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookPageViewController.h; sourceTree = "<group>"; };
 		84DD96071864B29A00B9BD5A /* BookPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookPageViewController.m; sourceTree = "<group>"; };
 		84DD96081864B29A00B9BD5A /* BookPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookPageViewController.xib; sourceTree = "<group>"; };
@@ -341,6 +356,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84DA8DC218A77A560079BD7C /* MMTabBarView.framework in Frameworks */,
 				8444EAD2185F8D2300F90B48 /* libz.dylib in Frameworks */,
 				8444EAD0185F847500F90B48 /* libxml2.dylib in Frameworks */,
 				8478C3E3185CA73F00B06779 /* Cocoa.framework in Frameworks */,
@@ -496,6 +512,7 @@
 		8478C3D6185CA73F00B06779 = {
 			isa = PBXGroup;
 			children = (
+				84DA8DBC18A77A450079BD7C /* MMTabBarView.xcodeproj */,
 				8478C3E8185CA73F00B06779 /* ListenBooks */,
 				8478C409185CA74000B06779 /* ListenBooksTests */,
 				8478C421185CA74000B06779 /* ListenBooksImporter */,
@@ -848,6 +865,14 @@
 			name = Alerts;
 			sourceTree = "<group>";
 		};
+		84DA8DBD18A77A450079BD7C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				84DA8DC118A77A450079BD7C /* MMTabBarView.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		84DD96441865C99200B9BD5A /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -883,6 +908,8 @@
 				848C95A21866489D0020FDC9 /* Book.m */,
 				848C959D1866489C0020FDC9 /* Bookmark.h */,
 				848C959E1866489C0020FDC9 /* Bookmark.m */,
+				8416257F18A827CE00C42723 /* TabBarModel.h */,
+				8416258018A827CE00C42723 /* TabBarModel.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -902,6 +929,8 @@
 			children = (
 				8478C3F4185CA73F00B06779 /* AppDelegate.h */,
 				8478C3F5185CA73F00B06779 /* AppDelegate.m */,
+				8416258318A828B700C42723 /* AppDelegate+TabBarView.h */,
+				8416258418A828B700C42723 /* AppDelegate+TabBarView.m */,
 				84AB04AD1868733B007106F4 /* Lumberjack.h */,
 				8478C3FA185CA73F00B06779 /* ListenBooks.xcdatamodeld */,
 				8478C43B185CA80200B06779 /* ListenBooks.entitlements */,
@@ -1007,6 +1036,12 @@
 			mainGroup = 8478C3D6185CA73F00B06779;
 			productRefGroup = 8478C3E0185CA73F00B06779 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 84DA8DBD18A77A450079BD7C /* Products */;
+					ProjectRef = 84DA8DBC18A77A450079BD7C /* MMTabBarView.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				8478C3DE185CA73F00B06779 /* ListenBooks */,
@@ -1015,6 +1050,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		84DA8DC118A77A450079BD7C /* MMTabBarView.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = MMTabBarView.framework;
+			remoteRef = 84DA8DC018A77A450079BD7C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		8478C3DD185CA73F00B06779 /* Resources */ = {
@@ -1108,8 +1153,10 @@
 				848C9585186647240020FDC9 /* ArrayCountIsZero.m in Sources */,
 				848C95A31866489D0020FDC9 /* Book.m in Sources */,
 				84AB042A186871DD007106F4 /* DDTTYLogger.m in Sources */,
+				8416258118A827CE00C42723 /* TabBarModel.m in Sources */,
 				8444EA93185F83A400F90B48 /* KFToolbar.m in Sources */,
 				848C956A186647010020FDC9 /* NSArray_Extensions.m in Sources */,
+				8416258518A828B700C42723 /* AppDelegate+TabBarView.m in Sources */,
 				8444EAB5185F840800F90B48 /* ioapi.c in Sources */,
 				848C956E186647010020FDC9 /* NSDate+Extensions.m in Sources */,
 				8444EACC185F841700F90B48 /* DDXMLDocument.m in Sources */,

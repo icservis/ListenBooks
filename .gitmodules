@@ -19,3 +19,6 @@
 [submodule "Vendor/Libraries"]
 	path = Vendor/Libraries
 	url = https://github.com/icservis/Libraries.git
+[submodule "Vendor/MMTabBarView"]
+	path = Vendor/MMTabBarView
+	url = https://github.com/MiMo42/MMTabBarView.git

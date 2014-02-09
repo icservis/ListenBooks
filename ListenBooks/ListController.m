@@ -56,9 +56,10 @@
 - (void)open
 {
     AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
-    Book* selectedObject = [[self.listArrayController selectedObjects] firstObject];
-    [self.booksTreeController setSelectedObject:selectedObject];
-    [appDelegate selectBookViewController:nil];
+    [[self.listArrayController selectedObjects] enumerateObjectsUsingBlock:^(Book* book, NSUInteger idx, BOOL *stop) {
+        [appDelegate addNewTabWithBook:book];
+    }];
+    [self.booksTreeController setSelectedObject:[self.listArrayController selectedObjects]];
 }
 
 - (void)information

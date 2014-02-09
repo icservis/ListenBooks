@@ -16,6 +16,8 @@
 		<string>https://github.com/icservis/Libraries.git</string>
 		<key>35DCDBCB-98F8-437D-88CE-193AD837EF3D</key>
 		<string>https://github.com/andyapps/ListenBooks.git</string>
+		<key>3EF4CE35-15CC-4DB9-AD35-6E6E61034449</key>
+		<string>https://github.com/MiMo42/MMTabBarView.git</string>
 		<key>5719B9E6-BC59-49BF-B43F-3E81366AAF4E</key>
 		<string>https://github.com/soffes/ssziparchive.git</string>
 		<key>80080660-E6CB-4B4F-8864-BC7C36A7AF73</key>
@@ -35,6 +37,8 @@
 		<string>../../Vendor/Libraries</string>
 		<key>35DCDBCB-98F8-437D-88CE-193AD837EF3D</key>
 		<string>../..</string>
+		<key>3EF4CE35-15CC-4DB9-AD35-6E6E61034449</key>
+		<string>../../Vendor/MMTabBarView</string>
 		<key>5719B9E6-BC59-49BF-B43F-3E81366AAF4E</key>
 		<string>../../Vendor/ssziparchive</string>
 		<key>80080660-E6CB-4B4F-8864-BC7C36A7AF73</key>
@@ -99,6 +103,14 @@
 			<string>35DCDBCB-98F8-437D-88CE-193AD837EF3D</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ListenBooks</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>3EF4CE35-15CC-4DB9-AD35-6E6E61034449</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MMTabBarView</string>
 		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>

@@ -9,7 +9,10 @@
 #import <Cocoa/Cocoa.h>
 #import "KFEpubController.h"
 #import "KFEpubContentModel.h"
+#import <MMTabBarView/MMTabBarView.h>
+#import "TabBarModel.h"
 
+@class Book;
 @class KFToolbar;
 @class BooksView;
 @class BookmarksView;
@@ -20,21 +23,28 @@
 @class ImageViewController;
 @class ListCollectionView;
 
-@interface AppDelegate : NSObject <NSApplicationDelegate, KFEpubControllerDelegate, NSSplitViewDelegate>
+extern NSString* const UpdateWebViewControllerNotification;
+
+@interface AppDelegate : NSObject <NSApplicationDelegate, KFEpubControllerDelegate, NSSplitViewDelegate, MMTabBarViewDelegate, NSTabViewDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
+@property (weak) IBOutlet MMTabBarView *tabBar;
+@property (nonatomic, strong) NSMutableArray* tabViewControllers;
+@property (weak) IBOutlet NSTabView *tabView;
 @property (weak) IBOutlet NSSplitView *splitView;
-@property (weak) IBOutlet NSView *detailView;
 @property (weak) IBOutlet NSView *contentView;
 @property (weak) IBOutlet NSView *inputView;
 @property (weak) IBOutlet KFToolbar *toolBar;
 @property (weak) IBOutlet NSMenu *actionMenu;
+@property (weak) IBOutlet NSMenuItem *menuItemCloseTab;
+@property (weak) IBOutlet NSMenuItem *menuItemNewTab;
 @property (weak) IBOutlet NSSplitView *subSplitView;
 @property (weak) IBOutlet NSView *sourceSplitPane;
 @property (weak) IBOutlet NSView *bookmarksSplitPane;
 @property (weak) IBOutlet BookmarksView *bookmarksView;
 @property (weak) IBOutlet BooksView *booksView;
 @property (weak) IBOutlet ListCollectionView *listCollectionView;
+@property (weak) IBOutlet NSTextField *tabField;
 
 @property (unsafe_unretained) IBOutlet NSPanel *progressWindow;
 @property (weak) IBOutlet NSProgressIndicator *progressIndicatior;
@@ -50,9 +60,6 @@
 @property (strong) IBOutlet BookmarksArrayController *bookmarksArrayController;
 @property (strong) IBOutlet ListArrayController *listArrayController;
 
-@property (strong, nonatomic) IBOutlet BookViewController *bookViewController;
-@property (strong, nonatomic) IBOutlet ImageViewController *imageViewController;
-
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
@@ -62,11 +69,11 @@
 - (NSArray*)allowedFileTypes;
 - (IBAction)openImportDialog:(id)sender;
 - (void)unlinkBookWithUrl:(NSURL*)sandboxedFileUrl;
-
+- (void)addNewTabWithBook:(Book*)book;
+- (IBAction)addNewTab:(id)sender;
+- (IBAction)closeTab:(id)sender;
 - (IBAction)saveAction:(id)sender;
-- (IBAction)selectBookViewController:(id)sender;
-- (IBAction)selectImageViewController:(id)sender;
-- (IBAction)removeDetailController:(id)sender;
+
 
 
 @end

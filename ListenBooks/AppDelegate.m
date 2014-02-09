@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "AppDelegate+TabBarView.h"
 #import "KFToolbar.h"
 #import "KFToolbarItem.h"
 
@@ -17,7 +18,7 @@
 #import "BooksTreeController.h"
 #import "BookmarksArrayController.h"
 
-static CGFloat const bookmarksPaneMinHeight = 17;
+NSString* const UpdateWebViewControllerNotification = @"UPDATE_TABVIEWCONTROLLER_NOTIFICATION";
 
 @implementation AppDelegate {
     CGFloat _inputViewWidth;
@@ -27,9 +28,7 @@ static CGFloat const bookmarksPaneMinHeight = 17;
 @synthesize dateFormatter = _dateFormatter;
 @synthesize epubController = _epubController;
 @synthesize importedUrls = _importedUrls;
-
-@synthesize bookViewController = _bookViewController;
-@synthesize imageViewController = _imageViewController;
+@synthesize tabViewControllers = _tabViewControllers;
 
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 @synthesize managedObjectModel = _managedObjectModel;
@@ -43,6 +42,7 @@ static CGFloat const bookmarksPaneMinHeight = 17;
 	[DDLog addLogger:[DDTTYLogger sharedInstance]];
     
     [self setupToolBar];
+    [self setupTabBar];
 }
 
 #pragma mark - Setters
@@ -66,77 +66,122 @@ static CGFloat const bookmarksPaneMinHeight = 17;
     return _dateFormatter;
 }
 
-- (BookViewController*)bookViewController
+- (NSMutableArray*)tabViewControllers
 {
-    if (_bookViewController == nil) {
-        _bookViewController = [[BookViewController alloc] initWithNibName:@"BookViewController" bundle:nil];
+    if (_tabViewControllers == nil) {
+        _tabViewControllers = [NSMutableArray array];
     }
-    return _bookViewController;
+    return _tabViewControllers;
 }
 
-- (ImageViewController*)imageViewController
+#pragma mark - NSWindowDelegate
+
+- (void)windowWillClose:(NSNotification *)notification
 {
-    if (_imageViewController == nil) {
-        _imageViewController = [[ImageViewController alloc] initWithNibName:@"ImageViewController" bundle:nil];
+    DDLogVerbose(@"windowWillClose: %@", [notification.object description]);
+    if ([notification.object isEqualTo:self.window]) {
+        [self.tabViewControllers removeAllObjects];
+        [NSApp stopModal];
     }
-    return _imageViewController;
+}
+
+- (void)windowDidResignMain:(NSNotification *)notification
+{
+    DDLogVerbose(@"windowDidResignMain: %@", [notification.object description]);
+}
+
+#pragma mark - TabView Controller
+
+- (void)setupTabBar
+{
+    DDLogVerbose(@"setupTabBar");
+    
+    [self.menuItemCloseTab setEnabled:NO];
+    [self.tabBar setStyleNamed:@"Safari"];
+    [self.tabBar setShowAddTabButton:YES];
+    [self.tabBar setHideForSingleTab:YES];
+}
+
+- (IBAction)addNewTab:(id)sender {
+    static NSInteger counter = 1;
+    [self addNewTabWithTitle:[NSString stringWithFormat:@"%@ %ld", NSLocalizedString(@"New Image", nil), (long)counter++]];
+}
+
+- (void)addNewTabWithTitle:(NSString *)aTitle {
+    
+	TabBarModel *newModel = [[TabBarModel alloc] init];
+    [newModel setTitle:aTitle];
+	NSTabViewItem *newItem = [[NSTabViewItem alloc] initWithIdentifier:newModel];
+    
+    ImageViewController* imageViewController = [[ImageViewController alloc] initWithNibName:@"ImageViewController" bundle:nil];;
+    [self.tabViewControllers addObject:imageViewController];
+    imageViewController.managedObjectContext = self.managedObjectContext;
+    imageViewController.tabViewItem = newItem;
+    NSView* mainView = [imageViewController view];
+    [newItem setView:mainView];
+	[self.tabView addTabViewItem:newItem];
+    [self.tabView selectTabViewItem:newItem];
+}
+
+- (void)addNewTabWithBook:(Book*)book
+{
+    TabBarModel *newModel = [[TabBarModel alloc] init];
+    [newModel setTitle:book.title];
+	NSTabViewItem *newItem = [[NSTabViewItem alloc] initWithIdentifier:newModel];
+    
+    BookViewController* bookViewController = [[BookViewController alloc] initWithNibName:@"BookViewController" bundle:nil];
+    [self.tabViewControllers addObject:bookViewController];
+    bookViewController.managedObjectContext = self.managedObjectContext;
+    bookViewController.tabViewItem = newItem;
+    NSView* mainView = [bookViewController view];
+    [newItem setView:mainView];
+	[self.tabView addTabViewItem:newItem];
+    [self.tabView selectTabViewItem:newItem];
+    bookViewController.book = book;
 }
 
 
-#pragma mark - SubViews
+- (IBAction)closeTab:(id)sender {
+    
+    NSTabViewItem *tabViewItem = [self.tabView selectedTabViewItem];
+    
+    if (([self.tabBar delegate]) && ([[self.tabBar delegate] respondsToSelector:@selector(tabView:shouldCloseTabViewItem:)])) {
+        if (![[self.tabBar delegate] tabView:self.tabView shouldCloseTabViewItem:tabViewItem]) {
+            return;
+        }
+    }
+    
+    if (([self.tabBar delegate]) && ([[self.tabBar delegate] respondsToSelector:@selector(tabView:willCloseTabViewItem:)])) {
+        [[self.tabBar delegate] tabView:self.tabView willCloseTabViewItem:tabViewItem];
+    }
+    
+    NSUInteger index = [[self.tabView tabViewItems] indexOfObject:tabViewItem] - 1;
+    [self.tabViewControllers removeObjectAtIndex:index];
+    [self.tabView removeTabViewItem:tabViewItem];
+    
+    if (([self.tabBar delegate]) && ([[self.tabBar delegate] respondsToSelector:@selector(tabView:didCloseTabViewItem:)])) {
+        [[self.tabBar delegate] tabView:self.tabView didCloseTabViewItem:tabViewItem];
+    }
+}
 
-- (void)setupContentViewConstraintsForSubView:(NSView*)subView
+
+#pragma mark - NSMenu Delegate
+
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
-    [subView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    
-    NSLayoutConstraint *constraintLeading = [NSLayoutConstraint constraintWithItem:subView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.detailView attribute:NSLayoutAttributeLeading multiplier:1.0f constant:0.0f];
-    [self.detailView addConstraint:constraintLeading];
-    
-    NSLayoutConstraint *constraintTrailing = [NSLayoutConstraint constraintWithItem:subView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.detailView attribute:NSLayoutAttributeTrailing multiplier:1.0f constant:0.0f];
-    [self.detailView addConstraint:constraintTrailing];
-    
-    NSLayoutConstraint *constraintTop = [NSLayoutConstraint constraintWithItem:subView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.detailView attribute:NSLayoutAttributeTop multiplier:1.0f constant:0.0f];
-    [self.detailView addConstraint:constraintTop];
-    
-    NSLayoutConstraint *constraintBottom = [NSLayoutConstraint constraintWithItem:subView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.detailView attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0.0f];
-    [self.detailView addConstraint:constraintBottom];
-    
+    DDLogVerbose(@"validateMenuItem: %@ - %d", menuItem.title, [menuItem isEnabled]);
+    return [menuItem isEnabled];
+}
+
+#pragma mark - NSToolbarItem Delegate
+
+-(BOOL)validateToolbarItem:(NSToolbarItem *)toolbarItem
+{
+    DDLogVerbose(@"validateToolbarItem: %@", [toolbarItem label]);
+    return [toolbarItem isEnabled];
 }
 
 #pragma mark - Target Action
-
-- (IBAction)selectBookViewController:(id)sender
-{
-    [self.detailView setHidden:NO];
-    [self.splitView setHidden:YES];
-    
-    [self.detailView addSubview:self.bookViewController.view];
-    [self setupContentViewConstraintsForSubView:self.bookViewController.view];
-    KFToolbarItem *bookItem = self.toolBar.rightItems[0];
-    bookItem.state = NSOnState;
-    KFToolbarItem *listItem = self.toolBar.rightItems[1];
-    listItem.state = NSOffState;
-}
-
-- (IBAction)selectImageViewController:(id)sender
-{
-    [self.detailView setHidden:NO];
-    [self.splitView setHidden:YES];
-    
-    [self.detailView addSubview:self.imageViewController.view];
-    [self setupContentViewConstraintsForSubView:self.imageViewController.view];
-}
-
-- (IBAction)removeDetailController:(id)sender
-{
-    [self.detailView setHidden:YES];
-    [self.splitView setHidden:NO];
-    
-    KFToolbarItem *bookItem = self.toolBar.rightItems[0];
-    bookItem.state = NSOffState;
-    KFToolbarItem *listItem = self.toolBar.rightItems[1];
-    listItem.state = NSOnState;
-}
 
 - (IBAction)toggleBookMarksPane:(id)sender
 {
@@ -192,7 +237,6 @@ static CGFloat const bookmarksPaneMinHeight = 17;
     self.toolBar.leftItems = @[addItem, actionItem, bookmarksItem];
     self.toolBar.rightItems = @[bookItem, listItem];
     
-    [self removeDetailController:listItem];
     
     [self.toolBar setItemSelectionHandler:^(KFToolbarItemSelectionType selectionType, KFToolbarItem *toolbarItem, NSUInteger tag)
      {
@@ -211,11 +255,10 @@ static CGFloat const bookmarksPaneMinHeight = 17;
                  break;
                  
              case 3:
-                 [self removeDetailController:listItem];
+                 
                  break;
                  
              case 4:
-                 [self selectBookViewController:bookItem];
                  break;
                  
              default:
