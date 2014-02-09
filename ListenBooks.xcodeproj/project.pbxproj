@@ -537,9 +537,9 @@
 			isa = PBXGroup;
 			children = (
 				84E27E80186249F200317411 /* Application */,
-				84E27E7E186249DA00317411 /* Models */,
-				84E27E7D186249D100317411 /* Views */,
-				84E27E8118624B3800317411 /* Controllers */,
+				847A006218702B8B00039910 /* MainWindow */,
+				84E27E7D186249D100317411 /* BookView */,
+				84E27E8118624B3800317411 /* ImageView */,
 				848C95781866470A0020FDC9 /* Transformers */,
 				848C955B186646E50020FDC9 /* Categories Extensions */,
 				84E27E7F186249E400317411 /* Resources */,
@@ -601,7 +601,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		847A005C18702AE900039910 /* App */ = {
+		847A005C18702AE900039910 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				848C953E18663FD00020FDC9 /* BooksTreeController.h */,
@@ -619,19 +619,19 @@
 				84722BDF186DDDB600FA7973 /* ListCollectionViewItem.h */,
 				84722BE0186DDDB600FA7973 /* ListCollectionViewItem.m */,
 			);
-			name = App;
+			name = Controllers;
 			sourceTree = "<group>";
 		};
-		847A005E18702AFA00039910 /* Image */ = {
+		847A005E18702AFA00039910 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				842A121E1865DC0E00AAAD42 /* ImageViewController.h */,
 				842A121F1865DC0E00AAAD42 /* ImageViewController.m */,
 			);
-			name = Image;
+			name = Controllers;
 			sourceTree = "<group>";
 		};
-		847A005F18702B2100039910 /* Book */ = {
+		847A005F18702B2100039910 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				84E27E9618624D6000317411 /* BookViewController.xib */,
@@ -639,10 +639,10 @@
 				84DD960E1865B8A900B9BD5A /* AutoSizingTextView.h */,
 				84DD960F1865B8A900B9BD5A /* AutoSizingTextView.m */,
 			);
-			name = Book;
+			name = Views;
 			sourceTree = "<group>";
 		};
-		847A006118702B5900039910 /* Image */ = {
+		847A006118702B5900039910 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				842A12201865DC0E00AAAD42 /* ImageViewController.xib */,
@@ -650,23 +650,17 @@
 				84DD96471865CA0E00B9BD5A /* AutoSizingImageView.h */,
 				84DD96481865CA0E00B9BD5A /* AutoSizingImageView.m */,
 			);
-			name = Image;
+			name = Views;
 			sourceTree = "<group>";
 		};
-		847A006218702B8B00039910 /* App */ = {
+		847A006218702B8B00039910 /* MainWindow */ = {
 			isa = PBXGroup;
 			children = (
-				8478C3F7185CA73F00B06779 /* MainMenu.xib */,
-				84E27E7A1862466F00317411 /* BooksView.h */,
-				84E27E7B1862466F00317411 /* BooksView.m */,
-				84E27E771862465600317411 /* BookmarksView.h */,
-				84E27E781862465600317411 /* BookmarksView.m */,
-				84E27EA01863010800317411 /* ListCollectionView.h */,
-				84E27EA11863010800317411 /* ListCollectionView.m */,
-				84722BDC186DD76200FA7973 /* ListCollectionItemView.h */,
-				84722BDD186DD76200FA7973 /* ListCollectionItemView.m */,
+				84E27E7E186249DA00317411 /* Models */,
+				847A005C18702AE900039910 /* Controllers */,
+				84DA8DAE18A75D780079BD7C /* Views */,
 			);
-			name = App;
+			name = MainWindow;
 			sourceTree = "<group>";
 		};
 		848C955B186646E50020FDC9 /* Categories Extensions */ = {
@@ -790,7 +784,7 @@
 			path = LumberJackFormatter;
 			sourceTree = "<group>";
 		};
-		84DA8DAB18A688AD0079BD7C /* Book */ = {
+		84DA8DAB18A688AD0079BD7C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				84E27E9418624D6000317411 /* BookViewController.h */,
@@ -798,7 +792,23 @@
 				84DD96061864B29A00B9BD5A /* BookPageViewController.h */,
 				84DD96071864B29A00B9BD5A /* BookPageViewController.m */,
 			);
-			name = Book;
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		84DA8DAE18A75D780079BD7C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8478C3F7185CA73F00B06779 /* MainMenu.xib */,
+				84E27E7A1862466F00317411 /* BooksView.h */,
+				84E27E7B1862466F00317411 /* BooksView.m */,
+				84E27E771862465600317411 /* BookmarksView.h */,
+				84E27E781862465600317411 /* BookmarksView.m */,
+				84E27EA01863010800317411 /* ListCollectionView.h */,
+				84E27EA11863010800317411 /* ListCollectionView.m */,
+				84722BDC186DD76200FA7973 /* ListCollectionItemView.h */,
+				84722BDD186DD76200FA7973 /* ListCollectionItemView.m */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		84DD96441865C99200B9BD5A /* Images */ = {
@@ -820,20 +830,18 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
-		84E27E7D186249D100317411 /* Views */ = {
+		84E27E7D186249D100317411 /* BookView */ = {
 			isa = PBXGroup;
 			children = (
-				847A006218702B8B00039910 /* App */,
-				847A005F18702B2100039910 /* Book */,
-				847A006118702B5900039910 /* Image */,
+				84DA8DAB18A688AD0079BD7C /* Controllers */,
+				847A005F18702B2100039910 /* Views */,
 			);
-			name = Views;
+			name = BookView;
 			sourceTree = "<group>";
 		};
 		84E27E7E186249DA00317411 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				8478C3FA185CA73F00B06779 /* ListenBooks.xcdatamodeld */,
 				848C95A11866489D0020FDC9 /* Book.h */,
 				848C95A21866489D0020FDC9 /* Book.m */,
 				848C959D1866489C0020FDC9 /* Bookmark.h */,
@@ -858,19 +866,19 @@
 				8478C3F4185CA73F00B06779 /* AppDelegate.h */,
 				8478C3F5185CA73F00B06779 /* AppDelegate.m */,
 				84AB04AD1868733B007106F4 /* Lumberjack.h */,
+				8478C3FA185CA73F00B06779 /* ListenBooks.xcdatamodeld */,
 				8478C43B185CA80200B06779 /* ListenBooks.entitlements */,
 			);
 			name = Application;
 			sourceTree = "<group>";
 		};
-		84E27E8118624B3800317411 /* Controllers */ = {
+		84E27E8118624B3800317411 /* ImageView */ = {
 			isa = PBXGroup;
 			children = (
-				847A005C18702AE900039910 /* App */,
-				84DA8DAB18A688AD0079BD7C /* Book */,
-				847A005E18702AFA00039910 /* Image */,
+				847A005E18702AFA00039910 /* Controllers */,
+				847A006118702B5900039910 /* Views */,
 			);
-			name = Controllers;
+			name = ImageView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
