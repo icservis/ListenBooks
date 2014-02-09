@@ -13,7 +13,7 @@
 @class BooksTreeController;
 @class BookmarksArrayController;
 
-@interface BooksController : NSObject <NSOutlineViewDelegate, NSAlertDelegate>
+@interface BooksController : NSObject <NSOutlineViewDelegate>
 
 @property (weak) IBOutlet BooksView *booksView;
 @property (unsafe_unretained) IBOutlet BookViewController* bookViewController;

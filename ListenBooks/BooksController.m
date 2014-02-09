@@ -17,6 +17,7 @@
 #import "ListArrayController.h"
 #import "NSArrayController_Extensions.h"
 #import "InformationWindowController.h"
+#import "BlockAlert.h"
 
 @implementation BooksController
 
@@ -38,7 +39,13 @@
 - (void)delete
 {
     DDLogVerbose(@"delete");
-    [self deleteAlert];
+    BlockAlert* alert = [[BlockAlert alloc] initWithStyle:NSWarningAlertStyle buttonTitles:@[NSLocalizedString(@"Delete", nil), NSLocalizedString(@"Cancel", nil)] messageText:NSLocalizedString(@"Do you really want to delete this item(s)?", nil) alternativeText:NSLocalizedString(@"Deleting an item cannot be undone.", nil)];
+    __weak BlockAlert* weakAlert = alert;
+    weakAlert.completionBlock = ^(NSInteger returnCode) {
+        if (returnCode ==  NSAlertFirstButtonReturn) {
+            [self deleteItems];
+        };
+    };
 }
 
 - (void)edit
@@ -91,29 +98,6 @@
     DDLogVerbose(@"count: %ld", (long)[[self.booksTreeController arrangedObjects] count]);
     if ([[self.booksTreeController arrangedObjects] count] == 0) {
         [self.bookViewController resetPageView];
-    }
-}
-
-#pragma mark - NSAlertViewDelegate
-
-- (void)deleteAlert
-{
-    NSAlert *alert = [[NSAlert alloc] init];
-    [alert addButtonWithTitle:NSLocalizedString(@"Delete", nil)];
-    [alert addButtonWithTitle:NSLocalizedString(@"Cancel", nil)];
-    [alert setMessageText:NSLocalizedString(@"Do you really want to delete this item(s)?", nil)];
-    [alert setInformativeText:NSLocalizedString(@"Deleting an item cannot be undone.", nil)];
-    [alert setAlertStyle:NSWarningAlertStyle];
-    [alert setDelegate:self];
-    [alert beginSheetModalForWindow:[[NSApplication sharedApplication] mainWindow] modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
-}
-
--(void)alertDidEnd:(NSAlert*)alert returnCode:(NSInteger)returnCode contextInfo:(void*)contextInfo
-{
-    if (returnCode ==  NSAlertFirstButtonReturn)
-    {
-        [self deleteItems];
-        
     }
 }
 

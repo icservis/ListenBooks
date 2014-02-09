@@ -107,6 +107,7 @@
 		84DA8DAA18A686A50079BD7C /* ListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DA8DA918A686A50079BD7C /* ListController.m */; };
 		84DA8DB218A7640C0079BD7C /* InformationWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DA8DB018A7640C0079BD7C /* InformationWindowController.m */; };
 		84DA8DB318A7640C0079BD7C /* InformationWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84DA8DB118A7640C0079BD7C /* InformationWindowController.xib */; };
+		84DA8DB918A76D540079BD7C /* BlockAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DA8DB818A76D540079BD7C /* BlockAlert.m */; };
 		84DD96091864B29A00B9BD5A /* BookPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD96071864B29A00B9BD5A /* BookPageViewController.m */; };
 		84DD960A1864B29A00B9BD5A /* BookPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84DD96081864B29A00B9BD5A /* BookPageViewController.xib */; };
 		84DD96101865B8A900B9BD5A /* AutoSizingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD960F1865B8A900B9BD5A /* AutoSizingTextView.m */; };
@@ -302,6 +303,8 @@
 		84DA8DAF18A7640C0079BD7C /* InformationWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationWindowController.h; sourceTree = "<group>"; };
 		84DA8DB018A7640C0079BD7C /* InformationWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationWindowController.m; sourceTree = "<group>"; };
 		84DA8DB118A7640C0079BD7C /* InformationWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InformationWindowController.xib; sourceTree = "<group>"; };
+		84DA8DB718A76D540079BD7C /* BlockAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockAlert.h; sourceTree = "<group>"; };
+		84DA8DB818A76D540079BD7C /* BlockAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockAlert.m; sourceTree = "<group>"; };
 		84DD96061864B29A00B9BD5A /* BookPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookPageViewController.h; sourceTree = "<group>"; };
 		84DD96071864B29A00B9BD5A /* BookPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookPageViewController.m; sourceTree = "<group>"; };
 		84DD96081864B29A00B9BD5A /* BookPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookPageViewController.xib; sourceTree = "<group>"; };
@@ -546,8 +549,7 @@
 				84E27E7D186249D100317411 /* BookView */,
 				84E27E8118624B3800317411 /* ImageView */,
 				84DA8DB418A764140079BD7C /* InfoWindow */,
-				848C95781866470A0020FDC9 /* Transformers */,
-				848C955B186646E50020FDC9 /* Categories Extensions */,
+				84DA8DB518A76D060079BD7C /* Classes */,
 				84E27E7F186249E400317411 /* Resources */,
 				8478C3E9185CA73F00B06779 /* Supporting Files */,
 			);
@@ -827,6 +829,25 @@
 			name = InfoWindow;
 			sourceTree = "<group>";
 		};
+		84DA8DB518A76D060079BD7C /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				84DA8DB618A76D180079BD7C /* Alerts */,
+				848C955B186646E50020FDC9 /* Categories Extensions */,
+				848C95781866470A0020FDC9 /* Transformers */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		84DA8DB618A76D180079BD7C /* Alerts */ = {
+			isa = PBXGroup;
+			children = (
+				84DA8DB718A76D540079BD7C /* BlockAlert.h */,
+				84DA8DB818A76D540079BD7C /* BlockAlert.m */,
+			);
+			name = Alerts;
+			sourceTree = "<group>";
+		};
 		84DD96441865C99200B9BD5A /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -1092,6 +1113,7 @@
 				8444EAB5185F840800F90B48 /* ioapi.c in Sources */,
 				848C956E186647010020FDC9 /* NSDate+Extensions.m in Sources */,
 				8444EACC185F841700F90B48 /* DDXMLDocument.m in Sources */,
+				84DA8DB918A76D540079BD7C /* BlockAlert.m in Sources */,
 				8444EAA3185F83D900F90B48 /* KFEpubContentModel.m in Sources */,
 				84DA8DAA18A686A50079BD7C /* ListController.m in Sources */,
 				8444EAB7185F840800F90B48 /* unzip.c in Sources */,
