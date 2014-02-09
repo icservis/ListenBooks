@@ -14,6 +14,9 @@
 #import "BooksTreeController.h"
 #import "BookmarksArrayController.h"
 #import "BookViewController.h"
+#import "ListArrayController.h"
+#import "NSArrayController_Extensions.h"
+#import "InformationWindowController.h"
 
 @implementation BooksController
 
@@ -52,6 +55,21 @@
 {
     AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
     [appDelegate selectBookViewController:nil];
+    [appDelegate.listArrayController setSelectedObjects:[self.booksTreeController selectedObjects]];
+}
+
+- (void)information
+{
+    DDLogVerbose(@"information");
+    
+    InformationWindowController* infoWindowController = [[InformationWindowController alloc] initWithWindowNibName:@"InformationWindowController"];
+    __weak InformationWindowController* weakInfoWindowController = infoWindowController;
+    Book* selectedBook = (Book*)[[[self.booksTreeController selectedNodes] firstObject] representedObject];
+    weakInfoWindowController.book = selectedBook;
+    weakInfoWindowController.completionBlock = ^(BOOL success) {
+        [infoWindowController.window close];
+    };
+    [weakInfoWindowController.window makeKeyAndOrderFront:self];
 }
 
 - (void)deleteItems

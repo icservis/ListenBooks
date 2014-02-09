@@ -72,4 +72,10 @@
 }
  */
 
+- (IBAction)information:(id)sender
+{
+    [self.booksController information];
+}
+
+
 @end

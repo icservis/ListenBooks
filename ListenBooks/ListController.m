@@ -11,6 +11,7 @@
 #import "Book.h"
 #import "BooksTreeController.h"
 #import "ListArrayController.h"
+#import "InformationWindowController.h"
 
 @implementation ListController
 
@@ -51,6 +52,20 @@
     Book* selectedObject = [[self.listArrayController selectedObjects] firstObject];
     [self.booksTreeController setSelectedObject:selectedObject];
     [appDelegate selectBookViewController:nil];
+}
+
+- (void)information
+{
+    DDLogVerbose(@"information");
+    
+    InformationWindowController* infoWindowController = [[InformationWindowController alloc] initWithWindowNibName:@"InformationWindowController"];
+    __weak InformationWindowController* weakInfoWindowController = infoWindowController;
+    Book* selectedBook = (Book*)[[self.listArrayController selectedObjects] firstObject];
+    weakInfoWindowController.book = selectedBook;
+    weakInfoWindowController.completionBlock = ^(BOOL success) {
+        [infoWindowController.window close];
+    };
+    [weakInfoWindowController.window makeKeyAndOrderFront:self];
 }
 
 - (void)deleteItems

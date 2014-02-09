@@ -26,5 +26,6 @@
 - (IBAction)delete:(id)sender;
 //- (IBAction)selectAll:(id)sender;
 - (IBAction)open:(id)sender;
+- (IBAction)information:(id)sender;
 
 @end

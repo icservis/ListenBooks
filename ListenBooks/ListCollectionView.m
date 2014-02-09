@@ -103,4 +103,9 @@
     [self.listController open];
 }
 
+- (IBAction)information:(id)sender
+{
+    [self.listController information];
+}
+
 @end

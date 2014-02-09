@@ -23,5 +23,6 @@
 - (IBAction)edit:(id)sender;
 - (IBAction)open:(id)sender;
 //- (IBAction)selectAll:(id)sender;
+- (IBAction)information:(id)sender;
 
 @end
