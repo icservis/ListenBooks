@@ -88,11 +88,23 @@
 - (void)deleteItems
 {
     AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
+    __block NSMutableArray* tabViewItemsToBeClosed = [NSMutableArray new];
     
     [[self.booksTreeController selectedNodes] enumerateObjectsUsingBlock:^(NSTreeNode* node, NSUInteger idx, BOOL *stop) {
         
         Book* book = [node representedObject];
         [appDelegate unlinkBookWithUrl:book.fileUrl];
+        
+        ;
+        [[appDelegate tabViewControllers] enumerateObjectsUsingBlock:^(NSViewController* controller, NSUInteger idx, BOOL *stop) {
+            if ([controller isKindOfClass:[BookViewController class]]) {
+                BookViewController* bookViewController = (BookViewController*)controller;
+                if ([bookViewController.book isEqualTo:book]) {
+                    DDLogVerbose(@"bookViewController found: %@", bookViewController);
+                    [tabViewItemsToBeClosed addObject:bookViewController.tabViewItem];
+                }
+            }
+        }];
         
         NSArray* childIndexPaths = [node childIndexPaths];
         [self.booksTreeController removeObjectsAtArrangedObjectIndexPaths:childIndexPaths];
@@ -100,11 +112,12 @@
     }];
     
     [self.booksTreeController remove:self];
-    
     DDLogVerbose(@"count: %ld", (long)[[self.booksTreeController arrangedObjects] count]);
-    if ([[self.booksTreeController arrangedObjects] count] == 0) {
-        [self.bookViewController resetPageView];
-    }
+    
+    DDLogVerbose(@"tabViewItemsToBeClosed available: %@", tabViewItemsToBeClosed);
+    [tabViewItemsToBeClosed enumerateObjectsUsingBlock:^(NSTabViewItem* tabViewItem, NSUInteger idx, BOOL *stop) {
+        [appDelegate closeTabWithItem:tabViewItem];
+    }];
 }
 
 #pragma mark - NSOutlineView Delegate Methods

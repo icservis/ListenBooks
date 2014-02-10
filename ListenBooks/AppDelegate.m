@@ -78,7 +78,6 @@ NSString* const UpdateWebViewControllerNotification = @"UPDATE_TABVIEWCONTROLLER
 
 - (void)windowWillClose:(NSNotification *)notification
 {
-    DDLogVerbose(@"windowWillClose: %@", [notification.object description]);
     if ([notification.object isEqualTo:self.window]) {
         [self.tabViewControllers removeAllObjects];
         [NSApp stopModal];
@@ -164,6 +163,27 @@ NSString* const UpdateWebViewControllerNotification = @"UPDATE_TABVIEWCONTROLLER
     }
 }
 
+- (void)closeTabWithItem:(NSTabViewItem*)tabViewItem
+{
+    if (([self.tabBar delegate]) && ([[self.tabBar delegate] respondsToSelector:@selector(tabView:shouldCloseTabViewItem:)])) {
+        if (![[self.tabBar delegate] tabView:self.tabView shouldCloseTabViewItem:tabViewItem]) {
+            return;
+        }
+    }
+    
+    if (([self.tabBar delegate]) && ([[self.tabBar delegate] respondsToSelector:@selector(tabView:willCloseTabViewItem:)])) {
+        [[self.tabBar delegate] tabView:self.tabView willCloseTabViewItem:tabViewItem];
+    }
+    
+    NSUInteger index = [[self.tabView tabViewItems] indexOfObject:tabViewItem] - 1;
+    [self.tabViewControllers removeObjectAtIndex:index];
+    [self.tabView removeTabViewItem:tabViewItem];
+    
+    if (([self.tabBar delegate]) && ([[self.tabBar delegate] respondsToSelector:@selector(tabView:didCloseTabViewItem:)])) {
+        [[self.tabBar delegate] tabView:self.tabView didCloseTabViewItem:tabViewItem];
+    }
+}
+
 
 #pragma mark - NSMenu Delegate
 
@@ -185,32 +205,41 @@ NSString* const UpdateWebViewControllerNotification = @"UPDATE_TABVIEWCONTROLLER
 
 - (IBAction)toggleBookMarksPane:(id)sender
 {
-    DDLogVerbose(@"_bookmarksSplitPaneHeight: %.0f",_bookmarksSplitPaneHeight);
+    DDLogVerbose(@"_bookmarksSplitPaneHeight: %.0f, %f",_bookmarksSplitPaneHeight, self.splitView.frame.size.height);
     [self.subSplitView adjustSubviews];
-    if ([self checkBookmarksPane]) {
+    if ([self.subSplitView isSubviewCollapsed:self.bookmarksSplitPane]) {
         DDLogVerbose(@"Open");
-        //[self.bookmarksSplitPane setHidden:YES];
-        [self.subSplitView setPosition:bookmarksPaneMinHeight ofDividerAtIndex:0];
+        [self.subSplitView setPosition:self.subSplitView.frame.size.height-_bookmarksSplitPaneHeight ofDividerAtIndex:0];
     } else {
         DDLogVerbose(@"Close");
-        //[self.bookmarksSplitPane setHidden:NO];
-        [self.subSplitView setPosition:_bookmarksSplitPaneHeight ofDividerAtIndex:0];
+        [self.subSplitView setPosition:self.subSplitView.frame.size.height ofDividerAtIndex:0];
     }
 }
 
-- (BOOL)checkBookmarksPane
+- (void)selectListCoverFlowView:(id)sender
 {
-    if (self.bookmarksSplitPane.frame.size.height > bookmarksPaneMinHeight) {
-        return YES;
-    } else {
-        return NO;
-    }
+    DDLogVerbose(@"sender: %@", sender);
+    KFToolbarItem *listCollectionItem = self.toolBar.rightItems[0];
+    listCollectionItem.state = NSOffState;
+    KFToolbarItem *listCoverFlowItem = self.toolBar.rightItems[1];
+    listCoverFlowItem.state = NSOnState;
+}
+
+- (void)selectListCollectionView:(id)sender
+{
+    DDLogVerbose(@"sender: %@", sender);
+    KFToolbarItem *listCollectionItem = self.toolBar.rightItems[0];
+    listCollectionItem.state = NSOnState;
+    KFToolbarItem *listCoverFlowItem = self.toolBar.rightItems[1];
+    listCoverFlowItem.state = NSOffState;
 }
 
 #pragma mark - KFToolBar
 
 - (void)setupToolBar
 {
+    DDLogVerbose(@"setupToolBar");
+    
     KFToolbarItem *addItem = [KFToolbarItem toolbarItemWithIcon:[NSImage imageNamed:NSImageNameAddTemplate] tag:0];
     addItem.toolTip = @"Add";
     addItem.keyEquivalent = @"q";
@@ -222,21 +251,22 @@ NSString* const UpdateWebViewControllerNotification = @"UPDATE_TABVIEWCONTROLLER
     
     KFToolbarItem *bookmarksItem = [KFToolbarItem toolbarItemWithType:NSToggleButton icon:[NSImage imageNamed:NSImageNameBookmarksTemplate] tag:2];
     bookmarksItem.toolTip = @"Bookmarks";
-    if ([self checkBookmarksPane]) {
-        bookmarksItem.state = NSOnState;
-    } else {
+    if ([self.subSplitView isSubviewCollapsed:self.bookmarksSplitPane]) {
         bookmarksItem.state = NSOffState;
+    } else {
+        bookmarksItem.state = NSOnState;
     }
     
-    KFToolbarItem *listItem = [KFToolbarItem toolbarItemWithType:NSToggleButton icon:[NSImage imageNamed:NSImageNameIconViewTemplate] tag:3];
-    listItem.toolTip = @"List";
+    KFToolbarItem *listCoverFlowItem = [KFToolbarItem toolbarItemWithType:NSToggleButton icon:[NSImage imageNamed:NSImageNameFlowViewTemplate] tag:3];
+    listCoverFlowItem.toolTip = @"CoverFlow";
     
-    KFToolbarItem *bookItem = [KFToolbarItem toolbarItemWithType:NSToggleButton icon:[NSImage imageNamed:NSImageNameFlowViewTemplate] tag:4];
-    bookItem.toolTip = @"View";
+    KFToolbarItem *listCollectionItem = [KFToolbarItem toolbarItemWithType:NSToggleButton icon:[NSImage imageNamed:NSImageNameIconViewTemplate] tag:4];
+    listCollectionItem.toolTip = @"Collection";
     
     self.toolBar.leftItems = @[addItem, actionItem, bookmarksItem];
-    self.toolBar.rightItems = @[bookItem, listItem];
+    self.toolBar.rightItems = @[listCollectionItem, listCoverFlowItem];
     
+    [self selectListCollectionView:listCollectionItem];
     
     [self.toolBar setItemSelectionHandler:^(KFToolbarItemSelectionType selectionType, KFToolbarItem *toolbarItem, NSUInteger tag)
      {
@@ -255,10 +285,11 @@ NSString* const UpdateWebViewControllerNotification = @"UPDATE_TABVIEWCONTROLLER
                  break;
                  
              case 3:
-                 
+                 [self selectListCoverFlowView:listCoverFlowItem];
                  break;
                  
              case 4:
+                 [self selectListCollectionView:listCollectionItem];
                  break;
                  
              default:
@@ -397,13 +428,14 @@ NSString* const UpdateWebViewControllerNotification = @"UPDATE_TABVIEWCONTROLLER
     if ([splitView isEqualTo:self.subSplitView]) {
         CGFloat height = self.bookmarksSplitPane.frame.size.height;
         KFToolbarItem *bookmarksItem = self.toolBar.leftItems[2];
-        //DDLogVerbose(@"height: %.0f, splitView.frame.size.height: %.0f", height, splitView.frame.size.height);
+        DDLogVerbose(@"height: %.0f, splitView.frame.size.height: %.0f", height, splitView.frame.size.height);
         if (height > bookmarksPaneMinHeight) {
             _bookmarksSplitPaneHeight = height;
             bookmarksItem.state = NSOnState;
         } else {
             bookmarksItem.state = NSOffState;
         }
+        DDLogVerbose(@"_bookmarksSplitPaneHeight: %.0f", _bookmarksSplitPaneHeight);
     }
 }
 

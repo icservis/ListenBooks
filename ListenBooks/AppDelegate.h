@@ -72,6 +72,7 @@ extern NSString* const UpdateWebViewControllerNotification;
 - (void)addNewTabWithBook:(Book*)book;
 - (IBAction)addNewTab:(id)sender;
 - (IBAction)closeTab:(id)sender;
+- (void)closeTabWithItem:(NSTabViewItem*)tabViewItem;
 - (IBAction)saveAction:(id)sender;
 
 
