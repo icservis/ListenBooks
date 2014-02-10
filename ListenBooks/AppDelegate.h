@@ -43,7 +43,7 @@ extern NSString* const UpdateWebViewControllerNotification;
 @property (weak) IBOutlet NSView *bookmarksSplitPane;
 @property (weak) IBOutlet BookmarksView *bookmarksView;
 @property (weak) IBOutlet BooksView *booksView;
-@property (weak) IBOutlet ListCollectionView *listCollectionView;
+@property (weak) IBOutlet NSScrollView *listCollectionView;
 @property (weak) IBOutlet NSTextField *tabField;
 
 @property (unsafe_unretained) IBOutlet NSPanel *progressWindow;

@@ -219,6 +219,8 @@ NSString* const UpdateWebViewControllerNotification = @"UPDATE_TABVIEWCONTROLLER
 - (void)selectListCoverFlowView:(id)sender
 {
     DDLogVerbose(@"sender: %@", sender);
+    
+    [self.listCollectionView setHidden:YES];
     KFToolbarItem *listCollectionItem = self.toolBar.rightItems[0];
     listCollectionItem.state = NSOffState;
     KFToolbarItem *listCoverFlowItem = self.toolBar.rightItems[1];
@@ -228,6 +230,8 @@ NSString* const UpdateWebViewControllerNotification = @"UPDATE_TABVIEWCONTROLLER
 - (void)selectListCollectionView:(id)sender
 {
     DDLogVerbose(@"sender: %@", sender);
+    
+    [self.listCollectionView setHidden:NO];
     KFToolbarItem *listCollectionItem = self.toolBar.rightItems[0];
     listCollectionItem.state = NSOnState;
     KFToolbarItem *listCoverFlowItem = self.toolBar.rightItems[1];

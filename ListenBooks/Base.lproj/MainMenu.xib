@@ -1036,7 +1036,7 @@ CA
                 <outlet property="contentView" destination="f24-Jh-WOV" id="y9r-2P-w5O"/>
                 <outlet property="inputView" destination="YUh-kr-OFc" id="wS8-n1-hCT"/>
                 <outlet property="listArrayController" destination="0YC-oF-0f9" id="3rF-hv-LA0"/>
-                <outlet property="listCollectionView" destination="OIY-B8-UiM" id="1ta-OC-LVU"/>
+                <outlet property="listCollectionView" destination="yHv-FM-h9y" id="CnO-NK-JOG"/>
                 <outlet property="menuItemCloseTab" destination="tVW-of-TOE" id="DWK-gD-Xdi"/>
                 <outlet property="menuItemNewTab" destination="MKv-Qh-KAh" id="1TJ-8s-reC"/>
                 <outlet property="progressIndicatior" destination="q2a-FS-yay" id="tTd-lI-fpc"/>
