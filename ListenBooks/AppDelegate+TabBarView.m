@@ -100,7 +100,7 @@
 }
 
 - (void)addNewTabToTabView:(NSTabView *)aTabView {
-    NSLog(@"addNewTabToTabView");
+    DDLogVerbose(@"addNewTabToTabView");
     [self addNewTab:aTabView];
 }
 
@@ -108,26 +108,24 @@
 
 - (void)tabView:(NSTabView *)aTabView willSelectTabViewItem:(NSTabViewItem *)tabViewItem
 {
-    //NSLog(@"tabViewItem: %@", [tabViewItem label]);
+    DDLogVerbose(@"tabViewItem: %@", [tabViewItem label]);
 }
 
 - (void)tabView:(NSTabView *)aTabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem {
 	// need to update bound values to match the selected tab
-    //NSLog(@"tabViewItem: %@", [tabViewItem label]);
+    DDLogVerbose(@"tabViewItem: %@", [tabViewItem label]);
     if ([[tabViewItem identifier] respondsToSelector:@selector(title)]) {
         [self.tabField setStringValue:[[tabViewItem identifier] title]];
     }
     //self.window.title = [[tabViewItem identifier] title];
-    [self saveAction:nil];
-    
-    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-    [notificationCenter postNotificationName:UpdateWebViewControllerNotification object:self];
+    [self updateToolBarContentForTabView:tabViewItem];
 }
 
 - (void)tabViewDidChangeNumberOfTabViewItems:(NSTabView *)tabView
 {
-    //NSLog(@"tabViewDidChangeNumberOfTabViewItems");
     NSUInteger tabsCount = [[tabView tabViewItems] count];
+    DDLogVerbose(@"tabViewDidChangeNumberOfTabViewItems: %lu", (unsigned long)tabsCount);
+    DDLogVerbose(@"tabViewControllers: %@", self.tabViewControllers);
     
     if (tabsCount > 1) {
         [self.menuItemCloseTab setEnabled:YES];
@@ -141,17 +139,18 @@
 }
 
 - (void)tabView:(NSTabView *)aTabView didCloseTabViewItem:(NSTabViewItem *)tabViewItem {
-	//NSLog(@"tabViewItem: %@", [tabViewItem label]);
+	DDLogVerbose(@"tabViewItem: %@", [tabViewItem label]);
 }
 
 - (void)tabView:(NSTabView *)aTabView didDetachTabViewItem:(NSTabViewItem *)tabViewItem
 {
-    //NSLog(@"tabViewItem: %@", [tabViewItem label]);
+    DDLogVerbose(@"tabViewItem: %@", [tabViewItem label]);
+    
 }
 
 - (void)tabView:(NSTabView *)aTabView didMoveTabViewItem:(NSTabViewItem *)tabViewItem toIndex:(NSUInteger)index
 {
-    NSLog(@"tab view did move tab view item %@ to index:%ld",[tabViewItem label],index);
+    DDLogVerbose(@"tab view did move tab view item %@ to index:%ld",[tabViewItem label],index);
 }
 
 - (NSArray *)allowedDraggedTypesForTabView:(NSTabView *)aTabView {
@@ -164,7 +163,7 @@
 }
 
 - (NSMenu *)tabView:(NSTabView *)aTabView menuForTabViewItem:(NSTabViewItem *)tabViewItem {
-	NSLog(@"menuForTabViewItem: %@", [tabViewItem label]);
+	DDLogVerbose(@"menuForTabViewItem: %@", [tabViewItem label]);
 	return nil;
 }
 
@@ -187,7 +186,7 @@
 }
 
 - (void)tabView:(NSTabView*)aTabView didDropTabViewItem:(NSTabViewItem *)tabViewItem inTabBarView:(MMTabBarView *)tabBarView {
-	NSLog(@"didDropTabViewItem: %@ inTabBarView: %@", [tabViewItem label], tabBarView);
+	DDLogVerbose(@"didDropTabViewItem: %@ inTabBarView: %@", [tabViewItem label], tabBarView);
 }
 
 - (NSImage *)tabView:(NSTabView *)aTabView imageForTabViewItem:(NSTabViewItem *)tabViewItem offset:(NSSize *)offset styleMask:(NSUInteger *)styleMask {

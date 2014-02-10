@@ -585,7 +585,7 @@ CA
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <font key="font" metaFont="system"/>
                         <tabViewItems>
-                            <tabViewItem label="Tab" identifier="1" id="3MW-HC-1Hz">
+                            <tabViewItem label="List" identifier="1" id="3MW-HC-1Hz">
                                 <view key="view" id="y2x-Lt-bHk">
                                     <rect key="frame" x="0.0" y="0.0" width="720" height="560"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1036,7 +1036,9 @@ CA
                 <outlet property="contentView" destination="f24-Jh-WOV" id="y9r-2P-w5O"/>
                 <outlet property="inputView" destination="YUh-kr-OFc" id="wS8-n1-hCT"/>
                 <outlet property="listArrayController" destination="0YC-oF-0f9" id="3rF-hv-LA0"/>
-                <outlet property="listCollectionView" destination="yHv-FM-h9y" id="CnO-NK-JOG"/>
+                <outlet property="listCollectionView" destination="OIY-B8-UiM" id="xHv-n4-4Ia"/>
+                <outlet property="listSearchField" destination="K7h-Fx-cdi" id="r5G-62-7EM"/>
+                <outlet property="listToolBarView" destination="nbg-2g-L9E" id="k4O-B8-Nho"/>
                 <outlet property="menuItemCloseTab" destination="tVW-of-TOE" id="DWK-gD-Xdi"/>
                 <outlet property="menuItemNewTab" destination="MKv-Qh-KAh" id="1TJ-8s-reC"/>
                 <outlet property="progressIndicatior" destination="q2a-FS-yay" id="tTd-lI-fpc"/>

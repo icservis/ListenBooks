@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "ListController.h"
 #import "Book.h"
+#import "BookViewController.h"
 #import "BooksTreeController.h"
 #import "ListArrayController.h"
 #import "InformationWindowController.h"
@@ -69,6 +70,8 @@
     InformationWindowController* infoWindowController = [[InformationWindowController alloc] initWithWindowNibName:@"InformationWindowController"];
     __weak InformationWindowController* weakInfoWindowController = infoWindowController;
     Book* selectedBook = (Book*)[[self.listArrayController selectedObjects] firstObject];
+    if (selectedBook == nil) return;
+    
     weakInfoWindowController.book = selectedBook;
     weakInfoWindowController.completionBlock = ^(BOOL success) {
         [infoWindowController.window close];
@@ -79,16 +82,22 @@
 - (void)deleteItems
 {
     AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
-    
     [[self.listArrayController selectedObjects] enumerateObjectsUsingBlock:^(Book* book, NSUInteger idx, BOOL *stop) {
         
         [appDelegate unlinkBookWithUrl:book.fileUrl];
-        
+        [[appDelegate tabViewControllers] enumerateObjectsUsingBlock:^(NSViewController* controller, NSUInteger idx, BOOL *stop) {
+            if ([controller isKindOfClass:[BookViewController class]]) {
+                BookViewController* bookViewController = (BookViewController*)controller;
+                if ([bookViewController.book isEqualTo:book]) {
+                    [appDelegate closeTabWithItem:bookViewController.tabViewItem];
+                }
+            }
+        }];
     }];
     
     [self.listArrayController remove:self];
-    
     DDLogVerbose(@"count: %ld", (long)[[self.listArrayController arrangedObjects] count]);
+    [appDelegate saveAction:nil];
 }
 
 @end

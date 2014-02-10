@@ -41,8 +41,7 @@
 
 - (void)contextDidChange:(NSNotification*)notification
 {
-    AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
-    DDLogVerbose(@"booksArrayController: %@", appDelegate.listArrayController);
+    //AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
 }
 
 - (void)setupBookPageControllerContent:(NSURL*)epubURL

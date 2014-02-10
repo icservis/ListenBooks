@@ -39,6 +39,7 @@
 - (void)delete
 {
     DDLogVerbose(@"delete");
+
     BlockAlert* alert = [[BlockAlert alloc] initWithStyle:NSWarningAlertStyle buttonTitles:@[NSLocalizedString(@"Delete", nil), NSLocalizedString(@"Cancel", nil)] messageText:NSLocalizedString(@"Do you really want to delete this item(s)?", nil) alternativeText:NSLocalizedString(@"Deleting an item cannot be undone.", nil)];
     __weak BlockAlert* weakAlert = alert;
     weakAlert.completionBlock = ^(NSInteger returnCode) {
@@ -78,6 +79,8 @@
     InformationWindowController* infoWindowController = [[InformationWindowController alloc] initWithWindowNibName:@"InformationWindowController"];
     __weak InformationWindowController* weakInfoWindowController = infoWindowController;
     Book* selectedBook = (Book*)[[[self.booksTreeController selectedNodes] firstObject] representedObject];
+    if (selectedBook == nil) return;
+    
     weakInfoWindowController.book = selectedBook;
     weakInfoWindowController.completionBlock = ^(BOOL success) {
         [infoWindowController.window close];
@@ -88,20 +91,16 @@
 - (void)deleteItems
 {
     AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
-    __block NSMutableArray* tabViewItemsToBeClosed = [NSMutableArray new];
-    
     [[self.booksTreeController selectedNodes] enumerateObjectsUsingBlock:^(NSTreeNode* node, NSUInteger idx, BOOL *stop) {
         
         Book* book = [node representedObject];
         [appDelegate unlinkBookWithUrl:book.fileUrl];
         
-        ;
         [[appDelegate tabViewControllers] enumerateObjectsUsingBlock:^(NSViewController* controller, NSUInteger idx, BOOL *stop) {
             if ([controller isKindOfClass:[BookViewController class]]) {
                 BookViewController* bookViewController = (BookViewController*)controller;
                 if ([bookViewController.book isEqualTo:book]) {
-                    DDLogVerbose(@"bookViewController found: %@", bookViewController);
-                    [tabViewItemsToBeClosed addObject:bookViewController.tabViewItem];
+                    [appDelegate closeTabWithItem:bookViewController.tabViewItem];
                 }
             }
         }];
@@ -113,11 +112,7 @@
     
     [self.booksTreeController remove:self];
     DDLogVerbose(@"count: %ld", (long)[[self.booksTreeController arrangedObjects] count]);
-    
-    DDLogVerbose(@"tabViewItemsToBeClosed available: %@", tabViewItemsToBeClosed);
-    [tabViewItemsToBeClosed enumerateObjectsUsingBlock:^(NSTabViewItem* tabViewItem, NSUInteger idx, BOOL *stop) {
-        [appDelegate closeTabWithItem:tabViewItem];
-    }];
+    [appDelegate saveAction:nil];
 }
 
 #pragma mark - NSOutlineView Delegate Methods

@@ -10,6 +10,9 @@
 #import "AppDelegate+TabBarView.h"
 #import "KFToolbar.h"
 #import "KFToolbarItem.h"
+#import <MMTabBarView/MMTabBarView.h>
+#import <MMTabBarView/MMTabStyle.h>
+#import "TabBarControllerProtocol.h"
 
 #import "ListViewController.h"
 #import "BookViewController.h"
@@ -17,8 +20,6 @@
 
 #import "BooksTreeController.h"
 #import "BookmarksArrayController.h"
-
-NSString* const UpdateWebViewControllerNotification = @"UPDATE_TABVIEWCONTROLLER_NOTIFICATION";
 
 @implementation AppDelegate {
     CGFloat _inputViewWidth;
@@ -93,7 +94,7 @@ NSString* const UpdateWebViewControllerNotification = @"UPDATE_TABVIEWCONTROLLER
 
 - (void)setupTabBar
 {
-    DDLogVerbose(@"setupTabBar");
+    DDLogDebug(@"setupTabBar");
     
     [self.menuItemCloseTab setEnabled:NO];
     [self.tabBar setStyleNamed:@"Safari"];
@@ -106,8 +107,8 @@ NSString* const UpdateWebViewControllerNotification = @"UPDATE_TABVIEWCONTROLLER
     [self addNewTabWithTitle:[NSString stringWithFormat:@"%@ %ld", NSLocalizedString(@"New Image", nil), (long)counter++]];
 }
 
-- (void)addNewTabWithTitle:(NSString *)aTitle {
-    
+- (void)addNewTabWithTitle:(NSString *)aTitle
+{
 	TabBarModel *newModel = [[TabBarModel alloc] init];
     [newModel setTitle:aTitle];
 	NSTabViewItem *newItem = [[NSTabViewItem alloc] initWithIdentifier:newModel];
@@ -116,6 +117,7 @@ NSString* const UpdateWebViewControllerNotification = @"UPDATE_TABVIEWCONTROLLER
     [self.tabViewControllers addObject:imageViewController];
     imageViewController.managedObjectContext = self.managedObjectContext;
     imageViewController.tabViewItem = newItem;
+    
     NSView* mainView = [imageViewController view];
     [newItem setView:mainView];
 	[self.tabView addTabViewItem:newItem];
@@ -132,39 +134,26 @@ NSString* const UpdateWebViewControllerNotification = @"UPDATE_TABVIEWCONTROLLER
     [self.tabViewControllers addObject:bookViewController];
     bookViewController.managedObjectContext = self.managedObjectContext;
     bookViewController.tabViewItem = newItem;
+    bookViewController.book = book;
+    
     NSView* mainView = [bookViewController view];
     [newItem setView:mainView];
 	[self.tabView addTabViewItem:newItem];
     [self.tabView selectTabViewItem:newItem];
-    bookViewController.book = book;
+    
 }
 
 
-- (IBAction)closeTab:(id)sender {
-    
+- (IBAction)closeTab:(id)sender
+{
     NSTabViewItem *tabViewItem = [self.tabView selectedTabViewItem];
-    
-    if (([self.tabBar delegate]) && ([[self.tabBar delegate] respondsToSelector:@selector(tabView:shouldCloseTabViewItem:)])) {
-        if (![[self.tabBar delegate] tabView:self.tabView shouldCloseTabViewItem:tabViewItem]) {
-            return;
-        }
-    }
-    
-    if (([self.tabBar delegate]) && ([[self.tabBar delegate] respondsToSelector:@selector(tabView:willCloseTabViewItem:)])) {
-        [[self.tabBar delegate] tabView:self.tabView willCloseTabViewItem:tabViewItem];
-    }
-    
-    NSUInteger index = [[self.tabView tabViewItems] indexOfObject:tabViewItem] - 1;
-    [self.tabViewControllers removeObjectAtIndex:index];
-    [self.tabView removeTabViewItem:tabViewItem];
-    
-    if (([self.tabBar delegate]) && ([[self.tabBar delegate] respondsToSelector:@selector(tabView:didCloseTabViewItem:)])) {
-        [[self.tabBar delegate] tabView:self.tabView didCloseTabViewItem:tabViewItem];
-    }
+    [self closeTabWithItem:tabViewItem];
 }
 
 - (void)closeTabWithItem:(NSTabViewItem*)tabViewItem
 {
+    DDLogVerbose(@"tabViewItem: %@", tabViewItem);
+    
     if (([self.tabBar delegate]) && ([[self.tabBar delegate] respondsToSelector:@selector(tabView:shouldCloseTabViewItem:)])) {
         if (![[self.tabBar delegate] tabView:self.tabView shouldCloseTabViewItem:tabViewItem]) {
             return;
@@ -174,9 +163,6 @@ NSString* const UpdateWebViewControllerNotification = @"UPDATE_TABVIEWCONTROLLER
     if (([self.tabBar delegate]) && ([[self.tabBar delegate] respondsToSelector:@selector(tabView:willCloseTabViewItem:)])) {
         [[self.tabBar delegate] tabView:self.tabView willCloseTabViewItem:tabViewItem];
     }
-    
-    NSUInteger index = [[self.tabView tabViewItems] indexOfObject:tabViewItem] - 1;
-    [self.tabViewControllers removeObjectAtIndex:index];
     [self.tabView removeTabViewItem:tabViewItem];
     
     if (([self.tabBar delegate]) && ([[self.tabBar delegate] respondsToSelector:@selector(tabView:didCloseTabViewItem:)])) {
@@ -208,19 +194,16 @@ NSString* const UpdateWebViewControllerNotification = @"UPDATE_TABVIEWCONTROLLER
     DDLogVerbose(@"_bookmarksSplitPaneHeight: %.0f, %f",_bookmarksSplitPaneHeight, self.splitView.frame.size.height);
     [self.subSplitView adjustSubviews];
     if ([self.subSplitView isSubviewCollapsed:self.bookmarksSplitPane]) {
-        DDLogVerbose(@"Open");
         [self.subSplitView setPosition:self.subSplitView.frame.size.height-_bookmarksSplitPaneHeight ofDividerAtIndex:0];
     } else {
-        DDLogVerbose(@"Close");
         [self.subSplitView setPosition:self.subSplitView.frame.size.height ofDividerAtIndex:0];
     }
 }
 
 - (void)selectListCoverFlowView:(id)sender
 {
-    DDLogVerbose(@"sender: %@", sender);
+    DDLogDebug(@"sender: %@", sender);
     
-    [self.listCollectionView setHidden:YES];
     KFToolbarItem *listCollectionItem = self.toolBar.rightItems[0];
     listCollectionItem.state = NSOffState;
     KFToolbarItem *listCoverFlowItem = self.toolBar.rightItems[1];
@@ -229,9 +212,8 @@ NSString* const UpdateWebViewControllerNotification = @"UPDATE_TABVIEWCONTROLLER
 
 - (void)selectListCollectionView:(id)sender
 {
-    DDLogVerbose(@"sender: %@", sender);
+    DDLogDebug(@"sender: %@", sender);
     
-    [self.listCollectionView setHidden:NO];
     KFToolbarItem *listCollectionItem = self.toolBar.rightItems[0];
     listCollectionItem.state = NSOnState;
     KFToolbarItem *listCoverFlowItem = self.toolBar.rightItems[1];
@@ -242,16 +224,16 @@ NSString* const UpdateWebViewControllerNotification = @"UPDATE_TABVIEWCONTROLLER
 
 - (void)setupToolBar
 {
-    DDLogVerbose(@"setupToolBar");
+    DDLogDebug(@"setupToolBar");
     
     KFToolbarItem *addItem = [KFToolbarItem toolbarItemWithIcon:[NSImage imageNamed:NSImageNameAddTemplate] tag:0];
     addItem.toolTip = @"Add";
-    addItem.keyEquivalent = @"q";
+    addItem.keyEquivalent = @"o";
     
     
     KFToolbarItem *actionItem = [KFToolbarItem toolbarItemWithType:NSMomentaryPushInButton icon:[NSImage imageNamed:NSImageNameActionTemplate] tag:1];
     actionItem.toolTip = @"Action";
-    actionItem.keyEquivalent = @"a";
+    actionItem.keyEquivalent = @"e";
     
     KFToolbarItem *bookmarksItem = [KFToolbarItem toolbarItemWithType:NSToggleButton icon:[NSImage imageNamed:NSImageNameBookmarksTemplate] tag:2];
     bookmarksItem.toolTip = @"Bookmarks";
@@ -302,11 +284,16 @@ NSString* const UpdateWebViewControllerNotification = @"UPDATE_TABVIEWCONTROLLER
      }];
 }
 
+- (void)updateToolBarContentForTabView:(NSTabViewItem*)tabViewItem
+{
+    DDLogVerbose(@"tabViewItem: %@", tabViewItem);
+}
+
 #pragma mark - Import file
 
 - (IBAction)openImportDialog:(id)sender
 {
-    DDLogVerbose(@"openImportDialog");
+    DDLogDebug(@"openImportDialog");
     NSOpenPanel* openpanel = [NSOpenPanel openPanel];
     [openpanel setCanChooseFiles:YES];
     [openpanel setCanCreateDirectories:NO];
@@ -401,7 +388,6 @@ NSString* const UpdateWebViewControllerNotification = @"UPDATE_TABVIEWCONTROLLER
     if (error != nil) {
         DDLogError(@"deleting error: %@", [error localizedDescription]);
     }
-    [self saveAction:nil];
 }
 
 #pragma mark - NSSplitViewDelegate
@@ -432,14 +418,12 @@ NSString* const UpdateWebViewControllerNotification = @"UPDATE_TABVIEWCONTROLLER
     if ([splitView isEqualTo:self.subSplitView]) {
         CGFloat height = self.bookmarksSplitPane.frame.size.height;
         KFToolbarItem *bookmarksItem = self.toolBar.leftItems[2];
-        DDLogVerbose(@"height: %.0f, splitView.frame.size.height: %.0f", height, splitView.frame.size.height);
         if (height > bookmarksPaneMinHeight) {
             _bookmarksSplitPaneHeight = height;
             bookmarksItem.state = NSOnState;
         } else {
             bookmarksItem.state = NSOffState;
         }
-        DDLogVerbose(@"_bookmarksSplitPaneHeight: %.0f", _bookmarksSplitPaneHeight);
     }
 }
 
@@ -633,7 +617,7 @@ NSString* const UpdateWebViewControllerNotification = @"UPDATE_TABVIEWCONTROLLER
 
 - (void)epubController:(KFEpubController *)controller willOpenEpub:(NSURL *)epubURL
 {
-    DDLogVerbose(@"will open epub");
+    DDLogDebug(@"will open epub");
     self.progressInfo.stringValue = NSLocalizedString([epubURL lastPathComponent], nil);
     [self.importedUrls removeObject:epubURL];
 }
@@ -684,7 +668,7 @@ NSString* const UpdateWebViewControllerNotification = @"UPDATE_TABVIEWCONTROLLER
 
 - (void)epubController:(KFEpubController *)controller didFailWithError:(NSError *)error
 {
-    DDLogVerbose(@"epubController:didFailWithError: %@", error.description);
+    DDLogError(@"epubController:didFailWithError: %@", error.description);
     self.progressIndicatior.doubleValue = self.progressIndicatior.maxValue - [self.importedUrls count];
     self.progressInfo.stringValue = error.localizedDescription;
     [self unlinkBookWithUrl:controller.epubURL];
@@ -695,5 +679,290 @@ NSString* const UpdateWebViewControllerNotification = @"UPDATE_TABVIEWCONTROLLER
         [self importBookWithUrl:[self.importedUrls firstObject]];
     }
 }
+
+#pragma mark - TabBar Config
+
+- (void)configStyle:(id)sender {
+	[self.tabBar setStyleNamed:[sender titleOfSelectedItem]];
+}
+
+- (void)configOnlyShowCloseOnHover:(id)sender {
+	[self.tabBar setOnlyShowCloseOnHover:[sender state]];
+}
+
+- (void)configCanCloseOnlyTab:(id)sender {
+	[self.tabBar setCanCloseOnlyTab:[sender state]];
+}
+
+- (void)configDisableTabClose:(id)sender {
+	[self.tabBar setDisableTabClose:[sender state]];
+}
+
+- (void)configAllowBackgroundClosing:(id)sender {
+	[self.tabBar setAllowsBackgroundTabClosing:[sender state]];
+}
+
+- (void)configHideForSingleTab:(id)sender {
+	[self.tabBar setHideForSingleTab:[sender state]];
+}
+
+- (void)configAddTabButton:(id)sender {
+	[self.tabBar setShowAddTabButton:[sender state]];
+}
+
+- (void)configTabMinWidth:(id)sender {
+	if ([self.tabBar buttonOptimumWidth] < [sender integerValue]) {
+		[self.tabBar setButtonMinWidth:[self.tabBar buttonOptimumWidth]];
+		[sender setIntegerValue:[self.tabBar buttonOptimumWidth]];
+		return;
+	}
+    
+	[self.tabBar setButtonMinWidth:[sender integerValue]];
+}
+
+- (void)configTabMaxWidth:(id)sender {
+	if ([self.tabBar buttonOptimumWidth] > [sender integerValue]) {
+		[self.tabBar setButtonMaxWidth:[self.tabBar buttonOptimumWidth]];
+		[sender setIntegerValue:[self.tabBar buttonOptimumWidth]];
+		return;
+	}
+    
+	[self.tabBar setButtonMaxWidth:[sender integerValue]];
+}
+
+- (void)configTabOptimumWidth:(id)sender {
+	if ([self.tabBar buttonMaxWidth] < [sender integerValue]) {
+		[self.tabBar setButtonOptimumWidth:[self.tabBar buttonMaxWidth]];
+		[sender setIntegerValue:[self.tabBar buttonMaxWidth]];
+		return;
+	}
+    
+	if ([self.tabBar buttonMinWidth] > [sender integerValue]) {
+		[self.tabBar setButtonOptimumWidth:[self.tabBar buttonMinWidth]];
+		[sender setIntegerValue:[self.tabBar buttonMinWidth]];
+		return;
+	}
+    
+	[self.tabBar setButtonOptimumWidth:[sender integerValue]];
+}
+
+- (void)configTabSizeToFit:(id)sender {
+	[self.tabBar setSizeButtonsToFit:[sender state]];
+}
+
+- (void)configTearOffStyle:(id)sender {
+	[self.tabBar setTearOffStyle:([sender indexOfSelectedItem] == 0) ? MMTabBarTearOffAlphaWindow : MMTabBarTearOffMiniwindow];
+}
+
+- (void)configUseOverflowMenu:(id)sender {
+	[self.tabBar setUseOverflowMenu:[sender state]];
+}
+
+- (void)configAutomaticallyAnimates:(id)sender {
+	[self.tabBar setAutomaticallyAnimates:[sender state]];
+}
+
+- (void)configAllowsScrubbing:(id)sender {
+	[self.tabBar setAllowsScrubbing:[sender state]];
+}
+
+- (void)addNewTabToTabView:(NSTabView *)aTabView {
+    DDLogVerbose(@"addNewTabToTabView");
+    [self addNewTab:aTabView];
+}
+
+#pragma mark - TabView Delegate
+
+- (void)tabView:(NSTabView *)aTabView willSelectTabViewItem:(NSTabViewItem *)tabViewItem
+{
+    DDLogVerbose(@"tabViewItem: %@", [tabViewItem label]);
+}
+
+- (void)tabView:(NSTabView *)aTabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem {
+	// need to update bound values to match the selected tab
+    DDLogVerbose(@"tabViewItem: %@", [tabViewItem label]);
+    if ([[tabViewItem identifier] respondsToSelector:@selector(title)]) {
+        [self.tabField setStringValue:[[tabViewItem identifier] title]];
+    }
+    //self.window.title = [[tabViewItem identifier] title];
+    [self updateToolBarContentForTabView:tabViewItem];
+}
+
+- (void)tabViewDidChangeNumberOfTabViewItems:(NSTabView *)tabView
+{
+    NSUInteger tabsCount = [[tabView tabViewItems] count];
+    DDLogVerbose(@"tabViewDidChangeNumberOfTabViewItems: %lu", (unsigned long)tabsCount);
+    DDLogVerbose(@"tabViewControllers: %@", self.tabViewControllers);
+    
+    if (tabsCount > 1) {
+        [self.menuItemCloseTab setEnabled:YES];
+    } else {
+        [self.menuItemCloseTab setEnabled:NO];
+    }
+}
+
+- (BOOL)tabView:(NSTabView *)aTabView shouldCloseTabViewItem:(NSTabViewItem *)tabViewItem {
+	return YES;
+}
+
+- (void)tabView:(NSTabView *)aTabView didCloseTabViewItem:(NSTabViewItem *)tabViewItem {
+	DDLogVerbose(@"tabViewItem: %@", [tabViewItem label]);
+}
+
+- (void)tabView:(NSTabView *)aTabView didDetachTabViewItem:(NSTabViewItem *)tabViewItem
+{
+    DDLogVerbose(@"tabViewItem: %@", [tabViewItem label]);
+    [self.tabViewControllers enumerateObjectsUsingBlock:^(id <TabBarControllerProtocol>controller, NSUInteger idx, BOOL *stop) {
+        
+        if ([controller.tabViewItem isEqualTo:tabViewItem]) {
+            BookViewController* bookViewController = (BookViewController*)controller;
+            NSLog(@"controller: %@", bookViewController.book.title);
+            [_tabViewControllers removeObject:controller];
+        }
+    }];
+}
+
+- (void)tabView:(NSTabView *)aTabView didMoveTabViewItem:(NSTabViewItem *)tabViewItem toIndex:(NSUInteger)index
+{
+    DDLogVerbose(@"tab view did move tab view item %@ to index:%ld",[tabViewItem label],index);
+}
+
+- (NSArray *)allowedDraggedTypesForTabView:(NSTabView *)aTabView {
+	return [NSArray arrayWithObjects:NSFilenamesPboardType, NSStringPboardType, nil];
+}
+
+- (BOOL)tabView:(NSTabView *)aTabView acceptedDraggingInfo:(id <NSDraggingInfo>)draggingInfo onTabViewItem:(NSTabViewItem *)tabViewItem {
+	NSLog(@"acceptedDraggingInfo: %@ onTabViewItem: %@", [[draggingInfo draggingPasteboard] stringForType:[[[draggingInfo draggingPasteboard] types] objectAtIndex:0]], [tabViewItem label]);
+    return YES;
+}
+
+- (NSMenu *)tabView:(NSTabView *)aTabView menuForTabViewItem:(NSTabViewItem *)tabViewItem {
+	DDLogVerbose(@"menuForTabViewItem: %@", [tabViewItem label]);
+	return nil;
+}
+
+- (BOOL)tabView:(NSTabView *)aTabView shouldAllowTabViewItem:(NSTabViewItem *)tabViewItem toLeaveTabBarView:(MMTabBarView *)tabBarView {
+    return NO;
+}
+
+- (BOOL)tabView:(NSTabView*)aTabView shouldDragTabViewItem:(NSTabViewItem *)tabViewItem inTabBarView:(MMTabBarView *)tabBarView {
+	return YES;
+}
+
+- (NSDragOperation)tabView:(NSTabView*)aTabView validateDrop:(id<NSDraggingInfo>)sender proposedItem:(NSTabViewItem *)tabViewItem proposedIndex:(NSUInteger)proposedIndex inTabBarView:(MMTabBarView *)tabBarView {
+    
+    return NSDragOperationMove;
+}
+
+- (NSDragOperation)tabView:(NSTabView *)aTabView validateSlideOfProposedItem:(NSTabViewItem *)tabViewItem proposedIndex:(NSUInteger)proposedIndex inTabBarView:(MMTabBarView *)tabBarView {
+    
+    return NSDragOperationMove;
+}
+
+- (void)tabView:(NSTabView*)aTabView didDropTabViewItem:(NSTabViewItem *)tabViewItem inTabBarView:(MMTabBarView *)tabBarView {
+	DDLogVerbose(@"didDropTabViewItem: %@ inTabBarView: %@", [tabViewItem label], tabBarView);
+}
+
+- (NSImage *)tabView:(NSTabView *)aTabView imageForTabViewItem:(NSTabViewItem *)tabViewItem offset:(NSSize *)offset styleMask:(NSUInteger *)styleMask {
+	// grabs whole window image
+	NSImage *viewImage = [[NSImage alloc] init];
+	NSRect contentFrame = [[[self window] contentView] frame];
+	[[[self window] contentView] lockFocus];
+	NSBitmapImageRep *viewRep = [[NSBitmapImageRep alloc] initWithFocusedViewRect:contentFrame];
+	[viewImage addRepresentation:viewRep];
+	[[[self window] contentView] unlockFocus];
+    
+	// grabs snapshot of dragged tabViewItem's view (represents content being dragged)
+	NSView *viewForImage = [tabViewItem view];
+	NSRect viewRect = [viewForImage frame];
+	NSImage *tabViewImage = [[NSImage alloc] initWithSize:viewRect.size];
+	[tabViewImage lockFocus];
+	[viewForImage drawRect:[viewForImage bounds]];
+	[tabViewImage unlockFocus];
+    
+	[viewImage lockFocus];
+	NSPoint tabOrigin = [self.tabView frame].origin;
+	tabOrigin.x += 10;
+	tabOrigin.y += kTabBarFrameHeight/2+2;
+    [tabViewImage drawAtPoint:tabOrigin fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
+    [tabViewImage compositeToPoint:tabOrigin operation:NSCompositeSourceOver];
+	[viewImage unlockFocus];
+    
+    MMTabBarView *tabBarView = (MMTabBarView *)[aTabView delegate];
+    
+	//draw over where the tab bar would usually be
+	NSRect tabFrame = [self.tabBar frame];
+	[viewImage lockFocus];
+	[[NSColor windowBackgroundColor] set];
+	NSRectFill(tabFrame);
+	//draw the background flipped, which is actually the right way up
+	NSAffineTransform *transform = [NSAffineTransform transform];
+	[transform scaleXBy:1.0 yBy:-1.0];
+	[transform concat];
+	tabFrame.origin.y = -tabFrame.origin.y - tabFrame.size.height;
+	[[tabBarView style] drawBezelOfTabBarView:tabBarView inRect:tabFrame];
+	[transform invert];
+	[transform concat];
+	[viewImage unlockFocus];
+    
+	if ([tabBarView orientation] == MMTabBarHorizontalOrientation) {
+		offset->width = [tabBarView leftMargin];
+		offset->height = kTabBarFrameHeight;
+	} else {
+		offset->width = 0;
+		offset->height = kTabBarFrameHeight + [tabBarView topMargin];
+	}
+    
+	if (styleMask) {
+		*styleMask = NSTitledWindowMask | NSTexturedBackgroundWindowMask;
+	}
+    
+	return viewImage;
+}
+
+- (MMTabBarView *)tabView:(NSTabView *)aTabView newTabBarViewForDraggedTabViewItem:(NSTabViewItem *)tabViewItem atPoint:(NSPoint)point {
+	NSLog(@"newTabBarViewForDraggedTabViewItem: %@ atPoint: %@", [tabViewItem label], NSStringFromPoint(point));
+    
+	//create a new window controller with no tab items
+    return nil;
+}
+
+- (void)tabView:(NSTabView *)aTabView closeWindowForLastTabViewItem:(NSTabViewItem *)tabViewItem {
+	NSLog(@"closeWindowForLastTabViewItem: %@", [tabViewItem label]);
+	[[self window] close];
+}
+
+- (void)tabView:(NSTabView *)aTabView tabBarViewDidHide:(MMTabBarView *)tabBarView {
+	//NSLog(@"tabBarViewDidHide: %@", NSStringFromRect(tabBarView.frame));
+    
+    NSArray *constraints = tabBarView.constraints;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"firstAttribute = %d", NSLayoutAttributeHeight];
+    NSArray* filteredArray = [constraints filteredArrayUsingPredicate:predicate];
+    if (filteredArray.count != 0) {
+        NSLayoutConstraint *constraint =  [constraints firstObject];
+        [[constraint animator] setConstant:0];
+    }
+}
+
+- (void)tabView:(NSTabView *)aTabView tabBarViewDidUnhide:(MMTabBarView *)tabBarView {
+	//NSLog(@"tabBarViewDidUnhide: %@", NSStringFromRect(tabBarView.frame));
+    
+    NSArray *constraints = tabBarView.constraints;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"firstAttribute = %d", NSLayoutAttributeHeight];
+    NSArray* filteredArray = [constraints filteredArrayUsingPredicate:predicate];
+    if (filteredArray.count != 0) {
+        NSLayoutConstraint *constraint =  [constraints firstObject];
+        [[constraint animator] setConstant:kTabBarFrameHeight];
+    }
+}
+
+- (NSString *)tabView:(NSTabView *)aTabView toolTipForTabViewItem:(NSTabViewItem *)tabViewItem {
+	return [tabViewItem label];
+}
+
+- (NSString *)accessibilityStringForTabView:(NSTabView *)aTabView objectCount:(NSInteger)objectCount {
+	return (objectCount == 1) ? @"item" : @"items";
+}
+
 
 @end

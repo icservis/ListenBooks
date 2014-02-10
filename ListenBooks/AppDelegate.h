@@ -23,33 +23,42 @@
 @class ImageViewController;
 @class ListCollectionView;
 
-extern NSString* const UpdateWebViewControllerNotification;
+extern NSString* const TabBarSelectionDidChangeNotification;
+extern NSString* const TabBarCountDidChangeNotification;
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, KFEpubControllerDelegate, NSSplitViewDelegate, MMTabBarViewDelegate, NSTabViewDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
 @property (weak) IBOutlet MMTabBarView *tabBar;
-@property (nonatomic, strong) NSMutableArray* tabViewControllers;
 @property (weak) IBOutlet NSTabView *tabView;
+
+@property (weak) IBOutlet KFToolbar *toolBar;
+@property (weak) IBOutlet NSTextField *tabField;
+
 @property (weak) IBOutlet NSSplitView *splitView;
 @property (weak) IBOutlet NSView *contentView;
 @property (weak) IBOutlet NSView *inputView;
-@property (weak) IBOutlet KFToolbar *toolBar;
-@property (weak) IBOutlet NSMenu *actionMenu;
-@property (weak) IBOutlet NSMenuItem *menuItemCloseTab;
-@property (weak) IBOutlet NSMenuItem *menuItemNewTab;
+
 @property (weak) IBOutlet NSSplitView *subSplitView;
 @property (weak) IBOutlet NSView *sourceSplitPane;
 @property (weak) IBOutlet NSView *bookmarksSplitPane;
-@property (weak) IBOutlet BookmarksView *bookmarksView;
 @property (weak) IBOutlet BooksView *booksView;
-@property (weak) IBOutlet NSScrollView *listCollectionView;
-@property (weak) IBOutlet NSTextField *tabField;
+@property (weak) IBOutlet BookmarksView *bookmarksView;
+
+@property (weak) IBOutlet ListCollectionView *listCollectionView;
+@property (weak) IBOutlet NSView *listToolBarView;
+@property (weak) IBOutlet NSSearchField *listSearchField;
 
 @property (unsafe_unretained) IBOutlet NSPanel *progressWindow;
 @property (weak) IBOutlet NSProgressIndicator *progressIndicatior;
 @property (weak) IBOutlet NSTextField *progressTitle;
 @property (weak) IBOutlet NSTextField *progressInfo;
+
+@property (weak) IBOutlet NSMenu *actionMenu;
+@property (weak) IBOutlet NSMenuItem *menuItemNewTab;
+@property (weak) IBOutlet NSMenuItem *menuItemCloseTab;
+
+@property (nonatomic, strong) NSMutableArray* tabViewControllers;
 
 @property (nonatomic, strong) NSMutableArray* importedUrls;
 @property (nonatomic, strong) KFEpubController *epubController;
@@ -73,6 +82,7 @@ extern NSString* const UpdateWebViewControllerNotification;
 - (IBAction)addNewTab:(id)sender;
 - (IBAction)closeTab:(id)sender;
 - (void)closeTabWithItem:(NSTabViewItem*)tabViewItem;
+- (void)updateToolBarContentForTabView:(NSTabViewItem*)tabViewItem;
 - (IBAction)saveAction:(id)sender;
 
 

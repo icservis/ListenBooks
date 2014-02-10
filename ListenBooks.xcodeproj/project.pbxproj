@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		8416258118A827CE00C42723 /* TabBarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8416258018A827CE00C42723 /* TabBarModel.m */; };
-		8416258518A828B700C42723 /* AppDelegate+TabBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8416258418A828B700C42723 /* AppDelegate+TabBarView.m */; };
 		842A12211865DC0E00AAAD42 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 842A121F1865DC0E00AAAD42 /* ImageViewController.m */; };
 		842A12221865DC0E00AAAD42 /* ImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842A12201865DC0E00AAAD42 /* ImageViewController.xib */; };
 		8444EA93185F83A400F90B48 /* KFToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8444EA90185F83A400F90B48 /* KFToolbar.m */; };
@@ -162,8 +161,7 @@
 /* Begin PBXFileReference section */
 		8416257F18A827CE00C42723 /* TabBarModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarModel.h; sourceTree = "<group>"; };
 		8416258018A827CE00C42723 /* TabBarModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarModel.m; sourceTree = "<group>"; };
-		8416258318A828B700C42723 /* AppDelegate+TabBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+TabBarView.h"; sourceTree = "<group>"; };
-		8416258418A828B700C42723 /* AppDelegate+TabBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+TabBarView.m"; sourceTree = "<group>"; };
+		8416258618A94C0300C42723 /* TabBarControllerProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabBarControllerProtocol.h; sourceTree = "<group>"; };
 		842A121E1865DC0E00AAAD42 /* ImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewController.h; sourceTree = "<group>"; };
 		842A121F1865DC0E00AAAD42 /* ImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
 		842A12201865DC0E00AAAD42 /* ImageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageViewController.xib; sourceTree = "<group>"; };
@@ -910,6 +908,7 @@
 				848C959E1866489C0020FDC9 /* Bookmark.m */,
 				8416257F18A827CE00C42723 /* TabBarModel.h */,
 				8416258018A827CE00C42723 /* TabBarModel.m */,
+				8416258618A94C0300C42723 /* TabBarControllerProtocol.h */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -929,8 +928,6 @@
 			children = (
 				8478C3F4185CA73F00B06779 /* AppDelegate.h */,
 				8478C3F5185CA73F00B06779 /* AppDelegate.m */,
-				8416258318A828B700C42723 /* AppDelegate+TabBarView.h */,
-				8416258418A828B700C42723 /* AppDelegate+TabBarView.m */,
 				84AB04AD1868733B007106F4 /* Lumberjack.h */,
 				8478C3FA185CA73F00B06779 /* ListenBooks.xcdatamodeld */,
 				8478C43B185CA80200B06779 /* ListenBooks.entitlements */,
@@ -1156,7 +1153,6 @@
 				8416258118A827CE00C42723 /* TabBarModel.m in Sources */,
 				8444EA93185F83A400F90B48 /* KFToolbar.m in Sources */,
 				848C956A186647010020FDC9 /* NSArray_Extensions.m in Sources */,
-				8416258518A828B700C42723 /* AppDelegate+TabBarView.m in Sources */,
 				8444EAB5185F840800F90B48 /* ioapi.c in Sources */,
 				848C956E186647010020FDC9 /* NSDate+Extensions.m in Sources */,
 				8444EACC185F841700F90B48 /* DDXMLDocument.m in Sources */,
