@@ -427,7 +427,16 @@ static NSTimeInterval const kModalSheetDelay = 1.0f;
 
 #pragma mark - NSSplitViewDelegate
 
-- (BOOL)splitView:(NSSplitView *)splitView canCollapseSubview:(NSView *)subview {
+- (BOOL)splitView:(NSSplitView *)splitView canCollapseSubview:(NSView *)subview
+{
+    if ([splitView isEqualTo:self.splitView] && [subview isEqualTo:self.contentView]) {
+        return NO;
+    }
+    
+    if ([splitView isEqualTo:self.subSplitView] && [subview isEqualTo:self.sourceSplitPane]) {
+        return NO;
+    }
+    
     return YES;
 }
 
@@ -469,6 +478,10 @@ static NSTimeInterval const kModalSheetDelay = 1.0f;
         }
         return proposedMaximumPosition;
     } else if ([splitView isEqualTo:self.subSplitView]) {
+        CGFloat max = self.subSplitView.frame.size.height*4/5;
+        if (proposedMaximumPosition > max) {
+            proposedMaximumPosition = max;
+        }
         return proposedMaximumPosition;
     }
     return CGFLOAT_MAX;
@@ -483,6 +496,10 @@ static NSTimeInterval const kModalSheetDelay = 1.0f;
         }
         return proposedMinimumPosition;
     } else if ([splitView isEqualTo:self.subSplitView]) {
+        CGFloat min = self.subSplitView.frame.size.height*1/2;
+        if (proposedMinimumPosition < min) {
+            proposedMinimumPosition = min;
+        }
         return proposedMinimumPosition;
     }
     return 0;
