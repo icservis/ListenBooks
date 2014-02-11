@@ -56,6 +56,7 @@
 		847A005B186F9B5D00039910 /* NSTextView+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 847A005A186F9B5D00039910 /* NSTextView+Extensions.m */; };
 		847EF68718AABEAF00A0DC04 /* ExportWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 847EF68518AABEAF00A0DC04 /* ExportWindowController.m */; };
 		847EF68818AABEAF00A0DC04 /* ExportWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 847EF68618AABEAF00A0DC04 /* ExportWindowController.xib */; };
+		847EF68B18AAC7F800A0DC04 /* MainWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 847EF68A18AAC7F800A0DC04 /* MainWindow.m */; };
 		848C954018663FD00020FDC9 /* BooksTreeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 848C953F18663FD00020FDC9 /* BooksTreeController.m */; };
 		848C954118663FD00020FDC9 /* BooksTreeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 848C953F18663FD00020FDC9 /* BooksTreeController.m */; };
 		848C954418663FF60020FDC9 /* BookmarksArrayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 848C954318663FF60020FDC9 /* BookmarksArrayController.m */; };
@@ -251,6 +252,8 @@
 		847EF68418AABEAF00A0DC04 /* ExportWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportWindowController.h; sourceTree = "<group>"; };
 		847EF68518AABEAF00A0DC04 /* ExportWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportWindowController.m; sourceTree = "<group>"; };
 		847EF68618AABEAF00A0DC04 /* ExportWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExportWindowController.xib; sourceTree = "<group>"; };
+		847EF68918AAC7F800A0DC04 /* MainWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainWindow.h; sourceTree = "<group>"; };
+		847EF68A18AAC7F800A0DC04 /* MainWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainWindow.m; sourceTree = "<group>"; };
 		848C953E18663FD00020FDC9 /* BooksTreeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BooksTreeController.h; sourceTree = "<group>"; };
 		848C953F18663FD00020FDC9 /* BooksTreeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BooksTreeController.m; sourceTree = "<group>"; };
 		848C954218663FF60020FDC9 /* BookmarksArrayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarksArrayController.h; sourceTree = "<group>"; };
@@ -838,6 +841,8 @@
 			isa = PBXGroup;
 			children = (
 				8478C3F7185CA73F00B06779 /* MainMenu.xib */,
+				847EF68918AAC7F800A0DC04 /* MainWindow.h */,
+				847EF68A18AAC7F800A0DC04 /* MainWindow.m */,
 				84E27E7A1862466F00317411 /* BooksView.h */,
 				84E27E7B1862466F00317411 /* BooksView.m */,
 				84E27E771862465600317411 /* BookmarksView.h */,
@@ -1182,6 +1187,7 @@
 				847A005B186F9B5D00039910 /* NSTextView+Extensions.m in Sources */,
 				8444EA94185F83A400F90B48 /* KFToolbarItem.m in Sources */,
 				848C9576186647010020FDC9 /* NSTreeNode_Extensions.m in Sources */,
+				847EF68B18AAC7F800A0DC04 /* MainWindow.m in Sources */,
 				84DD96091864B29A00B9BD5A /* BookPageViewController.m in Sources */,
 				84AB0492186871E9007106F4 /* ISO8601DateFormatter.m in Sources */,
 				848C958F186647240020FDC9 /* StringToPredicateTransformer.m in Sources */,

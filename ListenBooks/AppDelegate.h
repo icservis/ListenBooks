@@ -84,6 +84,4 @@ extern NSString* const TabBarCountDidChangeNotification;
 - (void)updateToolBarContentForTabView:(NSTabViewItem*)tabViewItem;
 - (IBAction)saveAction:(id)sender;
 
-
-
 @end

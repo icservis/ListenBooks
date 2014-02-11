@@ -558,7 +558,7 @@ CA
                 </menuItem>
             </items>
         </menu>
-        <window title="ListenBooks" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" frameAutosaveName="MainWindow" animationBehavior="default" id="371">
+        <window title="ListenBooks" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" frameAutosaveName="MainWindow" animationBehavior="default" id="371" customClass="MainWindow">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -1012,6 +1012,9 @@ CA
                     <constraint firstItem="Mef-3Q-Ajk" firstAttribute="top" secondItem="372" secondAttribute="top" id="jRY-DM-zK6"/>
                 </constraints>
             </view>
+            <connections>
+                <outlet property="appDelegate" destination="494" id="7ox-fx-6DW"/>
+            </connections>
         </window>
         <menu title="actionMenu" id="Li0-mn-mdc">
             <items>
