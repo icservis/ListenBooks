@@ -227,7 +227,23 @@ static NSTimeInterval const kModalSheetDelay = 1.0f;
 - (void)setupToolBar
 {
     DDLogDebug(@"setupToolBar");
+    [self setToolBarForMainTabView];
     
+}
+
+- (void)updateToolBarContentForTabView:(NSTabViewItem*)tabViewItem
+{
+    DDLogVerbose(@"tabViewItem: %@", tabViewItem);
+    
+    if ([self.tabView indexOfTabViewItem:tabViewItem] == 0) {
+        [self setToolBarForMainTabView];
+    } else {
+        [self setToolBarForBookTabView];
+    }
+}
+
+- (void)setToolBarForMainTabView
+{
     KFToolbarItem *addItem = [KFToolbarItem toolbarItemWithIcon:[NSImage imageNamed:NSImageNameAddTemplate] tag:0];
     addItem.toolTip = @"Add";
     addItem.keyEquivalent = @"o";
@@ -286,9 +302,33 @@ static NSTimeInterval const kModalSheetDelay = 1.0f;
      }];
 }
 
-- (void)updateToolBarContentForTabView:(NSTabViewItem*)tabViewItem
+- (void)setToolBarForBookTabView
 {
-    DDLogVerbose(@"tabViewItem: %@", tabViewItem);
+    KFToolbarItem *shareItem = [KFToolbarItem toolbarItemWithIcon:[NSImage imageNamed:NSImageNameShareTemplate] tag:0];
+    shareItem.toolTip = @"Share";
+    shareItem.keyEquivalent = @"s";
+    
+    
+    self.toolBar.leftItems = nil;
+    self.toolBar.rightItems = @[shareItem];
+    
+    [self.toolBar setItemSelectionHandler:^(KFToolbarItemSelectionType selectionType, KFToolbarItem *toolbarItem, NSUInteger tag)
+     {
+         switch (tag)
+         {
+             case 0:
+                 break;
+                 
+             case 1:
+                 break;
+                 
+             case 2:
+                 break;
+                 
+             default:
+                 break;
+         }
+     }];
 }
 
 #pragma mark - Import file

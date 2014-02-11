@@ -586,7 +586,7 @@ CA
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <font key="font" metaFont="system"/>
                         <tabViewItems>
-                            <tabViewItem label="List" identifier="1" id="3MW-HC-1Hz">
+                            <tabViewItem label="ListenBooks" identifier="1" id="3MW-HC-1Hz">
                                 <view key="view" id="y2x-Lt-bHk">
                                     <rect key="frame" x="0.0" y="0.0" width="720" height="560"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
