@@ -25,8 +25,7 @@
 
 - (void)dealloc
 {
-    AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSManagedObjectContextObjectsDidChangeNotification object:appDelegate.managedObjectContext];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)contextDidChange:(NSNotification*)notification

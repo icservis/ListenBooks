@@ -34,6 +34,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textSizeDidChange:) name:TextSizeDidChangeNotificaton object:nil];
 }
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)textSizeDidChange:(NSNotification*)notification
 {
