@@ -558,8 +558,9 @@ CA
                 </menuItem>
             </items>
         </menu>
-        <window title="ListenBooks" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="371">
+        <window title="ListenBooks" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" frameAutosaveName="MainWindow" animationBehavior="default" id="371">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="275" y="110" width="720" height="612"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1280" height="778"/>
@@ -1041,7 +1042,7 @@ CA
                 <outlet property="listToolBarView" destination="nbg-2g-L9E" id="k4O-B8-Nho"/>
                 <outlet property="menuItemCloseTab" destination="tVW-of-TOE" id="DWK-gD-Xdi"/>
                 <outlet property="menuItemNewTab" destination="MKv-Qh-KAh" id="1TJ-8s-reC"/>
-                <outlet property="progressIndicatior" destination="q2a-FS-yay" id="tTd-lI-fpc"/>
+                <outlet property="progressIndicator" destination="q2a-FS-yay" id="IIP-Lz-U8j"/>
                 <outlet property="progressInfo" destination="Jwp-mn-foe" id="6ri-2d-ahL"/>
                 <outlet property="progressTitle" destination="C5J-j3-cz2" id="TZC-ZM-lm5"/>
                 <outlet property="progressWindow" destination="09P-7W-ms9" id="L9q-HF-nYE"/>
@@ -1089,8 +1090,8 @@ CA
                 <binding destination="494" name="managedObjectContext" keyPath="self.managedObjectContext" id="tdk-NC-H3g"/>
             </connections>
         </arrayController>
-        <window title="Progress" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="09P-7W-ms9" customClass="NSPanel">
-            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES" HUD="YES"/>
+        <window title="Progress" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" oneShot="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="09P-7W-ms9" customClass="NSPanel">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="450" y="324" width="400" height="100"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1280" height="778"/>
@@ -1115,7 +1116,7 @@ CA
                         </constraints>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Title" id="2Tn-Sx-rSZ">
                             <font key="font" metaFont="systemBold"/>
-                            <color key="textColor" name="controlLightHighlightColor" catalog="System" colorSpace="catalog"/>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
@@ -1127,7 +1128,7 @@ CA
                         </constraints>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Info" id="h8B-EO-utf">
                             <font key="font" metaFont="system"/>
-                            <color key="textColor" name="controlLightHighlightColor" catalog="System" colorSpace="catalog"/>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>

@@ -49,8 +49,8 @@ extern NSString* const TabBarCountDidChangeNotification;
 @property (weak) IBOutlet NSView *listToolBarView;
 @property (weak) IBOutlet NSSearchField *listSearchField;
 
-@property (unsafe_unretained) IBOutlet NSPanel *progressWindow;
-@property (weak) IBOutlet NSProgressIndicator *progressIndicatior;
+@property (weak) IBOutlet NSPanel *progressWindow;
+@property (weak) IBOutlet NSProgressIndicator *progressIndicator;
 @property (weak) IBOutlet NSTextField *progressTitle;
 @property (weak) IBOutlet NSTextField *progressInfo;
 

@@ -301,6 +301,8 @@
     [openpanel setResolvesAliases:YES];
     [openpanel setAllowedFileTypes:[self allowedFileTypes]];
     
+    
+    
     [openpanel beginSheetModalForWindow:self.window completionHandler:^(NSInteger result) {
         
         DDLogVerbose(@"result: %ld, urls: %@", (long)result, [openpanel.URLs description]);
@@ -308,25 +310,39 @@
             return ;
         }
         
-        [self.progressWindow orderFront:self];
+        [[NSApplication sharedApplication] beginSheet:self.progressWindow
+                                       modalForWindow: self.window
+                                        modalDelegate:self
+                                       didEndSelector:@selector(didEndSheet:returnCode:contextInfo:)
+                                          contextInfo:nil];
+        
         NSInteger filesCount = openpanel.URLs.count;
-        self.progressIndicatior.doubleValue = 0;
-        self.progressIndicatior.minValue = 0;
-        self.progressIndicatior.maxValue = filesCount;
-        self.progressIndicatior.indeterminate = NO;
+        self.progressIndicator.doubleValue = 0;
+        self.progressIndicator.minValue = 0;
+        self.progressIndicator.maxValue = filesCount;
+        self.progressIndicator.indeterminate = NO;
         self.progressTitle.stringValue = NSLocalizedString(@"Importing files", nil);
+        self.progressInfo.stringValue = NSLocalizedString(@"Loading…", nil);
+        
+        NSLog(@"progressTitle: %@", self.progressTitle.stringValue);
+        NSLog(@"progressInfo: %@", self.progressInfo.stringValue);
+        NSLog(@"progressIndicatior: %.0f / %.0f", self.progressIndicator.doubleValue, self.progressIndicator.maxValue);
         
         NSURL* documentsDirectory = [self applicationDocumentsDirectory];
         __block NSInteger successFilesCount = 0;
         __block NSTextField* progressInfo = self.progressInfo;
-        __block NSProgressIndicator* progressIndicator = self.progressIndicatior;
+        __block NSProgressIndicator* progressIndicator = self.progressIndicator;
         __block NSMutableArray* copiedUrls = [NSMutableArray new];
         
         [openpanel.URLs enumerateObjectsUsingBlock:^(NSURL* fileUrl, NSUInteger idx, BOOL *stop) {
             
             NSURL* sandboxedFileUrl = [documentsDirectory URLByAppendingPathComponent:[fileUrl lastPathComponent]];
             progressInfo.stringValue = [fileUrl lastPathComponent];
-            progressIndicator.doubleValue = idx;
+            progressIndicator.doubleValue = (double)(idx + 1);
+            
+            NSLog(@"progressTitle: %@", self.progressTitle.stringValue);
+            NSLog(@"progressInfo: %@", self.progressInfo.stringValue);
+            NSLog(@"progressIndicatior: %.0f / %.0f", self.progressIndicator.doubleValue, self.progressIndicator.maxValue);
             
             NSError* error;
             NSFileManager* fileManager = [NSFileManager defaultManager];
@@ -354,22 +370,32 @@
             }
         }];
         
-        self.progressIndicatior.doubleValue = 0;
-        self.progressIndicatior.minValue = 0;
-        self.progressIndicatior.maxValue = [copiedUrls count];
+        self.importedUrls = [NSMutableArray arrayWithArray:copiedUrls];
+        self.progressTitle.stringValue = NSLocalizedString(@"Processing files", nil);
+        self.progressIndicator.doubleValue = 0;
+        self.progressIndicator.minValue = 0;
+        self.progressIndicator.maxValue = [self.importedUrls count];
         self.progressInfo.stringValue = [NSString stringWithFormat:@"%@: %ld", NSLocalizedString(@"Processing file(s)", nil), successFilesCount];
         
-        self.importedUrls = [NSMutableArray arrayWithArray:copiedUrls];
-
+        NSLog(@"progressTitle: %@", self.progressTitle.stringValue);
+        NSLog(@"progressInfo: %@", self.progressInfo.stringValue);
+        NSLog(@"progressIndicatior: %.0f / %.0f", self.progressIndicator.doubleValue, self.progressIndicator.maxValue);
+        
         [self importBookWithUrl:[self.importedUrls firstObject]];
         
     }];
+}
+
+- (void)didEndSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
+{
+    [sheet performSelector:@selector(orderOut:) withObject:self afterDelay:2];
 }
 
 #pragma mark - Importing Book
 
 - (void)importBookWithUrl:(NSURL*)sandboxedFileUrl
 {
+    DDLogVerbose(@"sandboxedFileUrl: %@", [sandboxedFileUrl absoluteString]);
     self.epubController = [[KFEpubController alloc] initWithEpubURL:sandboxedFileUrl andDestinationFolder:[self applicationCacheDirectory]];
     self.epubController.delegate = self;
     [self.epubController openAsynchronous:YES];
@@ -652,11 +678,16 @@
     }
     
     DDLogVerbose(@"inserted book: %@", [book description]);
-    self.progressIndicatior.doubleValue = self.progressIndicatior.maxValue - [self.importedUrls count];
+    self.progressIndicator.doubleValue = self.progressIndicator.maxValue - [self.importedUrls count];
+    
+    NSLog(@"progressTitle: %@", self.progressTitle.stringValue);
+    NSLog(@"progressInfo: %@", self.progressInfo.stringValue);
+    NSLog(@"progressIndicatior: %.0f / %.0f", self.progressIndicator.doubleValue, self.progressIndicator.maxValue);
     
     if ([self.importedUrls count] == 0) {
         [self.booksTreeController setSelectedObject:book];
-        [self.progressWindow close];
+        self.progressInfo.stringValue = NSLocalizedString(@"Importing files completed", nil);
+        [NSApp endSheet:self.progressWindow];
     } else {
         [self importBookWithUrl:[self.importedUrls firstObject]];
     }
@@ -667,12 +698,16 @@
 - (void)epubController:(KFEpubController *)controller didFailWithError:(NSError *)error
 {
     DDLogError(@"epubController:didFailWithError: %@", error.description);
-    self.progressIndicatior.doubleValue = self.progressIndicatior.maxValue - [self.importedUrls count];
+    self.progressIndicator.doubleValue = self.progressIndicator.maxValue - [self.importedUrls count];
     self.progressInfo.stringValue = error.localizedDescription;
     [self unlinkBookWithUrl:controller.epubURL];
     
+    NSLog(@"progressTitle: %@", self.progressTitle.stringValue);
+    NSLog(@"progressInfo: %@", self.progressInfo.stringValue);
+    
     if ([self.importedUrls count] == 0) {
-        [self.progressWindow close];
+        self.progressInfo.stringValue = NSLocalizedString(@"Importing files completed", nil);
+        [NSApp endSheet:self.progressWindow];
     } else {
         [self importBookWithUrl:[self.importedUrls firstObject]];
     }
