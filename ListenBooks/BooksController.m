@@ -17,6 +17,7 @@
 #import "ListArrayController.h"
 #import "NSArrayController_Extensions.h"
 #import "InformationWindowController.h"
+#import "ExportWindowController.h"
 #import "BlockAlert.h"
 
 @implementation BooksController
@@ -86,6 +87,24 @@
         [infoWindowController.window close];
     };
     [weakInfoWindowController.window makeKeyAndOrderFront:self];
+}
+
+- (void)export
+{
+    DDLogVerbose(@"export");
+    
+    
+    
+    ExportWindowController* exportWindowController = [[ExportWindowController alloc] initWithWindowNibName:@"ExportWindowController"];
+    __weak ExportWindowController* weakexportWindowController = exportWindowController;
+    Book* selectedBook = (Book*)[[[self.booksTreeController selectedNodes] firstObject] representedObject];
+    if (selectedBook == nil) return;
+    
+    weakexportWindowController.book = selectedBook;
+    weakexportWindowController.completionBlock = ^(BOOL success) {
+        [exportWindowController.window close];
+    };
+    [weakexportWindowController.window makeKeyAndOrderFront:self];
 }
 
 - (void)deleteItems

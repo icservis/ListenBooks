@@ -27,5 +27,6 @@
 - (void)deleteItems;
 - (void)open;
 - (void)information;
+- (void)export;
 
 @end

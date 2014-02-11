@@ -77,21 +77,48 @@
     [self.booksController information];
 }
 
+- (IBAction)export:(id)sender
+{
+    [self.booksController export];
+}
+
+#pragma mark - Validation menus
+
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
     SEL theAction = [menuItem action];
     
     if (theAction == @selector(information:)) {
         
-        if ([[self selectedRowIndexes] count]  == 1) {
+        if ([[self selectedRowIndexes] count] == 1) {
             return YES;
         } else {
             return NO;
         }
         
-    } else {
-        return YES;
     }
+    
+    if (theAction == @selector(open:)) {
+        
+        if ([[self selectedRowIndexes] count] > 0) {
+            return YES;
+        } else {
+            return NO;
+        }
+        
+    }
+    
+    if (theAction == @selector(export:)) {
+        
+        if ([[self selectedRowIndexes] count] == 1) {
+            return YES;
+        } else {
+            return NO;
+        }
+        
+    }
+    
+    return YES;
 }
 
 

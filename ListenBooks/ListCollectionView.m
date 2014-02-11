@@ -108,21 +108,46 @@
     [self.listController information];
 }
 
+- (IBAction)export:(id)sender
+{
+    [self.listController export];
+}
+
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
     SEL theAction = [menuItem action];
     
     if (theAction == @selector(information:)) {
         
-        if ([[self selectionIndexes] count]  == 1) {
+        if ([[self selectionIndexes] count] == 1) {
             return YES;
         } else {
             return NO;
         }
         
-    } else {
-        return YES;
     }
+    
+    if (theAction == @selector(open:)) {
+        
+        if ([[self selectionIndexes] count] > 0) {
+            return YES;
+        } else {
+            return NO;
+        }
+        
+    }
+    
+    if (theAction == @selector(export:)) {
+        
+        if ([[self selectionIndexes] count] == 1) {
+            return YES;
+        } else {
+            return NO;
+        }
+        
+    }
+    
+    return YES;
 }
 
 @end

@@ -24,5 +24,6 @@
 - (IBAction)open:(id)sender;
 //- (IBAction)selectAll:(id)sender;
 - (IBAction)information:(id)sender;
+- (IBAction)export:(id)sender;
 
 @end

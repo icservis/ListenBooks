@@ -49,6 +49,12 @@ static NSTimeInterval const kModalSheetDelay = 1.0f;
     [self setupTabBar];
 }
 
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender
+{
+    DDLogDebug(@"applicationShouldTerminateAfterLastWindowClosed");
+    return YES;
+}
+
 #pragma mark - Setters
 
 - (NSMutableArray*)importedUrls
