@@ -140,9 +140,7 @@
     [newItem setView:mainView];
 	[self.tabView addTabViewItem:newItem];
     [self.tabView selectTabViewItem:newItem];
-    
 }
-
 
 - (IBAction)closeTab:(id)sender
 {
@@ -784,7 +782,7 @@
     if ([[tabViewItem identifier] respondsToSelector:@selector(title)]) {
         [self.tabField setStringValue:[[tabViewItem identifier] title]];
     }
-    //self.window.title = [[tabViewItem identifier] title];
+    //self.window.title = [tabViewItem label];
     [self updateToolBarContentForTabView:tabViewItem];
 }
 
@@ -815,8 +813,6 @@
     [self.tabViewControllers enumerateObjectsUsingBlock:^(id <TabBarControllerProtocol>controller, NSUInteger idx, BOOL *stop) {
         
         if ([controller.tabViewItem isEqualTo:tabViewItem]) {
-            BookViewController* bookViewController = (BookViewController*)controller;
-            NSLog(@"controller: %@", bookViewController.book.title);
             [_tabViewControllers removeObject:controller];
         }
     }];

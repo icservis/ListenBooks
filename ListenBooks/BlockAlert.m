@@ -31,7 +31,11 @@
 -(void)alertDidEnd:(NSAlert*)alert returnCode:(NSInteger)returnCode contextInfo:(void*)contextInfo
 {
     if (self.completionBlock != nil) {
-        self.completionBlock(returnCode);
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // Finish in main queue
+            self.completionBlock(returnCode);
+        });
     }
 }
 

@@ -105,13 +105,8 @@
             }
         }];
         
-        NSArray* childIndexPaths = [node childIndexPaths];
-        [self.booksTreeController removeObjectsAtArrangedObjectIndexPaths:childIndexPaths];
-        
+        [appDelegate.managedObjectContext deleteObject:book];
     }];
-    
-    [self.booksTreeController remove:self];
-    DDLogVerbose(@"count: %ld", (long)[[self.booksTreeController arrangedObjects] count]);
     [appDelegate saveAction:nil];
 }
 

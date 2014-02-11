@@ -93,10 +93,8 @@
                 }
             }
         }];
+        [appDelegate.managedObjectContext deleteObject:book];
     }];
-    
-    [self.listArrayController remove:self];
-    DDLogVerbose(@"count: %ld", (long)[[self.listArrayController arrangedObjects] count]);
     [appDelegate saveAction:nil];
 }
 

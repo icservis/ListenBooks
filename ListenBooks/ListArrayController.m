@@ -23,6 +23,12 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(contextDidChange:) name:NSManagedObjectContextObjectsDidChangeNotification object:appDelegate.managedObjectContext];
 }
 
+- (void)dealloc
+{
+    AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSManagedObjectContextObjectsDidChangeNotification object:appDelegate.managedObjectContext];
+}
+
 - (void)contextDidChange:(NSNotification*)notification
 {
     DDLogVerbose(@"count: %lu", (unsigned long)[[self arrangedObjects] count]);

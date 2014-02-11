@@ -14,6 +14,5 @@
 @interface BooksTreeController : NSTreeController
 
 @property (unsafe_unretained) IBOutlet BookViewController *bookViewController;
-@property (unsafe_unretained) IBOutlet ListViewController *listViewController;
 
 @end
