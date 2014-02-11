@@ -59,7 +59,6 @@ extern NSString* const TabBarCountDidChangeNotification;
 @property (weak) IBOutlet NSMenuItem *menuItemCloseTab;
 
 @property (nonatomic, strong) NSMutableArray* tabViewControllers;
-
 @property (nonatomic, strong) NSMutableArray* importedUrls;
 @property (nonatomic, strong) KFEpubController *epubController;
 @property (nonatomic, strong) KFEpubContentModel *contentModel;

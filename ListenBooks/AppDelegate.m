@@ -21,6 +21,8 @@
 #import "BooksTreeController.h"
 #import "BookmarksArrayController.h"
 
+static NSTimeInterval const kModalSheetDelay = 1.0f;
+
 @implementation AppDelegate {
     CGFloat _inputViewWidth;
     CGFloat _bookmarksSplitPaneHeight;
@@ -303,8 +305,6 @@
     [openpanel setResolvesAliases:YES];
     [openpanel setAllowedFileTypes:[self allowedFileTypes]];
     
-    
-    
     [openpanel beginSheetModalForWindow:self.window completionHandler:^(NSInteger result) {
         
         DDLogVerbose(@"result: %ld, urls: %@", (long)result, [openpanel.URLs description]);
@@ -320,6 +320,9 @@
 
 - (void)processFiles:(NSArray*)fileURLs
 {
+    self.progressTitle.stringValue = NSLocalizedString(@"Importing file(s)", nil);
+    self.progressInfo.stringValue = NSLocalizedString(@"Loading…", nil);
+    
     [[NSApplication sharedApplication] beginSheet:self.progressWindow
                                    modalForWindow: self.window
                                     modalDelegate:self
@@ -331,28 +334,24 @@
     self.progressIndicator.minValue = 0;
     self.progressIndicator.maxValue = filesCount;
     self.progressIndicator.indeterminate = NO;
-    self.progressTitle.stringValue = NSLocalizedString(@"Importing files", nil);
-    self.progressInfo.stringValue = NSLocalizedString(@"Loading…", nil);
-    
-    DDLogVerbose(@"progressTitle: %@", self.progressTitle.stringValue);
-    DDLogVerbose(@"progressInfo: %@", self.progressInfo.stringValue);
-    DDLogVerbose(@"progressIndicatior: %.0f / %.0f", self.progressIndicator.doubleValue, self.progressIndicator.maxValue);
     
     NSURL* documentsDirectory = [self applicationDocumentsDirectory];
+    
+    
     __block NSInteger successFilesCount = 0;
-    __block NSTextField* progressInfo = self.progressInfo;
     __block NSProgressIndicator* progressIndicator = self.progressIndicator;
     __block NSMutableArray* copiedUrls = [NSMutableArray new];
     
     [fileURLs enumerateObjectsUsingBlock:^(NSURL* fileUrl, NSUInteger idx, BOOL *stop) {
         
         NSURL* sandboxedFileUrl = [documentsDirectory URLByAppendingPathComponent:[fileUrl lastPathComponent]];
-        progressInfo.stringValue = [fileUrl lastPathComponent];
-        progressIndicator.doubleValue = (double)(idx + 1);
         
-        DDLogVerbose(@"progressTitle: %@", self.progressTitle.stringValue);
-        DDLogVerbose(@"progressInfo: %@", self.progressInfo.stringValue);
-        DDLogVerbose(@"progressIndicatior: %.0f / %.0f", self.progressIndicator.doubleValue, self.progressIndicator.maxValue);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // Finish in main queue
+            self.progressInfo.stringValue = [fileUrl lastPathComponent];
+        });
+        
+        progressIndicator.doubleValue = (double)(idx + 1);
         
         NSError* error;
         NSFileManager* fileManager = [NSFileManager defaultManager];
@@ -383,13 +382,13 @@
     self.importedUrls = [NSMutableArray arrayWithArray:copiedUrls];
     self.progressInfo.stringValue = [NSString stringWithFormat:@"%@: %ld", NSLocalizedString(@"Total Imported Files", nil), successFilesCount];
     
-    [self performSelector:@selector(processImportedFiles) withObject:self afterDelay:2.5];
+    [self performSelector:@selector(processImportedFiles) withObject:self afterDelay:kModalSheetDelay];
     
 }
 
 - (void)didEndSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
 {
-    [sheet performSelector:@selector(orderOut:) withObject:self afterDelay:2];
+    [sheet performSelector:@selector(orderOut:) withObject:self afterDelay:kModalSheetDelay];
 }
 
 #pragma mark - Importing Book
@@ -401,10 +400,6 @@
     self.progressIndicator.minValue = 0;
     self.progressIndicator.maxValue = [self.importedUrls count];
     self.progressInfo.stringValue = [NSString stringWithFormat:@"%@: %ld", NSLocalizedString(@"Processing file(s)", nil), [self.importedUrls count]];
-    
-    DDLogVerbose(@"progressTitle: %@", self.progressTitle.stringValue);
-    DDLogVerbose(@"progressInfo: %@", self.progressInfo.stringValue);
-    DDLogVerbose(@"progressIndicatior: %.0f / %.0f", self.progressIndicator.doubleValue, self.progressIndicator.maxValue);
     
     [self importBookWithUrl:[self.importedUrls firstObject]];
 }
