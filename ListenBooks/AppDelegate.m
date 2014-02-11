@@ -24,6 +24,7 @@
 @implementation AppDelegate {
     CGFloat _inputViewWidth;
     CGFloat _bookmarksSplitPaneHeight;
+    CGFloat _tabBarFrameHeight;
 }
 
 @synthesize dateFormatter = _dateFormatter;
@@ -96,8 +97,9 @@
 {
     DDLogDebug(@"setupTabBar");
     
+    _tabBarFrameHeight = self.tabBar.frame.size.height;
     [self.menuItemCloseTab setEnabled:NO];
-    [self.tabBar setStyleNamed:@"Safari"];
+    [self.tabBar setStyleNamed:@"Aqua"];
     [self.tabBar setShowAddTabButton:YES];
     [self.tabBar setHideForSingleTab:YES];
 }
@@ -447,22 +449,48 @@
     NSSplitView* splitView = (NSSplitView*)notification.object;
     
     if ([splitView isEqualTo:self.splitView]) {
-        CGFloat width = self.inputView.frame.size.width;
-        if (width > 0) {
-            _inputViewWidth = width;
+        if ([self.splitView isSubviewCollapsed:self.inputView] == NO) {
+            _inputViewWidth = self.inputView.frame.size.width;;
         }
     }
     
     if ([splitView isEqualTo:self.subSplitView]) {
-        CGFloat height = self.bookmarksSplitPane.frame.size.height;
         KFToolbarItem *bookmarksItem = self.toolBar.leftItems[2];
-        if (height > bookmarksPaneMinHeight) {
-            _bookmarksSplitPaneHeight = height;
-            bookmarksItem.state = NSOnState;
-        } else {
+        if ([self.subSplitView isSubviewCollapsed:self.bookmarksSplitPane]) {
             bookmarksItem.state = NSOffState;
+        } else {
+            _bookmarksSplitPaneHeight = self.bookmarksSplitPane.frame.size.height;
+            bookmarksItem.state = NSOnState;
         }
     }
+}
+
+- (CGFloat)splitView:(NSSplitView *)splitView constrainMaxCoordinate:(CGFloat)proposedMaximumPosition ofSubviewAt:(NSInteger)dividerIndex
+{
+    if ([splitView isEqualTo:self.splitView]) {
+        CGFloat max = self.splitView.frame.size.width/3;
+        if (proposedMaximumPosition > max) {
+            proposedMaximumPosition = max;
+        }
+        return proposedMaximumPosition;
+    } else if ([splitView isEqualTo:self.subSplitView]) {
+        return proposedMaximumPosition;
+    }
+    return CGFLOAT_MAX;
+}
+
+- (CGFloat)splitView:(NSSplitView *)splitView constrainMinCoordinate:(CGFloat)proposedMinimumPosition ofSubviewAt:(NSInteger)dividerIndex
+{
+    if ([splitView isEqualTo:self.splitView]) {
+        CGFloat min = self.splitView.frame.size.width/5;
+        if (proposedMinimumPosition < min) {
+            proposedMinimumPosition = min;
+        }
+        return proposedMinimumPosition;
+    } else if ([splitView isEqualTo:self.subSplitView]) {
+        return proposedMinimumPosition;
+    }
+    return 0;
 }
 
 #pragma mark - CoreData
@@ -928,7 +956,7 @@
 	[viewImage lockFocus];
 	NSPoint tabOrigin = [self.tabView frame].origin;
 	tabOrigin.x += 10;
-	tabOrigin.y += kTabBarFrameHeight/2+2;
+	tabOrigin.y += _tabBarFrameHeight/2+2;
     [tabViewImage drawAtPoint:tabOrigin fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
     [tabViewImage compositeToPoint:tabOrigin operation:NSCompositeSourceOver];
 	[viewImage unlockFocus];
@@ -952,10 +980,10 @@
     
 	if ([tabBarView orientation] == MMTabBarHorizontalOrientation) {
 		offset->width = [tabBarView leftMargin];
-		offset->height = kTabBarFrameHeight;
+		offset->height = _tabBarFrameHeight;
 	} else {
 		offset->width = 0;
-		offset->height = kTabBarFrameHeight + [tabBarView topMargin];
+		offset->height = _tabBarFrameHeight + [tabBarView topMargin];
 	}
     
 	if (styleMask) {
@@ -997,7 +1025,7 @@
     NSArray* filteredArray = [constraints filteredArrayUsingPredicate:predicate];
     if (filteredArray.count != 0) {
         NSLayoutConstraint *constraint =  [constraints firstObject];
-        [[constraint animator] setConstant:kTabBarFrameHeight];
+        [[constraint animator] setConstant:_tabBarFrameHeight];
     }
 }
 

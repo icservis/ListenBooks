@@ -24,7 +24,4 @@
     #import "NSTreeController_Extensions.h"
     #import "NSTreeNode_Extensions.h"
 
-static CGFloat const bookmarksPaneMinHeight = 17;
-static CGFloat const kTabBarFrameHeight = 22;
-
 #endif
