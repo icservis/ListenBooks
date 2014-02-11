@@ -8,6 +8,10 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class BookmarksController;
+
 @interface BookmarksView : NSTableView
+
+@property (unsafe_unretained) IBOutlet BookmarksController* bookmarksController;
 
 @end
