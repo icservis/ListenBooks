@@ -309,81 +309,80 @@
         if (result == 0) {
             return ;
         }
-        
-        [[NSApplication sharedApplication] beginSheet:self.progressWindow
-                                       modalForWindow: self.window
-                                        modalDelegate:self
-                                       didEndSelector:@selector(didEndSheet:returnCode:contextInfo:)
-                                          contextInfo:nil];
-        
-        NSInteger filesCount = openpanel.URLs.count;
-        self.progressIndicator.doubleValue = 0;
-        self.progressIndicator.minValue = 0;
-        self.progressIndicator.maxValue = filesCount;
-        self.progressIndicator.indeterminate = NO;
-        self.progressTitle.stringValue = NSLocalizedString(@"Importing files", nil);
-        self.progressInfo.stringValue = NSLocalizedString(@"Loading…", nil);
-        
-        NSLog(@"progressTitle: %@", self.progressTitle.stringValue);
-        NSLog(@"progressInfo: %@", self.progressInfo.stringValue);
-        NSLog(@"progressIndicatior: %.0f / %.0f", self.progressIndicator.doubleValue, self.progressIndicator.maxValue);
-        
-        NSURL* documentsDirectory = [self applicationDocumentsDirectory];
-        __block NSInteger successFilesCount = 0;
-        __block NSTextField* progressInfo = self.progressInfo;
-        __block NSProgressIndicator* progressIndicator = self.progressIndicator;
-        __block NSMutableArray* copiedUrls = [NSMutableArray new];
-        
-        [openpanel.URLs enumerateObjectsUsingBlock:^(NSURL* fileUrl, NSUInteger idx, BOOL *stop) {
-            
-            NSURL* sandboxedFileUrl = [documentsDirectory URLByAppendingPathComponent:[fileUrl lastPathComponent]];
-            progressInfo.stringValue = [fileUrl lastPathComponent];
-            progressIndicator.doubleValue = (double)(idx + 1);
-            
-            NSLog(@"progressTitle: %@", self.progressTitle.stringValue);
-            NSLog(@"progressInfo: %@", self.progressInfo.stringValue);
-            NSLog(@"progressIndicatior: %.0f / %.0f", self.progressIndicator.doubleValue, self.progressIndicator.maxValue);
-            
-            NSError* error;
-            NSFileManager* fileManager = [NSFileManager defaultManager];
-            
-            if ([fileManager fileExistsAtPath:[sandboxedFileUrl path]]) {
-                
-                unsigned int counter = 1;
-                while ([fileManager fileExistsAtPath:[sandboxedFileUrl path]]) {
-                    
-                    NSString* fileName = [[fileUrl lastPathComponent] stringByDeletingPathExtension];
-                    NSString* fileExtension = [fileUrl pathExtension];
-                    NSString* newFileName = [NSString stringWithFormat:@"%@-%i.%@", fileName, counter++, fileExtension];
-                    sandboxedFileUrl = [[sandboxedFileUrl URLByDeletingLastPathComponent] URLByAppendingPathComponent:newFileName];
-                    if (counter > 512) break;
-                };
-            }
-            [fileManager copyItemAtURL:fileUrl toURL:sandboxedFileUrl error:&error];
-
-            if (error != nil) {
-                DDLogError(@"copying error: %@", [error localizedDescription]);
-                self.progressInfo.stringValue = [error localizedDescription];
-            } else {
-                successFilesCount ++;
-                [copiedUrls addObject:sandboxedFileUrl];
-            }
-        }];
-        
-        self.importedUrls = [NSMutableArray arrayWithArray:copiedUrls];
-        self.progressTitle.stringValue = NSLocalizedString(@"Processing files", nil);
-        self.progressIndicator.doubleValue = 0;
-        self.progressIndicator.minValue = 0;
-        self.progressIndicator.maxValue = [self.importedUrls count];
-        self.progressInfo.stringValue = [NSString stringWithFormat:@"%@: %ld", NSLocalizedString(@"Processing file(s)", nil), successFilesCount];
-        
-        NSLog(@"progressTitle: %@", self.progressTitle.stringValue);
-        NSLog(@"progressInfo: %@", self.progressInfo.stringValue);
-        NSLog(@"progressIndicatior: %.0f / %.0f", self.progressIndicator.doubleValue, self.progressIndicator.maxValue);
-        
-        [self importBookWithUrl:[self.importedUrls firstObject]];
-        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // Finish in main queue
+            [self processFiles:openpanel.URLs];
+        });
     }];
+}
+
+- (void)processFiles:(NSArray*)fileURLs
+{
+    [[NSApplication sharedApplication] beginSheet:self.progressWindow
+                                   modalForWindow: self.window
+                                    modalDelegate:self
+                                   didEndSelector:@selector(didEndSheet:returnCode:contextInfo:)
+                                      contextInfo:nil];
+    
+    NSInteger filesCount = fileURLs.count;
+    self.progressIndicator.doubleValue = 0;
+    self.progressIndicator.minValue = 0;
+    self.progressIndicator.maxValue = filesCount;
+    self.progressIndicator.indeterminate = NO;
+    self.progressTitle.stringValue = NSLocalizedString(@"Importing files", nil);
+    self.progressInfo.stringValue = NSLocalizedString(@"Loading…", nil);
+    
+    DDLogVerbose(@"progressTitle: %@", self.progressTitle.stringValue);
+    DDLogVerbose(@"progressInfo: %@", self.progressInfo.stringValue);
+    DDLogVerbose(@"progressIndicatior: %.0f / %.0f", self.progressIndicator.doubleValue, self.progressIndicator.maxValue);
+    
+    NSURL* documentsDirectory = [self applicationDocumentsDirectory];
+    __block NSInteger successFilesCount = 0;
+    __block NSTextField* progressInfo = self.progressInfo;
+    __block NSProgressIndicator* progressIndicator = self.progressIndicator;
+    __block NSMutableArray* copiedUrls = [NSMutableArray new];
+    
+    [fileURLs enumerateObjectsUsingBlock:^(NSURL* fileUrl, NSUInteger idx, BOOL *stop) {
+        
+        NSURL* sandboxedFileUrl = [documentsDirectory URLByAppendingPathComponent:[fileUrl lastPathComponent]];
+        progressInfo.stringValue = [fileUrl lastPathComponent];
+        progressIndicator.doubleValue = (double)(idx + 1);
+        
+        DDLogVerbose(@"progressTitle: %@", self.progressTitle.stringValue);
+        DDLogVerbose(@"progressInfo: %@", self.progressInfo.stringValue);
+        DDLogVerbose(@"progressIndicatior: %.0f / %.0f", self.progressIndicator.doubleValue, self.progressIndicator.maxValue);
+        
+        NSError* error;
+        NSFileManager* fileManager = [NSFileManager defaultManager];
+        
+        if ([fileManager fileExistsAtPath:[sandboxedFileUrl path]]) {
+            
+            unsigned int counter = 1;
+            while ([fileManager fileExistsAtPath:[sandboxedFileUrl path]]) {
+                
+                NSString* fileName = [[fileUrl lastPathComponent] stringByDeletingPathExtension];
+                NSString* fileExtension = [fileUrl pathExtension];
+                NSString* newFileName = [NSString stringWithFormat:@"%@-%i.%@", fileName, counter++, fileExtension];
+                sandboxedFileUrl = [[sandboxedFileUrl URLByDeletingLastPathComponent] URLByAppendingPathComponent:newFileName];
+                if (counter > 512) break;
+            };
+        }
+        [fileManager copyItemAtURL:fileUrl toURL:sandboxedFileUrl error:&error];
+        
+        if (error != nil) {
+            DDLogError(@"copying error: %@", [error localizedDescription]);
+            self.progressInfo.stringValue = [error localizedDescription];
+        } else {
+            successFilesCount ++;
+            [copiedUrls addObject:sandboxedFileUrl];
+        }
+    }];
+    
+    self.importedUrls = [NSMutableArray arrayWithArray:copiedUrls];
+    self.progressInfo.stringValue = [NSString stringWithFormat:@"%@: %ld", NSLocalizedString(@"Total Imported Files", nil), successFilesCount];
+    
+    [self performSelector:@selector(processImportedFiles) withObject:self afterDelay:2.5];
+    
 }
 
 - (void)didEndSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
@@ -392,6 +391,21 @@
 }
 
 #pragma mark - Importing Book
+
+- (void)processImportedFiles
+{
+    self.progressTitle.stringValue = NSLocalizedString(@"Processing files", nil);
+    self.progressIndicator.doubleValue = 0;
+    self.progressIndicator.minValue = 0;
+    self.progressIndicator.maxValue = [self.importedUrls count];
+    self.progressInfo.stringValue = [NSString stringWithFormat:@"%@: %ld", NSLocalizedString(@"Processing file(s)", nil), [self.importedUrls count]];
+    
+    DDLogVerbose(@"progressTitle: %@", self.progressTitle.stringValue);
+    DDLogVerbose(@"progressInfo: %@", self.progressInfo.stringValue);
+    DDLogVerbose(@"progressIndicatior: %.0f / %.0f", self.progressIndicator.doubleValue, self.progressIndicator.maxValue);
+    
+    [self importBookWithUrl:[self.importedUrls firstObject]];
+}
 
 - (void)importBookWithUrl:(NSURL*)sandboxedFileUrl
 {
@@ -680,9 +694,9 @@
     DDLogVerbose(@"inserted book: %@", [book description]);
     self.progressIndicator.doubleValue = self.progressIndicator.maxValue - [self.importedUrls count];
     
-    NSLog(@"progressTitle: %@", self.progressTitle.stringValue);
-    NSLog(@"progressInfo: %@", self.progressInfo.stringValue);
-    NSLog(@"progressIndicatior: %.0f / %.0f", self.progressIndicator.doubleValue, self.progressIndicator.maxValue);
+    DDLogVerbose(@"progressTitle: %@", self.progressTitle.stringValue);
+    DDLogVerbose(@"progressInfo: %@", self.progressInfo.stringValue);
+    DDLogVerbose(@"progressIndicatior: %.0f / %.0f", self.progressIndicator.doubleValue, self.progressIndicator.maxValue);
     
     if ([self.importedUrls count] == 0) {
         [self.booksTreeController setSelectedObject:book];
@@ -702,8 +716,8 @@
     self.progressInfo.stringValue = error.localizedDescription;
     [self unlinkBookWithUrl:controller.epubURL];
     
-    NSLog(@"progressTitle: %@", self.progressTitle.stringValue);
-    NSLog(@"progressInfo: %@", self.progressInfo.stringValue);
+    DDLogVerbose(@"progressTitle: %@", self.progressTitle.stringValue);
+    DDLogVerbose(@"progressInfo: %@", self.progressInfo.stringValue);
     
     if ([self.importedUrls count] == 0) {
         self.progressInfo.stringValue = NSLocalizedString(@"Importing files completed", nil);
@@ -863,7 +877,7 @@
 }
 
 - (BOOL)tabView:(NSTabView *)aTabView acceptedDraggingInfo:(id <NSDraggingInfo>)draggingInfo onTabViewItem:(NSTabViewItem *)tabViewItem {
-	NSLog(@"acceptedDraggingInfo: %@ onTabViewItem: %@", [[draggingInfo draggingPasteboard] stringForType:[[[draggingInfo draggingPasteboard] types] objectAtIndex:0]], [tabViewItem label]);
+	DDLogVerbose(@"acceptedDraggingInfo: %@ onTabViewItem: %@", [[draggingInfo draggingPasteboard] stringForType:[[[draggingInfo draggingPasteboard] types] objectAtIndex:0]], [tabViewItem label]);
     return YES;
 }
 
@@ -952,19 +966,19 @@
 }
 
 - (MMTabBarView *)tabView:(NSTabView *)aTabView newTabBarViewForDraggedTabViewItem:(NSTabViewItem *)tabViewItem atPoint:(NSPoint)point {
-	NSLog(@"newTabBarViewForDraggedTabViewItem: %@ atPoint: %@", [tabViewItem label], NSStringFromPoint(point));
+	DDLogVerbose(@"newTabBarViewForDraggedTabViewItem: %@ atPoint: %@", [tabViewItem label], NSStringFromPoint(point));
     
 	//create a new window controller with no tab items
     return nil;
 }
 
 - (void)tabView:(NSTabView *)aTabView closeWindowForLastTabViewItem:(NSTabViewItem *)tabViewItem {
-	NSLog(@"closeWindowForLastTabViewItem: %@", [tabViewItem label]);
+	DDLogVerbose(@"closeWindowForLastTabViewItem: %@", [tabViewItem label]);
 	[[self window] close];
 }
 
 - (void)tabView:(NSTabView *)aTabView tabBarViewDidHide:(MMTabBarView *)tabBarView {
-	//NSLog(@"tabBarViewDidHide: %@", NSStringFromRect(tabBarView.frame));
+	DDLogVerbose(@"tabBarViewDidHide: %@", NSStringFromRect(tabBarView.frame));
     
     NSArray *constraints = tabBarView.constraints;
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"firstAttribute = %d", NSLayoutAttributeHeight];
@@ -976,7 +990,7 @@
 }
 
 - (void)tabView:(NSTabView *)aTabView tabBarViewDidUnhide:(MMTabBarView *)tabBarView {
-	//NSLog(@"tabBarViewDidUnhide: %@", NSStringFromRect(tabBarView.frame));
+	DDLogVerbose(@"tabBarViewDidUnhide: %@", NSStringFromRect(tabBarView.frame));
     
     NSArray *constraints = tabBarView.constraints;
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"firstAttribute = %d", NSLayoutAttributeHeight];
