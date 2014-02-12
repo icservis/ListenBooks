@@ -494,36 +494,6 @@ CA
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="View" id="295">
-                    <menu key="submenu" title="View" id="296">
-                        <items>
-                            <menuItem title="Show Toolbar" keyEquivalent="t" id="297">
-                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
-                                <connections>
-                                    <action selector="toggleToolbarShown:" target="-1" id="366"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Customize Toolbar…" id="298">
-                                <connections>
-                                    <action selector="runToolbarCustomizationPalette:" target="-1" id="365"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem isSeparatorItem="YES" id="fmb-Ne-7LB"/>
-                            <menuItem title="New Tab" id="MKv-Qh-KAh">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="addNewTab:" target="494" id="SYN-6D-knM"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Close Tab" id="tVW-of-TOE">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="closeTab:" target="494" id="iJk-5b-Xna"/>
-                                </connections>
-                            </menuItem>
-                        </items>
-                    </menu>
-                </menuItem>
                 <menuItem title="Window" id="19">
                     <menu key="submenu" title="Window" systemMenu="window" id="24">
                         <items>
@@ -1047,8 +1017,6 @@ CA
                 <outlet property="listCollectionView" destination="OIY-B8-UiM" id="xHv-n4-4Ia"/>
                 <outlet property="listSearchField" destination="K7h-Fx-cdi" id="r5G-62-7EM"/>
                 <outlet property="listToolBarView" destination="nbg-2g-L9E" id="k4O-B8-Nho"/>
-                <outlet property="menuItemCloseTab" destination="tVW-of-TOE" id="DWK-gD-Xdi"/>
-                <outlet property="menuItemNewTab" destination="MKv-Qh-KAh" id="1TJ-8s-reC"/>
                 <outlet property="progressIndicator" destination="q2a-FS-yay" id="IIP-Lz-U8j"/>
                 <outlet property="progressInfo" destination="Jwp-mn-foe" id="6ri-2d-ahL"/>
                 <outlet property="progressTitle" destination="C5J-j3-cz2" id="TZC-ZM-lm5"/>

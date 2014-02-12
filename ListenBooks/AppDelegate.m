@@ -108,7 +108,6 @@ static NSTimeInterval const kModalSheetDelay = 1.0f;
     DDLogDebug(@"setupTabBar");
     
     _tabBarFrameHeight = self.tabBar.frame.size.height;
-    [self.menuItemCloseTab setEnabled:NO];
     [self.tabBar setStyleNamed:@"Aqua"];
     [self.tabBar setShowAddTabButton:YES];
     [self.tabBar setHideForSingleTab:YES];
@@ -965,12 +964,6 @@ static NSTimeInterval const kModalSheetDelay = 1.0f;
     NSUInteger tabsCount = [[tabView tabViewItems] count];
     DDLogVerbose(@"tabViewDidChangeNumberOfTabViewItems: %lu", (unsigned long)tabsCount);
     DDLogVerbose(@"tabViewControllers: %@", self.tabViewControllers);
-    
-    if (tabsCount > 1) {
-        [self.menuItemCloseTab setEnabled:YES];
-    } else {
-        [self.menuItemCloseTab setEnabled:NO];
-    }
 }
 
 - (BOOL)tabView:(NSTabView *)aTabView shouldCloseTabViewItem:(NSTabViewItem *)tabViewItem {

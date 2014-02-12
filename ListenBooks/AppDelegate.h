@@ -55,8 +55,6 @@ extern NSString* const TabBarCountDidChangeNotification;
 @property (weak) IBOutlet NSTextField *progressInfo;
 
 @property (weak) IBOutlet NSMenu *actionMenu;
-@property (weak) IBOutlet NSMenuItem *menuItemNewTab;
-@property (weak) IBOutlet NSMenuItem *menuItemCloseTab;
 
 @property (nonatomic, strong) NSMutableArray* tabViewControllers;
 @property (nonatomic, strong) NSMutableArray* importedUrls;
