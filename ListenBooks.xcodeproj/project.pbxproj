@@ -54,8 +54,6 @@
 		8478C42A185CA74000B06779 /* GetMetadataForFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 8478C429185CA74000B06779 /* GetMetadataForFile.m */; };
 		8478C42D185CA74000B06779 /* MySpotlightImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8478C42C185CA74000B06779 /* MySpotlightImporter.m */; };
 		847A005B186F9B5D00039910 /* NSTextView+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 847A005A186F9B5D00039910 /* NSTextView+Extensions.m */; };
-		847EF68718AABEAF00A0DC04 /* ExportWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 847EF68518AABEAF00A0DC04 /* ExportWindowController.m */; };
-		847EF68818AABEAF00A0DC04 /* ExportWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 847EF68618AABEAF00A0DC04 /* ExportWindowController.xib */; };
 		847EF68B18AAC7F800A0DC04 /* MainWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 847EF68A18AAC7F800A0DC04 /* MainWindow.m */; };
 		848C954018663FD00020FDC9 /* BooksTreeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 848C953F18663FD00020FDC9 /* BooksTreeController.m */; };
 		848C954118663FD00020FDC9 /* BooksTreeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 848C953F18663FD00020FDC9 /* BooksTreeController.m */; };
@@ -249,9 +247,6 @@
 		8478C43B185CA80200B06779 /* ListenBooks.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ListenBooks.entitlements; sourceTree = "<group>"; };
 		847A0059186F9B5D00039910 /* NSTextView+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTextView+Extensions.h"; sourceTree = "<group>"; };
 		847A005A186F9B5D00039910 /* NSTextView+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTextView+Extensions.m"; sourceTree = "<group>"; };
-		847EF68418AABEAF00A0DC04 /* ExportWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportWindowController.h; sourceTree = "<group>"; };
-		847EF68518AABEAF00A0DC04 /* ExportWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportWindowController.m; sourceTree = "<group>"; };
-		847EF68618AABEAF00A0DC04 /* ExportWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExportWindowController.xib; sourceTree = "<group>"; };
 		847EF68918AAC7F800A0DC04 /* MainWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainWindow.h; sourceTree = "<group>"; };
 		847EF68A18AAC7F800A0DC04 /* MainWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainWindow.m; sourceTree = "<group>"; };
 		848C953E18663FD00020FDC9 /* BooksTreeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BooksTreeController.h; sourceTree = "<group>"; };
@@ -572,7 +567,7 @@
 				84E27E7D186249D100317411 /* BookView */,
 				84E27E8118624B3800317411 /* ImageView */,
 				84DA8DB418A764140079BD7C /* InfoWindow */,
-				847EF68318AABE9300A0DC04 /* ExportWindow */,
+				847EF68318AABE9300A0DC04 /* PreferencesWindow */,
 				84DA8DB518A76D060079BD7C /* Classes */,
 				84E27E7F186249E400317411 /* Resources */,
 				8478C3E9185CA73F00B06779 /* Supporting Files */,
@@ -695,14 +690,11 @@
 			name = MainWindow;
 			sourceTree = "<group>";
 		};
-		847EF68318AABE9300A0DC04 /* ExportWindow */ = {
+		847EF68318AABE9300A0DC04 /* PreferencesWindow */ = {
 			isa = PBXGroup;
 			children = (
-				847EF68418AABEAF00A0DC04 /* ExportWindowController.h */,
-				847EF68518AABEAF00A0DC04 /* ExportWindowController.m */,
-				847EF68618AABEAF00A0DC04 /* ExportWindowController.xib */,
 			);
-			name = ExportWindow;
+			name = PreferencesWindow;
 			sourceTree = "<group>";
 		};
 		848C955B186646E50020FDC9 /* Categories Extensions */ = {
@@ -1094,7 +1086,6 @@
 				84DD96381865C98B00B9BD5A /* image1.jpg in Resources */,
 				84DD963E1865C98B00B9BD5A /* image7.jpg in Resources */,
 				84DD96421865C98B00B9BD5A /* image11.jpg in Resources */,
-				847EF68818AABEAF00A0DC04 /* ExportWindowController.xib in Resources */,
 				84DD963C1865C98B00B9BD5A /* image5.jpg in Resources */,
 				84AB042E186871DD007106F4 /* README.txt in Resources */,
 				84AB04AB186871E9007106F4 /* README.md in Resources */,
@@ -1143,7 +1134,6 @@
 				84AB042D186871DD007106F4 /* DDMultiFormatter.m in Sources */,
 				848C954418663FF60020FDC9 /* BookmarksArrayController.m in Sources */,
 				84AB0429186871DD007106F4 /* DDLog.m in Sources */,
-				847EF68718AABEAF00A0DC04 /* ExportWindowController.m in Sources */,
 				8444EAA7185F83D900F90B48 /* KFEpubParser.m in Sources */,
 				8478C3F6185CA73F00B06779 /* AppDelegate.m in Sources */,
 				84AB0428186871DD007106F4 /* DDFileLogger.m in Sources */,

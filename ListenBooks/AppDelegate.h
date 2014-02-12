@@ -82,6 +82,7 @@ extern NSString* const TabBarCountDidChangeNotification;
 - (IBAction)closeTab:(id)sender;
 - (void)closeTabWithItem:(NSTabViewItem*)tabViewItem;
 - (void)updateToolBarContentForTabView:(NSTabViewItem*)tabViewItem;
+- (void)exportBook:(Book*)book;
 - (IBAction)saveAction:(id)sender;
 
 @end

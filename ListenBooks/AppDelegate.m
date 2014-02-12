@@ -178,6 +178,16 @@ static NSTimeInterval const kModalSheetDelay = 1.0f;
     }
 }
 
+- (void)updateSelectionWithTabBarViewItem:(NSTabViewItem*)tabViewItem
+{
+    DDLogVerbose(@"tabViewItem: %@", tabViewItem);
+    [self.tabViewControllers enumerateObjectsUsingBlock:^(id <TabBarControllerProtocol>controller, NSUInteger idx, BOOL *stop) {
+        if ([controller.tabViewItem isEqualTo:tabViewItem]) {
+            
+        }
+    }];
+}
+
 
 #pragma mark - NSMenu Delegate
 
@@ -342,24 +352,24 @@ static NSTimeInterval const kModalSheetDelay = 1.0f;
 - (IBAction)openImportDialog:(id)sender
 {
     DDLogDebug(@"openImportDialog");
-    NSOpenPanel* openpanel = [NSOpenPanel openPanel];
-    [openpanel setCanChooseFiles:YES];
-    [openpanel setCanCreateDirectories:NO];
-    [openpanel setCanSelectHiddenExtension:YES];
-    [openpanel setCanChooseDirectories:NO];
-    [openpanel setAllowsMultipleSelection:YES];
-    [openpanel setResolvesAliases:YES];
-    [openpanel setAllowedFileTypes:[self allowedFileTypes]];
+    NSOpenPanel* openPanel = [NSOpenPanel openPanel];
+    [openPanel setCanChooseFiles:YES];
+    [openPanel setCanCreateDirectories:NO];
+    [openPanel setCanSelectHiddenExtension:YES];
+    [openPanel setCanChooseDirectories:NO];
+    [openPanel setAllowsMultipleSelection:YES];
+    [openPanel setResolvesAliases:YES];
+    [openPanel setAllowedFileTypes:[self allowedFileTypes]];
     
-    [openpanel beginSheetModalForWindow:self.window completionHandler:^(NSInteger result) {
+    [openPanel beginSheetModalForWindow:self.window completionHandler:^(NSInteger result) {
         
-        DDLogVerbose(@"result: %ld, urls: %@", (long)result, [openpanel.URLs description]);
+        DDLogVerbose(@"result: %ld, urls: %@", (long)result, [openPanel.URLs description]);
         if (result == 0) {
             return ;
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             // Finish in main queue
-            [self processFiles:openpanel.URLs];
+            [self processFiles:openPanel.URLs];
         });
     }];
 }
@@ -469,6 +479,17 @@ static NSTimeInterval const kModalSheetDelay = 1.0f;
     if (error != nil) {
         DDLogError(@"deleting error: %@", [error localizedDescription]);
     }
+}
+
+#pragma mark - Exporting Book
+
+- (void)exportBook:(Book*)book
+{
+    NSSavePanel* savePanel = [NSSavePanel savePanel];
+    [savePanel beginSheetModalForWindow:self.window completionHandler:^(NSInteger result) {
+        DDLogVerbose(@"result: %ld, url: %@", (long)result, [savePanel.URL description]);
+        
+    }];
 }
 
 #pragma mark - NSSplitViewDelegate
@@ -784,8 +805,11 @@ static NSTimeInterval const kModalSheetDelay = 1.0f;
     DDLogVerbose(@"progressInfo: %@", self.progressInfo.stringValue);
     DDLogVerbose(@"progressIndicatior: %.0f / %.0f", self.progressIndicator.doubleValue, self.progressIndicator.maxValue);
     
+    [self.booksTreeController setSelectedObject:book];
+    [self addNewTabWithBook:book];
+    
     if ([self.importedUrls count] == 0) {
-        [self.booksTreeController setSelectedObject:book];
+        
         self.progressInfo.stringValue = NSLocalizedString(@"Importing files completed", nil);
         [NSApp endSheet:self.progressWindow];
     } else {
@@ -793,7 +817,6 @@ static NSTimeInterval const kModalSheetDelay = 1.0f;
     }
     self.contentModel = nil;
 }
-
 
 - (void)epubController:(KFEpubController *)controller didFailWithError:(NSError *)error
 {
@@ -919,6 +942,7 @@ static NSTimeInterval const kModalSheetDelay = 1.0f;
     }
     //self.window.title = [tabViewItem label];
     [self updateToolBarContentForTabView:tabViewItem];
+    [self updateSelectionWithTabBarViewItem:tabViewItem];
 }
 
 - (void)tabViewDidChangeNumberOfTabViewItems:(NSTabView *)tabView
