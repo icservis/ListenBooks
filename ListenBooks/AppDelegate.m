@@ -7,12 +7,15 @@
 //
 
 #import "AppDelegate.h"
-#import "AppDelegate+TabBarView.h"
 #import "KFToolbar.h"
 #import "KFToolbarItem.h"
 #import <MMTabBarView/MMTabBarView.h>
 #import <MMTabBarView/MMTabStyle.h>
 #import "TabBarControllerProtocol.h"
+
+#import "Book.h"
+#import "Bookmark.h"
+#import "Page.h"
 
 #import "ListViewController.h"
 #import "BookViewController.h"
@@ -458,7 +461,7 @@ static NSTimeInterval const kModalSheetDelay = 1.0f;
 
 - (void)processImportedFiles
 {
-    self.progressTitle.stringValue = NSLocalizedString(@"Processing files", nil);
+    self.progressTitle.stringValue = NSLocalizedString(@"Processing file(s)", nil);
     self.progressIndicator.doubleValue = 0;
     self.progressIndicator.minValue = 0;
     self.progressIndicator.maxValue = [self.importedUrls count];
@@ -672,7 +675,14 @@ static NSTimeInterval const kModalSheetDelay = 1.0f;
     
     NSURL *url = [applicationFilesDirectory URLByAppendingPathComponent:@"ListenBooks.storedata"];
     NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:mom];
-    if (![coordinator addPersistentStoreWithType:NSXMLStoreType configuration:nil URL:url options:nil error:&error]) {
+    
+    
+    NSDictionary *options = @{NSMigratePersistentStoresAutomaticallyOption:@YES,
+                              NSInferMappingModelAutomaticallyOption:@YES,
+                              NSSQLitePragmasOption: @{@"journal_mode": @"WAL"}
+                              };
+    
+    if (![coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:options error:&error]) {
         [[NSApplication sharedApplication] presentError:error];
         return nil;
     }
@@ -831,7 +841,12 @@ static NSTimeInterval const kModalSheetDelay = 1.0f;
     if ([self.importedUrls count] == 0) {
         
         self.progressInfo.stringValue = NSLocalizedString(@"Importing files completed", nil);
-        [NSApp endSheet:self.progressWindow];
+        
+        [self.progressIndicator setIndeterminate:YES];
+        [self.progressIndicator startAnimation:nil];
+        self.progressTitle.stringValue = NSLocalizedString(@"Converting File(s)", nil);
+
+        //[NSApp endSheet:self.progressWindow];
     } else {
         [self importBookWithUrl:[self.importedUrls firstObject]];
     }

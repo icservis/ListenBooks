@@ -9,12 +9,24 @@
 #import "AppDelegate.h"
 #import "BookViewController.h"
 #import "BookPageViewController.h"
+#import "TabBarControllerProtocol.h"
 #import "NSTextView+Extensions.h"
+#import "Book.h"
+#import "Page.h"
 
 @interface BookViewController ()
 
-@property (strong) NSMutableArray *data;
-@property (assign) id initialSelectedObject;
+@property (strong) id initialSelectedObject;
+@property (nonatomic, strong) NSURL *libraryURL;
+@property (nonatomic, strong) KFEpubController *epubController;
+@property (nonatomic, strong) KFEpubContentModel *contentModel;
+
+@property (weak) IBOutlet NSView *toolBarView;
+@property (weak) IBOutlet NSTextField *titleField;
+@property (weak) IBOutlet NSView *pageView;
+@property (strong) IBOutlet NSPageController *pageController;
+@property (weak) IBOutlet NSProgressIndicator *progressIndicator;
+@property (weak) IBOutlet NSSlider *textSizeSlider;
 
 @end
 
@@ -42,11 +54,80 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    self.initialSelectedObject = nil;
+    self.libraryURL = nil;
+    self.contentModel = nil;
 }
 
 - (void)contextDidChange:(NSNotification*)notification
 {
     //AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
+}
+
+- (Book*)book
+{
+    return _book;
+}
+
+- (void)setBook:(Book *)book
+{
+    [self resetPageView];
+    self.processing = NO;
+    if (![book isEqual:_book]) {
+        DDLogVerbose(@"self.book: %@", book);
+        
+        if ([book.pages count] > 0) {
+            [self loadBookPageControllerContent:book];
+        } else {
+            [self setupBookPageControllerContent:book.fileUrl];
+        }
+    }
+    _book = book;
+}
+
+- (void)resetPageView
+{
+    DDLogVerbose(@"resetPageView");
+    
+    self.initialSelectedObject = nil;
+    self.libraryURL = nil;
+    self.contentModel = nil;
+    
+    self.titleField.stringValue = NSLocalizedString(@"No Selection", nil);
+    [[self.pageView subviews] enumerateObjectsUsingBlock:^(NSView* subView, NSUInteger idx, BOOL *stop) {
+        if (![subView isKindOfClass:[NSProgressIndicator class]]) {
+            [subView removeFromSuperview];
+        }
+    }];
+}
+
+- (void)loadBookPageControllerContent:(Book*)book
+{
+    DDLogVerbose(@"loadBookPageControllerContent: %@", book);
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        // Finish in main queue
+        self.titleField.stringValue = book.title;
+        __block NSMutableArray* spinedData = [[NSMutableArray alloc] init];
+        
+        NSArray* pages = [[book.pages allObjects] sortedArrayUsingComparator:^NSComparisonResult(Page* obj1, Page* obj2) {
+            NSInteger sortIndex1 = [obj1.sortIndex integerValue];
+            NSInteger sortIndex2 = [obj2.sortIndex integerValue];
+            
+            if (sortIndex1 < sortIndex2) {
+                return NSOrderedAscending;
+            } else if (sortIndex1 > sortIndex2) {
+                return NSOrderedDescending;
+            } else {
+                return NSOrderedSame;
+            }
+        }];
+        [pages enumerateObjectsUsingBlock:^(Page* page, NSUInteger idx, BOOL *stop) {
+            [spinedData addObject:page.data];
+        }];
+        [self.pageController setArrangedObjects:[[NSMutableArray alloc] initWithArray:spinedData]];
+    });
+    
 }
 
 - (void)setupBookPageControllerContent:(NSURL*)epubURL
@@ -60,36 +141,6 @@
     [self.epubController openAsynchronous:YES];
 }
 
-- (Book*)book
-{
-    return _book;
-}
-
-- (void)setBook:(Book *)book
-{
-    if (book == nil) {
-        [self resetPageView];
-    } else if (![book isEqual:_book]) {
-        [self resetPageView];
-        [self setupBookPageControllerContent:book.fileUrl];
-    }
-    _book = book;
-    
-}
-
-- (void)resetPageView
-{
-    DDLogVerbose(@"resetPageView");
-    self.data = nil;
-    self.initialSelectedObject = nil;
-    self.titleField.stringValue = NSLocalizedString(@"No Selection", nil);
-    [[self.pageView subviews] enumerateObjectsUsingBlock:^(NSView* subView, NSUInteger idx, BOOL *stop) {
-        if (![subView isKindOfClass:[NSProgressIndicator class]]) {
-            [subView removeFromSuperview];
-        }
-    }];
-}
-
 - (IBAction)textSizeSliderChange:(id)sender
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:TextSizeDidChangeNotificaton object:sender];
@@ -99,18 +150,18 @@
 
 - (void)epubController:(KFEpubController *)controller willOpenEpub:(NSURL *)epubURL
 {
+    DDLogVerbose(@"epubURL: %@", [epubURL absoluteString]);
+    self.processing = YES;
     self.titleField.stringValue = NSLocalizedString(@"Opening Book…", nil);
-    [self.progressIndicator startAnimation:nil];
 }
 
 
 - (void)epubController:(KFEpubController *)controller didOpenEpub:(KFEpubContentModel *)contentModel
 {
     
-    //DDLogVerbose(@"meta %@", contentModel.metaData);
-    //DDLogVerbose(@"spine %@", [contentModel.spine description]);
-    //DDLogVerbose(@"guide %@", [contentModel.guide description]);
+    DDLogVerbose(@"meta %@", contentModel.metaData);
     
+    [self.progressIndicator startAnimation:nil];
     self.titleField.stringValue = [contentModel.metaData valueForKey:@"title"];
     
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
@@ -119,11 +170,6 @@
         __block NSMutableArray* spinedData = [[NSMutableArray alloc] init];
         [contentModel.spine enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             
-            if ([contentModel.spine[idx] isKindOfClass:[NSNull class]] || [contentModel.manifest[contentModel.spine[idx]] isKindOfClass:[NSNull class]]) {
-                *stop = YES;
-                spinedData = nil;
-            }
-            
             NSString* media = contentModel.manifest[contentModel.spine[idx]][@"media"];
             
             if ([media isEqualToString:@"application/xhtml+xml"]) {
@@ -131,25 +177,34 @@
                 NSString *contentFile = contentModel.manifest[contentModel.spine[idx]][@"href"];
                 NSURL *contentURL = [controller.epubContentBaseURL URLByAppendingPathComponent:contentFile];
                 NSAttributedString *attributedString = [[NSAttributedString alloc] initWithURL:contentURL documentAttributes:nil];
+                
                 if (attributedString != nil) {
+                    
                     [spinedData addObject:attributedString];
+                    
+                    Page *page = [NSEntityDescription insertNewObjectForEntityForName:@"Page" inManagedObjectContext:self.managedObjectContext];
+                    page.book = self.book;
+                    page.sortIndex = [NSNumber numberWithInteger:idx];
+                    page.data = attributedString;
                 }
             }
         }];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             // Finish in main queue
-            [self.progressIndicator stopAnimation:nil];
+            AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
+            [appDelegate saveAction:nil];
             
             if ([spinedData count] > 0) {
                 self.contentModel = contentModel;
-                self.data = [[NSMutableArray alloc] initWithArray:spinedData];
-                [self.pageController setArrangedObjects:self.data];
+                [self.pageController setArrangedObjects:[[NSMutableArray alloc] initWithArray:spinedData]];
             } else {
-                self.contentModel = nil;
-                self.data = nil;
                 [self resetPageView];
             }
+            
+            [self.progressIndicator stopAnimation:nil];
+            self.processing = NO;
+            [self checkProcessingStatusOfAllControllers];
         });
     });
 }
@@ -158,8 +213,33 @@
 - (void)epubController:(KFEpubController *)controller didFailWithError:(NSError *)error
 {
     DDLogError(@"epubController:didFailWithError: %@", error.description);
-    [self.progressIndicator stopAnimation:nil];
     [self resetPageView];
+    
+    [self.progressIndicator stopAnimation:nil];
+    self.processing = NO;
+    [self checkProcessingStatusOfAllControllers];
+}
+
+- (void)checkProcessingStatusOfAllControllers
+{
+    DDLogVerbose(@"checkProcessingStatusOfAllControllers");
+    AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
+    __block BOOL progress = NO;
+    [appDelegate.tabViewControllers enumerateObjectsUsingBlock:^(id <TabBarControllerProtocol>controller, NSUInteger idx, BOOL *stop) {
+        if ([controller isKindOfClass:[self class]]) {
+            BookViewController* bookViewController = (BookViewController*)controller;
+            if (bookViewController.processing == YES) {
+                progress = YES;
+                *stop = YES;
+            }
+        }
+    }];
+    if (progress == NO) {
+        DDLogVerbose(@"progressWindow stop");
+        [NSApp endSheet:appDelegate.progressWindow];
+    } else {
+        appDelegate.progressInfo.stringValue = self.book.title;
+    }
 }
 
 #pragma mark - BookPageControllerDelegate

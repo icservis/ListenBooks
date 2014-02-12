@@ -2,42 +2,44 @@
 //  Book.m
 //  ListenBooks
 //
-//  Created by Libor Kučera on 21/12/13.
-//  Copyright (c) 2013 IC Servis. All rights reserved.
+//  Created by Libor Kučera on 12/02/14.
+//  Copyright (c) 2014 IC Servis. All rights reserved.
 //
 
 #import "Book.h"
 #import "Book.h"
 #import "Bookmark.h"
+#import "Page.h"
 
 
 @implementation Book
 
-@dynamic title;
 @dynamic author;
-@dynamic fileUrl;
-@dynamic cover;
-@dynamic type;
-@dynamic encryption;
-@dynamic created;
-@dynamic language;
-@dynamic subject;
-@dynamic source;
-@dynamic rights;
-@dynamic publisher;
-@dynamic identifier;
-@dynamic date;
-@dynamic creator;
 @dynamic canCollapse;
 @dynamic canExpand;
+@dynamic cover;
+@dynamic created;
+@dynamic creator;
+@dynamic date;
+@dynamic encryption;
+@dynamic fileUrl;
+@dynamic identifier;
 @dynamic isEditable;
 @dynamic isExpanded;
 @dynamic isLeaf;
 @dynamic isSelectable;
 @dynamic isSmart;
 @dynamic isSpecialGroup;
+@dynamic language;
+@dynamic publisher;
+@dynamic rights;
+@dynamic source;
+@dynamic subject;
+@dynamic title;
+@dynamic type;
 @dynamic bookmarks;
-@dynamic parent;
 @dynamic children;
+@dynamic pages;
+@dynamic parent;
 
 @end
