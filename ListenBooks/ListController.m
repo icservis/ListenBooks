@@ -58,7 +58,21 @@
 {
     AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
     [[self.listArrayController selectedObjects] enumerateObjectsUsingBlock:^(Book* book, NSUInteger idx, BOOL *stop) {
-        [appDelegate addNewTabWithBook:book];
+        
+        __block BOOL bookFound = NO;
+        [[appDelegate tabViewControllers] enumerateObjectsUsingBlock:^(NSViewController* controller, NSUInteger idx, BOOL *stop) {
+            if ([controller isKindOfClass:[BookViewController class]]) {
+                BookViewController* bookViewController = (BookViewController*)controller;
+                if ([bookViewController.book isEqualTo:book]) {
+                    [appDelegate.tabBar selectTabViewItem:bookViewController.tabViewItem];
+                    bookFound = YES;
+                    *stop = YES;
+                }
+            }
+        }];
+        if (bookFound == NO) {
+            [appDelegate addNewTabWithBook:book];
+        }
     }];
 }
 
