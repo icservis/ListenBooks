@@ -60,7 +60,6 @@
     [[self.listArrayController selectedObjects] enumerateObjectsUsingBlock:^(Book* book, NSUInteger idx, BOOL *stop) {
         [appDelegate addNewTabWithBook:book];
     }];
-    [self.booksTreeController setSelectedObject:[self.listArrayController selectedObjects]];
 }
 
 - (void)information

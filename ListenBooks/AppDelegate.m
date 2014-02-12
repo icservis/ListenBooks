@@ -20,6 +20,7 @@
 
 #import "BooksTreeController.h"
 #import "BookmarksArrayController.h"
+#import "ListArrayController.h"
 
 #import "PreferencesWindowController.h"
 
@@ -184,7 +185,12 @@ static NSTimeInterval const kModalSheetDelay = 1.0f;
     DDLogVerbose(@"tabViewItem: %@", tabViewItem);
     [self.tabViewControllers enumerateObjectsUsingBlock:^(id <TabBarControllerProtocol>controller, NSUInteger idx, BOOL *stop) {
         if ([controller.tabViewItem isEqualTo:tabViewItem]) {
-            
+            *stop = YES;
+            if ([controller isKindOfClass:[BookViewController class]]) {
+                BookViewController* bookViewController = (BookViewController*)controller;
+                [self.booksTreeController setSelectedObject:bookViewController.book];
+                [self.listArrayController setSelectedObjects:@[bookViewController.book]];
+            }
         }
     }];
 }
@@ -946,6 +952,8 @@ static NSTimeInterval const kModalSheetDelay = 1.0f;
 - (void)tabView:(NSTabView *)aTabView willSelectTabViewItem:(NSTabViewItem *)tabViewItem
 {
     DDLogVerbose(@"tabViewItem: %@", [tabViewItem label]);
+    [self updateToolBarContentForTabView:tabViewItem];
+    [self updateSelectionWithTabBarViewItem:tabViewItem];
 }
 
 - (void)tabView:(NSTabView *)aTabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem {
@@ -955,8 +963,6 @@ static NSTimeInterval const kModalSheetDelay = 1.0f;
         [self.tabField setStringValue:[[tabViewItem identifier] title]];
     }
     //self.window.title = [tabViewItem label];
-    [self updateToolBarContentForTabView:tabViewItem];
-    [self updateSelectionWithTabBarViewItem:tabViewItem];
 }
 
 - (void)tabViewDidChangeNumberOfTabViewItems:(NSTabView *)tabView

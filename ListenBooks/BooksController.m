@@ -69,7 +69,6 @@
         }
         
     }];
-    [appDelegate.listArrayController setSelectedObjects:[self.booksTreeController selectedObjects]];
 }
 
 - (void)information
