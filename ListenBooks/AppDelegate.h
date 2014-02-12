@@ -75,6 +75,7 @@ extern NSString* const TabBarCountDidChangeNotification;
 - (NSURL *)applicationDocumentsDirectory;
 - (NSURL *)applicationCacheDirectory;
 - (NSArray*)allowedFileTypes;
+- (IBAction)openPreferencesWindow:(id)sender;
 - (IBAction)openImportDialog:(id)sender;
 - (void)unlinkBookWithUrl:(NSURL*)sandboxedFileUrl;
 - (void)addNewTabWithBook:(Book*)book;

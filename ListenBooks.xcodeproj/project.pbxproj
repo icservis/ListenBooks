@@ -133,6 +133,8 @@
 		84E27E9718624D6000317411 /* BookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E27E9518624D6000317411 /* BookViewController.m */; };
 		84E27E9818624D6000317411 /* BookViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84E27E9618624D6000317411 /* BookViewController.xib */; };
 		84E27EA21863010800317411 /* ListCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E27EA11863010800317411 /* ListCollectionView.m */; };
+		84F5C8AB18AB43630082B3C5 /* PreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F5C8A918AB43630082B3C5 /* PreferencesWindowController.m */; };
+		84F5C8AC18AB43630082B3C5 /* PreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84F5C8AA18AB43630082B3C5 /* PreferencesWindowController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -350,6 +352,9 @@
 		84E27E9618624D6000317411 /* BookViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookViewController.xib; sourceTree = "<group>"; };
 		84E27EA01863010800317411 /* ListCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListCollectionView.h; sourceTree = "<group>"; };
 		84E27EA11863010800317411 /* ListCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListCollectionView.m; sourceTree = "<group>"; };
+		84F5C8A818AB43630082B3C5 /* PreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesWindowController.h; sourceTree = "<group>"; };
+		84F5C8A918AB43630082B3C5 /* PreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesWindowController.m; sourceTree = "<group>"; };
+		84F5C8AA18AB43630082B3C5 /* PreferencesWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesWindowController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -693,6 +698,9 @@
 		847EF68318AABE9300A0DC04 /* PreferencesWindow */ = {
 			isa = PBXGroup;
 			children = (
+				84F5C8A818AB43630082B3C5 /* PreferencesWindowController.h */,
+				84F5C8A918AB43630082B3C5 /* PreferencesWindowController.m */,
+				84F5C8AA18AB43630082B3C5 /* PreferencesWindowController.xib */,
 			);
 			name = PreferencesWindow;
 			sourceTree = "<group>";
@@ -1094,6 +1102,7 @@
 				84DD963D1865C98B00B9BD5A /* image6.jpg in Resources */,
 				8478C3F3185CA73F00B06779 /* Credits.rtf in Resources */,
 				84DD963B1865C98B00B9BD5A /* image4.jpg in Resources */,
+				84F5C8AC18AB43630082B3C5 /* PreferencesWindowController.xib in Resources */,
 				84DD96461865C9E700B9BD5A /* ImageView.xib in Resources */,
 				8478C418185CA74000B06779 /* ListenBooksImporter.mdimporter in Resources */,
 				8478C3F9185CA73F00B06779 /* MainMenu.xib in Resources */,
@@ -1152,6 +1161,7 @@
 				848C9572186647010020FDC9 /* NSManagedObject_Extensions.m in Sources */,
 				84E27EA21863010800317411 /* ListCollectionView.m in Sources */,
 				8478C3EF185CA73F00B06779 /* main.m in Sources */,
+				84F5C8AB18AB43630082B3C5 /* PreferencesWindowController.m in Sources */,
 				84DA8DB218A7640C0079BD7C /* InformationWindowController.m in Sources */,
 				848C9587186647240020FDC9 /* ArrayCountToString.m in Sources */,
 				84AB0426186871DD007106F4 /* DDAbstractDatabaseLogger.m in Sources */,

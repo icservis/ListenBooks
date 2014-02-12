@@ -21,6 +21,8 @@
 #import "BooksTreeController.h"
 #import "BookmarksArrayController.h"
 
+#import "PreferencesWindowController.h"
+
 static NSTimeInterval const kModalSheetDelay = 1.0f;
 
 @implementation AppDelegate {
@@ -490,6 +492,19 @@ static NSTimeInterval const kModalSheetDelay = 1.0f;
         DDLogVerbose(@"result: %ld, url: %@", (long)result, [savePanel.URL description]);
         
     }];
+}
+
+#pragma mark - Preferences
+
+- (IBAction)openPreferencesWindow:(id)sender
+{
+    PreferencesWindowController* preferencesWindowController = [[PreferencesWindowController alloc] initWithWindowNibName:@"PreferencesWindowController"];
+    [preferencesWindowController.window makeKeyAndOrderFront:self];
+    __weak PreferencesWindowController* weakPrefsWindowController = preferencesWindowController;
+    weakPrefsWindowController.completionBlock = ^(BOOL success) {
+        [preferencesWindowController.window close];
+    };
+    [weakPrefsWindowController.window makeKeyAndOrderFront:self];
 }
 
 #pragma mark - NSSplitViewDelegate
