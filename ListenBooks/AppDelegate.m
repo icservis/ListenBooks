@@ -84,6 +84,8 @@
     
     [self setupToolBar];
     [self setupTabBar];
+    
+    [self cleanUndoStack:nil];
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender
@@ -756,9 +758,16 @@
     return [[self managedObjectContext] undoManager];
 }
 
+- (IBAction)cleanUndoStack:(id)sender
+{
+    NSLog(@"cleanUndoStack");
+    [[self.managedObjectContext undoManager] removeAllActions];
+}
+
 // Performs the save action for the application, which is to send the save: message to the application's managed object context. Any encountered errors are presented to the user.
 - (IBAction)saveAction:(id)sender
 {
+    NSLog(@"saveAction");
     NSError *error = nil;
     
     if (![[self managedObjectContext] commitEditing]) {
@@ -768,8 +777,6 @@
     if (![[self managedObjectContext] save:&error]) {
         [[NSApplication sharedApplication] presentError:error];
     }
-    
-    DDLogVerbose(@"save");
 }
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
@@ -841,6 +848,9 @@
     DDLogVerbose(@"url %@", [controller.epubURL path]);
     DDLogVerbose(@"meta %@", [self.contentModel.metaData description]);
     
+    [self.managedObjectContext processPendingChanges];
+    [[self.managedObjectContext undoManager] disableUndoRegistration];
+    
     Book *book = [NSEntityDescription insertNewObjectForEntityForName:@"Book" inManagedObjectContext:self.managedObjectContext];
     book.title = [self.contentModel.metaData objectForKey:@"title"];
     book.author = [self.contentModel.metaData objectForKey:@"author"];
@@ -885,6 +895,9 @@
         
         dispatch_async(dispatch_get_main_queue(), ^{
             // Finish in main queue
+            
+            [self.managedObjectContext processPendingChanges];
+            [[self.managedObjectContext undoManager] enableUndoRegistration];
             
             DDLogVerbose(@"inserted book: %@", [book description]);
             [self.progressWindowController updateProgressWindowWithDoubleValue:(self.importedFilesCount - [self.importedUrls count])];

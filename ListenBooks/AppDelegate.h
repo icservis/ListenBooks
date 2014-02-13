@@ -48,6 +48,7 @@ extern NSString* const TabBarCountDidChangeNotification;
 - (NSURL *)applicationDocumentsDirectory;
 - (NSURL *)applicationCacheDirectory;
 - (IBAction)saveAction:(id)sender;
+- (IBAction)cleanUndoStack:(id)sender;
 
 #pragma mark - Input/Output Operations
 - (IBAction)openImportDialog:(id)sender;

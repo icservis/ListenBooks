@@ -112,9 +112,19 @@
     Book* selectedBook = (Book*)[[[self.booksTreeController selectedNodes] firstObject] representedObject];
     if (selectedBook == nil) return;
     
+    AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
+    [[appDelegate.managedObjectContext undoManager] beginUndoGrouping];
+    
     weakInfoWindowController.book = selectedBook;
     weakInfoWindowController.completionBlock = ^(BOOL success) {
         [infoWindowController.window close];
+        
+        [[appDelegate.managedObjectContext undoManager] endUndoGrouping];
+        if (success) {
+            [[appDelegate.managedObjectContext undoManager] setActionName:NSLocalizedString(@"Edit Information", nil)];
+        } else {
+            [[appDelegate.managedObjectContext undoManager] undo];
+        }
     };
     [weakInfoWindowController.window makeKeyAndOrderFront:self];
 }
@@ -138,7 +148,10 @@
         self.progressWindowController = nil;
         DDLogVerbose(@"ProgressWindowController closed");
     };
-
+    
+    [appDelegate.managedObjectContext processPendingChanges];
+    [[appDelegate.managedObjectContext undoManager] disableUndoRegistration];
+    
     [[self.booksTreeController selectedNodes] enumerateObjectsUsingBlock:^(NSTreeNode* node, NSUInteger idx, BOOL *stop) {
         
         Book* book = [node representedObject];
@@ -156,7 +169,10 @@
         
         [appDelegate.managedObjectContext deleteObject:book];
     }];
+    
     [appDelegate saveAction:nil];
+    [appDelegate.managedObjectContext processPendingChanges];
+    [[appDelegate.managedObjectContext undoManager] enableUndoRegistration];
     
     [self.progressWindowController updateProgressWindowWithInfo:NSLocalizedString(@"Completed", nil)];
     [self.progressWindowController updateProgressWindowWithIndeterminate:YES animating:NO];
