@@ -47,6 +47,7 @@ extern NSString* const TabBarCountDidChangeNotification;
 #pragma mark - CoreData
 - (NSURL *)applicationDocumentsDirectory;
 - (NSURL *)applicationCacheDirectory;
+- (NSUndoManager*)undoManager;
 - (IBAction)saveAction:(id)sender;
 - (IBAction)cleanUndoStack:(id)sender;
 

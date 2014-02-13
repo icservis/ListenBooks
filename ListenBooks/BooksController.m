@@ -109,24 +109,10 @@
     
     InformationWindowController* infoWindowController = [[InformationWindowController alloc] initWithWindowNibName:@"InformationWindowController"];
     __weak InformationWindowController* weakInfoWindowController = infoWindowController;
-    Book* selectedBook = (Book*)[[[self.booksTreeController selectedNodes] firstObject] representedObject];
-    if (selectedBook == nil) return;
-    
-    AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
-    [[appDelegate.managedObjectContext undoManager] beginUndoGrouping];
-    
-    weakInfoWindowController.book = selectedBook;
     weakInfoWindowController.completionBlock = ^(BOOL success) {
         [infoWindowController.window close];
-        
-        [[appDelegate.managedObjectContext undoManager] endUndoGrouping];
-        if (success) {
-            [[appDelegate.managedObjectContext undoManager] setActionName:NSLocalizedString(@"Edit Information", nil)];
-        } else {
-            [[appDelegate.managedObjectContext undoManager] undo];
-        }
     };
-    [weakInfoWindowController.window makeKeyAndOrderFront:self];
+    [infoWindowController.window makeKeyAndOrderFront:self];
 }
 
 - (void)export
@@ -269,14 +255,12 @@
 
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification
 {
-    [self.bookmarksArrayController rearrangeObjects];
-    /*
-    NSUInteger currentIndex = [self.booksView selectedRow];
-    NSTreeNode* currentNode = [self.booksView itemAtRow:currentIndex];
-    Book* currentBook = [currentNode representedObject];
-    
-    AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
-   */
+    //DDLogVerbose(@"notification: %@", notification.object);
+}
+
+- (void)setCrossSelection
+{
+    [self.listArrayController setSelectedObjects:[self.booksTreeController selectedObjects]];
 }
 
 

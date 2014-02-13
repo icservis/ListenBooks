@@ -42,10 +42,9 @@
         } else {
             return NO;
         }
-        
-    } else {
-        return YES;
     }
+    
+    return YES;
 }
 
 @end

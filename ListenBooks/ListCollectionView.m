@@ -34,6 +34,12 @@
 }
 
 
+- (void)mouseDown:(NSEvent *)theEvent
+{
+    [super mouseDown:theEvent];
+    [self.listController setCrossSelection];
+}
+
 - (NSCollectionViewItem*)newItemForRepresentedObject:(id)object
 {
     ListCollectionViewItem* listItem = (ListCollectionViewItem*)[super newItemForRepresentedObject:object];
@@ -91,12 +97,10 @@
     [self.listController delete];
 }
 
-/*
 - (IBAction)selectAll:(id)sender
 {
-    [self.listController selectAll];
+    [super selectAll:sender];
 }
- */
 
 - (IBAction)open:(id)sender
 {
@@ -124,7 +128,6 @@
         } else {
             return NO;
         }
-        
     }
     
     if (theAction == @selector(open:)) {
@@ -134,7 +137,6 @@
         } else {
             return NO;
         }
-        
     }
     
     if (theAction == @selector(export:)) {
@@ -144,7 +146,6 @@
         } else {
             return NO;
         }
-        
     }
     
     return YES;

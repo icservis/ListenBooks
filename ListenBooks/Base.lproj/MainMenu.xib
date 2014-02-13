@@ -988,6 +988,7 @@ CA
             </view>
             <connections>
                 <outlet property="appDelegate" destination="494" id="7ox-fx-6DW"/>
+                <outlet property="delegate" destination="494" id="El1-pH-QQY"/>
             </connections>
         </window>
         <menu title="actionMenu" id="Li0-mn-mdc">
@@ -1034,6 +1035,7 @@ CA
                 <outlet property="bookmarksArrayController" destination="Wjr-Iu-HEJ" id="4Re-Na-BDB"/>
                 <outlet property="booksTreeController" destination="JIz-cg-z1q" id="khV-wD-e9e"/>
                 <outlet property="booksView" destination="1f5-sw-iLl" id="c3j-mX-UiG"/>
+                <outlet property="listArrayController" destination="0YC-oF-0f9" id="Ikx-hY-TE9"/>
             </connections>
         </customObject>
         <treeController mode="entity" entityName="Book" fetchPredicateFormat="parent == nil" automaticallyPreparesContent="YES" childrenKeyPath="children" leafKeyPath="isLeaf" id="JIz-cg-z1q" customClass="BooksTreeController">
@@ -1064,8 +1066,10 @@ CA
         <customObject id="whp-eZ-0pM" customClass="ListController">
             <connections>
                 <outlet property="bookViewController" destination="HlQ-3S-wAo" id="eIg-KH-GXP"/>
+                <outlet property="bookmarksArrayController" destination="Wjr-Iu-HEJ" id="B0v-vN-HaI"/>
                 <outlet property="booksTreeController" destination="JIz-cg-z1q" id="nIc-Eg-bwR"/>
                 <outlet property="listArrayController" destination="0YC-oF-0f9" id="lIV-oZ-Slf"/>
+                <outlet property="listControllerView" destination="OIY-B8-UiM" id="kK3-Ip-9XM"/>
             </connections>
         </customObject>
         <arrayController mode="entity" entityName="Book" automaticallyPreparesContent="YES" avoidsEmptySelection="NO" automaticallyRearrangesObjects="YES" id="0YC-oF-0f9" customClass="ListArrayController">

@@ -37,7 +37,7 @@
     return _progressWindowController;
 }
 
-#pragma  mark - FirstResponder
+#pragma mark - FirstResponder
 
 - (void)copy
 {
@@ -104,24 +104,10 @@
     
     InformationWindowController* infoWindowController = [[InformationWindowController alloc] initWithWindowNibName:@"InformationWindowController"];
     __weak InformationWindowController* weakInfoWindowController = infoWindowController;
-    Book* selectedBook = (Book*)[[self.listArrayController selectedObjects] firstObject];
-    if (selectedBook == nil) return;
-    
-    AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
-    [[appDelegate.managedObjectContext undoManager] beginUndoGrouping];
-    
-    weakInfoWindowController.book = selectedBook;
     weakInfoWindowController.completionBlock = ^(BOOL success) {
         [infoWindowController.window close];
-        
-        [[appDelegate.managedObjectContext undoManager] endUndoGrouping];
-        if (success) {
-            [[appDelegate.managedObjectContext undoManager] setActionName:NSLocalizedString(@"Edit Information", nil)];
-        } else {
-            [[appDelegate.managedObjectContext undoManager] undo];
-        }
     };
-    [weakInfoWindowController.window makeKeyAndOrderFront:self];
+    [infoWindowController.window makeKeyAndOrderFront:self];
 }
 
 - (void)export
@@ -170,5 +156,11 @@
     [self.progressWindowController updateProgressWindowWithIndeterminate:YES animating:NO];
     [self.progressWindowController closeProgressWindow];
 }
+
+- (void)setCrossSelection
+{
+    [self.booksTreeController setSelectedObject:[[self.listArrayController selectedObjects] firstObject]];
+}
+
 
 @end

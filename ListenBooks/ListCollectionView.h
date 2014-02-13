@@ -24,7 +24,7 @@
 - (IBAction)cut:(id)sender;
 - (IBAction)edit:(id)sender;
 - (IBAction)delete:(id)sender;
-//- (IBAction)selectAll:(id)sender;
+- (IBAction)selectAll:(id)sender;
 - (IBAction)open:(id)sender;
 - (IBAction)information:(id)sender;
 - (IBAction)export:(id)sender;

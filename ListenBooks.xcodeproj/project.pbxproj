@@ -10,6 +10,7 @@
 		8416258118A827CE00C42723 /* TabBarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8416258018A827CE00C42723 /* TabBarModel.m */; };
 		842A12211865DC0E00AAAD42 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 842A121F1865DC0E00AAAD42 /* ImageViewController.m */; };
 		842A12221865DC0E00AAAD42 /* ImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842A12201865DC0E00AAAD42 /* ImageViewController.xib */; };
+		842B61DB18AE633000DC1A08 /* BookObjectController.m in Sources */ = {isa = PBXBuildFile; fileRef = 842B61DA18AE633000DC1A08 /* BookObjectController.m */; };
 		8444EA93185F83A400F90B48 /* KFToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8444EA90185F83A400F90B48 /* KFToolbar.m */; };
 		8444EA94185F83A400F90B48 /* KFToolbarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8444EA92185F83A400F90B48 /* KFToolbarItem.m */; };
 		8444EAA2185F83D900F90B48 /* KFEpubConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 8444EA97185F83D900F90B48 /* KFEpubConstants.m */; };
@@ -171,6 +172,8 @@
 		842A121E1865DC0E00AAAD42 /* ImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewController.h; sourceTree = "<group>"; };
 		842A121F1865DC0E00AAAD42 /* ImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
 		842A12201865DC0E00AAAD42 /* ImageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageViewController.xib; sourceTree = "<group>"; };
+		842B61D918AE633000DC1A08 /* BookObjectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookObjectController.h; sourceTree = "<group>"; };
+		842B61DA18AE633000DC1A08 /* BookObjectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookObjectController.m; sourceTree = "<group>"; };
 		8444EA8F185F83A400F90B48 /* KFToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFToolbar.h; sourceTree = "<group>"; };
 		8444EA90185F83A400F90B48 /* KFToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFToolbar.m; sourceTree = "<group>"; };
 		8444EA91185F83A400F90B48 /* KFToolbarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFToolbarItem.h; sourceTree = "<group>"; };
@@ -886,6 +889,8 @@
 				84DA8DAF18A7640C0079BD7C /* InformationWindowController.h */,
 				84DA8DB018A7640C0079BD7C /* InformationWindowController.m */,
 				84DA8DB118A7640C0079BD7C /* InformationWindowController.xib */,
+				842B61D918AE633000DC1A08 /* BookObjectController.h */,
+				842B61DA18AE633000DC1A08 /* BookObjectController.m */,
 			);
 			name = InfoWindow;
 			sourceTree = "<group>";
@@ -1170,6 +1175,7 @@
 				8444EACE185F841700F90B48 /* DDXMLNode.m in Sources */,
 				84AB042D186871DD007106F4 /* DDMultiFormatter.m in Sources */,
 				848C954418663FF60020FDC9 /* BookmarksArrayController.m in Sources */,
+				842B61DB18AE633000DC1A08 /* BookObjectController.m in Sources */,
 				84AB0429186871DD007106F4 /* DDLog.m in Sources */,
 				8444EAA7185F83D900F90B48 /* KFEpubParser.m in Sources */,
 				8478C3F6185CA73F00B06779 /* AppDelegate.m in Sources */,

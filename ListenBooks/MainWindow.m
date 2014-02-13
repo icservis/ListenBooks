@@ -38,7 +38,7 @@
         }
     }
     
-    return YES;
+    return [super validateMenuItem:menuItem];
 }
 
 @end

@@ -27,6 +27,12 @@
     // Drawing code here.
 }
 
+- (void)mouseDown:(NSEvent *)theEvent
+{
+    [super mouseDown:theEvent];
+    [self.booksController setCrossSelection];
+}
+
 - (void)awakeFromNib
 {
     [super awakeFromNib];
@@ -65,12 +71,10 @@
     [self.booksController open];
 }
 
-/*
 - (void)selectAll:(id)sender
 {
-    [self.booksController selectAll];
+    [super selectAll:sender];
 }
- */
 
 - (IBAction)information:(id)sender
 {
@@ -95,7 +99,6 @@
         } else {
             return NO;
         }
-        
     }
     
     if (theAction == @selector(open:)) {
@@ -105,7 +108,6 @@
         } else {
             return NO;
         }
-        
     }
     
     if (theAction == @selector(export:)) {
@@ -115,7 +117,6 @@
         } else {
             return NO;
         }
-        
     }
     
     return YES;

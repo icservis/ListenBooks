@@ -84,8 +84,6 @@
     
     [self setupToolBar];
     [self setupTabBar];
-    
-    [self cleanUndoStack:nil];
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender
@@ -257,7 +255,6 @@
 
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
-    DDLogVerbose(@"validateMenuItem: %@ - %d", menuItem.title, [menuItem isEnabled]);
     return [menuItem isEnabled];
 }
 
@@ -746,9 +743,8 @@
         [[NSApplication sharedApplication] presentError:error];
         return nil;
     }
-    _managedObjectContext = [[NSManagedObjectContext alloc] init];
+    _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
     [_managedObjectContext setPersistentStoreCoordinator:coordinator];
-
     return _managedObjectContext;
 }
 
@@ -758,10 +754,15 @@
     return [[self managedObjectContext] undoManager];
 }
 
+- (NSUndoManager*)undoManager
+{
+    return [self.managedObjectContext undoManager];
+}
+
 - (IBAction)cleanUndoStack:(id)sender
 {
     NSLog(@"cleanUndoStack");
-    [[self.managedObjectContext undoManager] removeAllActions];
+    [self.managedObjectContext.undoManager removeAllActions];
 }
 
 // Performs the save action for the application, which is to send the save: message to the application's managed object context. Any encountered errors are presented to the user.

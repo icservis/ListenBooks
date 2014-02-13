@@ -9,10 +9,11 @@
 #import <Cocoa/Cocoa.h>
 
 @class Book;
+@class BookObjectController;
 
 @interface InformationWindowController : NSWindowController
 
-@property (nonatomic, strong) Book* book;
 @property (nonatomic, copy) void (^completionBlock)(BOOL success);
+@property (strong) IBOutlet BookObjectController *bookObjectController;
 
 @end
