@@ -18,8 +18,30 @@
 #import "NSArrayController_Extensions.h"
 #import "InformationWindowController.h"
 #import "BlockAlert.h"
+#import "ProgressWindowController.h"
+
+@interface BooksController ()
+
+@property (nonatomic, strong) ProgressWindowController* progressWindowController;
+
+@end
 
 @implementation BooksController
+
+- (void)dealloc
+{
+    self.progressWindowController = nil;
+}
+
+- (ProgressWindowController*)progressWindowController
+{
+    if (_progressWindowController == nil) {
+        _progressWindowController = [ProgressWindowController sharedController];
+    };
+    return _progressWindowController;
+}
+
+#pragma  mark - FirstResponder
 
 - (void)copy
 {
@@ -109,8 +131,14 @@
 - (void)deleteItems
 {
     AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
-    [appDelegate openProgressWindowWithTitle:NSLocalizedString(@"Deleting Book(s)", nil) info:NSLocalizedString(@"Prepairing…", nil) indicatorMinValue:0 indicatorMaxValue:0 doubleValue:0 indeterminate:YES animating:YES];
     
+    [self.progressWindowController openProgressWindowWithTitle:NSLocalizedString(@"Deleting Books(s)", nil) info:NSLocalizedString(@"Processing…", nil) indicatorMinValue:0 indicatorMaxValue:0 doubleValue:0 indeterminate:YES animating:YES];
+    __weak ProgressWindowController* weakProgressWindowController = self.progressWindowController;
+    weakProgressWindowController.completionBlock = ^() {
+        self.progressWindowController = nil;
+        DDLogVerbose(@"ProgressWindowController closed");
+    };
+
     [[self.booksTreeController selectedNodes] enumerateObjectsUsingBlock:^(NSTreeNode* node, NSUInteger idx, BOOL *stop) {
         
         Book* book = [node representedObject];
@@ -121,7 +149,7 @@
                 BookViewController* bookViewController = (BookViewController*)controller;
                 if ([bookViewController.book isEqualTo:book]) {
                     [appDelegate closeTabWithItem:bookViewController.tabViewItem];
-                    [appDelegate updateProgressWindowWithInfo:bookViewController.book.title];
+                    [self.progressWindowController updateProgressWindowWithInfo:bookViewController.book.title];
                 }
             }
         }];
@@ -129,9 +157,10 @@
         [appDelegate.managedObjectContext deleteObject:book];
     }];
     [appDelegate saveAction:nil];
-    [appDelegate updateProgressWindowWithInfo:NSLocalizedString(@"Completed", nil)];
-    [appDelegate updateProgressWindowWithIndeterminate:YES animating:NO];
-    [appDelegate closeProgressWindow];
+    
+    [self.progressWindowController updateProgressWindowWithInfo:NSLocalizedString(@"Completed", nil)];
+    [self.progressWindowController updateProgressWindowWithIndeterminate:YES animating:NO];
+    [self.progressWindowController closeProgressWindow];
 }
 
 #pragma mark - NSOutlineView Delegate Methods

@@ -26,8 +26,8 @@
 #import "ListArrayController.h"
 
 #import "PreferencesWindowController.h"
+#import "ProgressWindowController.h"
 
-static NSTimeInterval const kModalSheetDelay = 1.0f;
 
 @interface AppDelegate ()
 
@@ -72,6 +72,7 @@ static NSTimeInterval const kModalSheetDelay = 1.0f;
 @synthesize epubController = _epubController;
 @synthesize importedUrls = _importedUrls;
 @synthesize tabViewControllers = _tabViewControllers;
+@synthesize progressWindowController = _progressWindowController;
 
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 @synthesize managedObjectModel = _managedObjectModel;
@@ -94,6 +95,19 @@ static NSTimeInterval const kModalSheetDelay = 1.0f;
     return YES;
 }
 
+- (void)dealloc
+{
+    self.booksTreeController = nil;
+    self.bookmarksArrayController = nil;
+    self.listArrayController = nil;
+    self.tabViewControllers = nil;
+    self.importedUrls = nil;
+    self.epubController = nil;
+    self.contentModel = nil;
+    self.dateFormatter = nil;
+    self.progressWindowController = nil;
+}
+
 #pragma mark - Setters
 
 - (NSMutableArray*)importedUrls
@@ -102,6 +116,14 @@ static NSTimeInterval const kModalSheetDelay = 1.0f;
         _importedUrls = [NSMutableArray array];
     }
     return _importedUrls;
+}
+
+- (ProgressWindowController*)progressWindowController
+{
+    if (_progressWindowController == nil) {
+        _progressWindowController = [ProgressWindowController sharedController];
+    };
+    return _progressWindowController;
 }
 
 - (NSDateFormatter*)dateFormatter
@@ -421,7 +443,12 @@ static NSTimeInterval const kModalSheetDelay = 1.0f;
 {
     NSInteger filesCount = fileURLs.count;
     
-    [self openProgressWindowWithTitle:NSLocalizedString(@"Importing file(s)", nil) info:NSLocalizedString(@"Loading…", nil) indicatorMinValue:0 indicatorMaxValue:filesCount doubleValue:0 indeterminate:NO animating:NO];
+    [self.progressWindowController openProgressWindowWithTitle:NSLocalizedString(@"Importing File(s)", nil) info:NSLocalizedString(@"Loading…", nil) indicatorMinValue:0 indicatorMaxValue:filesCount doubleValue:0 indeterminate:NO animating:NO];
+    __weak ProgressWindowController* weakProgressWindowController = self.progressWindowController;
+    weakProgressWindowController.completionBlock = ^() {
+        self.progressWindowController = nil;
+        DDLogVerbose(@"ProgressWindowController closed");
+    };
     
     NSURL* documentsDirectory = [self applicationDocumentsDirectory];
     
@@ -435,10 +462,10 @@ static NSTimeInterval const kModalSheetDelay = 1.0f;
         
         dispatch_async(dispatch_get_main_queue(), ^{
             // Finish in main queue
-            [self updateProgressWindowWithInfo:[fileUrl lastPathComponent]];
+            [self.progressWindowController updateProgressWindowWithInfo:[fileUrl lastPathComponent]];
         });
         
-        [self updateProgressWindowWithDoubleValue:(double)(idx + 1)];
+        [self.progressWindowController updateProgressWindowWithDoubleValue:(double)(idx + 1)];
         
         NSError* error;
         NSFileManager* fileManager = [NSFileManager defaultManager];
@@ -459,7 +486,7 @@ static NSTimeInterval const kModalSheetDelay = 1.0f;
         
         if (error != nil) {
             DDLogError(@"copying error: %@", [error localizedDescription]);
-            [self updateProgressWindowWithInfo:[error localizedDescription]];
+            [self.progressWindowController updateProgressWindowWithInfo:[error localizedDescription]];
         } else {
             successFilesCount ++;
             [copiedUrls addObject:sandboxedFileUrl];
@@ -467,101 +494,19 @@ static NSTimeInterval const kModalSheetDelay = 1.0f;
     }];
     
     self.importedUrls = [NSMutableArray arrayWithArray:copiedUrls];
-    [self updateProgressWindowWithInfo:[NSString stringWithFormat:@"%@: %ld", NSLocalizedString(@"Total Imported Files", nil), successFilesCount]];
-    
-    [self performSelector:@selector(processImportedFiles) withObject:self afterDelay:kModalSheetDelay];
-    
-}
-
-#pragma mark - ProgressWindow
-
-- (void)openProgressWindowWithTitle:(NSString*)title info:(NSString*)info indicatorMinValue:(double)minValue indicatorMaxValue:(double)maxValue doubleValue:(double)doubleValue indeterminate:(BOOL)indeterminate animating:(BOOL)animating
-{
-    self.progressTitle.stringValue = title;
-    self.progressInfo.stringValue = info;
-    
-    [[NSApplication sharedApplication] beginSheet:self.progressWindow
-                                   modalForWindow: self.window
-                                    modalDelegate:self
-                                   didEndSelector:@selector(didEndSheet:returnCode:contextInfo:)
-                                      contextInfo:nil];
-    
-    self.progressIndicator.doubleValue = doubleValue;
-    self.progressIndicator.minValue = minValue;
-    self.progressIndicator.maxValue = maxValue;
-    self.progressIndicator.indeterminate = indeterminate;
-    if (indeterminate == YES) {
-        if (animating) {
-            [self.progressIndicator startAnimation:nil];
-        } else {
-            [self.progressIndicator stopAnimation:nil];
-        }
-    }
-}
-
-- (void)updateProgressWindowWithTitle:(NSString*)title
-{
-    NSLog(@"title: %@", title);
-    self.progressTitle.stringValue = title;
-}
-
-- (void)updateProgressWindowWithInfo:(NSString*)info
-{
-    NSLog(@"info: %@", info);
-    self.progressInfo.stringValue = info;
-}
-
-- (void)updateProgressWindowWithDoubleValue:(double)doubleValue
-{
-    self.progressIndicator.doubleValue = doubleValue;
-    [self.progressIndicator setNeedsDisplay:YES];
-}
-
-- (void)updateProgressWindowWithMinValue:(double)minValue
-{
-    self.progressIndicator.minValue = minValue;
-    [self.progressIndicator setNeedsDisplay:YES];
-}
-
-- (void)updateProgressWindowWithMaxValue:(double)maxValue
-{
-    self.progressIndicator.maxValue = maxValue;
-    [self.progressIndicator setNeedsDisplay:YES];
-}
-
-- (void)updateProgressWindowWithIndeterminate:(BOOL)indeterminate animating:(BOOL)animating
-{
-    if (indeterminate == YES) {
-        if (animating) {
-            [self.progressIndicator startAnimation:nil];
-        } else {
-            [self.progressIndicator stopAnimation:nil];
-        }
-    }
-    [self.progressIndicator setNeedsDisplay:YES];
-}
-
-- (void)closeProgressWindow
-{
-    [NSApp endSheet:self.progressWindow];
-}
-
-#pragma mark - ProgressWindowDelegate
-
-- (void)didEndSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
-{
-    [sheet performSelector:@selector(orderOut:) withObject:self afterDelay:kModalSheetDelay];
+    [self.progressWindowController updateProgressWindowWithInfo:[NSString stringWithFormat:@"%@: %ld", NSLocalizedString(@"Total Imported Files", nil), successFilesCount]];
+    [self processImportedFiles];
 }
 
 #pragma mark - Importing Book
 
 - (void)processImportedFiles
 {
-    [self updateProgressWindowWithTitle:NSLocalizedString(@"Processing file(s)", nil)];
-    [self updateProgressWindowWithInfo:[NSString stringWithFormat:@"%@: %ld", NSLocalizedString(@"Processing file(s)", nil), [self.importedUrls count]]];
-    [self updateProgressWindowWithDoubleValue:0];
-    [self updateProgressWindowWithMinValue:0];
-    [self updateProgressWindowWithMaxValue:[self.importedUrls count]];
+    [self.progressWindowController updateProgressWindowWithTitle:NSLocalizedString(@"Processing File(s)", nil)];
+    [self.progressWindowController updateProgressWindowWithInfo:[NSString stringWithFormat:@"%@: %ld", NSLocalizedString(@"Processing File(s)", nil), [self.importedUrls count]]];
+    [self.progressWindowController updateProgressWindowWithDoubleValue:0];
+    [self.progressWindowController updateProgressWindowWithMinValue:0];
+    [self.progressWindowController updateProgressWindowWithMaxValue:[self.importedUrls count]];
     
     [self importBookWithUrl:[self.importedUrls firstObject]];
 }
@@ -608,7 +553,6 @@ static NSTimeInterval const kModalSheetDelay = 1.0f;
     weakPrefsWindowController.completionBlock = ^(BOOL success) {
         [preferencesWindowController.window close];
     };
-    [weakPrefsWindowController.window makeKeyAndOrderFront:self];
 }
 
 #pragma mark - NSSplitViewDelegate
@@ -889,7 +833,7 @@ static NSTimeInterval const kModalSheetDelay = 1.0f;
 - (void)epubController:(KFEpubController *)controller willOpenEpub:(NSURL *)epubURL
 {
     DDLogDebug(@"will open epub");
-    [self updateProgressWindowWithInfo:[epubURL lastPathComponent]];
+    [self.progressWindowController updateProgressWindowWithInfo:[epubURL lastPathComponent]];
     [self.importedUrls removeObject:epubURL];
 }
 
@@ -925,7 +869,7 @@ static NSTimeInterval const kModalSheetDelay = 1.0f;
     }
     
     DDLogVerbose(@"inserted book: %@", [book description]);
-    [self updateProgressWindowWithDoubleValue:(self.progressIndicator.maxValue - [self.importedUrls count])];
+    [self.progressWindowController updateProgressWindowWithDoubleValue:(self.progressIndicator.maxValue - [self.importedUrls count])];
     [self addNewTabWithBook:book];
     [self processNextFiles];
 }
@@ -934,8 +878,8 @@ static NSTimeInterval const kModalSheetDelay = 1.0f;
 {
     DDLogError(@"epubController:didFailWithError: %@", error.description);
     
-    [self updateProgressWindowWithInfo:error.localizedDescription];
-    [self updateProgressWindowWithDoubleValue:(self.progressIndicator.maxValue - [self.importedUrls count])];
+    [self.progressWindowController updateProgressWindowWithInfo:error.localizedDescription];
+    [self.progressWindowController updateProgressWindowWithDoubleValue:(self.progressIndicator.maxValue - [self.importedUrls count])];
     [self unlinkBookWithUrl:controller.epubURL];
     [self processNextFiles];
 }
@@ -943,9 +887,9 @@ static NSTimeInterval const kModalSheetDelay = 1.0f;
 - (void)processNextFiles
 {
     if ([self.importedUrls count] == 0) {
-        [self updateProgressWindowWithTitle:NSLocalizedString(@"Opening File(s)", nil)];
-        [self updateProgressWindowWithInfo:NSLocalizedString(@"Importing file(s) completed", nil)];
-        [self updateProgressWindowWithIndeterminate:YES animating:YES];
+        [self.progressWindowController updateProgressWindowWithTitle:NSLocalizedString(@"Opening File(s)", nil)];
+        [self.progressWindowController updateProgressWindowWithInfo:NSLocalizedString(@"Importing File(s) completed", nil)];
+        [self.progressWindowController updateProgressWindowWithIndeterminate:YES animating:YES];
     } else {
         [self importBookWithUrl:[self.importedUrls firstObject]];
     }

@@ -22,6 +22,7 @@
 @class BookViewController;
 @class ImageViewController;
 @class ListCollectionView;
+@class ProgressWindowController;
 
 extern NSString* const TabBarSelectionDidChangeNotification;
 extern NSString* const TabBarCountDidChangeNotification;
@@ -32,10 +33,12 @@ extern NSString* const TabBarCountDidChangeNotification;
 @property (weak) IBOutlet MMTabBarView *tabBar;
 @property (weak) IBOutlet KFToolbar *toolBar;
 
+@property (nonatomic, strong) ProgressWindowController* progressWindowController;
 @property (nonatomic, strong) NSMutableArray* tabViewControllers;
-@property (strong) IBOutlet BooksTreeController *booksTreeController;
-@property (strong) IBOutlet BookmarksArrayController *bookmarksArrayController;
-@property (strong) IBOutlet ListArrayController *listArrayController;
+
+@property (nonatomic, strong) IBOutlet BooksTreeController *booksTreeController;
+@property (nonatomic, strong) IBOutlet BookmarksArrayController *bookmarksArrayController;
+@property (nonatomic, strong) IBOutlet ListArrayController *listArrayController;
 
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
@@ -57,16 +60,5 @@ extern NSString* const TabBarCountDidChangeNotification;
 - (IBAction)closeTab:(id)sender;
 - (void)closeTabWithItem:(NSTabViewItem*)tabViewItem;
 - (void)updateToolBarContentForTabView:(NSTabViewItem*)tabViewItem;
-
-
-#pragma mark - ProgressWindow
-- (void)openProgressWindowWithTitle:(NSString*)title info:(NSString*)info indicatorMinValue:(double)minValue indicatorMaxValue:(double)maxValue doubleValue:(double)doubleValue indeterminate:(BOOL)indeterminate animating:(BOOL)animating;
-- (void)updateProgressWindowWithTitle:(NSString*)title;
-- (void)updateProgressWindowWithInfo:(NSString*)info;
-- (void)updateProgressWindowWithDoubleValue:(double)doubleValue;
-- (void)updateProgressWindowWithMinValue:(double)minValue;
-- (void)updateProgressWindowWithMaxValue:(double)maxValue;
-- (void)updateProgressWindowWithIndeterminate:(BOOL)indeterminate animating:(BOOL)animating;
-- (void)closeProgressWindow;
 
 @end

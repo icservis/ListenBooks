@@ -13,6 +13,7 @@
 #import "NSTextView+Extensions.h"
 #import "Book.h"
 #import "Page.h"
+#import "ProgressWindowController.h"
 
 @interface BookViewController ()
 
@@ -236,11 +237,10 @@
     }];
     if (progress == NO) {
         DDLogVerbose(@"progressWindow stop");
-        [appDelegate updateProgressWindowWithInfo:NSLocalizedString(@"Opening Book(s) Completed", nil)];
-        [appDelegate updateProgressWindowWithIndeterminate:YES animating:NO];
-        [appDelegate closeProgressWindow];
+        [appDelegate.progressWindowController updateProgressWindowWithInfo:NSLocalizedString(@"Opening Book(s) Completed", nil)];
+        [appDelegate.progressWindowController closeProgressWindow];
     } else {
-        [appDelegate updateProgressWindowWithInfo:self.book.title];
+        [appDelegate.progressWindowController updateProgressWindowWithInfo:self.book.title];
     }
 }
 

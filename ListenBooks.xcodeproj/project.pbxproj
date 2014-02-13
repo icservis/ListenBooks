@@ -30,6 +30,8 @@
 		8444EACE185F841700F90B48 /* DDXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8444EAC7185F841700F90B48 /* DDXMLNode.m */; };
 		8444EAD0185F847500F90B48 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8444EACF185F847500F90B48 /* libxml2.dylib */; };
 		8444EAD2185F8D2300F90B48 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8444EAD1185F8D2300F90B48 /* libz.dylib */; };
+		844C0AA918ACDDD600656A28 /* ProgressWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 844C0AA718ACDDD600656A28 /* ProgressWindowController.m */; };
+		844C0AAA18ACDDD600656A28 /* ProgressWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 844C0AA818ACDDD600656A28 /* ProgressWindowController.xib */; };
 		84722BDE186DD76200FA7973 /* ListCollectionItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84722BDD186DD76200FA7973 /* ListCollectionItemView.m */; };
 		84722BE1186DDDB600FA7973 /* ListCollectionViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 84722BE0186DDDB600FA7973 /* ListCollectionViewItem.m */; };
 		8478C3E3185CA73F00B06779 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8478C3E2185CA73F00B06779 /* Cocoa.framework */; };
@@ -210,6 +212,9 @@
 		8444EAC9185F841700F90B48 /* DDXMLPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLPrivate.h; sourceTree = "<group>"; };
 		8444EACF185F847500F90B48 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		8444EAD1185F8D2300F90B48 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		844C0AA618ACDDD600656A28 /* ProgressWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressWindowController.h; sourceTree = "<group>"; };
+		844C0AA718ACDDD600656A28 /* ProgressWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressWindowController.m; sourceTree = "<group>"; };
+		844C0AA818ACDDD600656A28 /* ProgressWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProgressWindowController.xib; sourceTree = "<group>"; };
 		84722BDC186DD76200FA7973 /* ListCollectionItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListCollectionItemView.h; sourceTree = "<group>"; };
 		84722BDD186DD76200FA7973 /* ListCollectionItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListCollectionItemView.m; sourceTree = "<group>"; };
 		84722BDF186DDDB600FA7973 /* ListCollectionViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListCollectionViewItem.h; sourceTree = "<group>"; };
@@ -521,6 +526,17 @@
 			path = Private;
 			sourceTree = "<group>";
 		};
+		844C0AA518ACDCED00656A28 /* ProgressWindow */ = {
+			isa = PBXGroup;
+			children = (
+				844C0AA618ACDDD600656A28 /* ProgressWindowController.h */,
+				844C0AA718ACDDD600656A28 /* ProgressWindowController.m */,
+				844C0AA818ACDDD600656A28 /* ProgressWindowController.xib */,
+			);
+			name = ProgressWindow;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		8478C3D6185CA73F00B06779 = {
 			isa = PBXGroup;
 			children = (
@@ -579,6 +595,7 @@
 				84E27E8118624B3800317411 /* ImageView */,
 				84DA8DB418A764140079BD7C /* InfoWindow */,
 				847EF68318AABE9300A0DC04 /* PreferencesWindow */,
+				844C0AA518ACDCED00656A28 /* ProgressWindow */,
 				84DA8DB518A76D060079BD7C /* Classes */,
 				84E27E7F186249E400317411 /* Resources */,
 				8478C3E9185CA73F00B06779 /* Supporting Files */,
@@ -1098,6 +1115,7 @@
 				84DD96391865C98B00B9BD5A /* image2.jpg in Resources */,
 				84DA8DB318A7640C0079BD7C /* InformationWindowController.xib in Resources */,
 				8478C3ED185CA73F00B06779 /* InfoPlist.strings in Resources */,
+				844C0AAA18ACDDD600656A28 /* ProgressWindowController.xib in Resources */,
 				84DD96401865C98B00B9BD5A /* image9.jpg in Resources */,
 				84DD96411865C98B00B9BD5A /* image10.jpg in Resources */,
 				84DD96431865C98B00B9BD5A /* image12.jpg in Resources */,
@@ -1184,6 +1202,7 @@
 				84AB042A186871DD007106F4 /* DDTTYLogger.m in Sources */,
 				8416258118A827CE00C42723 /* TabBarModel.m in Sources */,
 				8444EA93185F83A400F90B48 /* KFToolbar.m in Sources */,
+				844C0AA918ACDDD600656A28 /* ProgressWindowController.m in Sources */,
 				848C956A186647010020FDC9 /* NSArray_Extensions.m in Sources */,
 				84F468D318ABD0B0002C3578 /* Book.m in Sources */,
 				8444EAB5185F840800F90B48 /* ioapi.c in Sources */,
