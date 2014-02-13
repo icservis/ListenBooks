@@ -1017,10 +1017,6 @@ CA
                 <outlet property="listCollectionView" destination="OIY-B8-UiM" id="xHv-n4-4Ia"/>
                 <outlet property="listSearchField" destination="K7h-Fx-cdi" id="r5G-62-7EM"/>
                 <outlet property="listToolBarView" destination="nbg-2g-L9E" id="k4O-B8-Nho"/>
-                <outlet property="progressIndicator" destination="q2a-FS-yay" id="IIP-Lz-U8j"/>
-                <outlet property="progressInfo" destination="Jwp-mn-foe" id="6ri-2d-ahL"/>
-                <outlet property="progressTitle" destination="C5J-j3-cz2" id="TZC-ZM-lm5"/>
-                <outlet property="progressWindow" destination="09P-7W-ms9" id="L9q-HF-nYE"/>
                 <outlet property="sourceSplitPane" destination="cLb-oU-W2r" id="kZE-Oy-UCb"/>
                 <outlet property="splitView" destination="U1O-yz-ZIZ" id="I4P-Y6-nYX"/>
                 <outlet property="subSplitView" destination="9qT-mg-IHD" id="bED-vS-CVd"/>
@@ -1065,65 +1061,6 @@ CA
                 <binding destination="494" name="managedObjectContext" keyPath="self.managedObjectContext" id="tdk-NC-H3g"/>
             </connections>
         </arrayController>
-        <window title="Progress" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" oneShot="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="09P-7W-ms9" customClass="NSPanel">
-            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES"/>
-            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="450" y="324" width="400" height="100"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="778"/>
-            <value key="minSize" type="size" width="200" height="100"/>
-            <value key="maxSize" type="size" width="400" height="100"/>
-            <view key="contentView" id="85T-rR-SKl">
-                <rect key="frame" x="0.0" y="0.0" width="400" height="100"/>
-                <autoresizingMask key="autoresizingMask"/>
-                <subviews>
-                    <progressIndicator maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="q2a-FS-yay">
-                        <rect key="frame" x="20" y="40" width="360" height="20"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="18" id="f0Y-S8-wbV"/>
-                        </constraints>
-                    </progressIndicator>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="C5J-j3-cz2">
-                        <rect key="frame" x="181" y="67" width="39" height="17"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="17" id="7H9-eL-K9V"/>
-                        </constraints>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Title" id="2Tn-Sx-rSZ">
-                            <font key="font" metaFont="systemBold"/>
-                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Jwp-mn-foe">
-                        <rect key="frame" x="184" y="16" width="33" height="17"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="17" id="48j-jy-IIj"/>
-                        </constraints>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Info" id="h8B-EO-utf">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
-                </subviews>
-                <constraints>
-                    <constraint firstItem="q2a-FS-yay" firstAttribute="leading" secondItem="85T-rR-SKl" secondAttribute="leading" constant="20" id="2rb-vi-6mc"/>
-                    <constraint firstAttribute="centerX" secondItem="q2a-FS-yay" secondAttribute="centerX" id="5oX-zU-9xp"/>
-                    <constraint firstAttribute="trailing" secondItem="q2a-FS-yay" secondAttribute="trailing" constant="20" id="89d-In-SSp"/>
-                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="C5J-j3-cz2" secondAttribute="trailing" constant="20" id="8xH-hc-lHW"/>
-                    <constraint firstItem="Jwp-mn-foe" firstAttribute="top" secondItem="q2a-FS-yay" secondAttribute="bottom" constant="8" id="FNH-PT-AfF"/>
-                    <constraint firstItem="q2a-FS-yay" firstAttribute="centerY" secondItem="85T-rR-SKl" secondAttribute="centerY" id="Jih-8n-3jp"/>
-                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Jwp-mn-foe" secondAttribute="trailing" constant="20" id="Zon-b9-lpI"/>
-                    <constraint firstAttribute="centerX" secondItem="Jwp-mn-foe" secondAttribute="centerX" id="b1s-E2-aZk"/>
-                    <constraint firstAttribute="centerX" secondItem="C5J-j3-cz2" secondAttribute="centerX" id="lCv-jK-adn"/>
-                    <constraint firstItem="Jwp-mn-foe" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="85T-rR-SKl" secondAttribute="leading" constant="20" id="xaE-4Z-sQA"/>
-                    <constraint firstItem="q2a-FS-yay" firstAttribute="top" secondItem="C5J-j3-cz2" secondAttribute="bottom" constant="8" id="yNl-eK-lc1"/>
-                    <constraint firstItem="C5J-j3-cz2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="85T-rR-SKl" secondAttribute="leading" constant="20" id="yVv-cy-bAe"/>
-                </constraints>
-            </view>
-        </window>
         <customObject id="whp-eZ-0pM" customClass="ListController">
             <connections>
                 <outlet property="bookViewController" destination="HlQ-3S-wAo" id="eIg-KH-GXP"/>

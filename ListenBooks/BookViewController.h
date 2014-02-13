@@ -7,19 +7,17 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "KFEpubController.h"
-#import "KFEpubContentModel.h"
+
 
 
 static NSString* const TextSizeDidChangeNotificaton = @"TEXT_SIZE_DID_CHANGE_NOTIFICATION";
 
 @class Book;
 
-@interface BookViewController : NSViewController <NSPageControllerDelegate, KFEpubControllerDelegate>
+@interface BookViewController : NSViewController <NSPageControllerDelegate>
 
 @property (strong) Book* book;
 @property (strong, nonatomic) NSManagedObjectContext* managedObjectContext;
 @property (strong) NSTabViewItem* tabViewItem;
-@property (assign, getter = isProcessing) BOOL processing;
 
 @end

@@ -30,7 +30,6 @@
 {
     [super awakeFromNib];
     self.textView.textContainerInset = NSMakeSize(20.0f, 20.0f);
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textSizeDidChange:) name:TextSizeDidChangeNotificaton object:nil];
 }
 
@@ -41,6 +40,7 @@
 
 - (void)textSizeDidChange:(NSNotification*)notification
 {
+    DDLogVerbose(@"notification: %@", notification.object);
     static double lastFontSizeChange = 0;
     double requiredFontSizeChange = [notification.object doubleValue];
     

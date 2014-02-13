@@ -31,6 +31,8 @@
 
 @interface AppDelegate ()
 
+@property (nonatomic, strong) NSURL *libraryURL;
+@property (assign) NSInteger importedFilesCount;
 @property (nonatomic, strong) NSMutableArray* importedUrls;
 @property (nonatomic, strong) KFEpubController *epubController;
 @property (nonatomic, strong) KFEpubContentModel *contentModel;
@@ -52,11 +54,6 @@
 @property (weak) IBOutlet ListCollectionView *listCollectionView;
 @property (weak) IBOutlet NSView *listToolBarView;
 @property (weak) IBOutlet NSSearchField *listSearchField;
-
-@property (weak) IBOutlet NSPanel *progressWindow;
-@property (weak) IBOutlet NSProgressIndicator *progressIndicator;
-@property (weak) IBOutlet NSTextField *progressTitle;
-@property (weak) IBOutlet NSTextField *progressInfo;
 
 @property (weak) IBOutlet NSMenu *actionMenu;
 
@@ -452,7 +449,6 @@
     
     NSURL* documentsDirectory = [self applicationDocumentsDirectory];
     
-    
     __block NSInteger successFilesCount = 0;
     __block NSMutableArray* copiedUrls = [NSMutableArray new];
     
@@ -493,6 +489,7 @@
         }
     }];
     
+    self.importedFilesCount = successFilesCount;
     self.importedUrls = [NSMutableArray arrayWithArray:copiedUrls];
     [self.progressWindowController updateProgressWindowWithInfo:[NSString stringWithFormat:@"%@: %ld", NSLocalizedString(@"Total Imported Files", nil), successFilesCount]];
     [self processImportedFiles];
@@ -503,10 +500,10 @@
 - (void)processImportedFiles
 {
     [self.progressWindowController updateProgressWindowWithTitle:NSLocalizedString(@"Processing File(s)", nil)];
-    [self.progressWindowController updateProgressWindowWithInfo:[NSString stringWithFormat:@"%@: %ld", NSLocalizedString(@"Processing File(s)", nil), [self.importedUrls count]]];
+    [self.progressWindowController updateProgressWindowWithInfo:[NSString stringWithFormat:@"%@: %ld", NSLocalizedString(@"Processing File(s)", nil), self.importedFilesCount]];
     [self.progressWindowController updateProgressWindowWithDoubleValue:0];
     [self.progressWindowController updateProgressWindowWithMinValue:0];
-    [self.progressWindowController updateProgressWindowWithMaxValue:[self.importedUrls count]];
+    [self.progressWindowController updateProgressWindowWithMaxValue:self.importedFilesCount];
     
     [self importBookWithUrl:[self.importedUrls firstObject]];
 }
@@ -859,27 +856,49 @@
     book.encryption = [NSNumber numberWithInteger:self.contentModel.bookEncryption];
     book.date = [self.dateFormatter dateFromString:[self.contentModel.metaData objectForKey:@"date"]];
     
-    // Save the context.
-    NSError *error = nil;
-    if (![self.managedObjectContext save:&error]) {
-        // Replace this implementation with code to handle the error appropriately.
-        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-        DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
-        //abort();
-    }
     
-    DDLogVerbose(@"inserted book: %@", [book description]);
-    [self.progressWindowController updateProgressWindowWithDoubleValue:(self.progressIndicator.maxValue - [self.importedUrls count])];
-    [self addNewTabWithBook:book];
-    [self processNextFiles];
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        // Do a taks in the background
+        
+        __block NSMutableArray* spinedData = [[NSMutableArray alloc] init];
+        [contentModel.spine enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            
+            NSString* media = contentModel.manifest[contentModel.spine[idx]][@"media"];
+            
+            if ([media isEqualToString:@"application/xhtml+xml"]) {
+                
+                NSString *contentFile = contentModel.manifest[contentModel.spine[idx]][@"href"];
+                NSURL *contentURL = [controller.epubContentBaseURL URLByAppendingPathComponent:contentFile];
+                NSAttributedString *attributedString = [[NSAttributedString alloc] initWithURL:contentURL documentAttributes:nil];
+                
+                if (attributedString != nil) {
+                    
+                    [spinedData addObject:attributedString];
+                    
+                    Page *page = [NSEntityDescription insertNewObjectForEntityForName:@"Page" inManagedObjectContext:self.managedObjectContext];
+                    page.book = book;
+                    page.sortIndex = [NSNumber numberWithInteger:idx];
+                    page.data = attributedString;
+                }
+            }
+        }];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // Finish in main queue
+            
+            DDLogVerbose(@"inserted book: %@", [book description]);
+            [self.progressWindowController updateProgressWindowWithDoubleValue:(self.importedFilesCount - [self.importedUrls count])];
+            [self addNewTabWithBook:book];
+            [self processNextFiles];
+        });
+    });
 }
 
 - (void)epubController:(KFEpubController *)controller didFailWithError:(NSError *)error
 {
     DDLogError(@"epubController:didFailWithError: %@", error.description);
     
-    [self.progressWindowController updateProgressWindowWithInfo:error.localizedDescription];
-    [self.progressWindowController updateProgressWindowWithDoubleValue:(self.progressIndicator.maxValue - [self.importedUrls count])];
+    [self.progressWindowController updateProgressWindowWithDoubleValue:(self.importedFilesCount - [self.importedUrls count])];
     [self unlinkBookWithUrl:controller.epubURL];
     [self processNextFiles];
 }
@@ -887,9 +906,12 @@
 - (void)processNextFiles
 {
     if ([self.importedUrls count] == 0) {
-        [self.progressWindowController updateProgressWindowWithTitle:NSLocalizedString(@"Opening File(s)", nil)];
+        
+        AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
+        [appDelegate saveAction:nil];
+        
         [self.progressWindowController updateProgressWindowWithInfo:NSLocalizedString(@"Importing File(s) completed", nil)];
-        [self.progressWindowController updateProgressWindowWithIndeterminate:YES animating:YES];
+        [self.progressWindowController closeProgressWindow];
     } else {
         [self importBookWithUrl:[self.importedUrls firstObject]];
     }
@@ -1171,6 +1193,5 @@
 - (NSString *)accessibilityStringForTabView:(NSTabView *)aTabView objectCount:(NSInteger)objectCount {
 	return (objectCount == 1) ? @"item" : @"items";
 }
-
 
 @end

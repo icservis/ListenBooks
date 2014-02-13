@@ -12,15 +12,13 @@
 #import "TabBarControllerProtocol.h"
 #import "NSTextView+Extensions.h"
 #import "Book.h"
+#import "Bookmark.h"
 #import "Page.h"
 #import "ProgressWindowController.h"
 
 @interface BookViewController ()
 
 @property (strong) id initialSelectedObject;
-@property (nonatomic, strong) NSURL *libraryURL;
-@property (nonatomic, strong) KFEpubController *epubController;
-@property (nonatomic, strong) KFEpubContentModel *contentModel;
 
 @property (weak) IBOutlet NSView *toolBarView;
 @property (weak) IBOutlet NSTextField *titleField;
@@ -56,8 +54,6 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     self.initialSelectedObject = nil;
-    self.libraryURL = nil;
-    self.contentModel = nil;
 }
 
 - (void)contextDidChange:(NSNotification*)notification
@@ -73,14 +69,11 @@
 - (void)setBook:(Book *)book
 {
     [self resetPageView];
-    self.processing = NO;
     if (![book isEqual:_book]) {
-        DDLogVerbose(@"self.book: %@", book);
-        
         if ([book.pages count] > 0) {
             [self loadBookPageControllerContent:book];
         } else {
-            [self setupBookPageControllerContent:book.fileUrl];
+            self.titleField.stringValue = NSLocalizedString(@"Book Has No Pages!", nil);
         }
     }
     _book = book;
@@ -91,8 +84,6 @@
     DDLogVerbose(@"resetPageView");
     
     self.initialSelectedObject = nil;
-    self.libraryURL = nil;
-    self.contentModel = nil;
     
     self.titleField.stringValue = NSLocalizedString(@"No Selection", nil);
     [[self.pageView subviews] enumerateObjectsUsingBlock:^(NSView* subView, NSUInteger idx, BOOL *stop) {
@@ -131,118 +122,11 @@
     
 }
 
-- (void)setupBookPageControllerContent:(NSURL*)epubURL
-{
-    DDLogVerbose(@"setupBookPageControllerContent");
-    
-    AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
-    self.libraryURL = [appDelegate applicationCacheDirectory];
-    self.epubController = [[KFEpubController alloc] initWithEpubURL:epubURL andDestinationFolder:self.libraryURL];
-    self.epubController.delegate = self;
-    [self.epubController openAsynchronous:YES];
-}
-
 - (IBAction)textSizeSliderChange:(id)sender
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:TextSizeDidChangeNotificaton object:sender];
 }
 
-#pragma mark - KFEpubDelegate
-
-- (void)epubController:(KFEpubController *)controller willOpenEpub:(NSURL *)epubURL
-{
-    DDLogVerbose(@"epubURL: %@", [epubURL absoluteString]);
-    self.processing = YES;
-    self.titleField.stringValue = NSLocalizedString(@"Opening Book…", nil);
-}
-
-
-- (void)epubController:(KFEpubController *)controller didOpenEpub:(KFEpubContentModel *)contentModel
-{
-    
-    DDLogVerbose(@"meta %@", contentModel.metaData);
-    
-    [self.progressIndicator startAnimation:nil];
-    self.titleField.stringValue = [contentModel.metaData valueForKey:@"title"];
-    
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        // Do a taks in the background
-        
-        __block NSMutableArray* spinedData = [[NSMutableArray alloc] init];
-        [contentModel.spine enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            
-            NSString* media = contentModel.manifest[contentModel.spine[idx]][@"media"];
-            
-            if ([media isEqualToString:@"application/xhtml+xml"]) {
-
-                NSString *contentFile = contentModel.manifest[contentModel.spine[idx]][@"href"];
-                NSURL *contentURL = [controller.epubContentBaseURL URLByAppendingPathComponent:contentFile];
-                NSAttributedString *attributedString = [[NSAttributedString alloc] initWithURL:contentURL documentAttributes:nil];
-                
-                if (attributedString != nil) {
-                    
-                    [spinedData addObject:attributedString];
-                    
-                    Page *page = [NSEntityDescription insertNewObjectForEntityForName:@"Page" inManagedObjectContext:self.managedObjectContext];
-                    page.book = self.book;
-                    page.sortIndex = [NSNumber numberWithInteger:idx];
-                    page.data = attributedString;
-                }
-            }
-        }];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            // Finish in main queue
-            AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
-            [appDelegate saveAction:nil];
-            
-            if ([spinedData count] > 0) {
-                self.contentModel = contentModel;
-                [self.pageController setArrangedObjects:[[NSMutableArray alloc] initWithArray:spinedData]];
-            } else {
-                [self resetPageView];
-            }
-            
-            [self.progressIndicator stopAnimation:nil];
-            self.processing = NO;
-            [self checkProcessingStatusOfAllControllers];
-        });
-    });
-}
-
-
-- (void)epubController:(KFEpubController *)controller didFailWithError:(NSError *)error
-{
-    DDLogError(@"epubController:didFailWithError: %@", error.description);
-    [self resetPageView];
-    
-    [self.progressIndicator stopAnimation:nil];
-    self.processing = NO;
-    [self checkProcessingStatusOfAllControllers];
-}
-
-- (void)checkProcessingStatusOfAllControllers
-{
-    DDLogVerbose(@"checkProcessingStatusOfAllControllers");
-    AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
-    __block BOOL progress = NO;
-    [appDelegate.tabViewControllers enumerateObjectsUsingBlock:^(id <TabBarControllerProtocol>controller, NSUInteger idx, BOOL *stop) {
-        if ([controller isKindOfClass:[self class]]) {
-            BookViewController* bookViewController = (BookViewController*)controller;
-            if (bookViewController.processing == YES) {
-                progress = YES;
-                *stop = YES;
-            }
-        }
-    }];
-    if (progress == NO) {
-        DDLogVerbose(@"progressWindow stop");
-        [appDelegate.progressWindowController updateProgressWindowWithInfo:NSLocalizedString(@"Opening Book(s) Completed", nil)];
-        [appDelegate.progressWindowController closeProgressWindow];
-    } else {
-        [appDelegate.progressWindowController updateProgressWindowWithInfo:self.book.title];
-    }
-}
 
 #pragma mark - BookPageControllerDelegate
 
