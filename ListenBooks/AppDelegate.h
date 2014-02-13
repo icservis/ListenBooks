@@ -30,38 +30,9 @@ extern NSString* const TabBarCountDidChangeNotification;
 
 @property (assign) IBOutlet NSWindow *window;
 @property (weak) IBOutlet MMTabBarView *tabBar;
-@property (weak) IBOutlet NSTabView *tabView;
-
 @property (weak) IBOutlet KFToolbar *toolBar;
-@property (weak) IBOutlet NSTextField *tabField;
-
-@property (weak) IBOutlet NSSplitView *splitView;
-@property (weak) IBOutlet NSView *contentView;
-@property (weak) IBOutlet NSView *inputView;
-
-@property (weak) IBOutlet NSSplitView *subSplitView;
-@property (weak) IBOutlet NSView *sourceSplitPane;
-@property (weak) IBOutlet NSView *bookmarksSplitPane;
-@property (weak) IBOutlet BooksView *booksView;
-@property (weak) IBOutlet BookmarksView *bookmarksView;
-
-@property (weak) IBOutlet ListCollectionView *listCollectionView;
-@property (weak) IBOutlet NSView *listToolBarView;
-@property (weak) IBOutlet NSSearchField *listSearchField;
-
-@property (weak) IBOutlet NSPanel *progressWindow;
-@property (weak) IBOutlet NSProgressIndicator *progressIndicator;
-@property (weak) IBOutlet NSTextField *progressTitle;
-@property (weak) IBOutlet NSTextField *progressInfo;
-
-@property (weak) IBOutlet NSMenu *actionMenu;
 
 @property (nonatomic, strong) NSMutableArray* tabViewControllers;
-@property (nonatomic, strong) NSMutableArray* importedUrls;
-@property (nonatomic, strong) KFEpubController *epubController;
-@property (nonatomic, strong) KFEpubContentModel *contentModel;
-@property (nonatomic, strong) NSDateFormatter* dateFormatter;
-
 @property (strong) IBOutlet BooksTreeController *booksTreeController;
 @property (strong) IBOutlet BookmarksArrayController *bookmarksArrayController;
 @property (strong) IBOutlet ListArrayController *listArrayController;
@@ -70,18 +41,32 @@ extern NSString* const TabBarCountDidChangeNotification;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
+#pragma mark - CoreData
 - (NSURL *)applicationDocumentsDirectory;
 - (NSURL *)applicationCacheDirectory;
-- (NSArray*)allowedFileTypes;
-- (IBAction)openPreferencesWindow:(id)sender;
+- (IBAction)saveAction:(id)sender;
+
+#pragma mark - Input/Output Operations
 - (IBAction)openImportDialog:(id)sender;
 - (void)unlinkBookWithUrl:(NSURL*)sandboxedFileUrl;
+- (void)exportBook:(Book*)book;
+
+#pragma mark - Tabs Management
 - (void)addNewTabWithBook:(Book*)book;
 - (IBAction)addNewTab:(id)sender;
 - (IBAction)closeTab:(id)sender;
 - (void)closeTabWithItem:(NSTabViewItem*)tabViewItem;
 - (void)updateToolBarContentForTabView:(NSTabViewItem*)tabViewItem;
-- (void)exportBook:(Book*)book;
-- (IBAction)saveAction:(id)sender;
+
+
+#pragma mark - ProgressWindow
+- (void)openProgressWindowWithTitle:(NSString*)title info:(NSString*)info indicatorMinValue:(double)minValue indicatorMaxValue:(double)maxValue doubleValue:(double)doubleValue indeterminate:(BOOL)indeterminate animating:(BOOL)animating;
+- (void)updateProgressWindowWithTitle:(NSString*)title;
+- (void)updateProgressWindowWithInfo:(NSString*)info;
+- (void)updateProgressWindowWithDoubleValue:(double)doubleValue;
+- (void)updateProgressWindowWithMinValue:(double)minValue;
+- (void)updateProgressWindowWithMaxValue:(double)maxValue;
+- (void)updateProgressWindowWithIndeterminate:(BOOL)indeterminate animating:(BOOL)animating;
+- (void)closeProgressWindow;
 
 @end

@@ -15,8 +15,8 @@
     DDLogVerbose(@"sender: %@", sender);
     
     AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
-    NSTabViewItem* selectedTabViewIntem = [appDelegate.tabView selectedTabViewItem];
-    NSInteger index = [appDelegate.tabView indexOfTabViewItem:selectedTabViewIntem];
+    NSTabViewItem* selectedTabViewIntem = [appDelegate.tabBar selectedTabViewItem];
+    NSInteger index = [appDelegate.tabBar indexOfTabViewItem:selectedTabViewIntem];
     
     if (index > 0) {
         [appDelegate closeTabWithItem:selectedTabViewIntem];
@@ -30,8 +30,8 @@
     if (theAction == @selector(performClose:)) {
         
         AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
-        NSTabViewItem* selectedTabViewIntem = [appDelegate.tabView selectedTabViewItem];
-        NSInteger index = [appDelegate.tabView indexOfTabViewItem:selectedTabViewIntem];
+        NSTabViewItem* selectedTabViewIntem = [appDelegate.tabBar selectedTabViewItem];
+        NSInteger index = [appDelegate.tabBar indexOfTabViewItem:selectedTabViewIntem];
         
         if (index == 0) {
             return NO;

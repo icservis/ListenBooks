@@ -109,6 +109,8 @@
 - (void)deleteItems
 {
     AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
+    [appDelegate openProgressWindowWithTitle:NSLocalizedString(@"Deleting Book(s)", nil) info:NSLocalizedString(@"Prepairing…", nil) indicatorMinValue:0 indicatorMaxValue:0 doubleValue:0 indeterminate:YES animating:YES];
+    
     [[self.booksTreeController selectedNodes] enumerateObjectsUsingBlock:^(NSTreeNode* node, NSUInteger idx, BOOL *stop) {
         
         Book* book = [node representedObject];
@@ -119,6 +121,7 @@
                 BookViewController* bookViewController = (BookViewController*)controller;
                 if ([bookViewController.book isEqualTo:book]) {
                     [appDelegate closeTabWithItem:bookViewController.tabViewItem];
+                    [appDelegate updateProgressWindowWithInfo:bookViewController.book.title];
                 }
             }
         }];
@@ -126,6 +129,9 @@
         [appDelegate.managedObjectContext deleteObject:book];
     }];
     [appDelegate saveAction:nil];
+    [appDelegate updateProgressWindowWithInfo:NSLocalizedString(@"Completed", nil)];
+    [appDelegate updateProgressWindowWithIndeterminate:YES animating:NO];
+    [appDelegate closeProgressWindow];
 }
 
 #pragma mark - NSOutlineView Delegate Methods

@@ -104,6 +104,8 @@
 - (void)deleteItems
 {
     AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
+    [appDelegate openProgressWindowWithTitle:NSLocalizedString(@"Deleting Book(s)", nil) info:NSLocalizedString(@"Prepairing…", nil) indicatorMinValue:0 indicatorMaxValue:0 doubleValue:0 indeterminate:YES animating:YES];
+
     [[self.listArrayController selectedObjects] enumerateObjectsUsingBlock:^(Book* book, NSUInteger idx, BOOL *stop) {
         
         [appDelegate unlinkBookWithUrl:book.fileUrl];
@@ -112,12 +114,16 @@
                 BookViewController* bookViewController = (BookViewController*)controller;
                 if ([bookViewController.book isEqualTo:book]) {
                     [appDelegate closeTabWithItem:bookViewController.tabViewItem];
+                    [appDelegate updateProgressWindowWithInfo:bookViewController.book.title];
                 }
             }
         }];
         [appDelegate.managedObjectContext deleteObject:book];
     }];
     [appDelegate saveAction:nil];
+    [appDelegate updateProgressWindowWithInfo:NSLocalizedString(@"Completed", nil)];
+    [appDelegate updateProgressWindowWithIndeterminate:YES animating:NO];
+    [appDelegate closeProgressWindow];
 }
 
 @end

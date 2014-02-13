@@ -236,9 +236,11 @@
     }];
     if (progress == NO) {
         DDLogVerbose(@"progressWindow stop");
-        [NSApp endSheet:appDelegate.progressWindow];
+        [appDelegate updateProgressWindowWithInfo:NSLocalizedString(@"Opening Book(s) Completed", nil)];
+        [appDelegate updateProgressWindowWithIndeterminate:YES animating:NO];
+        [appDelegate closeProgressWindow];
     } else {
-        appDelegate.progressInfo.stringValue = self.book.title;
+        [appDelegate updateProgressWindowWithInfo:self.book.title];
     }
 }
 
