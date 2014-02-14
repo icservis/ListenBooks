@@ -7,19 +7,35 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="InformationWindowController">
             <connections>
+                <outlet property="authorField" destination="Xty-5k-nfU" id="YW0-nB-FTT"/>
+                <outlet property="authorLabel" destination="bS3-Vq-e7n" id="42n-XA-GtH"/>
                 <outlet property="bookObjectController" destination="v0g-Hn-YQf" id="pnM-Ji-y2h"/>
                 <outlet property="closeButton" destination="M4i-BA-IyU" id="Tew-yi-SaM"/>
+                <outlet property="createdLabel" destination="USL-gM-hVk" id="IpP-j4-Ei4"/>
+                <outlet property="fontLabel" destination="rDS-dJ-LVg" id="NQG-mw-dV9"/>
+                <outlet property="fontNamePopupButton" destination="Mx9-Ne-cQz" id="Rgq-hi-fCP"/>
+                <outlet property="fontSizeTickSlider" destination="0fH-8c-U34" id="xz3-Oz-OaN"/>
+                <outlet property="publisherLabel" destination="vhj-0X-1TU" id="F3S-Fn-E2T"/>
+                <outlet property="rightsLabel" destination="eWw-Pe-QHY" id="0Qy-ay-ReV"/>
                 <outlet property="saveButton" destination="l7T-s0-vy2" id="rPz-fc-XAu"/>
+                <outlet property="sizeLabel" destination="Idv-Ch-ZNy" id="sAS-hA-KRm"/>
+                <outlet property="subjectField" destination="fhr-2M-My3" id="Rdo-RG-bsb"/>
+                <outlet property="subjectLabel" destination="XAx-JX-hdw" id="ZhN-RH-D0q"/>
                 <outlet property="tabView" destination="43l-ju-QFR" id="o9e-fz-Hk0"/>
+                <outlet property="themeLabel" destination="CNr-ei-cm6" id="xOL-JU-sxP"/>
+                <outlet property="themeSegmentedControl" destination="4Ti-gQ-ETp" id="GpW-dW-UbV"/>
+                <outlet property="titleField" destination="2tN-5c-vL8" id="BCl-ah-sqd"/>
+                <outlet property="titleLabel" destination="PYr-ny-nMv" id="iE6-Sm-7xb"/>
                 <outlet property="view" destination="2" id="UL7-G8-usw"/>
+                <outlet property="voiceLabel" destination="jRd-sD-Qfd" id="6rJ-FR-fne"/>
+                <outlet property="voicePopupButton" destination="juc-DV-pr5" id="aLs-Jm-o3P"/>
                 <outlet property="window" destination="1" id="3"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application"/>
         <window title="Information" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" wantsToBeColor="NO" visibleAtLaunch="NO" frameAutosaveName="InformationWindow" animationBehavior="default" id="1">
-            <windowStyleMask key="styleMask" titled="YES"/>
-            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <windowStyleMask key="styleMask" titled="YES" miniaturizable="YES"/>
             <rect key="contentRect" x="428" y="275" width="480" height="270"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1280" height="778"/>
             <view key="contentView" id="2">
@@ -154,7 +170,7 @@
                                             </constraints>
                                             <popUpButtonCell key="cell" type="push" title="Times" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="5MB-FB-664" id="CNd-RF-eJU">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
+                                                <font key="font" metaFont="menu"/>
                                                 <menu key="menu" title="OtherViews" id="xmA-Y7-HAK">
                                                     <items>
                                                         <menuItem title="Courier" id="SnV-6Z-sEA">
@@ -191,6 +207,27 @@
                                             </constraints>
                                             <sliderCell key="cell" state="on" alignment="left" minValue="-3" maxValue="7" tickMarkPosition="above" numberOfTickMarks="11" allowsTickMarkValuesOnly="YES" sliderType="linear" id="CMr-Ot-JQk"/>
                                         </slider>
+                                        <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="juc-DV-pr5">
+                                            <rect key="frame" x="148" y="13" width="272" height="26"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="Ggc-0o-hkZ"/>
+                                                <constraint firstAttribute="width" constant="267" id="ku4-fs-3YD"/>
+                                            </constraints>
+                                            <popUpButtonCell key="cell" type="push" title="Anna" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="tq4-bu-T3P" id="zqQ-p0-Rln">
+                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="menu"/>
+                                                <menu key="menu" title="OtherViews" id="ee4-5m-cjg">
+                                                    <items>
+                                                        <menuItem title="Anna" state="on" id="tq4-bu-T3P">
+                                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                                        </menuItem>
+                                                        <menuItem title="Martina" id="6op-Tf-Mg5"/>
+                                                        <menuItem title="Ingrid" id="lXZ-zc-FBq"/>
+                                                    </items>
+                                                </menu>
+                                            </popUpButtonCell>
+                                        </popUpButton>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rDS-dJ-LVg">
                                             <rect key="frame" x="15" y="147" width="32" height="17"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -227,27 +264,6 @@
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
-                                        <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="juc-DV-pr5">
-                                            <rect key="frame" x="148" y="13" width="272" height="26"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="21" id="Ggc-0o-hkZ"/>
-                                                <constraint firstAttribute="width" constant="267" id="ku4-fs-3YD"/>
-                                            </constraints>
-                                            <popUpButtonCell key="cell" type="push" title="Anna" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="tq4-bu-T3P" id="zqQ-p0-Rln">
-                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                                <menu key="menu" title="OtherViews" id="ee4-5m-cjg">
-                                                    <items>
-                                                        <menuItem title="Anna" state="on" id="tq4-bu-T3P">
-                                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                                        </menuItem>
-                                                        <menuItem title="Martina" id="6op-Tf-Mg5"/>
-                                                        <menuItem title="Ingrid" id="lXZ-zc-FBq"/>
-                                                    </items>
-                                                </menu>
-                                            </popUpButtonCell>
-                                        </popUpButton>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jRd-sD-Qfd">
                                             <rect key="frame" x="15" y="18" width="38" height="17"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -302,18 +318,6 @@
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eWw-Pe-QHY">
-                                            <rect key="frame" x="38" y="93" width="44" height="17"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="17" id="6BS-d2-fof"/>
-                                            </constraints>
-                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Rights" id="ER7-Ic-YQk">
-                                                <font key="font" metaFont="system"/>
-                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                            </textFieldCell>
-                                        </textField>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cR4-Jb-UqR">
                                             <rect key="frame" x="38" y="125" width="68" height="17"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -356,6 +360,18 @@
                                             <connections>
                                                 <binding destination="v0g-Hn-YQf" name="value" keyPath="selection.created" id="l6u-XR-nHX"/>
                                             </connections>
+                                        </textField>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eWw-Pe-QHY">
+                                            <rect key="frame" x="38" y="93" width="44" height="17"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="17" id="6BS-d2-fof"/>
+                                            </constraints>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Rights" id="ER7-Ic-YQk">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
                                         </textField>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="48S-Wv-jsI">
                                             <rect key="frame" x="38" y="68" width="47" height="17"/>

@@ -14,6 +14,5 @@
 @interface InformationWindowController : NSWindowController
 
 @property (nonatomic, copy) void (^completionBlock)(BOOL success);
-@property (strong) IBOutlet BookObjectController *bookObjectController;
 
 @end
