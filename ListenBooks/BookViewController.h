@@ -7,17 +7,20 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "TabBarControllerProtocol.h"
 
-
-
-static NSString* const TextSizeDidChangeNotificaton = @"TEXT_SIZE_DID_CHANGE_NOTIFICATION";
+static NSString* const FontNameDidChangeNotificaton = @"FONT_NAME_DID_CHANGE_NOTIFICATION";
+static NSString* const FontSizeDidChangeNotificaton = @"FONT_SIZE_DID_CHANGE_NOTIFICATION";
+static NSString* const ThemeDidChangeNotificaton = @"THEME_DID_CHANGE_NOTIFICATION";
+static NSString* const VoiceNameDidChangeNotificaton = @"VOICE_NAME_DID_CHANGE_NOTIFICATION";
+static NSString* const VoiceSpeedDidChangeNotificaton = @"VOICE_SPEED_DID_CHANGE_NOTIFICATION";
 
 @class Book;
 
-@interface BookViewController : NSViewController <NSPageControllerDelegate>
+@interface BookViewController : NSViewController <TabBarControllerProtocol, NSPageControllerDelegate>
 
 @property (strong) Book* book;
 @property (strong, nonatomic) NSManagedObjectContext* managedObjectContext;
-@property (strong) NSTabViewItem* tabViewItem;
+@property (nonatomic, strong) NSTabViewItem* tabViewItem;
 
 @end

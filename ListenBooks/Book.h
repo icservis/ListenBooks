@@ -2,7 +2,7 @@
 //  Book.h
 //  ListenBooks
 //
-//  Created by Libor Kučera on 12/02/14.
+//  Created by Libor Kučera on 15/02/14.
 //  Copyright (c) 2014 IC Servis. All rights reserved.
 //
 
@@ -16,7 +16,7 @@
 @property (nonatomic, retain) NSString * author;
 @property (nonatomic, retain) NSNumber * canCollapse;
 @property (nonatomic, retain) NSNumber * canExpand;
-@property (nonatomic, retain) NSImage* cover;
+@property (nonatomic, retain) NSImage * cover;
 @property (nonatomic, retain) NSDate * created;
 @property (nonatomic, retain) NSString * creator;
 @property (nonatomic, retain) NSDate * date;
@@ -36,6 +36,11 @@
 @property (nonatomic, retain) NSString * subject;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSNumber * type;
+@property (nonatomic, retain) NSString * fontName;
+@property (nonatomic, retain) NSNumber * fontSizeDelta;
+@property (nonatomic, retain) NSString * voiceIdentifier;
+@property (nonatomic, retain) NSNumber * voiceSpeed;
+@property (nonatomic, retain) NSNumber * themeIndex;
 @property (nonatomic, retain) NSSet *bookmarks;
 @property (nonatomic, retain) NSSet *children;
 @property (nonatomic, retain) NSSet *pages;

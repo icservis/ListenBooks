@@ -13,4 +13,9 @@
 @property (nonatomic, strong) NSTabViewItem* tabViewItem;
 @property (nonatomic, strong) NSManagedObjectContext* managedObjectContext;
 
+- (void)toggleToolBar;
+- (BOOL)isToolBarOpened;
+- (void)toggleSideBar;
+- (BOOL)isSideBarOpened;
+
 @end

@@ -7,7 +7,15 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ImageViewController">
             <connections>
+                <outlet property="contentView" destination="9qE-a1-W5O" id="8OO-4T-QmN"/>
                 <outlet property="pageController" destination="7gy-hI-YnT" id="MQa-LX-A5A"/>
+                <outlet property="pageLabel" destination="72C-Yr-w7U" id="Fzr-8C-qNr"/>
+                <outlet property="pageView" destination="5dv-XV-tRH" id="DLz-UX-07d"/>
+                <outlet property="progressIndicatior" destination="zPO-hh-6RF" id="frP-Ub-mwt"/>
+                <outlet property="sideBarView" destination="Fwo-Jt-rwT" id="uCW-KG-DBf"/>
+                <outlet property="splitView" destination="5Wa-V7-RC2" id="ZIV-c7-XTE"/>
+                <outlet property="toolBarHeightConstraint" destination="ARw-cr-bk4" id="uJt-pO-JK0"/>
+                <outlet property="toolBarView" destination="VLq-ZN-gPq" id="jfB-lw-pVv"/>
                 <outlet property="view" destination="1" id="2"/>
             </connections>
         </customObject>
@@ -17,45 +25,84 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <customView translatesAutoresizingMaskIntoConstraints="NO" id="xZP-wR-Ifp">
-                    <rect key="frame" x="0.0" y="236" width="480" height="36"/>
+                <splitView dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Wa-V7-RC2">
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <subviews>
-                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pw6-JJ-Wav">
-                            <rect key="frame" x="18" y="10" width="43" height="17"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Image" id="iLb-bq-3pV">
-                                <font key="font" metaFont="system"/>
-                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                            </textFieldCell>
-                        </textField>
+                        <customView fixedFrame="YES" id="Fwo-Jt-rwT">
+                            <rect key="frame" x="0.0" y="0.0" width="135" height="272"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </customView>
+                        <customView id="9qE-a1-W5O">
+                            <rect key="frame" x="136" y="0.0" width="344" height="272"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <subviews>
+                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="5dv-XV-tRH">
+                                    <rect key="frame" x="0.0" y="0.0" width="344" height="236"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <subviews>
+                                        <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="zPO-hh-6RF">
+                                            <rect key="frame" x="156" y="102" width="32" height="32"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        </progressIndicator>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="centerX" secondItem="zPO-hh-6RF" secondAttribute="centerX" id="7T4-2u-deE"/>
+                                        <constraint firstAttribute="centerY" secondItem="zPO-hh-6RF" secondAttribute="centerY" id="Fce-PV-I5N"/>
+                                    </constraints>
+                                </customView>
+                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="VLq-ZN-gPq">
+                                    <rect key="frame" x="0.0" y="236" width="344" height="36"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <subviews>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="72C-Yr-w7U">
+                                            <rect key="frame" x="18" y="10" width="68" height="17"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="pageLabel" id="a7B-Lp-C5T">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="36" id="ARw-cr-bk4"/>
+                                        <constraint firstAttribute="centerY" secondItem="72C-Yr-w7U" secondAttribute="centerY" id="INj-tr-V2b"/>
+                                        <constraint firstItem="72C-Yr-w7U" firstAttribute="leading" secondItem="VLq-ZN-gPq" secondAttribute="leading" constant="20" id="SPK-Gz-b9q"/>
+                                    </constraints>
+                                </customView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="5dv-XV-tRH" firstAttribute="top" secondItem="VLq-ZN-gPq" secondAttribute="bottom" id="3sQ-uI-ECV"/>
+                                <constraint firstItem="VLq-ZN-gPq" firstAttribute="leading" secondItem="9qE-a1-W5O" secondAttribute="leading" id="BSj-Ge-EAE"/>
+                                <constraint firstAttribute="trailing" secondItem="VLq-ZN-gPq" secondAttribute="trailing" id="Tk8-I6-qzJ"/>
+                                <constraint firstAttribute="trailing" secondItem="5dv-XV-tRH" secondAttribute="trailing" id="dWK-nJ-F8Y"/>
+                                <constraint firstAttribute="bottom" secondItem="5dv-XV-tRH" secondAttribute="bottom" id="miW-WJ-ZBR"/>
+                                <constraint firstItem="VLq-ZN-gPq" firstAttribute="top" secondItem="9qE-a1-W5O" secondAttribute="top" id="yRf-bA-2pu"/>
+                                <constraint firstItem="5dv-XV-tRH" firstAttribute="leading" secondItem="9qE-a1-W5O" secondAttribute="leading" id="zsr-xZ-RBS"/>
+                            </constraints>
+                        </customView>
                     </subviews>
-                    <constraints>
-                        <constraint firstItem="pw6-JJ-Wav" firstAttribute="leading" secondItem="xZP-wR-Ifp" secondAttribute="leading" constant="20" id="M0j-gp-eIj"/>
-                        <constraint firstAttribute="centerY" secondItem="pw6-JJ-Wav" secondAttribute="centerY" id="fK5-j8-EKZ"/>
-                        <constraint firstAttribute="height" constant="36" id="xk7-SG-lDd"/>
-                    </constraints>
-                </customView>
-                <customView translatesAutoresizingMaskIntoConstraints="NO" id="dhr-CB-2xz">
-                    <rect key="frame" x="0.0" y="0.0" width="480" height="236"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                </customView>
+                    <holdingPriorities>
+                        <real value="250"/>
+                        <real value="250"/>
+                    </holdingPriorities>
+                    <connections>
+                        <outlet property="delegate" destination="-2" id="fIw-lZ-hEn"/>
+                    </connections>
+                </splitView>
             </subviews>
             <constraints>
-                <constraint firstItem="xZP-wR-Ifp" firstAttribute="top" secondItem="1" secondAttribute="top" id="8nf-4c-9y4"/>
-                <constraint firstItem="xZP-wR-Ifp" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="F9Z-T7-I7U"/>
-                <constraint firstAttribute="bottom" secondItem="dhr-CB-2xz" secondAttribute="bottom" id="Lx8-iW-LN9"/>
-                <constraint firstAttribute="trailing" secondItem="xZP-wR-Ifp" secondAttribute="trailing" id="RP9-pt-Qwg"/>
-                <constraint firstAttribute="trailing" secondItem="dhr-CB-2xz" secondAttribute="trailing" id="a3Z-qn-8Al"/>
-                <constraint firstItem="dhr-CB-2xz" firstAttribute="top" secondItem="xZP-wR-Ifp" secondAttribute="bottom" id="czx-ve-kZe"/>
-                <constraint firstItem="dhr-CB-2xz" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="mxu-bT-6zG"/>
+                <constraint firstItem="5Wa-V7-RC2" firstAttribute="top" secondItem="1" secondAttribute="top" id="EwB-Gh-Lup"/>
+                <constraint firstAttribute="bottom" secondItem="5Wa-V7-RC2" secondAttribute="bottom" id="PZ4-NB-hof"/>
+                <constraint firstItem="5Wa-V7-RC2" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="Wc3-hB-d6g"/>
+                <constraint firstAttribute="trailing" secondItem="5Wa-V7-RC2" secondAttribute="trailing" id="wim-xz-GvP"/>
             </constraints>
         </customView>
         <pagecontroller id="7gy-hI-YnT">
             <connections>
                 <outlet property="delegate" destination="-2" id="aqA-sh-wtc"/>
-                <outlet property="view" destination="dhr-CB-2xz" id="PZS-hK-EXD"/>
+                <outlet property="view" destination="5dv-XV-tRH" id="I61-tz-OzM"/>
             </connections>
         </pagecontroller>
     </objects>

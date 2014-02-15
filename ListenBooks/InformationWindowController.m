@@ -22,14 +22,18 @@
 @property (weak) IBOutlet NSTextField *authorField;
 @property (weak) IBOutlet NSTextField *subjectLabel;
 @property (weak) IBOutlet NSTextField *subjectField;
-@property (weak) IBOutlet NSPopUpButton *fontNamePopupButton;
+
+@property (weak) IBOutlet NSPopUpButton *fontNamePopup;
 @property (weak) IBOutlet NSSegmentedControl *themeSegmentedControl;
 @property (weak) IBOutlet NSSlider *fontSizeTickSlider;
-@property (weak) IBOutlet NSPopUpButton *voicePopupButton;
+@property (weak) IBOutlet NSPopUpButton *voicePopup;
+@property (weak) IBOutlet NSSlider *voiceSpeedSlider;
 @property (weak) IBOutlet NSTextField *fontLabel;
 @property (weak) IBOutlet NSTextField *themeLabel;
 @property (weak) IBOutlet NSTextField *sizeLabel;
 @property (weak) IBOutlet NSTextField *voiceLabel;
+@property (weak) IBOutlet NSTextField *sppedLabel;
+
 @property (weak) IBOutlet NSTextField *publisherLabel;
 @property (weak) IBOutlet NSTextField *rightsLabel;
 @property (weak) IBOutlet NSTextField *createdLabel;

@@ -38,6 +38,7 @@
 @property (nonatomic, strong) KFEpubContentModel *contentModel;
 @property (nonatomic, strong) NSDateFormatter* dateFormatter;
 
+@property (weak) IBOutlet NSLayoutConstraint *tabBarHeightConstraint;
 @property (weak) IBOutlet NSSplitView *splitView;
 @property (weak) IBOutlet NSView *contentView;
 @property (weak) IBOutlet NSView *inputView;
@@ -111,7 +112,11 @@
 
 - (IBAction)toggleBookMarksPane:(id)sender
 {
-    DDLogVerbose(@"_bookmarksSplitPaneHeight: %.0f, %f",_bookmarksSplitPaneHeight, self.splitView.frame.size.height);
+    [self.splitView adjustSubviews];
+    if ([self.splitView isSubviewCollapsed:self.inputView]) {
+        [self.splitView setPosition:_inputViewWidth ofDividerAtIndex:0];
+    }
+    
     [self.subSplitView adjustSubviews];
     if ([self.subSplitView isSubviewCollapsed:self.bookmarksSplitPane]) {
         [self.subSplitView setPosition:self.subSplitView.frame.size.height-_bookmarksSplitPaneHeight ofDividerAtIndex:0];
@@ -165,7 +170,7 @@
 }
 
 #pragma mark - User Interface
-#pragma mark - KFToolBar
+#pragma mark - ToolBar
 
 - (void)setupToolBar
 {
@@ -242,47 +247,6 @@
      }];
 }
 
-- (void)setToolBarForBookTabView
-{
-    KFToolbarItem *addItem = [KFToolbarItem toolbarItemWithIcon:[NSImage imageNamed:NSImageNameAddTemplate] tag:0];
-    addItem.toolTip = NSLocalizedString(@"Add Bookmark", nil);
-    
-    KFToolbarItem *actionItem = [KFToolbarItem toolbarItemWithType:NSMomentaryPushInButton icon:[NSImage imageNamed:NSImageNameActionTemplate] tag:1];
-    actionItem.toolTip = NSLocalizedString(@"Settings", nil);
-    
-    KFToolbarItem *bookmarksItem = [KFToolbarItem toolbarItemWithType:NSToggleButton icon:[NSImage imageNamed:NSImageNameBookmarksTemplate] tag:2];
-    bookmarksItem.toolTip = NSLocalizedString(@"Bookmarks", nil);
-    if ([self.subSplitView isSubviewCollapsed:self.bookmarksSplitPane]) {
-        bookmarksItem.state = NSOffState;
-    } else {
-        bookmarksItem.state = NSOnState;
-    }
-    
-    KFToolbarItem *optionsItem = [KFToolbarItem toolbarItemWithIcon:[NSImage imageNamed:NSImageNameFollowLinkFreestandingTemplate] tag:0];
-    optionsItem.toolTip = @"Options";
-    
-    self.toolBar.leftItems = @[addItem, actionItem, bookmarksItem];
-    self.toolBar.rightItems = @[optionsItem];
-    
-    [self.toolBar setItemSelectionHandler:^(KFToolbarItemSelectionType selectionType, KFToolbarItem *toolbarItem, NSUInteger tag)
-     {
-         switch (tag)
-         {
-             case 0:
-                 break;
-                 
-             case 1:
-                 break;
-                 
-             case 2:
-                 break;
-                 
-             default:
-                 break;
-         }
-     }];
-}
-
 - (void)selectListCoverFlowView:(id)sender
 {
     DDLogDebug(@"sender: %@", sender);
@@ -303,6 +267,71 @@
     listCoverFlowItem.state = NSOffState;
 }
 
+- (void)setToolBarForBookTabView
+{
+    KFToolbarItem *addItem = [KFToolbarItem toolbarItemWithIcon:[NSImage imageNamed:NSImageNameAddTemplate] tag:0];
+    addItem.toolTip = NSLocalizedString(@"Add Bookmark", nil);
+    
+    KFToolbarItem *actionItem = [KFToolbarItem toolbarItemWithType:NSMomentaryPushInButton icon:[NSImage imageNamed:NSImageNameActionTemplate] tag:1];
+    actionItem.toolTip = NSLocalizedString(@"Settings", nil);
+    
+    KFToolbarItem *bookmarksItem = [KFToolbarItem toolbarItemWithType:NSToggleButton icon:[NSImage imageNamed:NSImageNameBookmarksTemplate] tag:2];
+    bookmarksItem.toolTip = NSLocalizedString(@"Bookmarks", nil);
+    if ([self.subSplitView isSubviewCollapsed:self.bookmarksSplitPane]) {
+        bookmarksItem.state = NSOffState;
+    } else {
+        bookmarksItem.state = NSOnState;
+    }
+    
+    KFToolbarItem *toggleToolBarItem = [KFToolbarItem toolbarItemWithIcon:[NSImage imageNamed:NSImageNameFollowLinkFreestandingTemplate] tag:3];
+    toggleToolBarItem.toolTip = @"Toggle ToolBar";
+    
+    self.toolBar.leftItems = @[addItem, actionItem, bookmarksItem];
+    self.toolBar.rightItems = @[toggleToolBarItem];
+    
+    [self.toolBar setItemSelectionHandler:^(KFToolbarItemSelectionType selectionType, KFToolbarItem *toolbarItem, NSUInteger tag)
+     {
+         switch (tag)
+         {
+             case 0:
+                 break;
+                 
+             case 1:
+                 break;
+                 
+             case 2:
+                 [self toggleSideBarControllerToolBar];
+                 break;
+                 
+             case 3:
+                 [self toggleToolBarControllerToolBar];
+                 break;
+                 
+             default:
+                 break;
+         }
+     }];
+}
+
+- (void)toggleToolBarControllerToolBar
+{
+    id <TabBarControllerProtocol> controller = [self controllerForSelectedTabViewItem];
+    [controller toggleToolBar];
+}
+
+- (void)toggleSideBarControllerToolBar
+{
+    id <TabBarControllerProtocol> controller = [self controllerForSelectedTabViewItem];
+    [controller toggleSideBar];
+    
+    KFToolbarItem *toggleToolBarItem = self.toolBar.rightItems[0];
+    if ([controller isToolBarOpened]) {
+        toggleToolBarItem.state = NSOnState;
+    } else {
+        toggleToolBarItem.state = NSOffState;
+    }
+    
+}
 
 #pragma mark - TabView
 
@@ -380,6 +409,27 @@
     if (([self.tabBar delegate]) && ([[self.tabBar delegate] respondsToSelector:@selector(tabView:didCloseTabViewItem:)])) {
         [[self.tabBar delegate] tabView:self.tabView didCloseTabViewItem:tabViewItem];
     }
+}
+
+- (id)controllerForSelectedTabViewItem
+{
+    NSTabViewItem *tabViewItem = [self.tabView selectedTabViewItem];
+    return [self controllerForTabViewItem:tabViewItem];
+}
+
+- (id)controllerForTabViewItem:(NSTabViewItem*)tabViewItem
+{
+    if ([self.tabView indexOfTabViewItem:tabViewItem] > 0) {
+        __block NSViewController* selectedController = nil;
+        [self.tabViewControllers enumerateObjectsUsingBlock:^(id <TabBarControllerProtocol>controller, NSUInteger idx, BOOL *stop) {
+            if ([controller.tabViewItem isEqualTo:tabViewItem]) {
+                *stop = YES;
+                selectedController = (NSViewController*)controller;
+            }
+        }];
+        return selectedController;
+    }
+    return nil;
 }
 
 - (void)updateSelectionWithTabBarViewItem:(NSTabViewItem*)tabViewItem
@@ -565,7 +615,7 @@
     return [menuItem isEnabled];
 }
 
-#pragma mark - NSToolbarItem Delegate
+#pragma mark - NSToolBarItem Delegate
 
 -(BOOL)validateToolbarItem:(NSToolbarItem *)toolbarItem
 {
@@ -997,27 +1047,11 @@
 }
 
 - (void)tabView:(NSTabView *)aTabView tabBarViewDidHide:(MMTabBarView *)tabBarView {
-	DDLogVerbose(@"tabBarViewDidHide: %@", NSStringFromRect(tabBarView.frame));
-    
-    NSArray *constraints = tabBarView.constraints;
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"firstAttribute = %d", NSLayoutAttributeHeight];
-    NSArray* filteredArray = [constraints filteredArrayUsingPredicate:predicate];
-    if (filteredArray.count != 0) {
-        NSLayoutConstraint *constraint =  [constraints firstObject];
-        [[constraint animator] setConstant:0];
-    }
+    [[self.tabBarHeightConstraint animator] setConstant:0];
 }
 
 - (void)tabView:(NSTabView *)aTabView tabBarViewDidUnhide:(MMTabBarView *)tabBarView {
-	DDLogVerbose(@"tabBarViewDidUnhide: %@", NSStringFromRect(tabBarView.frame));
-    
-    NSArray *constraints = tabBarView.constraints;
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"firstAttribute = %d", NSLayoutAttributeHeight];
-    NSArray* filteredArray = [constraints filteredArrayUsingPredicate:predicate];
-    if (filteredArray.count != 0) {
-        NSLayoutConstraint *constraint =  [constraints firstObject];
-        [[constraint animator] setConstant:_tabBarFrameHeight];
-    }
+	[[self.tabBarHeightConstraint animator] setConstant:_tabBarFrameHeight];
 }
 
 - (NSString *)tabView:(NSTabView *)aTabView toolTipForTabViewItem:(NSTabViewItem *)tabViewItem {

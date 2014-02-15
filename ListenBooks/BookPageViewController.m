@@ -30,7 +30,12 @@
 {
     [super awakeFromNib];
     self.textView.textContainerInset = NSMakeSize(20.0f, 20.0f);
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textSizeDidChange:) name:TextSizeDidChangeNotificaton object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fontSizeDidChange:) name:FontSizeDidChangeNotificaton object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fontNameDidChange:) name:FontNameDidChangeNotificaton object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(themeDidChange:) name:ThemeDidChangeNotificaton object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(voiceNameDidChange:) name:VoiceNameDidChangeNotificaton object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(voiceSpeedDidChange:) name:VoiceSpeedDidChangeNotificaton object:nil];
 }
 
 - (void)dealloc
@@ -38,9 +43,12 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)textSizeDidChange:(NSNotification*)notification
+#pragma mark - Notifications Implementation
+
+- (void)fontSizeDidChange:(NSNotification*)notification
 {
-    DDLogVerbose(@"notification: %@", notification.object);
+    DDLogVerbose(@"object: %@", notification.object);
+    
     static double lastFontSizeChange = 0;
     double requiredFontSizeChange = [notification.object doubleValue];
     
@@ -49,6 +57,26 @@
         [self.textView changeFontSize:delta];
         lastFontSizeChange = requiredFontSizeChange;
     }
+}
+
+- (void)fontNameDidChange:(NSNotification*)notification
+{
+    DDLogVerbose(@"object: %@", notification.object);
+}
+
+- (void)themeDidChange:(NSNotification*)notification
+{
+    DDLogVerbose(@"object: %@", notification.object);
+}
+
+- (void)voiceNameDidChange:(NSNotification*)notification
+{
+    DDLogVerbose(@"object: %@", notification.object);
+}
+
+- (void)voiceSpeedDidChange:(NSNotification*)notification
+{
+    DDLogVerbose(@"object: %@", notification.object);
 }
 
 @end

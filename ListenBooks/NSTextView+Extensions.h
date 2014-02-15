@@ -12,7 +12,8 @@
 
 - (void)setFontSize:(CGFloat)points;
 - (void)changeFontSize:(CGFloat)delta;
--  (IBAction)decrementFontSize:(id)sender;
--  (IBAction)incrementFontSize:(id)sender;
+- (IBAction)decrementFontSize:(id)sender;
+- (IBAction)incrementFontSize:(id)sender;
+
 
 @end

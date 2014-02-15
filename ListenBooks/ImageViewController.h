@@ -7,11 +7,12 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "TabBarControllerProtocol.h"
 
-@interface ImageViewController : NSViewController <NSPageControllerDelegate>
+@interface ImageViewController : NSViewController <TabBarControllerProtocol, NSPageControllerDelegate>
 
 @property (strong) IBOutlet NSPageController *pageController;
 @property (strong, nonatomic) NSManagedObjectContext* managedObjectContext;
-@property (strong) NSTabViewItem* tabViewItem;
+@property (nonatomic, strong) NSTabViewItem* tabViewItem;
 
 @end
