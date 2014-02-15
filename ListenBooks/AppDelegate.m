@@ -75,6 +75,8 @@
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize managedObjectContext = _managedObjectContext;
 
+#pragma mark - Life Cycle
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     // Logging.
@@ -103,6 +105,19 @@
     self.contentModel = nil;
     self.dateFormatter = nil;
     self.progressWindowController = nil;
+}
+
+#pragma mark - Target Action
+
+- (IBAction)toggleBookMarksPane:(id)sender
+{
+    DDLogVerbose(@"_bookmarksSplitPaneHeight: %.0f, %f",_bookmarksSplitPaneHeight, self.splitView.frame.size.height);
+    [self.subSplitView adjustSubviews];
+    if ([self.subSplitView isSubviewCollapsed:self.bookmarksSplitPane]) {
+        [self.subSplitView setPosition:self.subSplitView.frame.size.height-_bookmarksSplitPaneHeight ofDividerAtIndex:0];
+    } else {
+        [self.subSplitView setPosition:self.subSplitView.frame.size.height ofDividerAtIndex:0];
+    }
 }
 
 #pragma mark - Setters
@@ -142,22 +157,154 @@
     return _tabViewControllers;
 }
 
-#pragma mark - NSWindowDelegate
+#pragma mark - Configurations
 
-- (void)windowWillClose:(NSNotification *)notification
+- (NSArray*)allowedFileTypes
 {
-    if ([notification.object isEqualTo:self.window]) {
-        [self.tabViewControllers removeAllObjects];
-        [NSApp stopModal];
+    return [[NSArray alloc] initWithObjects:@"epub", @"ibook", @"opf", nil];
+}
+
+#pragma mark - User Interface
+#pragma mark - KFToolBar
+
+- (void)setupToolBar
+{
+    DDLogDebug(@"setupToolBar");
+    [self setToolBarForMainTabView];
+    
+}
+
+- (void)updateToolBarContentForTabView:(NSTabViewItem*)tabViewItem
+{
+    DDLogVerbose(@"tabViewItem: %@", tabViewItem);
+    
+    if ([self.tabView indexOfTabViewItem:tabViewItem] == 0) {
+        [self setToolBarForMainTabView];
+    } else {
+        [self setToolBarForBookTabView];
     }
 }
 
-- (void)windowDidResignMain:(NSNotification *)notification
+- (void)setToolBarForMainTabView
 {
-    DDLogVerbose(@"windowDidResignMain: %@", [notification.object description]);
+    KFToolbarItem *addItem = [KFToolbarItem toolbarItemWithIcon:[NSImage imageNamed:NSImageNameAddTemplate] tag:0];
+    addItem.toolTip = NSLocalizedString(@"Add To Library", nil);
+    
+    KFToolbarItem *actionItem = [KFToolbarItem toolbarItemWithType:NSMomentaryPushInButton icon:[NSImage imageNamed:NSImageNameActionTemplate] tag:1];
+    actionItem.toolTip = NSLocalizedString(@"Settings", nil);
+    
+    KFToolbarItem *bookmarksItem = [KFToolbarItem toolbarItemWithType:NSToggleButton icon:[NSImage imageNamed:NSImageNameBookmarksTemplate] tag:2];
+    bookmarksItem.toolTip = NSLocalizedString(@"Bookmarks", nil);
+    if ([self.subSplitView isSubviewCollapsed:self.bookmarksSplitPane]) {
+        bookmarksItem.state = NSOffState;
+    } else {
+        bookmarksItem.state = NSOnState;
+    }
+    
+    KFToolbarItem *listCoverFlowItem = [KFToolbarItem toolbarItemWithType:NSToggleButton icon:[NSImage imageNamed:NSImageNameFlowViewTemplate] tag:3];
+    listCoverFlowItem.toolTip = @"CoverFlow";
+    
+    KFToolbarItem *listCollectionItem = [KFToolbarItem toolbarItemWithType:NSToggleButton icon:[NSImage imageNamed:NSImageNameIconViewTemplate] tag:4];
+    listCollectionItem.toolTip = @"Collection";
+    
+    self.toolBar.leftItems = @[addItem, actionItem, bookmarksItem];
+    self.toolBar.rightItems = @[listCollectionItem, listCoverFlowItem];
+    
+    [self selectListCollectionView:listCollectionItem];
+    
+    [self.toolBar setItemSelectionHandler:^(KFToolbarItemSelectionType selectionType, KFToolbarItem *toolbarItem, NSUInteger tag)
+     {
+         switch (tag)
+         {
+             case 0:
+                 [self openImportDialog:addItem];
+                 break;
+                 
+             case 1:
+                 [actionItem.button setMenu:self.actionMenu];
+                 break;
+                 
+             case 2:
+                 [self toggleBookMarksPane:bookmarksItem];
+                 break;
+                 
+             case 3:
+                 [self selectListCoverFlowView:listCoverFlowItem];
+                 break;
+                 
+             case 4:
+                 [self selectListCollectionView:listCollectionItem];
+                 break;
+                 
+             default:
+                 break;
+         }
+     }];
 }
 
-#pragma mark - TabView Controller
+- (void)setToolBarForBookTabView
+{
+    KFToolbarItem *addItem = [KFToolbarItem toolbarItemWithIcon:[NSImage imageNamed:NSImageNameAddTemplate] tag:0];
+    addItem.toolTip = NSLocalizedString(@"Add Bookmark", nil);
+    
+    KFToolbarItem *actionItem = [KFToolbarItem toolbarItemWithType:NSMomentaryPushInButton icon:[NSImage imageNamed:NSImageNameActionTemplate] tag:1];
+    actionItem.toolTip = NSLocalizedString(@"Settings", nil);
+    
+    KFToolbarItem *bookmarksItem = [KFToolbarItem toolbarItemWithType:NSToggleButton icon:[NSImage imageNamed:NSImageNameBookmarksTemplate] tag:2];
+    bookmarksItem.toolTip = NSLocalizedString(@"Bookmarks", nil);
+    if ([self.subSplitView isSubviewCollapsed:self.bookmarksSplitPane]) {
+        bookmarksItem.state = NSOffState;
+    } else {
+        bookmarksItem.state = NSOnState;
+    }
+    
+    KFToolbarItem *optionsItem = [KFToolbarItem toolbarItemWithIcon:[NSImage imageNamed:NSImageNameFollowLinkFreestandingTemplate] tag:0];
+    optionsItem.toolTip = @"Options";
+    
+    self.toolBar.leftItems = @[addItem, actionItem, bookmarksItem];
+    self.toolBar.rightItems = @[optionsItem];
+    
+    [self.toolBar setItemSelectionHandler:^(KFToolbarItemSelectionType selectionType, KFToolbarItem *toolbarItem, NSUInteger tag)
+     {
+         switch (tag)
+         {
+             case 0:
+                 break;
+                 
+             case 1:
+                 break;
+                 
+             case 2:
+                 break;
+                 
+             default:
+                 break;
+         }
+     }];
+}
+
+- (void)selectListCoverFlowView:(id)sender
+{
+    DDLogDebug(@"sender: %@", sender);
+    
+    KFToolbarItem *listCollectionItem = self.toolBar.rightItems[0];
+    listCollectionItem.state = NSOffState;
+    KFToolbarItem *listCoverFlowItem = self.toolBar.rightItems[1];
+    listCoverFlowItem.state = NSOnState;
+}
+
+- (void)selectListCollectionView:(id)sender
+{
+    DDLogDebug(@"sender: %@", sender);
+    
+    KFToolbarItem *listCollectionItem = self.toolBar.rightItems[0];
+    listCollectionItem.state = NSOnState;
+    KFToolbarItem *listCoverFlowItem = self.toolBar.rightItems[1];
+    listCoverFlowItem.state = NSOffState;
+}
+
+
+#pragma mark - TabView
 
 - (void)setupTabBar
 {
@@ -245,169 +392,13 @@
                 BookViewController* bookViewController = (BookViewController*)controller;
                 [self.booksTreeController setSelectedObject:bookViewController.book];
                 [self.listArrayController setSelectedObjects:@[bookViewController.book]];
+                [controller.tabViewItem setLabel:bookViewController.book.title];
             }
         }
     }];
 }
 
-
-#pragma mark - NSMenu Delegate
-
-- (BOOL)validateMenuItem:(NSMenuItem *)menuItem
-{
-    return [menuItem isEnabled];
-}
-
-#pragma mark - NSToolbarItem Delegate
-
--(BOOL)validateToolbarItem:(NSToolbarItem *)toolbarItem
-{
-    DDLogVerbose(@"validateToolbarItem: %@", [toolbarItem label]);
-    return [toolbarItem isEnabled];
-}
-
-#pragma mark - Target Action
-
-- (IBAction)toggleBookMarksPane:(id)sender
-{
-    DDLogVerbose(@"_bookmarksSplitPaneHeight: %.0f, %f",_bookmarksSplitPaneHeight, self.splitView.frame.size.height);
-    [self.subSplitView adjustSubviews];
-    if ([self.subSplitView isSubviewCollapsed:self.bookmarksSplitPane]) {
-        [self.subSplitView setPosition:self.subSplitView.frame.size.height-_bookmarksSplitPaneHeight ofDividerAtIndex:0];
-    } else {
-        [self.subSplitView setPosition:self.subSplitView.frame.size.height ofDividerAtIndex:0];
-    }
-}
-
-- (void)selectListCoverFlowView:(id)sender
-{
-    DDLogDebug(@"sender: %@", sender);
-    
-    KFToolbarItem *listCollectionItem = self.toolBar.rightItems[0];
-    listCollectionItem.state = NSOffState;
-    KFToolbarItem *listCoverFlowItem = self.toolBar.rightItems[1];
-    listCoverFlowItem.state = NSOnState;
-}
-
-- (void)selectListCollectionView:(id)sender
-{
-    DDLogDebug(@"sender: %@", sender);
-    
-    KFToolbarItem *listCollectionItem = self.toolBar.rightItems[0];
-    listCollectionItem.state = NSOnState;
-    KFToolbarItem *listCoverFlowItem = self.toolBar.rightItems[1];
-    listCoverFlowItem.state = NSOffState;
-}
-
-#pragma mark - KFToolBar
-
-- (void)setupToolBar
-{
-    DDLogDebug(@"setupToolBar");
-    [self setToolBarForMainTabView];
-    
-}
-
-- (void)updateToolBarContentForTabView:(NSTabViewItem*)tabViewItem
-{
-    DDLogVerbose(@"tabViewItem: %@", tabViewItem);
-    
-    if ([self.tabView indexOfTabViewItem:tabViewItem] == 0) {
-        [self setToolBarForMainTabView];
-    } else {
-        [self setToolBarForBookTabView];
-    }
-}
-
-- (void)setToolBarForMainTabView
-{
-    KFToolbarItem *addItem = [KFToolbarItem toolbarItemWithIcon:[NSImage imageNamed:NSImageNameAddTemplate] tag:0];
-    addItem.toolTip = @"Add";
-    addItem.keyEquivalent = @"o";
-    
-    
-    KFToolbarItem *actionItem = [KFToolbarItem toolbarItemWithType:NSMomentaryPushInButton icon:[NSImage imageNamed:NSImageNameActionTemplate] tag:1];
-    actionItem.toolTip = @"Action";
-    actionItem.keyEquivalent = @"e";
-    
-    KFToolbarItem *bookmarksItem = [KFToolbarItem toolbarItemWithType:NSToggleButton icon:[NSImage imageNamed:NSImageNameBookmarksTemplate] tag:2];
-    bookmarksItem.toolTip = @"Bookmarks";
-    if ([self.subSplitView isSubviewCollapsed:self.bookmarksSplitPane]) {
-        bookmarksItem.state = NSOffState;
-    } else {
-        bookmarksItem.state = NSOnState;
-    }
-    
-    KFToolbarItem *listCoverFlowItem = [KFToolbarItem toolbarItemWithType:NSToggleButton icon:[NSImage imageNamed:NSImageNameFlowViewTemplate] tag:3];
-    listCoverFlowItem.toolTip = @"CoverFlow";
-    
-    KFToolbarItem *listCollectionItem = [KFToolbarItem toolbarItemWithType:NSToggleButton icon:[NSImage imageNamed:NSImageNameIconViewTemplate] tag:4];
-    listCollectionItem.toolTip = @"Collection";
-    
-    self.toolBar.leftItems = @[addItem, actionItem, bookmarksItem];
-    self.toolBar.rightItems = @[listCollectionItem, listCoverFlowItem];
-    
-    [self selectListCollectionView:listCollectionItem];
-    
-    [self.toolBar setItemSelectionHandler:^(KFToolbarItemSelectionType selectionType, KFToolbarItem *toolbarItem, NSUInteger tag)
-     {
-         switch (tag)
-         {
-             case 0:
-                 [self openImportDialog:addItem];
-                 break;
-                 
-             case 1:
-                 [actionItem.button setMenu:self.actionMenu];
-                 break;
-                 
-             case 2:
-                 [self toggleBookMarksPane:bookmarksItem];
-                 break;
-                 
-             case 3:
-                 [self selectListCoverFlowView:listCoverFlowItem];
-                 break;
-                 
-             case 4:
-                 [self selectListCollectionView:listCollectionItem];
-                 break;
-                 
-             default:
-                 break;
-         }
-     }];
-}
-
-- (void)setToolBarForBookTabView
-{
-    KFToolbarItem *shareItem = [KFToolbarItem toolbarItemWithIcon:[NSImage imageNamed:NSImageNameShareTemplate] tag:0];
-    shareItem.toolTip = @"Share";
-    shareItem.keyEquivalent = @"s";
-    
-    
-    self.toolBar.leftItems = nil;
-    self.toolBar.rightItems = @[shareItem];
-    
-    [self.toolBar setItemSelectionHandler:^(KFToolbarItemSelectionType selectionType, KFToolbarItem *toolbarItem, NSUInteger tag)
-     {
-         switch (tag)
-         {
-             case 0:
-                 break;
-                 
-             case 1:
-                 break;
-                 
-             case 2:
-                 break;
-                 
-             default:
-                 break;
-         }
-     }];
-}
-
+#pragma mark - Windows & Actions
 #pragma mark - Import file
 
 - (IBAction)openImportDialog:(id)sender
@@ -551,6 +542,37 @@
     };
 }
 
+#pragma mark - Delegates
+#pragma mark - NSWindowDelegate
+
+- (void)windowWillClose:(NSNotification *)notification
+{
+    if ([notification.object isEqualTo:self.window]) {
+        [self.tabViewControllers removeAllObjects];
+        [NSApp stopModal];
+    }
+}
+
+- (void)windowDidResignMain:(NSNotification *)notification
+{
+    DDLogVerbose(@"windowDidResignMain: %@", [notification.object description]);
+}
+
+#pragma mark - NSMenu Delegate
+
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem
+{
+    return [menuItem isEnabled];
+}
+
+#pragma mark - NSToolbarItem Delegate
+
+-(BOOL)validateToolbarItem:(NSToolbarItem *)toolbarItem
+{
+    DDLogVerbose(@"validateToolbarItem: %@", [toolbarItem label]);
+    return [toolbarItem isEnabled];
+}
+
 #pragma mark - NSSplitViewDelegate
 
 - (BOOL)splitView:(NSSplitView *)splitView canCollapseSubview:(NSView *)subview
@@ -629,208 +651,6 @@
         return proposedMinimumPosition;
     }
     return 0;
-}
-
-#pragma mark - CoreData
-
-- (NSURL *)applicationDocumentsDirectory
-{
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSURL *appDocumemtsURL = [[fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-    return appDocumemtsURL;
-}
-
-- (NSURL *)applicationCacheDirectory
-{
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSURL *appCacheURL = [[fileManager URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask] lastObject];
-    return [appCacheURL URLByAppendingPathComponent:@"cc.andyapps.ListenBooks"];
-}
-
-// Returns the directory the application uses to store the Core Data store file. This code uses a directory named "cc.andyapps.ListenBooks" in the user's Application Support directory.
-- (NSURL *)applicationFilesDirectory
-{
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSURL *appSupportURL = [[fileManager URLsForDirectory:NSApplicationSupportDirectory inDomains:NSUserDomainMask] lastObject];
-    return [appSupportURL URLByAppendingPathComponent:@"cc.andyapps.ListenBooks"];
-}
-
-// Creates if necessary and returns the managed object model for the application.
-- (NSManagedObjectModel *)managedObjectModel
-{
-    if (_managedObjectModel) {
-        return _managedObjectModel;
-    }
-	
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"ListenBooks" withExtension:@"momd"];
-    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
-    return _managedObjectModel;
-}
-
-// Returns the persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it. (The directory for the store is created, if necessary.)
-- (NSPersistentStoreCoordinator *)persistentStoreCoordinator
-{
-    if (_persistentStoreCoordinator) {
-        return _persistentStoreCoordinator;
-    }
-    
-    NSManagedObjectModel *mom = [self managedObjectModel];
-    if (!mom) {
-        NSLog(@"%@:%@ No model to generate a store from", [self class], NSStringFromSelector(_cmd));
-        return nil;
-    }
-    
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSURL *applicationFilesDirectory = [self applicationFilesDirectory];
-    NSError *error = nil;
-    
-    NSDictionary *properties = [applicationFilesDirectory resourceValuesForKeys:@[NSURLIsDirectoryKey] error:&error];
-    
-    if (!properties) {
-        BOOL ok = NO;
-        if ([error code] == NSFileReadNoSuchFileError) {
-            ok = [fileManager createDirectoryAtPath:[applicationFilesDirectory path] withIntermediateDirectories:YES attributes:nil error:&error];
-        }
-        if (!ok) {
-            [[NSApplication sharedApplication] presentError:error];
-            return nil;
-        }
-    } else {
-        if (![properties[NSURLIsDirectoryKey] boolValue]) {
-            // Customize and localize this error.
-            NSString *failureDescription = [NSString stringWithFormat:@"Expected a folder to store application data, found a file (%@).", [applicationFilesDirectory path]];
-            
-            NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-            [dict setValue:failureDescription forKey:NSLocalizedDescriptionKey];
-            error = [NSError errorWithDomain:@"YOUR_ERROR_DOMAIN" code:101 userInfo:dict];
-            
-            [[NSApplication sharedApplication] presentError:error];
-            return nil;
-        }
-    }
-    
-    NSURL *url = [applicationFilesDirectory URLByAppendingPathComponent:@"ListenBooks.storedata"];
-    NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:mom];
-    
-    
-    NSDictionary *options = @{NSMigratePersistentStoresAutomaticallyOption:@YES,
-                              NSInferMappingModelAutomaticallyOption:@YES,
-                              NSSQLitePragmasOption: @{@"journal_mode": @"WAL"}
-                              };
-    
-    if (![coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:options error:&error]) {
-        [[NSApplication sharedApplication] presentError:error];
-        return nil;
-    }
-    _persistentStoreCoordinator = coordinator;
-    
-    return _persistentStoreCoordinator;
-}
-
-// Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.) 
-- (NSManagedObjectContext *)managedObjectContext
-{
-    if (_managedObjectContext) {
-        return _managedObjectContext;
-    }
-    
-    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-    if (!coordinator) {
-        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        [dict setValue:@"Failed to initialize the store" forKey:NSLocalizedDescriptionKey];
-        [dict setValue:@"There was an error building up the data file." forKey:NSLocalizedFailureReasonErrorKey];
-        NSError *error = [NSError errorWithDomain:@"YOUR_ERROR_DOMAIN" code:9999 userInfo:dict];
-        [[NSApplication sharedApplication] presentError:error];
-        return nil;
-    }
-    _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    [_managedObjectContext setPersistentStoreCoordinator:coordinator];
-    return _managedObjectContext;
-}
-
-// Returns the NSUndoManager for the application. In this case, the manager returned is that of the managed object context for the application.
-- (NSUndoManager *)windowWillReturnUndoManager:(NSWindow *)window
-{
-    return [[self managedObjectContext] undoManager];
-}
-
-- (NSUndoManager*)undoManager
-{
-    return [self.managedObjectContext undoManager];
-}
-
-- (IBAction)cleanUndoStack:(id)sender
-{
-    NSLog(@"cleanUndoStack");
-    [self.managedObjectContext.undoManager removeAllActions];
-}
-
-// Performs the save action for the application, which is to send the save: message to the application's managed object context. Any encountered errors are presented to the user.
-- (IBAction)saveAction:(id)sender
-{
-    NSLog(@"saveAction");
-    NSError *error = nil;
-    
-    if (![[self managedObjectContext] commitEditing]) {
-        NSLog(@"%@:%@ unable to commit editing before saving", [self class], NSStringFromSelector(_cmd));
-    }
-    
-    if (![[self managedObjectContext] save:&error]) {
-        [[NSApplication sharedApplication] presentError:error];
-    }
-}
-
-- (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
-{
-    // Save changes in the application's managed object context before the application terminates.
-    
-    if (!_managedObjectContext) {
-        return NSTerminateNow;
-    }
-    
-    if (![[self managedObjectContext] commitEditing]) {
-        NSLog(@"%@:%@ unable to commit editing to terminate", [self class], NSStringFromSelector(_cmd));
-        return NSTerminateCancel;
-    }
-    
-    if (![[self managedObjectContext] hasChanges]) {
-        return NSTerminateNow;
-    }
-    
-    NSError *error = nil;
-    if (![[self managedObjectContext] save:&error]) {
-
-        // Customize this code block to include application-specific recovery steps.              
-        BOOL result = [sender presentError:error];
-        if (result) {
-            return NSTerminateCancel;
-        }
-
-        NSString *question = NSLocalizedString(@"Could not save changes while quitting. Quit anyway?", @"Quit without saves error question message");
-        NSString *info = NSLocalizedString(@"Quitting now will lose any changes you have made since the last successful save", @"Quit without saves error question info");
-        NSString *quitButton = NSLocalizedString(@"Quit anyway", @"Quit anyway button title");
-        NSString *cancelButton = NSLocalizedString(@"Cancel", @"Cancel button title");
-        NSAlert *alert = [[NSAlert alloc] init];
-        [alert setMessageText:question];
-        [alert setInformativeText:info];
-        [alert addButtonWithTitle:quitButton];
-        [alert addButtonWithTitle:cancelButton];
-
-        NSInteger answer = [alert runModal];
-        
-        if (answer == NSAlertAlternateReturn) {
-            return NSTerminateCancel;
-        }
-    }
-
-    return NSTerminateNow;
-}
-
-#pragma mark - File System
-
-- (NSArray*)allowedFileTypes
-{
-    return [[NSArray alloc] initWithObjects:@"epub", @"ibook", @"opf", nil];
 }
 
 #pragma mark - KFEpubDelegate
@@ -1037,7 +857,7 @@
     if ([[tabViewItem identifier] respondsToSelector:@selector(title)]) {
         [self.tabField setStringValue:[[tabViewItem identifier] title]];
     }
-    //self.window.title = [tabViewItem label];
+    self.window.title = [tabViewItem label];
 }
 
 - (void)tabViewDidChangeNumberOfTabViewItems:(NSTabView *)tabView
@@ -1206,6 +1026,202 @@
 
 - (NSString *)accessibilityStringForTabView:(NSTabView *)aTabView objectCount:(NSInteger)objectCount {
 	return (objectCount == 1) ? @"item" : @"items";
+}
+
+#pragma mark - Persistent Store
+#pragma mark - CoreData
+
+- (NSURL *)applicationDocumentsDirectory
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSURL *appDocumemtsURL = [[fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+    return appDocumemtsURL;
+}
+
+- (NSURL *)applicationCacheDirectory
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSURL *appCacheURL = [[fileManager URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask] lastObject];
+    return [appCacheURL URLByAppendingPathComponent:@"cc.andyapps.ListenBooks"];
+}
+
+// Returns the directory the application uses to store the Core Data store file. This code uses a directory named "cc.andyapps.ListenBooks" in the user's Application Support directory.
+- (NSURL *)applicationFilesDirectory
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSURL *appSupportURL = [[fileManager URLsForDirectory:NSApplicationSupportDirectory inDomains:NSUserDomainMask] lastObject];
+    return [appSupportURL URLByAppendingPathComponent:@"cc.andyapps.ListenBooks"];
+}
+
+// Creates if necessary and returns the managed object model for the application.
+- (NSManagedObjectModel *)managedObjectModel
+{
+    if (_managedObjectModel) {
+        return _managedObjectModel;
+    }
+	
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"ListenBooks" withExtension:@"momd"];
+    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+    return _managedObjectModel;
+}
+
+// Returns the persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it. (The directory for the store is created, if necessary.)
+- (NSPersistentStoreCoordinator *)persistentStoreCoordinator
+{
+    if (_persistentStoreCoordinator) {
+        return _persistentStoreCoordinator;
+    }
+    
+    NSManagedObjectModel *mom = [self managedObjectModel];
+    if (!mom) {
+        NSLog(@"%@:%@ No model to generate a store from", [self class], NSStringFromSelector(_cmd));
+        return nil;
+    }
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSURL *applicationFilesDirectory = [self applicationFilesDirectory];
+    NSError *error = nil;
+    
+    NSDictionary *properties = [applicationFilesDirectory resourceValuesForKeys:@[NSURLIsDirectoryKey] error:&error];
+    
+    if (!properties) {
+        BOOL ok = NO;
+        if ([error code] == NSFileReadNoSuchFileError) {
+            ok = [fileManager createDirectoryAtPath:[applicationFilesDirectory path] withIntermediateDirectories:YES attributes:nil error:&error];
+        }
+        if (!ok) {
+            [[NSApplication sharedApplication] presentError:error];
+            return nil;
+        }
+    } else {
+        if (![properties[NSURLIsDirectoryKey] boolValue]) {
+            // Customize and localize this error.
+            NSString *failureDescription = [NSString stringWithFormat:@"Expected a folder to store application data, found a file (%@).", [applicationFilesDirectory path]];
+            
+            NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+            [dict setValue:failureDescription forKey:NSLocalizedDescriptionKey];
+            error = [NSError errorWithDomain:@"YOUR_ERROR_DOMAIN" code:101 userInfo:dict];
+            
+            [[NSApplication sharedApplication] presentError:error];
+            return nil;
+        }
+    }
+    
+    NSURL *url = [applicationFilesDirectory URLByAppendingPathComponent:@"ListenBooks.storedata"];
+    NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:mom];
+    
+    
+    NSDictionary *options = @{NSMigratePersistentStoresAutomaticallyOption:@YES,
+                              NSInferMappingModelAutomaticallyOption:@YES,
+                              NSSQLitePragmasOption: @{@"journal_mode": @"WAL"}
+                              };
+    
+    if (![coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:options error:&error]) {
+        [[NSApplication sharedApplication] presentError:error];
+        return nil;
+    }
+    _persistentStoreCoordinator = coordinator;
+    
+    return _persistentStoreCoordinator;
+}
+
+// Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.)
+- (NSManagedObjectContext *)managedObjectContext
+{
+    if (_managedObjectContext) {
+        return _managedObjectContext;
+    }
+    
+    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+    if (!coordinator) {
+        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+        [dict setValue:@"Failed to initialize the store" forKey:NSLocalizedDescriptionKey];
+        [dict setValue:@"There was an error building up the data file." forKey:NSLocalizedFailureReasonErrorKey];
+        NSError *error = [NSError errorWithDomain:@"YOUR_ERROR_DOMAIN" code:9999 userInfo:dict];
+        [[NSApplication sharedApplication] presentError:error];
+        return nil;
+    }
+    _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+    [_managedObjectContext setPersistentStoreCoordinator:coordinator];
+    return _managedObjectContext;
+}
+
+// Returns the NSUndoManager for the application. In this case, the manager returned is that of the managed object context for the application.
+- (NSUndoManager *)windowWillReturnUndoManager:(NSWindow *)window
+{
+    return [[self managedObjectContext] undoManager];
+}
+
+- (NSUndoManager*)undoManager
+{
+    return [self.managedObjectContext undoManager];
+}
+
+- (IBAction)cleanUndoStack:(id)sender
+{
+    NSLog(@"cleanUndoStack");
+    [self.managedObjectContext.undoManager removeAllActions];
+}
+
+// Performs the save action for the application, which is to send the save: message to the application's managed object context. Any encountered errors are presented to the user.
+- (IBAction)saveAction:(id)sender
+{
+    NSLog(@"saveAction");
+    NSError *error = nil;
+    
+    if (![[self managedObjectContext] commitEditing]) {
+        NSLog(@"%@:%@ unable to commit editing before saving", [self class], NSStringFromSelector(_cmd));
+    }
+    
+    if (![[self managedObjectContext] save:&error]) {
+        [[NSApplication sharedApplication] presentError:error];
+    }
+}
+
+- (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
+{
+    // Save changes in the application's managed object context before the application terminates.
+    
+    if (!_managedObjectContext) {
+        return NSTerminateNow;
+    }
+    
+    if (![[self managedObjectContext] commitEditing]) {
+        NSLog(@"%@:%@ unable to commit editing to terminate", [self class], NSStringFromSelector(_cmd));
+        return NSTerminateCancel;
+    }
+    
+    if (![[self managedObjectContext] hasChanges]) {
+        return NSTerminateNow;
+    }
+    
+    NSError *error = nil;
+    if (![[self managedObjectContext] save:&error]) {
+        
+        // Customize this code block to include application-specific recovery steps.
+        BOOL result = [sender presentError:error];
+        if (result) {
+            return NSTerminateCancel;
+        }
+        
+        NSString *question = NSLocalizedString(@"Could not save changes while quitting. Quit anyway?", @"Quit without saves error question message");
+        NSString *info = NSLocalizedString(@"Quitting now will lose any changes you have made since the last successful save", @"Quit without saves error question info");
+        NSString *quitButton = NSLocalizedString(@"Quit anyway", @"Quit anyway button title");
+        NSString *cancelButton = NSLocalizedString(@"Cancel", @"Cancel button title");
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert setMessageText:question];
+        [alert setInformativeText:info];
+        [alert addButtonWithTitle:quitButton];
+        [alert addButtonWithTitle:cancelButton];
+        
+        NSInteger answer = [alert runModal];
+        
+        if (answer == NSAlertAlternateReturn) {
+            return NSTerminateCancel;
+        }
+    }
+    
+    return NSTerminateNow;
 }
 
 @end
