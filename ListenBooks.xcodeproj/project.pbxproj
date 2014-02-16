@@ -433,8 +433,6 @@
 				842B61E718AFE22C00DC1A08 /* FontControl.m */,
 				842B61EA18AFFAA300DC1A08 /* VoiceControl.h */,
 				842B61EB18AFFAA300DC1A08 /* VoiceControl.m */,
-				842B61ED18B00A6F00DC1A08 /* VoiceControlLanguageToPredicateTransformer.h */,
-				842B61EE18B00A6F00DC1A08 /* VoiceControlLanguageToPredicateTransformer.m */,
 				842B61F418B0BBB700DC1A08 /* ThemeControl.h */,
 				842B61F518B0BBB700DC1A08 /* ThemeControl.m */,
 			);
@@ -799,6 +797,8 @@
 				848C9582186647240020FDC9 /* NumberValueIsOne.m */,
 				848C9583186647240020FDC9 /* StringToPredicateTransformer.h */,
 				848C9584186647240020FDC9 /* StringToPredicateTransformer.m */,
+				842B61ED18B00A6F00DC1A08 /* VoiceControlLanguageToPredicateTransformer.h */,
+				842B61EE18B00A6F00DC1A08 /* VoiceControlLanguageToPredicateTransformer.m */,
 			);
 			name = Transformers;
 			sourceTree = "<group>";

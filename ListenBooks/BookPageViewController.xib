@@ -13,14 +13,14 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application"/>
-        <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="9yQ-pa-5qu">
+        <scrollView identifier="BookPageScrollView" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="9yQ-pa-5qu">
             <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
             <autoresizingMask key="autoresizingMask"/>
-            <clipView key="contentView" id="u87-cJ-ydp">
+            <clipView key="contentView" identifier="BookPageScrollClipView" id="u87-cJ-ydp">
                 <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <textView editable="NO" importsGraphics="NO" selectionGranularity="word" findStyle="panel" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" id="f1d-Sc-geg" customClass="AutoSizingTextView">
+                    <textView identifier="BookPageAutoSizingTextView" editable="NO" importsGraphics="NO" selectionGranularity="word" findStyle="panel" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" id="f1d-Sc-geg" customClass="AutoSizingTextView">
                         <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

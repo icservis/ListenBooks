@@ -532,18 +532,18 @@ CA
                 </menuItem>
             </items>
         </menu>
-        <window title="ListenBooks" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" frameAutosaveName="MainWindow" animationBehavior="default" id="371" customClass="MainWindow">
+        <window identifier="MainWindow" title="ListenBooks" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" frameAutosaveName="MainWindow" animationBehavior="default" id="371" customClass="MainWindow">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="275" y="110" width="720" height="612"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1280" height="778"/>
             <value key="minSize" type="size" width="720" height="612"/>
-            <view key="contentView" id="372">
+            <view key="contentView" identifier="MainViewMainView" id="372">
                 <rect key="frame" x="0.0" y="0.0" width="720" height="612"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mef-3Q-Ajk" customClass="MMTabBarView">
+                    <customView identifier="MainViewTabBarView" hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mef-3Q-Ajk" customClass="MMTabBarView">
                         <rect key="frame" x="0.0" y="590" width="720" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <constraints>
@@ -555,40 +555,40 @@ CA
                             <outlet property="tabView" destination="Bsf-zR-sp8" id="gZ1-Yx-2kU"/>
                         </connections>
                     </customView>
-                    <tabView type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="Bsf-zR-sp8">
+                    <tabView identifier="MainViewTabView" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="Bsf-zR-sp8">
                         <rect key="frame" x="0.0" y="30" width="720" height="560"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <font key="font" metaFont="system"/>
                         <tabViewItems>
                             <tabViewItem label="ListenBooks" identifier="1" id="3MW-HC-1Hz">
-                                <view key="view" id="y2x-Lt-bHk">
+                                <view key="view" identifier="MainViewTabItemView" id="y2x-Lt-bHk">
                                     <rect key="frame" x="0.0" y="0.0" width="720" height="560"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <splitView dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U1O-yz-ZIZ">
+                                        <splitView identifier="MainViewSplitView" dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U1O-yz-ZIZ">
                                             <rect key="frame" x="0.0" y="0.0" width="720" height="560"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <subviews>
-                                                <customView id="YUh-kr-OFc">
+                                                <customView identifier="MainWindowInputView" id="YUh-kr-OFc">
                                                     <rect key="frame" x="0.0" y="0.0" width="209" height="560"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <splitView dividerStyle="thin" translatesAutoresizingMaskIntoConstraints="NO" id="9qT-mg-IHD">
+                                                        <splitView identifier="MainWindowInputSubSplitView" dividerStyle="thin" translatesAutoresizingMaskIntoConstraints="NO" id="9qT-mg-IHD">
                                                             <rect key="frame" x="0.0" y="0.0" width="209" height="560"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                             <subviews>
-                                                                <customView id="cLb-oU-W2r">
+                                                                <customView identifier="MainWindowInputSubSplitSourcePane" id="cLb-oU-W2r">
                                                                     <rect key="frame" x="0.0" y="0.0" width="209" height="376"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
-                                                                        <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XXs-eq-Mwy">
+                                                                        <scrollView identifier="MainWindowSourceScrollView" borderType="none" autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XXs-eq-Mwy">
                                                                             <rect key="frame" x="0.0" y="0.0" width="209" height="376"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                                            <clipView key="contentView" id="jxx-T3-Ki7">
+                                                                            <clipView key="contentView" identifier="MainWindowSourceScrollClipView" id="jxx-T3-Ki7">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="209" height="376"/>
                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                 <subviews>
-                                                                                    <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" autosaveColumns="NO" rowHeight="24" rowSizeStyle="systemDefault" viewBased="YES" indentationPerLevel="16" autosaveExpandedItems="YES" outlineTableColumn="YNz-xj-Lrp" id="1f5-sw-iLl" customClass="BooksView">
+                                                                                    <outlineView identifier="MainWindowSourceBookView" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" autosaveColumns="NO" rowHeight="24" rowSizeStyle="systemDefault" viewBased="YES" indentationPerLevel="16" autosaveExpandedItems="YES" outlineTableColumn="YNz-xj-Lrp" id="1f5-sw-iLl" customClass="BooksView">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="209" height="376"/>
                                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                                         <size key="intercellSpacing" width="3" height="0.0"/>
@@ -688,18 +688,18 @@ CA
                                                                         <constraint firstAttribute="bottom" secondItem="XXs-eq-Mwy" secondAttribute="bottom" id="zjr-z5-EIC"/>
                                                                     </constraints>
                                                                 </customView>
-                                                                <customView id="swU-Vg-5jU">
+                                                                <customView identifier="MainWindowInputSubSplitBookmarksPane" id="swU-Vg-5jU">
                                                                     <rect key="frame" x="0.0" y="377" width="209" height="183"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
-                                                                        <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LU6-rs-KLV">
+                                                                        <scrollView identifier="MainWindowBookmarksScrollView" borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LU6-rs-KLV">
                                                                             <rect key="frame" x="0.0" y="0.0" width="209" height="183"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                                            <clipView key="contentView" id="2aY-hG-gLD">
+                                                                            <clipView key="contentView" identifier="MainWindowBookmarksScrollClipView" id="2aY-hG-gLD">
                                                                                 <rect key="frame" x="0.0" y="17" width="209" height="166"/>
                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                 <subviews>
-                                                                                    <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="dAV-NX-dsr" viewBased="YES" id="mm5-sr-EJJ" customClass="BookmarksView">
+                                                                                    <tableView identifier="MainWindowBookmarksView" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="dAV-NX-dsr" viewBased="YES" id="mm5-sr-EJJ" customClass="BookmarksView">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="209" height="166"/>
                                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                                         <size key="intercellSpacing" width="3" height="2"/>
@@ -868,15 +868,15 @@ CA
                                                         <constraint firstAttribute="trailing" secondItem="9qT-mg-IHD" secondAttribute="trailing" id="vbf-gI-zMr"/>
                                                     </constraints>
                                                 </customView>
-                                                <customView id="f24-Jh-WOV">
+                                                <customView identifier="mainWindowContentView" id="f24-Jh-WOV">
                                                     <rect key="frame" x="210" y="0.0" width="510" height="560"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="nbg-2g-L9E">
+                                                        <customView identifier="MainWindowListToolBarView" translatesAutoresizingMaskIntoConstraints="NO" id="nbg-2g-L9E">
                                                             <rect key="frame" x="0.0" y="530" width="510" height="30"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                             <subviews>
-                                                                <searchField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="K7h-Fx-cdi">
+                                                                <searchField identifier="MainWindowListToolBarSearchField" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="K7h-Fx-cdi">
                                                                     <rect key="frame" x="200" y="4" width="290" height="22"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="predicate" usesSingleLineMode="YES" bezelStyle="round" id="UBc-vo-dJC">
@@ -901,14 +901,14 @@ CA
                                                                 <constraint firstAttribute="height" constant="30" id="whf-46-aGk"/>
                                                             </constraints>
                                                         </customView>
-                                                        <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yHv-FM-h9y">
+                                                        <scrollView identifier="MainWindowPageScrollView" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yHv-FM-h9y">
                                                             <rect key="frame" x="0.0" y="0.0" width="510" height="530"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                            <clipView key="contentView" id="ldf-5E-cUq">
+                                                            <clipView key="contentView" identifier="MainWindowPageScrollContentView" id="ldf-5E-cUq">
                                                                 <rect key="frame" x="0.0" y="0.0" width="510" height="530"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <subviews>
-                                                                    <collectionView selectable="YES" allowsMultipleSelection="YES" id="OIY-B8-UiM" customClass="ListCollectionView">
+                                                                    <collectionView identifier="MainWindowListCollectionView" selectable="YES" allowsMultipleSelection="YES" id="OIY-B8-UiM" customClass="ListCollectionView">
                                                                         <rect key="frame" x="0.0" y="0.0" width="510" height="530"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -965,7 +965,7 @@ CA
                             <outlet property="delegate" destination="Mef-3Q-Ajk" id="W9C-Hp-wlX"/>
                         </connections>
                     </tabView>
-                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="f1m-ms-A6b" customClass="KFToolbar">
+                    <customView identifier="MainWindowToolBarView" translatesAutoresizingMaskIntoConstraints="NO" id="f1m-ms-A6b" customClass="KFToolbar">
                         <rect key="frame" x="0.0" y="0.0" width="720" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <constraints>
@@ -1085,18 +1085,18 @@ CA
                 <outlet property="view" destination="JTN-za-zjK" id="ljx-MH-adY"/>
             </connections>
         </collectionViewItem>
-        <view id="JTN-za-zjK" customClass="ListCollectionItemView">
+        <view identifier="ListCollectionItemView" id="JTN-za-zjK" customClass="ListCollectionItemView">
             <rect key="frame" x="0.0" y="0.0" width="120" height="160"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
-                <box transparent="YES" title="Box" boxType="custom" borderType="line" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="DDW-s0-Mcg">
+                <box identifier="ListCollectionItemViewBox" transparent="YES" title="Box" boxType="custom" borderType="line" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="DDW-s0-Mcg">
                     <rect key="frame" x="0.0" y="0.0" width="120" height="160"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <view key="contentView">
                         <rect key="frame" x="1" y="1" width="118" height="158"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dI8-hx-nCb">
+                            <textField identifier="ListCollectionItemViewBoxTitleField" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dI8-hx-nCb">
                                 <rect key="frame" x="41" y="15" width="36" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <constraints>
@@ -1111,7 +1111,7 @@ CA
                                     <binding destination="QNA-Cr-Vml" name="value" keyPath="self.representedObject.title" id="cBI-7g-WfF"/>
                                 </connections>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="t6E-hL-CPv">
+                            <textField identifier="ListCollectionItemViewBoxAuthorField" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="t6E-hL-CPv">
                                 <rect key="frame" x="38" y="0.0" width="41" height="14"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <constraints>
@@ -1126,7 +1126,7 @@ CA
                                     <binding destination="QNA-Cr-Vml" name="value" keyPath="self.representedObject.author" id="gZA-r7-YYz"/>
                                 </connections>
                             </textField>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UIH-jk-KTf">
+                            <imageView identifier="ListCollectionItemViewBoxImageView" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UIH-jk-KTf">
                                 <rect key="frame" x="3" y="32" width="112" height="120"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <constraints>
@@ -1178,11 +1178,11 @@ CA
         </view>
         <viewController id="HlQ-3S-wAo" customClass="BookViewController"/>
         <userDefaultsController id="GrI-Q5-06P"/>
-        <customView id="ynm-0q-pFE">
+        <customView identifier="TabBarTitleView" id="ynm-0q-pFE">
             <rect key="frame" x="0.0" y="0.0" width="460" height="22"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IPP-77-T7S">
+                <textField identifier="TabBarTitleTextField" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IPP-77-T7S">
                     <rect key="frame" x="0.0" y="0.0" width="460" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="IKO-sk-MZN">
