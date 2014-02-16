@@ -286,12 +286,8 @@
                     </segmentedControl>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="centerY" secondItem="8pU-qs-rwT" secondAttribute="centerY" id="84f-RW-Uw6"/>
-                    <constraint firstAttribute="centerX" secondItem="8pU-qs-rwT" secondAttribute="centerX" id="Qzd-TX-bZO"/>
-                    <constraint firstAttribute="bottom" secondItem="8pU-qs-rwT" secondAttribute="bottom" constant="26" id="STy-YK-6IR"/>
-                    <constraint firstAttribute="trailing" secondItem="8pU-qs-rwT" secondAttribute="trailing" constant="22" id="aEC-AJ-UJ5"/>
-                    <constraint firstItem="8pU-qs-rwT" firstAttribute="top" secondItem="eei-24-oer" secondAttribute="top" constant="27" id="bDD-3o-8vB"/>
-                    <constraint firstItem="8pU-qs-rwT" firstAttribute="leading" secondItem="eei-24-oer" secondAttribute="leading" constant="23" id="y6w-ar-RI4"/>
+                    <constraint firstAttribute="centerY" secondItem="8pU-qs-rwT" secondAttribute="centerY" id="N47-2i-7d1"/>
+                    <constraint firstAttribute="centerX" secondItem="8pU-qs-rwT" secondAttribute="centerX" id="xKl-Ly-npg"/>
                 </constraints>
             </view>
         </window>
