@@ -717,7 +717,9 @@
 {
     self.contentModel = contentModel;
     DDLogVerbose(@"url %@", [controller.epubURL path]);
+    DDLogVerbose(@"epubContentBaseURL %@", [controller.epubContentBaseURL path]);
     DDLogVerbose(@"meta %@", [self.contentModel.metaData description]);
+    DDLogVerbose(@"coverPath %@", [self.contentModel.coverPath description]);
     
     [self.managedObjectContext processPendingChanges];
     [[self.managedObjectContext undoManager] disableUndoRegistration];
@@ -737,6 +739,11 @@
     book.encryption = [NSNumber numberWithInteger:self.contentModel.bookEncryption];
     book.date = [self.dateFormatter dateFromString:[self.contentModel.metaData objectForKey:@"date"]];
     
+    // cover Image
+    if (self.contentModel.coverPath != nil) {
+        NSURL* coverPath = [controller.epubContentBaseURL URLByAppendingPathComponent:self.contentModel.coverPath];
+        book.cover = [[NSImage alloc] initWithContentsOfURL:coverPath];
+    }
     
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         // Do a taks in the background
