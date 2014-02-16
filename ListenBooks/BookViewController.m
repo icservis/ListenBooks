@@ -19,6 +19,7 @@
 #import "KFToolbarItem.h"
 #import "FontControl.h"
 #import "VoiceControl.h"
+#import "ThemeControl.h"
 
 @interface BookViewController ()
 
@@ -26,6 +27,7 @@
 @property (strong) IBOutlet NSPageController *pageController;
 @property (strong, nonatomic) IBOutlet FontControl* fontControl;
 @property (strong, nonatomic) IBOutlet VoiceControl* voiceControl;
+@property (strong, nonatomic) IBOutlet ThemeControl *themeControl;
 
 @property (weak) IBOutlet NSSplitView *splitView;
 @property (weak) IBOutlet NSView *contentView;
@@ -168,6 +170,14 @@
     return _voiceControl;
 }
 
+- (ThemeControl*)themeControl
+{
+    if (_themeControl == nil) {
+        _themeControl = [[ThemeControl alloc] init];
+    }
+    return _themeControl;
+}
+
 #pragma mark - Actions
 
 - (IBAction)fontPanelButtonClicked:(id)sender
@@ -304,7 +314,12 @@
     if (!isRepreparingOriginalView) {
         NSScrollView* scrollView = (NSScrollView*)bookPageViewController.view;
         scrollView.magnification = 1;
-        [bookPageViewController.textView changeFontSize:[self.fontSizeSlider doubleValue]];
+        
+        [bookPageViewController.textView changeFontSize:[self.book.fontSizeDelta doubleValue]];
+        [bookPageViewController.textView setFontFamily:self.book.fontName];
+        NSDictionary* selectedTheme = [[self.themeControl arrangedObjects] objectAtIndex:[self.book.themeIndex integerValue]];
+        [bookPageViewController.textView setBackgroundColor:[selectedTheme valueForKey:@"BackgroundColor"]];
+        [bookPageViewController.textView setForegroundColor:[selectedTheme valueForKey:@"ForegroundColor"]];
     }
 }
 

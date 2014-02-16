@@ -14,6 +14,7 @@
 - (void)changeFontSize:(CGFloat)delta;
 - (IBAction)decrementFontSize:(id)sender;
 - (IBAction)incrementFontSize:(id)sender;
-
+- (void)setFontFamily:(NSString*)familyName;
+- (void)setForegroundColor:(NSColor*)color;
 
 @end

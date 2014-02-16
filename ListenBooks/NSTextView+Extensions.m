@@ -39,6 +39,8 @@
 
 - (void)changeFontSize:(CGFloat)delta
 {
+    DDLogVerbose(@"changeFontSize: %f", delta);
+    
     NSFontManager * fontManager = [NSFontManager sharedFontManager];
     NSTextStorage * textStorage = [self textStorage];
     [textStorage beginEditing];
@@ -50,13 +52,68 @@
                                       BOOL * stop)
      {
          NSFont * font = value;
+         CGFloat pointSize = [font pointSize];
          font = [fontManager convertFont:font
-                                  toSize:[font pointSize] + delta];
+                                  toSize:pointSize + delta];
          if (font != nil) {
              [textStorage removeAttribute:NSFontAttributeName
                                     range:range];
              [textStorage addAttribute:NSFontAttributeName
                                  value:font
+                                 range:range];
+         }
+     }];
+    [textStorage endEditing];
+    [self didChangeText];
+}
+
+- (void)setFontFamily:(NSString*)familyName
+{
+    DDLogVerbose(@"setFontFamily: %@", familyName);
+    
+    NSFontManager * fontManager = [NSFontManager sharedFontManager];
+    NSTextStorage * textStorage = [self textStorage];
+    [textStorage beginEditing];
+    [textStorage enumerateAttribute:NSFontAttributeName
+                            inRange:NSMakeRange(0, [textStorage length])
+                            options:0
+                         usingBlock:^(id value,
+                                      NSRange range,
+                                      BOOL * stop)
+     {
+         NSFont * font = value;
+         font = [fontManager convertFont:font toFamily:familyName];
+         if (font != nil) {
+             [textStorage removeAttribute:NSFontAttributeName
+                                    range:range];
+             [textStorage addAttribute:NSFontAttributeName
+                                 value:font
+                                 range:range];
+         }
+     }];
+    [textStorage endEditing];
+    [self didChangeText];
+    
+}
+- (void)setForegroundColor:(NSColor*)color
+{
+    DDLogVerbose(@"setForegroundColor: %@", color);
+    
+    NSTextStorage * textStorage = [self textStorage];
+    [textStorage beginEditing];
+    [textStorage enumerateAttribute:NSForegroundColorAttributeName
+                            inRange:NSMakeRange(0, [textStorage length])
+                            options:0
+                         usingBlock:^(id value,
+                                      NSRange range,
+                                      BOOL * stop)
+     {
+         NSLog(@"color: %@", [color description]);
+         if (color != nil) {
+             [textStorage removeAttribute:NSForegroundColorAttributeName
+                                    range:range];
+             [textStorage addAttribute:NSForegroundColorAttributeName
+                                 value:color
                                  range:range];
          }
      }];

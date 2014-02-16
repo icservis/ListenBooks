@@ -12,9 +12,9 @@
 
 - (NSArray*)arrangedObjects
 {
-    NSDictionary* lightTheme = [[NSDictionary alloc] initWithObjectsAndKeys:NSLocalizedString(@"Light", @"Theme Name"), @"Name", [NSColor colorWithCalibratedRed:0.975 green:0.975 blue:0.975 alpha:1], @"BackgroundColor", [NSColor colorWithCalibratedRed:0.282 green:0.282 blue:0.282 alpha:1], @"ForegroundColor", nil];
-    NSDictionary* sepiaTheme = [[NSDictionary alloc] initWithObjectsAndKeys:NSLocalizedString(@"Sepia", @"Theme Name"), @"Name", [NSColor colorWithCalibratedRed:0.975 green:0.975 blue:0.975 alpha:1], @"BackgroundColor", [NSColor colorWithCalibratedRed:0.900 green:0.655 blue:0.300 alpha:1], @"ForegroundColor", nil];
-    NSDictionary* darkTheme = [[NSDictionary alloc] initWithObjectsAndKeys:NSLocalizedString(@"Dark", @"Theme Name"), @"Name", [NSColor colorWithCalibratedRed:0.282 green:0.282 blue:0.282 alpha:1], @"BackgroundColor", [NSColor colorWithCalibratedRed:0.975 green:0.975 blue:0.975  alpha:1], @"ForegroundColor", nil];
+    NSDictionary* lightTheme = [[NSDictionary alloc] initWithObjectsAndKeys:NSLocalizedString(@"Light", @"Theme Name"), @"Name", [NSColor colorWithCalibratedRed:1.000 green:1.000 blue:1.000 alpha:1], @"BackgroundColor", [NSColor colorWithCalibratedRed:0.141 green:0.141 blue:0.141 alpha:1], @"ForegroundColor", nil];
+    NSDictionary* sepiaTheme = [[NSDictionary alloc] initWithObjectsAndKeys:NSLocalizedString(@"Sepia", @"Theme Name"), @"Name", [NSColor colorWithCalibratedRed:0.973 green:0.945 blue:0.894 alpha:1], @"BackgroundColor", [NSColor colorWithCalibratedRed:0.314 green:0.200 blue:0.118 alpha:1], @"ForegroundColor", nil];
+    NSDictionary* darkTheme = [[NSDictionary alloc] initWithObjectsAndKeys:NSLocalizedString(@"Dark", @"Theme Name"), @"Name", [NSColor colorWithCalibratedRed:0.000 green:0.000 blue:0.000 alpha:1], @"BackgroundColor", [NSColor colorWithCalibratedRed:0.745 green:0.745 blue:0.745 alpha:1], @"ForegroundColor", nil];
     return @[lightTheme, sepiaTheme, darkTheme];
 }
 

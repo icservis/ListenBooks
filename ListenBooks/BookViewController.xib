@@ -19,6 +19,7 @@
                 <outlet property="progressIndicator" destination="stc-5D-7nD" id="XYp-np-XjX"/>
                 <outlet property="sideBarView" destination="ohj-03-nTq" id="szI-9r-TEq"/>
                 <outlet property="splitView" destination="gdb-Rv-Hx7" id="72v-9t-iGB"/>
+                <outlet property="themeControl" destination="84a-AT-1ze" id="qe3-H2-528"/>
                 <outlet property="themePanel" destination="1CL-0a-3oV" id="zOn-7Q-B5F"/>
                 <outlet property="themePanelButton" destination="PDw-6G-vzA" id="TGm-Mv-o2a"/>
                 <outlet property="themeSegmentedControl" destination="8pU-qs-rwT" id="yze-Bm-nzx"/>
@@ -200,14 +201,14 @@
                         <sliderCell key="cell" state="on" alignment="left" minValue="-3" maxValue="7" tickMarkPosition="above" numberOfTickMarks="11" allowsTickMarkValuesOnly="YES" sliderType="linear" id="GtO-oZ-Dgc"/>
                         <connections>
                             <action selector="fontSizeSliderChange:" target="-2" id="Wec-CS-YPU"/>
-                            <binding destination="T3E-Ta-yKa" name="maxValue" keyPath="sliderMaxValue" id="1ZU-8m-OSP"/>
-                            <binding destination="T3E-Ta-yKa" name="minValue" keyPath="sliderMinValue" previousBinding="1ZU-8m-OSP" id="kvE-PM-Xya"/>
+                            <binding destination="-2" name="value" keyPath="book.fontSizeDelta" previousBinding="kvE-PM-Xya" id="cXS-Wb-jjJ"/>
                             <binding destination="-2" name="toolTip" keyPath="book.fontSizeDelta" id="q5R-Hz-I8l">
                                 <dictionary key="options">
                                     <string key="NSValueTransformerName">NumberToString</string>
                                 </dictionary>
                             </binding>
-                            <binding destination="-2" name="value" keyPath="book.fontSizeDelta" previousBinding="kvE-PM-Xya" id="cXS-Wb-jjJ"/>
+                            <binding destination="T3E-Ta-yKa" name="maxValue" keyPath="sliderMaxValue" id="1ZU-8m-OSP"/>
+                            <binding destination="T3E-Ta-yKa" name="minValue" keyPath="sliderMinValue" previousBinding="1ZU-8m-OSP" id="kvE-PM-Xya"/>
                         </connections>
                     </slider>
                     <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RIM-6y-nAD">
@@ -341,14 +342,14 @@
                         <sliderCell key="cell" state="on" alignment="left" minValue="-100" maxValue="100" tickMarkPosition="above" numberOfTickMarks="5" sliderType="linear" id="bfn-RM-n0w"/>
                         <connections>
                             <action selector="voiceSpeedSliderChanged:" target="-2" id="jSd-eb-hx8"/>
-                            <binding destination="rJS-Ke-05G" name="maxValue" keyPath="sliderMaxValue" id="LUS-A9-wPF"/>
-                            <binding destination="rJS-Ke-05G" name="minValue" keyPath="sliderMinValue" previousBinding="LUS-A9-wPF" id="wYD-Zz-kMa"/>
+                            <binding destination="-2" name="value" keyPath="book.voiceSpeed" previousBinding="wYD-Zz-kMa" id="MKX-77-Pgw"/>
                             <binding destination="-2" name="toolTip" keyPath="book.voiceSpeed" id="uJx-f6-rW2">
                                 <dictionary key="options">
                                     <string key="NSValueTransformerName">NumberToString</string>
                                 </dictionary>
                             </binding>
-                            <binding destination="-2" name="value" keyPath="book.voiceSpeed" previousBinding="wYD-Zz-kMa" id="MKX-77-Pgw"/>
+                            <binding destination="rJS-Ke-05G" name="maxValue" keyPath="sliderMaxValue" id="LUS-A9-wPF"/>
+                            <binding destination="rJS-Ke-05G" name="minValue" keyPath="sliderMinValue" previousBinding="LUS-A9-wPF" id="wYD-Zz-kMa"/>
                         </connections>
                     </slider>
                 </subviews>

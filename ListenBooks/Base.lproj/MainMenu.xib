@@ -1089,15 +1089,15 @@ CA
             <rect key="frame" x="0.0" y="0.0" width="120" height="160"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
-                <box title="Box" boxType="custom" borderType="none" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="DDW-s0-Mcg">
+                <box transparent="YES" title="Box" boxType="custom" borderType="line" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="DDW-s0-Mcg">
                     <rect key="frame" x="0.0" y="0.0" width="120" height="160"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <view key="contentView">
-                        <rect key="frame" x="0.0" y="0.0" width="120" height="160"/>
+                        <rect key="frame" x="1" y="1" width="118" height="158"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dI8-hx-nCb">
-                                <rect key="frame" x="42" y="16" width="36" height="17"/>
+                                <rect key="frame" x="41" y="15" width="36" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17" id="4oe-fc-Pud"/>
@@ -1112,7 +1112,7 @@ CA
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="t6E-hL-CPv">
-                                <rect key="frame" x="39" y="0.0" width="41" height="14"/>
+                                <rect key="frame" x="38" y="0.0" width="41" height="14"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="14" id="DyD-v3-J7B"/>
@@ -1127,7 +1127,7 @@ CA
                                 </connections>
                             </textField>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UIH-jk-KTf">
-                                <rect key="frame" x="4" y="32" width="112" height="120"/>
+                                <rect key="frame" x="3" y="32" width="112" height="120"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="120" id="lai-sb-uWo"/>
@@ -1146,14 +1146,14 @@ CA
                         <constraint firstItem="dI8-hx-nCb" firstAttribute="centerX" secondItem="DDW-s0-Mcg" secondAttribute="centerX" id="DAd-UE-9fr"/>
                         <constraint firstItem="t6E-hL-CPv" firstAttribute="top" secondItem="UIH-jk-KTf" secondAttribute="bottom" constant="18" id="JLh-KU-lQG"/>
                         <constraint firstItem="dI8-hx-nCb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="DDW-s0-Mcg" secondAttribute="leading" constant="5" id="ORA-qg-Tpb"/>
-                        <constraint firstItem="dI8-hx-nCb" firstAttribute="top" secondItem="UIH-jk-KTf" secondAttribute="bottom" constant="-1" id="UN6-eM-1eV"/>
+                        <constraint firstItem="dI8-hx-nCb" firstAttribute="top" secondItem="UIH-jk-KTf" secondAttribute="bottom" id="UN6-eM-1eV"/>
                         <constraint firstItem="dI8-hx-nCb" firstAttribute="centerX" secondItem="UIH-jk-KTf" secondAttribute="centerX" id="Uh5-f6-QC4"/>
                         <constraint firstAttribute="bottom" secondItem="dI8-hx-nCb" secondAttribute="bottom" constant="16" id="WPZ-Vl-t30"/>
                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dI8-hx-nCb" secondAttribute="trailing" constant="5" id="wqv-6M-DOy"/>
                         <constraint firstItem="dI8-hx-nCb" firstAttribute="centerX" secondItem="t6E-hL-CPv" secondAttribute="centerX" id="zlF-gx-H4Z"/>
                     </constraints>
-                    <color key="borderColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                    <color key="fillColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                    <color key="borderColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                    <color key="fillColor" white="0.80000000000000004" alpha="0.0" colorSpace="deviceWhite"/>
                     <connections>
                         <binding destination="QNA-Cr-Vml" name="transparent" keyPath="selected" id="yS3-i2-bdY">
                             <dictionary key="options">
