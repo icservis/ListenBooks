@@ -17,10 +17,10 @@ static NSString* const VoiceSpeedDidChangeNotificaton = @"VOICE_SPEED_DID_CHANGE
 
 @class Book;
 
-@interface BookViewController : NSViewController <TabBarControllerProtocol, NSPageControllerDelegate>
+@interface BookViewController : NSViewController <TabBarControllerProtocol, NSPageControllerDelegate, NSTableViewDelegate, NSTableViewDataSource>
 
-@property (strong) Book* book;
-@property (strong, nonatomic) NSManagedObjectContext* managedObjectContext;
+@property (nonatomic, strong) Book* book;
+@property (nonatomic, strong) NSManagedObjectContext* managedObjectContext;
 @property (nonatomic, strong) NSTabViewItem* tabViewItem;
 
 @end

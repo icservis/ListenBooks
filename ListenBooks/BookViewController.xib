@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5037.3" systemVersion="13B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1080" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5037.3"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="BookViewController">
             <connections>
-                <outlet property="bookmarksArrayController" destination="WDh-fN-td0" id="mov-A3-QZM"/>
+                <outlet property="bookBookmarksView" destination="vFy-ae-W7f" id="GYl-D0-1qT"/>
                 <outlet property="contentView" destination="jiw-a8-aDw" id="hkL-Ld-Fwy"/>
                 <outlet property="fontControl" destination="T3E-Ta-yKa" id="FFF-eG-mDZ"/>
                 <outlet property="fontNamePopup" destination="RIM-6y-nAD" id="d2k-vR-1qJ"/>
@@ -55,14 +55,14 @@
                                         <rect key="frame" x="1" y="17" width="218" height="418"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
-                                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="ck7-q7-wCu" viewBased="YES" id="vFy-ae-W7f">
+                                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="ck7-q7-wCu" viewBased="YES" id="vFy-ae-W7f" customClass="BookBookmarksView">
                                                 <rect key="frame" x="0.0" y="0.0" width="218" height="418"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <size key="intercellSpacing" width="3" height="2"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                 <tableColumns>
-                                                    <tableColumn width="139" minWidth="40" maxWidth="1000" id="mHQ-kq-NN2">
+                                                    <tableColumn width="134" minWidth="40" maxWidth="1000" id="mHQ-kq-NN2">
                                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Created">
                                                             <font key="font" metaFont="smallSystem"/>
                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -77,11 +77,11 @@
                                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                         <prototypeCellViews>
                                                             <tableCellView id="id7-kE-zps">
-                                                                <rect key="frame" x="1" y="1" width="139" height="17"/>
+                                                                <rect key="frame" x="1" y="1" width="134" height="17"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <subviews>
                                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hXS-sU-Okd">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="139" height="17"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="134" height="17"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                         <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="xHC-tn-AlB">
                                                                             <dateFormatter key="formatter" dateStyle="short" timeStyle="short" doesRelativeDateFormatting="YES" id="UDA-ta-zL3"/>
@@ -99,9 +99,6 @@
                                                                 </connections>
                                                             </tableCellView>
                                                         </prototypeCellViews>
-                                                        <connections>
-                                                            <binding destination="WDh-fN-td0" name="value" keyPath="arrangedObjects" id="4Xx-2F-edj"/>
-                                                        </connections>
                                                     </tableColumn>
                                                     <tableColumn width="40" minWidth="40" maxWidth="1000" id="gCd-pJ-jsg">
                                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Page">
@@ -117,7 +114,7 @@
                                                         <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="page" ascending="NO"/>
                                                         <prototypeCellViews>
                                                             <tableCellView id="lZB-N5-ojs">
-                                                                <rect key="frame" x="143" y="1" width="40" height="17"/>
+                                                                <rect key="frame" x="138" y="1" width="40" height="17"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <subviews>
                                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ixt-yH-VJu">
@@ -142,11 +139,8 @@
                                                                 </connections>
                                                             </tableCellView>
                                                         </prototypeCellViews>
-                                                        <connections>
-                                                            <binding destination="WDh-fN-td0" name="value" keyPath="arrangedObjects" id="jQN-6f-Sii"/>
-                                                        </connections>
                                                     </tableColumn>
-                                                    <tableColumn width="30" minWidth="10" maxWidth="3.4028234663852886e+38" id="8UZ-hx-E9l">
+                                                    <tableColumn width="35" minWidth="10" maxWidth="3.4028234663852886e+38" id="8UZ-hx-E9l">
                                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Pos">
                                                             <font key="font" metaFont="smallSystem"/>
                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -160,11 +154,11 @@
                                                         <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="position" ascending="NO"/>
                                                         <prototypeCellViews>
                                                             <tableCellView id="0Uh-hn-zvQ">
-                                                                <rect key="frame" x="186" y="1" width="30" height="17"/>
+                                                                <rect key="frame" x="181" y="1" width="35" height="17"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <subviews>
                                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8hg-bn-rxR">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="30" height="17"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="35" height="17"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                         <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="pB5-RC-SYd">
                                                                             <font key="font" metaFont="system"/>
@@ -185,11 +179,12 @@
                                                                 </connections>
                                                             </tableCellView>
                                                         </prototypeCellViews>
-                                                        <connections>
-                                                            <binding destination="WDh-fN-td0" name="value" keyPath="arrangedObjects" id="Wuq-Dj-MY7"/>
-                                                        </connections>
                                                     </tableColumn>
                                                 </tableColumns>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="-2" id="SjP-sZ-gNC"/>
+                                                    <outlet property="delegate" destination="-2" id="b2z-bO-FJZ"/>
+                                                </connections>
                                             </tableView>
                                         </subviews>
                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -198,7 +193,7 @@
                                         <rect key="frame" x="1" y="419" width="218" height="16"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </scroller>
-                                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="37" horizontal="NO" id="A1A-Fc-C3h">
+                                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="A1A-Fc-C3h">
                                         <rect key="frame" x="-15" y="17" width="16" height="0.0"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </scroller>
@@ -218,14 +213,6 @@
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     </searchFieldCell>
-                                    <connections>
-                                        <binding destination="WDh-fN-td0" name="predicate" keyPath="filterPredicate" id="D0l-te-gqZ">
-                                            <dictionary key="options">
-                                                <string key="NSDisplayName">predicate</string>
-                                                <string key="NSPredicateFormat">text contains $value</string>
-                                            </dictionary>
-                                        </binding>
-                                    </connections>
                                 </searchField>
                             </subviews>
                             <constraints>
@@ -369,11 +356,6 @@
                 <string>BackgroundColor</string>
                 <string>ForegroundColor</string>
             </declaredKeys>
-        </arrayController>
-        <arrayController mode="entity" entityName="Bookmark" automaticallyPreparesContent="YES" automaticallyRearrangesObjects="YES" id="WDh-fN-td0" customClass="BookmarksArrayController">
-            <connections>
-                <binding destination="DFm-K4-015" name="managedObjectContext" keyPath="self.managedObjectContext" id="3R9-0a-8td"/>
-            </connections>
         </arrayController>
         <pagecontroller nibName="" transitionStyle="stackBook" id="SXf-7F-t5Y">
             <connections>

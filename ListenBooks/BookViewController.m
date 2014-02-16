@@ -20,7 +20,7 @@
 #import "FontControl.h"
 #import "VoiceControl.h"
 #import "ThemeControl.h"
-#import "BookmarksArrayController.h"
+#import "BookBookmarksView.h"
 
 @interface BookViewController ()
 
@@ -29,11 +29,11 @@
 @property (strong, nonatomic) IBOutlet FontControl* fontControl;
 @property (strong, nonatomic) IBOutlet VoiceControl* voiceControl;
 @property (strong, nonatomic) IBOutlet ThemeControl *themeControl;
-@property (strong) IBOutlet BookmarksArrayController *bookmarksArrayController;
 
 @property (weak) IBOutlet NSSplitView *splitView;
 @property (weak) IBOutlet NSView *contentView;
 @property (weak) IBOutlet NSView *sideBarView;
+@property (weak) IBOutlet BookBookmarksView *bookBookmarksView;
 
 #pragma mark - Internal Outlets
 
@@ -85,6 +85,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Initialization code here.
+        NSLog(@"self: %@", self);
+        
     }
     return self;
 }
@@ -99,7 +101,10 @@
     _toolBarFrameHeight = self.toolBarView.frame.size.height;
     _sideBarViewWidth = self.sideBarView.frame.size.width;
     
-    //[self.bookmarksArrayController bind:NSContentArrayBinding toObject:self.book.bookmarks withKeyPath:@"arrangedObjects" options:nil];
+    DDLogVerbose(@"book: %@", self.book);
+    if (self.book != nil) {
+        [self.bookBookmarksView reloadData];
+    }
 }
 
 - (void)dealloc
@@ -112,7 +117,11 @@
 
 - (void)contextDidChange:(NSNotification*)notification
 {
-    //AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
+    DDLogVerbose(@"self.book: %@", self.book);
+    DDLogVerbose(@"self.pageController: %@", self.pageController);
+    if (self.book != nil) {
+        [self.bookBookmarksView reloadData];
+    }
 }
 
 - (IBAction)fontSizeSliderChange:(id)sender
@@ -142,20 +151,22 @@
 
 #pragma mark - Setters
 
-- (Book*)book
-{
-    return _book;
-}
-
 - (void)setBook:(Book *)book
 {
-    [self resetPageView];
+    DDLogVerbose(@"self: %@", self);
     if (![book isEqual:_book]) {
+        [self resetPageView];
         if ([book.pages count] > 0) {
             [self loadPageContent:book];
         }
     }
     _book = book;
+    [self.bookBookmarksView reloadData];
+}
+
+- (Book*)book
+{
+    return _book;
 }
 
 - (FontControl*)fontControl
@@ -225,7 +236,8 @@
 
 - (void)loadPageContent:(Book*)book
 {
-    DDLogVerbose(@"loadBookPageControllerContent: %@", book);
+    //DDLogVerbose(@"loadBookPageControllerContent: %@", book);
+    DDLogInfo(@"loadBookPageControllerContent");
     
     [self.progressIndicator startAnimation:nil];
     
@@ -290,13 +302,16 @@
 - (IBAction)add:(id)sender
 {
     DDLogVerbose(@"sender: %@", sender);
-    [self.bookmarksArrayController add:sender];
+    Bookmark* bookmark = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([Bookmark class]) inManagedObjectContext:self.managedObjectContext];
+    bookmark.book = self.book;
+    bookmark.created = [NSDate date];
+    bookmark.page = [NSNumber numberWithInteger:[self.pageController selectedIndex]];
+    DDLogVerbose(@"book: %@", self.book);
 }
 
 - (IBAction)edit:(id)sender
 {
     DDLogVerbose(@"sender: %@", sender);
-    [self.bookmarksArrayController remove:sender];
 }
 
 - (IBAction)remove:(id)sender
@@ -411,6 +426,34 @@
         return proposedMinimumPosition;
     }
     return 0;
+}
+
+#pragma mark - NSTableViewDataSource
+
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
+{
+    DDLogVerbose(@"self: %@", self);
+    DDLogVerbose(@"book: %@", self.book);
+    
+    
+    NSInteger count = [self.book.bookmarks count];
+    DDLogVerbose(@"count: %li", (long)count);
+    return count;;
+}
+
+- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
+{
+    DDLogVerbose(@"tableView: %@, tableColumn: %@, row: %li", tableView, tableColumn, (long)row);
+    NSArray* bookmarks = [[self.book.bookmarks allObjects] sortedArrayUsingComparator:^NSComparisonResult(Bookmark* obj1, Bookmark* obj2) {
+        
+        NSDate* obj1Date = obj1.created;
+        NSDate* obj2Date = obj2.created;
+        return [obj1Date compare:obj2Date];
+        
+    }];
+    
+    Bookmark* bookmark = bookmarks[row];
+    return bookmark;
 }
 
 @end

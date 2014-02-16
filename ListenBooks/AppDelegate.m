@@ -143,6 +143,11 @@
     return _progressWindowController;
 }
 
+- (void)setProgressWindowController:(ProgressWindowController *)progressWindowController
+{
+    _progressWindowController = progressWindowController;
+}
+
 - (NSDateFormatter*)dateFormatter
 {
     if (_dateFormatter == nil) {
@@ -160,6 +165,11 @@
         _tabViewControllers = [NSMutableArray array];
     }
     return _tabViewControllers;
+}
+
+- (void)setTabViewControllers:(NSMutableArray *)tabViewControllers
+{
+    _tabViewControllers = tabViewControllers;
 }
 
 #pragma mark - Configurations
@@ -387,6 +397,7 @@
 	NSTabViewItem *newItem = [[NSTabViewItem alloc] initWithIdentifier:newModel];
     
     BookViewController* bookViewController = [[BookViewController alloc] initWithNibName:@"BookViewController" bundle:nil];
+    
     [self.tabViewControllers addObject:bookViewController];
     bookViewController.managedObjectContext = self.managedObjectContext;
     bookViewController.tabViewItem = newItem;
@@ -737,7 +748,7 @@
     [self.managedObjectContext processPendingChanges];
     [[self.managedObjectContext undoManager] disableUndoRegistration];
     
-    Book *book = [NSEntityDescription insertNewObjectForEntityForName:@"Book" inManagedObjectContext:self.managedObjectContext];
+    Book *book = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([Book class]) inManagedObjectContext:self.managedObjectContext];
     book.title = [self.contentModel.metaData objectForKey:@"title"];
     book.author = [self.contentModel.metaData objectForKey:@"author"];
     book.subject = [self.contentModel.metaData objectForKey:@"subject"];
@@ -776,7 +787,7 @@
                     
                     [spinedData addObject:attributedString];
                     
-                    Page *page = [NSEntityDescription insertNewObjectForEntityForName:@"Page" inManagedObjectContext:self.managedObjectContext];
+                    Page *page = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([Page class]) inManagedObjectContext:self.managedObjectContext];
                     page.book = book;
                     page.sortIndex = [NSNumber numberWithInteger:idx];
                     page.data = attributedString;

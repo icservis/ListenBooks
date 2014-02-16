@@ -33,12 +33,12 @@ extern NSString* const TabBarCountDidChangeNotification;
 @property (weak) IBOutlet MMTabBarView *tabBar;
 @property (weak) IBOutlet KFToolbar *toolBar;
 
-@property (nonatomic, strong) ProgressWindowController* progressWindowController;
-@property (nonatomic, strong) NSMutableArray* tabViewControllers;
+@property (strong) ProgressWindowController* progressWindowController;
+@property (strong) NSMutableArray* tabViewControllers;
 
-@property (nonatomic, strong) IBOutlet BooksTreeController *booksTreeController;
-@property (nonatomic, strong) IBOutlet BookmarksArrayController *bookmarksArrayController;
-@property (nonatomic, strong) IBOutlet ListArrayController *listArrayController;
+@property (strong) IBOutlet BooksTreeController *booksTreeController;
+@property (strong) IBOutlet BookmarksArrayController *bookmarksArrayController;
+@property (strong) IBOutlet ListArrayController *listArrayController;
 
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
