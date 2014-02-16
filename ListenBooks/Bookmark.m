@@ -15,6 +15,7 @@
 @dynamic page;
 @dynamic position;
 @dynamic created;
+@dynamic text;
 @dynamic book;
 
 @end

@@ -16,6 +16,7 @@
 		842B61EF18B00A6F00DC1A08 /* VoiceControlLanguageToPredicateTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 842B61EE18B00A6F00DC1A08 /* VoiceControlLanguageToPredicateTransformer.m */; };
 		842B61F318B010DE00DC1A08 /* Book.m in Sources */ = {isa = PBXBuildFile; fileRef = 842B61F218B010DE00DC1A08 /* Book.m */; };
 		842B61F618B0BBB700DC1A08 /* ThemeControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 842B61F518B0BBB700DC1A08 /* ThemeControl.m */; };
+		842B61F918B16D5C00DC1A08 /* StringTrimedWhiteSpacesTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 842B61F818B16D5C00DC1A08 /* StringTrimedWhiteSpacesTransformer.m */; };
 		8444EA93185F83A400F90B48 /* KFToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8444EA90185F83A400F90B48 /* KFToolbar.m */; };
 		8444EA94185F83A400F90B48 /* KFToolbarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8444EA92185F83A400F90B48 /* KFToolbarItem.m */; };
 		8444EAA2185F83D900F90B48 /* KFEpubConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 8444EA97185F83D900F90B48 /* KFEpubConstants.m */; };
@@ -189,6 +190,8 @@
 		842B61F218B010DE00DC1A08 /* Book.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Book.m; sourceTree = "<group>"; };
 		842B61F418B0BBB700DC1A08 /* ThemeControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemeControl.h; sourceTree = "<group>"; };
 		842B61F518B0BBB700DC1A08 /* ThemeControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThemeControl.m; sourceTree = "<group>"; };
+		842B61F718B16D5C00DC1A08 /* StringTrimedWhiteSpacesTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringTrimedWhiteSpacesTransformer.h; sourceTree = "<group>"; };
+		842B61F818B16D5C00DC1A08 /* StringTrimedWhiteSpacesTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringTrimedWhiteSpacesTransformer.m; sourceTree = "<group>"; };
 		8444EA8F185F83A400F90B48 /* KFToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFToolbar.h; sourceTree = "<group>"; };
 		8444EA90185F83A400F90B48 /* KFToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFToolbar.m; sourceTree = "<group>"; };
 		8444EA91185F83A400F90B48 /* KFToolbarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFToolbarItem.h; sourceTree = "<group>"; };
@@ -799,6 +802,8 @@
 				848C9584186647240020FDC9 /* StringToPredicateTransformer.m */,
 				842B61ED18B00A6F00DC1A08 /* VoiceControlLanguageToPredicateTransformer.h */,
 				842B61EE18B00A6F00DC1A08 /* VoiceControlLanguageToPredicateTransformer.m */,
+				842B61F718B16D5C00DC1A08 /* StringTrimedWhiteSpacesTransformer.h */,
+				842B61F818B16D5C00DC1A08 /* StringTrimedWhiteSpacesTransformer.m */,
 			);
 			name = Transformers;
 			sourceTree = "<group>";
@@ -1262,6 +1267,7 @@
 				848C954018663FD00020FDC9 /* BooksTreeController.m in Sources */,
 				84DD96491865CA0E00B9BD5A /* AutoSizingImageView.m in Sources */,
 				84DD96101865B8A900B9BD5A /* AutoSizingTextView.m in Sources */,
+				842B61F918B16D5C00DC1A08 /* StringTrimedWhiteSpacesTransformer.m in Sources */,
 				848E57E718AB997F004D72A3 /* NSAttributedStringToData.m in Sources */,
 				848C959F1866489C0020FDC9 /* Bookmark.m in Sources */,
 				84AB0493186871E9007106F4 /* LumberjackFormatter.m in Sources */,

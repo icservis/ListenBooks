@@ -20,6 +20,7 @@
 #import "FontControl.h"
 #import "VoiceControl.h"
 #import "ThemeControl.h"
+#import "BookmarksArrayController.h"
 
 @interface BookViewController ()
 
@@ -28,6 +29,7 @@
 @property (strong, nonatomic) IBOutlet FontControl* fontControl;
 @property (strong, nonatomic) IBOutlet VoiceControl* voiceControl;
 @property (strong, nonatomic) IBOutlet ThemeControl *themeControl;
+@property (strong) IBOutlet BookmarksArrayController *bookmarksArrayController;
 
 @property (weak) IBOutlet NSSplitView *splitView;
 @property (weak) IBOutlet NSView *contentView;
@@ -96,6 +98,8 @@
     
     _toolBarFrameHeight = self.toolBarView.frame.size.height;
     _sideBarViewWidth = self.sideBarView.frame.size.width;
+    
+    //[self.bookmarksArrayController bind:NSContentArrayBinding toObject:self.book.bookmarks withKeyPath:@"arrangedObjects" options:nil];
 }
 
 - (void)dealloc
@@ -281,6 +285,23 @@
 - (BOOL)isSideBarOpened
 {
     return ![self.splitView isSubviewCollapsed:self.sideBarView];
+}
+
+- (IBAction)add:(id)sender
+{
+    DDLogVerbose(@"sender: %@", sender);
+    [self.bookmarksArrayController add:sender];
+}
+
+- (IBAction)edit:(id)sender
+{
+    DDLogVerbose(@"sender: %@", sender);
+    [self.bookmarksArrayController remove:sender];
+}
+
+- (IBAction)remove:(id)sender
+{
+    DDLogVerbose(@"sender: %@", sender);
 }
 
 #pragma mark - PageControllerDelegate

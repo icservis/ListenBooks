@@ -17,5 +17,8 @@
 - (BOOL)isToolBarOpened;
 - (void)toggleSideBar;
 - (BOOL)isSideBarOpened;
+- (IBAction)add:(id)sender;
+- (IBAction)edit:(id)sender;
+- (IBAction)remove:(id)sender;
 
 @end

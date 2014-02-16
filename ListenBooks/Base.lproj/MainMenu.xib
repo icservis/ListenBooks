@@ -718,7 +718,7 @@ CA
                                                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                                                 </textFieldCell>
-                                                                                                <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="created"/>
+                                                                                                <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="created" ascending="NO"/>
                                                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                                                 <prototypeCellViews>
                                                                                                     <tableCellView id="3UO-0c-IOl">
@@ -729,6 +729,7 @@ CA
                                                                                                                 <rect key="frame" x="0.0" y="0.0" width="110" height="17"/>
                                                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="gfD-qn-NsX">
+                                                                                                                    <dateFormatter key="formatter" dateStyle="short" timeStyle="short" doesRelativeDateFormatting="YES" id="cy6-rs-mZB"/>
                                                                                                                     <font key="font" metaFont="system"/>
                                                                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -758,7 +759,7 @@ CA
                                                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                                                 </textFieldCell>
-                                                                                                <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="page"/>
+                                                                                                <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="page" ascending="NO"/>
                                                                                                 <prototypeCellViews>
                                                                                                     <tableCellView id="rvx-AB-iRo">
                                                                                                         <rect key="frame" x="114" y="1" width="49" height="17"/>
@@ -773,7 +774,11 @@ CA
                                                                                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                                                 </textFieldCell>
                                                                                                                 <connections>
-                                                                                                                    <binding destination="rvx-AB-iRo" name="value" keyPath="objectValue.page" id="Dyg-Wz-muM"/>
+                                                                                                                    <binding destination="rvx-AB-iRo" name="value" keyPath="objectValue.page" id="Xa6-h4-xFT">
+                                                                                                                        <dictionary key="options">
+                                                                                                                            <string key="NSValueTransformerName">NumberToString</string>
+                                                                                                                        </dictionary>
+                                                                                                                    </binding>
                                                                                                                 </connections>
                                                                                                             </textField>
                                                                                                         </subviews>
@@ -797,7 +802,7 @@ CA
                                                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                                                 </textFieldCell>
-                                                                                                <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="position"/>
+                                                                                                <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="position" ascending="NO"/>
                                                                                                 <prototypeCellViews>
                                                                                                     <tableCellView id="b0h-9v-ymI">
                                                                                                         <rect key="frame" x="166" y="1" width="41" height="17"/>
@@ -812,7 +817,11 @@ CA
                                                                                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                                                 </textFieldCell>
                                                                                                                 <connections>
-                                                                                                                    <binding destination="b0h-9v-ymI" name="value" keyPath="objectValue.position" id="x79-YO-Mlx"/>
+                                                                                                                    <binding destination="b0h-9v-ymI" name="value" keyPath="objectValue.position" id="EOO-pN-idL">
+                                                                                                                        <dictionary key="options">
+                                                                                                                            <string key="NSValueTransformerName">NumberToString</string>
+                                                                                                                        </dictionary>
+                                                                                                                    </binding>
                                                                                                                 </connections>
                                                                                                             </textField>
                                                                                                         </subviews>
@@ -821,6 +830,9 @@ CA
                                                                                                         </connections>
                                                                                                     </tableCellView>
                                                                                                 </prototypeCellViews>
+                                                                                                <connections>
+                                                                                                    <binding destination="Wjr-Iu-HEJ" name="value" keyPath="arrangedObjects" id="tAo-GR-d4S"/>
+                                                                                                </connections>
                                                                                             </tableColumn>
                                                                                         </tableColumns>
                                                                                         <connections>

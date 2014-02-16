@@ -16,6 +16,7 @@
 @property (nonatomic, retain) NSNumber * page;
 @property (nonatomic, retain) NSNumber * position;
 @property (nonatomic, retain) NSDate * created;
+@property (nonatomic, retain) NSString * text;
 @property (nonatomic, retain) Book *book;
 
 @end

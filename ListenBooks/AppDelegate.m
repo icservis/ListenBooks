@@ -294,13 +294,15 @@
          switch (tag)
          {
              case 0:
+                 [self performToolBarControllerAddAction];
                  break;
                  
              case 1:
+                 [self performToolBarControllerEditAction];
                  break;
                  
              case 2:
-                 [self toggleSideBarControllerToolBar];
+                 [self toggleToolBarControllerSideBar];
                  break;
                  
              case 3:
@@ -319,7 +321,7 @@
     [controller toggleToolBar];
 }
 
-- (void)toggleSideBarControllerToolBar
+- (void)toggleToolBarControllerSideBar
 {
     id <TabBarControllerProtocol> controller = [self controllerForSelectedTabViewItem];
     [controller toggleSideBar];
@@ -330,7 +332,18 @@
     } else {
         toggleToolBarItem.state = NSOffState;
     }
-    
+}
+
+- (void)performToolBarControllerAddAction
+{
+    id <TabBarControllerProtocol> controller = [self controllerForSelectedTabViewItem];
+    [controller add:nil];
+}
+
+- (void)performToolBarControllerEditAction
+{
+    id <TabBarControllerProtocol> controller = [self controllerForSelectedTabViewItem];
+    [controller edit:nil];
 }
 
 #pragma mark - TabView

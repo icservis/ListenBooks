@@ -137,6 +137,21 @@
     return ![self.splitView isSubviewCollapsed:self.sideBarView];
 }
 
+- (IBAction)add:(id)sender
+{
+    
+}
+
+- (IBAction)edit:(id)sender
+{
+    
+}
+
+- (IBAction)remove:(id)sender
+{
+    
+}
+
 #pragma mark - PageControllerDelegate
 
 - (NSString *)pageController:(NSPageController *)pageController identifierForObject:(id)object {
