@@ -287,13 +287,8 @@
 
 - (void)loadBookmark:(Bookmark*)bookmark
 {
-    DDLogVerbose(@"bookmark: %@", bookmark);
     NSInteger page = [bookmark.page integerValue];
-    DDLogVerbose(@"page: %li", (long)page);
-    NSArray* arrangedObjects = self.pageController.arrangedObjects;
-    DDLogVerbose(@"arrangedObjects: %li", (long)[arrangedObjects count]);
-    Page* selectedPage = [arrangedObjects objectAtIndex:page];
-    
+    self.pageController.selectedIndex = page;
 }
 
 #pragma mark - TabViewControllerProtocol
