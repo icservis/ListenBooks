@@ -10,4 +10,5 @@
 
 @interface BookmarksArrayController : NSArrayController
 
+
 @end

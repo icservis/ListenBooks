@@ -10,6 +10,7 @@
 #import "Book.h"
 #import "Bookmark.h"
 #import "BookmarksController.h"
+#import "BookViewController.h"
 #import "BookmarksView.h"
 #import "BooksView.h"
 #import "BooksTreeController.h"
@@ -17,9 +18,44 @@
 
 @implementation BookmarksController
 
+- (AppDelegate*)appDelegate
+{
+    return (AppDelegate*)[[NSApplication sharedApplication] delegate];
+}
+
+- (void)open
+{
+    AppDelegate* appDelegate = [self appDelegate];
+    [[self.bookmarksArrayController selectedObjects] enumerateObjectsUsingBlock:^(Bookmark* bookmark, NSUInteger idx, BOOL *stop) {
+        
+        __block BOOL bookFound = NO;
+        [[appDelegate tabViewControllers] enumerateObjectsUsingBlock:^(NSViewController* controller, NSUInteger idx, BOOL *stop) {
+            if ([controller isKindOfClass:[BookViewController class]]) {
+                BookViewController* bookViewController = (BookViewController*)controller;
+                if ([bookViewController.book isEqualTo:bookmark.book]) {
+                    [appDelegate.tabBar selectTabViewItem:bookViewController.tabViewItem];
+                    bookViewController.bookmark = bookmark;
+                    bookFound = YES;
+                    *stop = YES;
+                }
+            }
+        }];
+        if (bookFound == NO) {
+            BookViewController* bookViewController = [appDelegate addNewTabWithBook:bookmark.book];
+            bookViewController.bookmark = bookmark;
+        }
+    }];
+}
+
 - (void)remove
 {
+    DDLogVerbose(@"remove");
+    [[[self appDelegate] undoManager] beginUndoGrouping];
+    [[[self appDelegate] undoManager] setActionName:NSLocalizedString(@"Delete Bookmark", nil)];
+    
     [self.bookmarksArrayController remove:nil];
+    
+    [[[self appDelegate] undoManager] endUndoGrouping];
 }
 
 @end

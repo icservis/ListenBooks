@@ -83,6 +83,8 @@
 
 - (void)open
 {
+    DDLogVerbose(@"open");
+    
     AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
     [[self.booksTreeController selectedObjects] enumerateObjectsUsingBlock:^(Book* book, NSUInteger idx, BOOL *stop) {
         

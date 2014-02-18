@@ -390,7 +390,7 @@
     [self.tabView selectTabViewItem:newItem];
 }
 
-- (void)addNewTabWithBook:(Book*)book
+- (BookViewController*)addNewTabWithBook:(Book*)book
 {
     TabBarModel *newModel = [[TabBarModel alloc] init];
     [newModel setTitle:book.title];
@@ -407,6 +407,8 @@
     [newItem setView:mainView];
 	[self.tabView addTabViewItem:newItem];
     [self.tabView selectTabViewItem:newItem];
+
+    return bookViewController;
 }
 
 - (IBAction)closeTab:(id)sender
@@ -830,13 +832,6 @@
     } else {
         [self importBookWithUrl:[self.importedUrls firstObject]];
     }
-}
-
-#pragma mark - NSTableView
-
-- (NSArray*)bookmarksSortDescriptors
-{
-    return [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"created" ascending:NO]];
 }
 
 #pragma mark - TabBar Config

@@ -16,6 +16,7 @@
 @property (unsafe_unretained) IBOutlet BookmarksController* bookmarksController;
 @property (unsafe_unretained) IBOutlet BooksController* booksController;
 
+- (IBAction)open:(id)sender;
 - (IBAction)delete:(id)sender;
 
 @end

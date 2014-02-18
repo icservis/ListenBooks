@@ -21,5 +21,6 @@
 @property (unsafe_unretained) IBOutlet BookmarksArrayController *bookmarksArrayController;
 
 - (void)remove;
+- (void)open;
 
 @end

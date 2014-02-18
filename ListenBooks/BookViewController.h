@@ -8,6 +8,10 @@
 
 #import <Cocoa/Cocoa.h>
 #import "TabBarControllerProtocol.h"
+#import "BookPageView.h"
+
+@class Book;
+@class Bookmark;
 
 static NSString* const FontNameDidChangeNotificaton = @"FONT_NAME_DID_CHANGE_NOTIFICATION";
 static NSString* const FontSizeDidChangeNotificaton = @"FONT_SIZE_DID_CHANGE_NOTIFICATION";
@@ -15,11 +19,11 @@ static NSString* const ThemeDidChangeNotificaton = @"THEME_DID_CHANGE_NOTIFICATI
 static NSString* const VoiceNameDidChangeNotificaton = @"VOICE_NAME_DID_CHANGE_NOTIFICATION";
 static NSString* const VoiceSpeedDidChangeNotificaton = @"VOICE_SPEED_DID_CHANGE_NOTIFICATION";
 
-@class Book;
 
-@interface BookViewController : NSViewController <TabBarControllerProtocol, NSPageControllerDelegate, NSTableViewDelegate, NSTableViewDataSource>
+@interface BookViewController : NSViewController <TabBarControllerProtocol, NSPageControllerDelegate, NSTableViewDelegate, NSTableViewDataSource, BookPageViewDelegate>
 
 @property (nonatomic, strong) Book* book;
+@property (nonatomic, strong) Bookmark* bookmark;
 @property (nonatomic, strong) NSManagedObjectContext* managedObjectContext;
 @property (nonatomic, strong) NSTabViewItem* tabViewItem;
 

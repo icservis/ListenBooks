@@ -21,6 +21,7 @@
 #import "VoiceControl.h"
 #import "ThemeControl.h"
 #import "BookBookmarksView.h"
+#import "BookPageView.h"
 
 @interface BookViewController ()
 
@@ -40,7 +41,7 @@
 @property (weak) IBOutlet NSView *toolBarView;
 @property (weak) IBOutlet NSLayoutConstraint *toolBarHeightConstraint;
 @property (weak) IBOutlet NSTextField *pageLabel;
-@property (weak) IBOutlet NSView *pageView;
+@property (weak) IBOutlet BookPageView *pageView;
 @property (weak) IBOutlet NSProgressIndicator *progressIndicator;
 
 #pragma mark - Font Panel
@@ -79,14 +80,13 @@
 }
 
 @synthesize book = _book;
+@synthesize bookmark = _bookmark;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Initialization code here.
-        NSLog(@"self: %@", self);
-        
+        // Initialization code here.        
     }
     return self;
 }
@@ -95,19 +95,25 @@
 {
     [super awakeFromNib];
     
-    AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
+    AppDelegate* appDelegate = [self appDelegate];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(contextDidChange:) name:NSManagedObjectContextObjectsDidChangeNotification object:appDelegate.managedObjectContext];
     
     _toolBarFrameHeight = self.toolBarView.frame.size.height;
     _sideBarViewWidth = self.sideBarView.frame.size.width;
     
     [self.bookBookmarksView setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"created" ascending:NO]]];
+    [self.pageView setDelegate:self];
 }
 
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     self.initialSelectedObject = nil;
+}
+
+- (AppDelegate*)appDelegate
+{
+    return (AppDelegate*)[[NSApplication sharedApplication] delegate];
 }
 
 #pragma mark - Notifications
@@ -149,6 +155,7 @@
 {
     DDLogVerbose(@"self: %@", self);
     if (![book isEqual:_book]) {
+        _bookmark = nil;
         [self resetPageView];
         if ([book.pages count] > 0) {
             [self loadPageContent:book];
@@ -161,6 +168,19 @@
 - (Book*)book
 {
     return _book;
+}
+
+- (void)setBookmark:(Bookmark *)bookmark
+{
+    if ([self.pageController.arrangedObjects count] > 0) {
+        [self loadBookmark:bookmark];
+    }
+    _bookmark = bookmark;
+}
+
+- (Bookmark*)bookmark
+{
+    return _bookmark;
 }
 
 - (FontControl*)fontControl
@@ -221,6 +241,7 @@
     DDLogVerbose(@"resetPageView");
     
     self.initialSelectedObject = nil;
+    self.pageController.arrangedObjects = nil;
     [[self.pageView subviews] enumerateObjectsUsingBlock:^(NSView* subView, NSUInteger idx, BOOL *stop) {
         if (![subView isKindOfClass:[NSProgressIndicator class]]) {
             [subView removeFromSuperview];
@@ -230,7 +251,6 @@
 
 - (void)loadPageContent:(Book*)book
 {
-    //DDLogVerbose(@"loadBookPageControllerContent: %@", book);
     DDLogInfo(@"loadBookPageControllerContent");
     
     [self.progressIndicator startAnimation:nil];
@@ -257,9 +277,23 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             // Finish in main queue
             [self.pageController setArrangedObjects:[[NSMutableArray alloc] initWithArray:spinedData]];
+            if (self.bookmark != nil) {
+                [self loadBookmark:self.bookmark];
+            }
             [self.progressIndicator stopAnimation:nil];
         });
     });
+}
+
+- (void)loadBookmark:(Bookmark*)bookmark
+{
+    DDLogVerbose(@"bookmark: %@", bookmark);
+    NSInteger page = [bookmark.page integerValue];
+    DDLogVerbose(@"page: %li", (long)page);
+    NSArray* arrangedObjects = self.pageController.arrangedObjects;
+    DDLogVerbose(@"arrangedObjects: %li", (long)[arrangedObjects count]);
+    Page* selectedPage = [arrangedObjects objectAtIndex:page];
+    
 }
 
 #pragma mark - TabViewControllerProtocol
@@ -296,11 +330,16 @@
 - (IBAction)add:(id)sender
 {
     DDLogVerbose(@"sender: %@", sender);
+    
+    [[[self appDelegate] undoManager] beginUndoGrouping];
+    [[[self appDelegate] undoManager] setActionName:NSLocalizedString(@"New Bookmark", nil)];
+    
     Bookmark* bookmark = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([Bookmark class]) inManagedObjectContext:self.managedObjectContext];
     bookmark.book = self.book;
     bookmark.created = [NSDate date];
     bookmark.page = [NSNumber numberWithInteger:[self.pageController selectedIndex]];
-    DDLogVerbose(@"book: %@", self.book);
+    
+    [[[self appDelegate] undoManager] endUndoGrouping];
 }
 
 - (IBAction)edit:(id)sender
@@ -312,10 +351,15 @@
 {
     DDLogVerbose(@"sender: %@", sender);
     
+    [[[self appDelegate] undoManager] beginUndoGrouping];
+    [[[self appDelegate] undoManager] setActionName:NSLocalizedString(@"Delete Bookmark", nil)];
+    
     [[self.bookBookmarksView selectedRowIndexes] enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
         Bookmark* bookmark = [self tableView:self.bookBookmarksView objectValueForTableColumn:nil row:idx];
         [self.managedObjectContext deleteObject:bookmark];
     }];
+    
+    [[[self appDelegate] undoManager] endUndoGrouping];
 }
 
 #pragma mark - PageControllerDelegate
@@ -392,7 +436,7 @@
     NSSplitView* splitView = (NSSplitView*)notification.object;
     
     if ([splitView isEqualTo:self.splitView]) {
-        AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
+        AppDelegate* appDelegate = [self appDelegate];
         KFToolbarItem *bookmarksItem = appDelegate.toolBar.leftItems[2];
         if ([self.splitView isSubviewCollapsed:self.sideBarView] == NO) {
             _sideBarViewWidth = self.sideBarView.frame.size.width;
@@ -431,28 +475,23 @@
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
-    DDLogVerbose(@"self: %@", self);
-    DDLogVerbose(@"book: %@", self.book);
-    
-    
-    NSInteger count = [self.book.bookmarks count];
-    DDLogVerbose(@"count: %li", (long)count);
-    return count;;
+    return [self.book.bookmarks count];
 }
 
 - (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
-    DDLogVerbose(@"tableView: %@, tableColumn: %@, row: %li", tableView, tableColumn, (long)row);
     NSArray* bookmarks = [[self.book.bookmarks allObjects] sortedArrayUsingDescriptors:[tableView sortDescriptors]];
-    Bookmark* bookmark = bookmarks[row];
-    return bookmark;
+    return bookmarks[row];
 }
 
 - (void)tableView:(NSTableView *)tableView sortDescriptorsDidChange:(NSArray *)oldDescriptors
 {
-    DDLogVerbose(@"oldDescriptors: %@", oldDescriptors);
-    DDLogVerbose(@"newDescriptors: %@", [tableView sortDescriptors]);
     [tableView reloadData];
+}
+
+- (void)open
+{
+    DDLogVerbose(@"open: %li", (long)[self.bookBookmarksView selectedRow]);
 }
 
 @end

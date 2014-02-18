@@ -699,7 +699,7 @@ CA
                                                                                 <rect key="frame" x="0.0" y="17" width="209" height="166"/>
                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                 <subviews>
-                                                                                    <tableView identifier="MainWindowBookmarksView" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="dAV-NX-dsr" viewBased="YES" id="mm5-sr-EJJ" customClass="BookmarksView">
+                                                                                    <tableView identifier="MainWindowBookmarksView" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" autosaveColumns="NO" rowSizeStyle="automatic" headerView="dAV-NX-dsr" viewBased="YES" id="mm5-sr-EJJ" customClass="BookmarksView">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="209" height="166"/>
                                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                                         <size key="intercellSpacing" width="3" height="2"/>
@@ -1076,7 +1076,6 @@ CA
                     </dictionary>
                 </binding>
                 <binding destination="494" name="managedObjectContext" keyPath="self.managedObjectContext" id="tdk-NC-H3g"/>
-                <binding destination="494" name="sortDescriptors" keyPath="bookmarksSortDescriptors" id="daV-pO-WWx"/>
             </connections>
         </arrayController>
         <customObject id="whp-eZ-0pM" customClass="ListController">

@@ -27,25 +27,16 @@
     // Drawing code here.
 }
 
-- (IBAction)information:(id)sender
+- (void)awakeFromNib
 {
-    //[self.bookmarksController information];
+    [super awakeFromNib];
+    [self setDoubleAction:@selector(open:)];
+    [self setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"created" ascending:NO]]];
 }
 
-- (BOOL)validateMenuItem:(NSMenuItem *)menuItem
+- (IBAction)open:(id)sender
 {
-    SEL theAction = [menuItem action];
-    
-    if (theAction == @selector(information:)) {
-        
-        if ([[self selectedRowIndexes] count]  == 1) {
-            return YES;
-        } else {
-            return NO;
-        }
-    }
-    
-    return YES;
+    [self.bookmarksController open];
 }
 
 - (IBAction)delete:(id)sender

@@ -57,7 +57,7 @@ extern NSString* const TabBarCountDidChangeNotification;
 - (void)exportBook:(Book*)book;
 
 #pragma mark - Tabs Management
-- (void)addNewTabWithBook:(Book*)book;
+- (BookViewController*)addNewTabWithBook:(Book*)book;
 - (IBAction)addNewTab:(id)sender;
 - (IBAction)closeTab:(id)sender;
 - (void)closeTabWithItem:(NSTabViewItem*)tabViewItem;

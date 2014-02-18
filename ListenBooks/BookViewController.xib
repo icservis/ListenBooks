@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5037.3" systemVersion="13B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1080" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5037.3"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="BookViewController">
@@ -229,7 +229,7 @@
                             <rect key="frame" x="220" y="0.0" width="500" height="460"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
-                                <customView identifier="BookPageView" translatesAutoresizingMaskIntoConstraints="NO" id="BX8-OB-RG3">
+                                <customView identifier="BookPageView" translatesAutoresizingMaskIntoConstraints="NO" id="BX8-OB-RG3" customClass="BookPageView">
                                     <rect key="frame" x="0.0" y="0.0" width="500" height="424"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <subviews>
