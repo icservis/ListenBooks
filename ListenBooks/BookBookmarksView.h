@@ -10,4 +10,6 @@
 
 @interface BookBookmarksView : NSTableView
 
+- (IBAction)delete:(id)sender;
+
 @end

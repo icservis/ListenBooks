@@ -836,6 +836,8 @@ CA
                                                                                             </tableColumn>
                                                                                         </tableColumns>
                                                                                         <connections>
+                                                                                            <outlet property="bookmarksController" destination="KJq-QR-or6" id="DLp-oU-kgN"/>
+                                                                                            <outlet property="booksController" destination="haP-Ld-S8C" id="PEn-zh-31m"/>
                                                                                             <outlet property="delegate" destination="KJq-QR-or6" id="B0Z-VF-Wrr"/>
                                                                                         </connections>
                                                                                     </tableView>
@@ -1074,6 +1076,7 @@ CA
                     </dictionary>
                 </binding>
                 <binding destination="494" name="managedObjectContext" keyPath="self.managedObjectContext" id="tdk-NC-H3g"/>
+                <binding destination="494" name="sortDescriptors" keyPath="bookmarksSortDescriptors" id="daV-pO-WWx"/>
             </connections>
         </arrayController>
         <customObject id="whp-eZ-0pM" customClass="ListController">

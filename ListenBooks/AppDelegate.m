@@ -832,6 +832,13 @@
     }
 }
 
+#pragma mark - NSTableView
+
+- (NSArray*)bookmarksSortDescriptors
+{
+    return [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"created" ascending:NO]];
+}
+
 #pragma mark - TabBar Config
 
 - (void)configStyle:(id)sender {

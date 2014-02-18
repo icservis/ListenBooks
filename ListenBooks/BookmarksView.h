@@ -9,9 +9,13 @@
 #import <Cocoa/Cocoa.h>
 
 @class BookmarksController;
+@class BooksController;
 
 @interface BookmarksView : NSTableView
 
 @property (unsafe_unretained) IBOutlet BookmarksController* bookmarksController;
+@property (unsafe_unretained) IBOutlet BooksController* booksController;
+
+- (IBAction)delete:(id)sender;
 
 @end

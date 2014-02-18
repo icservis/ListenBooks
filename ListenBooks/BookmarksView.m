@@ -7,6 +7,7 @@
 //
 
 #import "BookmarksView.h"
+#import "BookmarksController.h"
 
 @implementation BookmarksView
 
@@ -45,6 +46,11 @@
     }
     
     return YES;
+}
+
+- (IBAction)delete:(id)sender
+{
+    [self.bookmarksController remove];
 }
 
 @end

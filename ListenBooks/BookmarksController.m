@@ -17,4 +17,9 @@
 
 @implementation BookmarksController
 
+- (void)remove
+{
+    [self.bookmarksArrayController remove:nil];
+}
+
 @end

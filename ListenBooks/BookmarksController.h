@@ -20,4 +20,6 @@
 @property (unsafe_unretained) IBOutlet BooksTreeController *booksTreeController;
 @property (unsafe_unretained) IBOutlet BookmarksArrayController *bookmarksArrayController;
 
+- (void)remove;
+
 @end

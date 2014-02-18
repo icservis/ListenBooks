@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8412B05D18B393C900D14AAE /* BookBookmarksView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8412B05C18B393C900D14AAE /* BookBookmarksView.m */; };
 		8416258118A827CE00C42723 /* TabBarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8416258018A827CE00C42723 /* TabBarModel.m */; };
 		842A12211865DC0E00AAAD42 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 842A121F1865DC0E00AAAD42 /* ImageViewController.m */; };
 		842A12221865DC0E00AAAD42 /* ImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842A12201865DC0E00AAAD42 /* ImageViewController.xib */; };
@@ -171,6 +172,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8412B05B18B393C900D14AAE /* BookBookmarksView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookBookmarksView.h; sourceTree = "<group>"; };
+		8412B05C18B393C900D14AAE /* BookBookmarksView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookBookmarksView.m; sourceTree = "<group>"; };
 		8416257F18A827CE00C42723 /* TabBarModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarModel.h; sourceTree = "<group>"; };
 		8416258018A827CE00C42723 /* TabBarModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarModel.m; sourceTree = "<group>"; };
 		8416258618A94C0300C42723 /* TabBarControllerProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabBarControllerProtocol.h; sourceTree = "<group>"; };
@@ -181,7 +184,7 @@
 		842B61DA18AE633000DC1A08 /* BookObjectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookObjectController.m; sourceTree = "<group>"; };
 		842B61E618AFE22C00DC1A08 /* FontControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontControl.h; sourceTree = "<group>"; };
 		842B61E718AFE22C00DC1A08 /* FontControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FontControl.m; sourceTree = "<group>"; };
-		842B61E918AFFA2B00DC1A08 /* ListenBooks 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ListenBooks 3.xcdatamodel"; sourceTree = "<group>"; };
+		842B61E918AFFA2B00DC1A08 /* ListenBooks 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ListenBooks 3.xcdatamodel"; sourceTree = "<group>"; };
 		842B61EA18AFFAA300DC1A08 /* VoiceControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceControl.h; sourceTree = "<group>"; };
 		842B61EB18AFFAA300DC1A08 /* VoiceControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoiceControl.m; sourceTree = "<group>"; };
 		842B61ED18B00A6F00DC1A08 /* VoiceControlLanguageToPredicateTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceControlLanguageToPredicateTransformer.h; sourceTree = "<group>"; };
@@ -725,6 +728,8 @@
 				84DD96081864B29A00B9BD5A /* BookPageViewController.xib */,
 				84DD960E1865B8A900B9BD5A /* AutoSizingTextView.h */,
 				84DD960F1865B8A900B9BD5A /* AutoSizingTextView.m */,
+				8412B05B18B393C900D14AAE /* BookBookmarksView.h */,
+				8412B05C18B393C900D14AAE /* BookBookmarksView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1227,6 +1232,7 @@
 				8444EAB9185F840800F90B48 /* SSZipArchive.m in Sources */,
 				84722BDE186DD76200FA7973 /* ListCollectionItemView.m in Sources */,
 				84E27E9718624D6000317411 /* BookViewController.m in Sources */,
+				8412B05D18B393C900D14AAE /* BookBookmarksView.m in Sources */,
 				848C9572186647010020FDC9 /* NSManagedObject_Extensions.m in Sources */,
 				84E27EA21863010800317411 /* ListCollectionView.m in Sources */,
 				8478C3EF185CA73F00B06779 /* main.m in Sources */,

@@ -23,4 +23,8 @@ static NSString* const VoiceSpeedDidChangeNotificaton = @"VOICE_SPEED_DID_CHANGE
 @property (nonatomic, strong) NSManagedObjectContext* managedObjectContext;
 @property (nonatomic, strong) NSTabViewItem* tabViewItem;
 
+- (IBAction)add:(id)sender;
+- (IBAction)edit:(id)sender;
+- (IBAction)remove:(id)sender;
+
 @end

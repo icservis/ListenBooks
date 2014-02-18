@@ -7,6 +7,7 @@
 //
 
 #import "BookBookmarksView.h"
+#import "BookViewController.h"
 
 @implementation BookBookmarksView
 
@@ -24,6 +25,12 @@
 	[super drawRect:dirtyRect];
 	
     // Drawing code here.
+}
+
+- (IBAction)delete:(id)sender
+{
+    BookViewController* bookViewController = (BookViewController*)self.dataSource;
+    [bookViewController remove:sender];
 }
 
 @end

@@ -101,10 +101,7 @@
     _toolBarFrameHeight = self.toolBarView.frame.size.height;
     _sideBarViewWidth = self.sideBarView.frame.size.width;
     
-    DDLogVerbose(@"book: %@", self.book);
-    if (self.book != nil) {
-        [self.bookBookmarksView reloadData];
-    }
+    [self.bookBookmarksView setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"created" ascending:NO]]];
 }
 
 - (void)dealloc
@@ -117,11 +114,8 @@
 
 - (void)contextDidChange:(NSNotification*)notification
 {
-    DDLogVerbose(@"self.book: %@", self.book);
-    DDLogVerbose(@"self.pageController: %@", self.pageController);
-    if (self.book != nil) {
-        [self.bookBookmarksView reloadData];
-    }
+    DDLogVerbose(@"v: %@", notification.object);
+    [self.bookBookmarksView reloadData];
 }
 
 - (IBAction)fontSizeSliderChange:(id)sender
@@ -317,6 +311,11 @@
 - (IBAction)remove:(id)sender
 {
     DDLogVerbose(@"sender: %@", sender);
+    
+    [[self.bookBookmarksView selectedRowIndexes] enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
+        Bookmark* bookmark = [self tableView:self.bookBookmarksView objectValueForTableColumn:nil row:idx];
+        [self.managedObjectContext deleteObject:bookmark];
+    }];
 }
 
 #pragma mark - PageControllerDelegate
@@ -444,16 +443,16 @@
 - (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
     DDLogVerbose(@"tableView: %@, tableColumn: %@, row: %li", tableView, tableColumn, (long)row);
-    NSArray* bookmarks = [[self.book.bookmarks allObjects] sortedArrayUsingComparator:^NSComparisonResult(Bookmark* obj1, Bookmark* obj2) {
-        
-        NSDate* obj1Date = obj1.created;
-        NSDate* obj2Date = obj2.created;
-        return [obj1Date compare:obj2Date];
-        
-    }];
-    
+    NSArray* bookmarks = [[self.book.bookmarks allObjects] sortedArrayUsingDescriptors:[tableView sortDescriptors]];
     Bookmark* bookmark = bookmarks[row];
     return bookmark;
+}
+
+- (void)tableView:(NSTableView *)tableView sortDescriptorsDidChange:(NSArray *)oldDescriptors
+{
+    DDLogVerbose(@"oldDescriptors: %@", oldDescriptors);
+    DDLogVerbose(@"newDescriptors: %@", [tableView sortDescriptors]);
+    [tableView reloadData];
 }
 
 @end
