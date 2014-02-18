@@ -70,12 +70,12 @@
                 <menuItem title="File" id="83">
                     <menu key="submenu" title="File" id="81">
                         <items>
-                            <menuItem title="New Bookmark …" keyEquivalent="n" id="82">
+                            <menuItem title="New Bookmark" keyEquivalent="n" id="82">
                                 <connections>
                                     <action selector="new:" target="-1" id="Bie-uk-d3N"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Open Book…" keyEquivalent="o" id="72">
+                            <menuItem title="Open Book" keyEquivalent="o" id="72">
                                 <connections>
                                     <action selector="open:" target="-1" id="aja-GO-0XN"/>
                                 </connections>
@@ -99,7 +99,7 @@
                                     <action selector="export:" target="-1" id="X3h-Ka-eYi"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Save…" keyEquivalent="s" id="75">
+                            <menuItem title="Save" keyEquivalent="s" id="75">
                                 <connections>
                                     <action selector="saveAction:" target="494" id="JF5-jo-0WU"/>
                                 </connections>

@@ -1240,7 +1240,9 @@
         NSLog(@"%@:%@ unable to commit editing before saving", [self class], NSStringFromSelector(_cmd));
     }
     
-    if (![[self managedObjectContext] save:&error]) {
+    if ([[self managedObjectContext] save:&error]) {
+        [self cleanUndoStack:sender];
+    } else {
         [[NSApplication sharedApplication] presentError:error];
     }
 }
