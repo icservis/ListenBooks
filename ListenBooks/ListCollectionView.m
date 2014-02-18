@@ -148,6 +148,30 @@
         }
     }
     
+    if (theAction == @selector(delete:)) {
+        
+        if ([[self selectionIndexes] count] > 0) {
+            return YES;
+        } else {
+            return NO;
+        }
+    }
+    
+    if (theAction == @selector(cut:)) {
+        
+        return NO;
+    }
+    
+    if (theAction == @selector(copy:)) {
+        
+        return NO;
+    }
+    
+    if (theAction == @selector(paste:)) {
+        
+        return NO;
+    }
+    
     return YES;
 }
 

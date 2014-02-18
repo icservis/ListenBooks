@@ -61,4 +61,41 @@
     bookViewController.bookmark = bookmark;
 }
 
+#pragma mark - Validation menus
+
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem
+{
+    SEL theAction = [menuItem action];
+    
+    if (theAction == @selector(new:)) {
+        
+        return YES;
+    }
+    
+    if (theAction == @selector(open:)) {
+        
+        if ([[self selectedRowIndexes] count] > 0) {
+            return YES;
+        } else {
+            return NO;
+        }
+    }
+    
+    if (theAction == @selector(delete:)) {
+        
+        if ([[self selectedRowIndexes] count] > 0) {
+            return YES;
+        } else {
+            return NO;
+        }
+    }
+    
+    if (theAction == @selector(selectAll:)) {
+        
+        return NO;
+    }
+    
+    return YES;
+}
+
 @end

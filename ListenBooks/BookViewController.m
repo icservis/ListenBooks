@@ -484,9 +484,4 @@
     [tableView reloadData];
 }
 
-- (void)open
-{
-    DDLogVerbose(@"open: %li", (long)[self.bookBookmarksView selectedRow]);
-}
-
 @end

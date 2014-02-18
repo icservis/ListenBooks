@@ -39,22 +39,7 @@
     [self setDoubleAction:@selector(open:)];
 }
 
-#pragma mark - Event Handling methods
-
-- (IBAction)copy:(id)sender;
-{
-    [self.booksController copy];
-}
-
-- (IBAction)paste:(id)sender
-{
-    [self.booksController paste];
-}
-
-- (IBAction)cut:(id)sender
-{
-    [self.booksController cut];
-}
+#pragma mark - FirstResponder
 
 - (IBAction)delete:(id)sender
 {
@@ -113,6 +98,15 @@
     if (theAction == @selector(export:)) {
         
         if ([[self selectedRowIndexes] count] == 1) {
+            return YES;
+        } else {
+            return NO;
+        }
+    }
+    
+    if (theAction == @selector(delete:)) {
+        
+        if ([[self selectedRowIndexes] count] > 0) {
             return YES;
         } else {
             return NO;

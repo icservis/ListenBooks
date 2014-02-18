@@ -75,7 +75,7 @@
                                     <action selector="new:" target="-1" id="Bie-uk-d3N"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Open Book" keyEquivalent="o" id="72">
+                            <menuItem title="Open" keyEquivalent="o" id="72">
                                 <connections>
                                     <action selector="open:" target="-1" id="aja-GO-0XN"/>
                                 </connections>

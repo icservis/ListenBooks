@@ -34,4 +34,19 @@
     [self.delegate add:sender];
 }
 
+#pragma mark - Validation menus
+
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem
+{
+    SEL theAction = [menuItem action];
+    
+    
+    if (theAction == @selector(new:)) {
+        
+        return YES;
+    }
+    
+    return YES;
+}
+
 @end
