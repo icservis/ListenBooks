@@ -599,6 +599,7 @@
 
 - (void)exportBook:(Book*)book
 {
+    DDLogVerbose(@"book: %@", book);
     NSSavePanel* savePanel = [NSSavePanel savePanel];
     [savePanel beginSheetModalForWindow:self.window completionHandler:^(NSInteger result) {
         DDLogVerbose(@"result: %ld, url: %@", (long)result, [savePanel.URL description]);

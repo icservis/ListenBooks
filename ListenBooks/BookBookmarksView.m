@@ -61,6 +61,13 @@
     bookViewController.bookmark = bookmark;
 }
 
+- (IBAction)export:(id)sender
+{
+    DDLogVerbose(@"sender: %@", sender);
+    BookViewController* bookViewController = (BookViewController*)self.dataSource;
+    [bookViewController export:sender];
+}
+
 #pragma mark - Validation menus
 
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem

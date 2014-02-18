@@ -18,5 +18,6 @@
 @property (nonatomic, weak) id <BookPageViewDelegate> delegate;
 
 - (IBAction)new:(id)sender;
+- (IBAction)export:(id)sender;
 
 @end

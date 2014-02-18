@@ -34,6 +34,12 @@
     [self.delegate add:sender];
 }
 
+- (IBAction)export:(id)sender
+{
+    DDLogVerbose(@"sender: %@", sender);
+    [self.delegate export:sender];
+}
+
 #pragma mark - Validation menus
 
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem

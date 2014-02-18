@@ -30,5 +30,6 @@ static NSString* const VoiceSpeedDidChangeNotificaton = @"VOICE_SPEED_DID_CHANGE
 - (IBAction)add:(id)sender;
 - (IBAction)edit:(id)sender;
 - (IBAction)remove:(id)sender;
+- (IBAction)export:(id)sender;
 
 @end

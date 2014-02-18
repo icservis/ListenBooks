@@ -357,6 +357,13 @@
     [[[self appDelegate] undoManager] endUndoGrouping];
 }
 
+- (IBAction)export:(id)sender
+{
+    DDLogVerbose(@"sender: %@", sender);
+    
+    [[self appDelegate] exportBook:self.book];
+}
+
 #pragma mark - PageControllerDelegate
 
 - (NSString *)pageController:(NSPageController *)pageController identifierForObject:(id)object
