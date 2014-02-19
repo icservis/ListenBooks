@@ -29,27 +29,24 @@
     scrollView.frame = scrollView.superview.frame;
 }
 
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+}
+
 
 #pragma mark - Validation menus
 
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
+    /*
     SEL theAction = [menuItem action];
     
-    if (theAction == @selector(paste:)) {
+    if (theAction == @selector(export:)) {
         
         return NO;
     }
-    
-    if (theAction == @selector(delete:)) {
-        
-        return NO;
-    }
-    
-    if (theAction == @selector(cut:)) {
-        
-        return NO;
-    }
+     */
     
     return YES;
 }

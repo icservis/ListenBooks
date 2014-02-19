@@ -20,7 +20,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <textView identifier="BookPageAutoSizingTextView" editable="NO" importsGraphics="NO" selectionGranularity="word" findStyle="panel" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" id="f1d-Sc-geg" customClass="AutoSizingTextView">
+                    <textView identifier="BookPageAutoSizingTextView" editable="NO" importsGraphics="NO" selectionGranularity="word" findStyle="bar" allowsUndo="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" id="f1d-Sc-geg" customClass="AutoSizingTextView">
                         <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -31,6 +31,8 @@
                         <size key="maxSize" width="463" height="10000000"/>
                         <connections>
                             <binding destination="-2" name="attributedString" keyPath="self.representedObject" id="qeU-1A-kGB"/>
+                            <outlet property="delegate" destination="-2" id="W33-XQ-wnU"/>
+                            <outlet property="menu" destination="Hbd-WE-tmK" id="j5q-IO-GQ9"/>
                         </connections>
                     </textView>
                 </subviews>
@@ -46,5 +48,31 @@
             </scroller>
         </scrollView>
         <userDefaultsController representsSharedInstance="YES" id="tvd-Sp-kNf"/>
+        <menu title="ContextMenu" id="Hbd-WE-tmK">
+            <items>
+                <menuItem title="New Bookmark" id="SNM-5N-adQ">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="new:" target="-1" id="FWD-qG-6W9"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="KJB-27-2tA">
+                    <connections>
+                        <action selector="new:" target="-1" id="AJQ-VQ-ctU"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Start Speaking" id="BEL-Xa-si8">
+                    <connections>
+                        <action selector="startSpeaking:" target="-1" id="12345"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Stop Speaking" id="X8U-Na-335">
+                    <connections>
+                        <action selector="stopSpeaking:" target="-1" id="23456"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="AhZ-kQ-mnn"/>
+            </items>
+        </menu>
     </objects>
 </document>

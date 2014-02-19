@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "BookPageViewController.h"
 
-@interface BookPageViewController : NSViewController
+@interface BookPageViewController : NSViewController <NSTextViewDelegate>
 
 @property (unsafe_unretained) IBOutlet NSTextView *textView;
 
