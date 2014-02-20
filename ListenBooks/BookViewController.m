@@ -448,7 +448,7 @@
         }
     }
 }
-
+/*
 - (CGFloat)splitView:(NSSplitView *)splitView constrainMaxCoordinate:(CGFloat)proposedMaximumPosition ofSubviewAt:(NSInteger)dividerIndex
 {
     if ([splitView isEqualTo:self.splitView]) {
@@ -472,7 +472,7 @@
     }
     return 0;
 }
-
+*/
 #pragma mark - NSTableViewDataSource
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView

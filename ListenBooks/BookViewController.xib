@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1080" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
@@ -40,7 +40,7 @@
             <rect key="frame" x="0.0" y="0.0" width="720" height="460"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <splitView identifier="BookSplitView" dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gdb-Rv-Hx7">
+                <splitView identifier="BookSplitView" autosaveName="SplitView" dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gdb-Rv-Hx7">
                     <rect key="frame" x="0.0" y="0.0" width="720" height="460"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <subviews>
@@ -219,10 +219,12 @@
                                 <constraint firstItem="JZd-lk-2Ev" firstAttribute="top" secondItem="9NF-Eq-fFF" secondAttribute="bottom" constant="2" id="2RY-XU-klV"/>
                                 <constraint firstItem="JZd-lk-2Ev" firstAttribute="leading" secondItem="ohj-03-nTq" secondAttribute="leading" constant="-1" id="4cA-N6-O12"/>
                                 <constraint firstAttribute="trailing" secondItem="JZd-lk-2Ev" secondAttribute="trailing" id="ARd-Pt-SeA"/>
+                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="350" id="DD5-Iy-fs4"/>
                                 <constraint firstAttribute="bottom" secondItem="JZd-lk-2Ev" secondAttribute="bottom" id="E9X-O7-i9b"/>
                                 <constraint firstAttribute="trailing" secondItem="9NF-Eq-fFF" secondAttribute="trailing" id="Gl2-2j-ihT"/>
                                 <constraint firstItem="9NF-Eq-fFF" firstAttribute="top" secondItem="ohj-03-nTq" secondAttribute="top" constant="3" id="PFx-9u-Xv6"/>
                                 <constraint firstItem="9NF-Eq-fFF" firstAttribute="leading" secondItem="ohj-03-nTq" secondAttribute="leading" id="VH9-f7-euW"/>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="o5h-7D-bok"/>
                             </constraints>
                         </customView>
                         <customView identifier="BookContentView" id="jiw-a8-aDw">
@@ -248,7 +250,7 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <subviews>
                                         <textField identifier="BookToolBarPageLabel" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yBx-Ex-R0j">
-                                            <rect key="frame" x="18" y="10" width="68" height="17"/>
+                                            <rect key="frame" x="17" y="10" width="68" height="17"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="pageLabel" id="GyE-Zb-kBs">
                                                 <font key="font" metaFont="system"/>
@@ -279,7 +281,7 @@
                                             </connections>
                                         </button>
                                         <button identifier="BookToolBarVoiceButton" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="prL-mF-BPa">
-                                            <rect key="frame" x="261" y="1" width="74" height="32"/>
+                                            <rect key="frame" x="260" y="1" width="75" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <buttonCell key="cell" type="push" title="Voice" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="c7R-7I-S62">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -319,8 +321,8 @@
                         </customView>
                     </subviews>
                     <holdingPriorities>
-                        <real value="250"/>
-                        <real value="250"/>
+                        <real value="100"/>
+                        <real value="100"/>
                     </holdingPriorities>
                     <connections>
                         <outlet property="delegate" destination="-2" id="7Sj-L5-bXj"/>

@@ -693,7 +693,7 @@
         }
     }
 }
-
+/*
 - (CGFloat)splitView:(NSSplitView *)splitView constrainMaxCoordinate:(CGFloat)proposedMaximumPosition ofSubviewAt:(NSInteger)dividerIndex
 {
     if ([splitView isEqualTo:self.splitView]) {
@@ -729,7 +729,7 @@
     }
     return 0;
 }
-
+*/
 #pragma mark - KFEpubDelegate
 
 - (void)epubController:(KFEpubController *)controller willOpenEpub:(NSURL *)epubURL
