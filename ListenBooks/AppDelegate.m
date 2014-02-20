@@ -792,8 +792,9 @@
                     
                     Page *page = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([Page class]) inManagedObjectContext:self.managedObjectContext];
                     page.book = book;
-                    page.sortIndex = [NSNumber numberWithInteger:idx];
                     page.data = attributedString;
+                    
+                    // process paragraphs
                 }
             }
         }];

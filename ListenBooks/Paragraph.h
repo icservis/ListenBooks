@@ -1,5 +1,5 @@
 //
-//  Page.h
+//  Paragraph.h
 //  ListenBooks
 //
 //  Created by Libor Kučera on 03.03.14.
@@ -9,26 +9,21 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Book, Bookmark, Paragraph;
+@class Book, Bookmark, Page;
 
-@interface Page : NSManagedObject
+@interface Paragraph : NSManagedObject
 
-@property (nonatomic, retain) NSAttributedString * data;
+@property (nonatomic, retain) NSString * text;
 @property (nonatomic, retain) Book *book;
 @property (nonatomic, retain) NSSet *bookmarks;
-@property (nonatomic, retain) NSSet *paragraphs;
+@property (nonatomic, retain) Page *page;
 @end
 
-@interface Page (CoreDataGeneratedAccessors)
+@interface Paragraph (CoreDataGeneratedAccessors)
 
 - (void)addBookmarksObject:(Bookmark *)value;
 - (void)removeBookmarksObject:(Bookmark *)value;
 - (void)addBookmarks:(NSSet *)values;
 - (void)removeBookmarks:(NSSet *)values;
-
-- (void)addParagraphsObject:(Paragraph *)value;
-- (void)removeParagraphsObject:(Paragraph *)value;
-- (void)addParagraphs:(NSSet *)values;
-- (void)removeParagraphs:(NSSet *)values;
 
 @end

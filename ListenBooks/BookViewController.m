@@ -21,9 +21,10 @@
 #import "VoiceControl.h"
 #import "ThemeControl.h"
 #import "BookBookmarksView.h"
+#import "BookSearchView.h"
 #import "BookPageView.h"
 
-@interface BookViewController ()
+@interface BookViewController () <NSTabViewDelegate>
 
 @property (strong) id initialSelectedObject;
 @property (strong) IBOutlet NSPageController *pageController;
@@ -34,7 +35,13 @@
 @property (weak) IBOutlet NSSplitView *splitView;
 @property (weak) IBOutlet NSView *contentView;
 @property (weak) IBOutlet NSView *sideBarView;
+@property (weak) IBOutlet NSTabView *sideBarTabView;
+@property (weak) IBOutlet NSTabViewItem *sideBarTabViewBookmarksTab;
 @property (weak) IBOutlet BookBookmarksView *bookBookmarksView;
+@property (weak) IBOutlet NSSearchField *bookBookmarksSearchField;
+@property (weak) IBOutlet NSTabViewItem *sideBarTabViewSearchTab;
+@property (weak) IBOutlet BookSearchView *bookSearchView;
+@property (weak) IBOutlet NSSearchField *bookSearchSearchField;
 
 #pragma mark - Internal Outlets
 
@@ -77,6 +84,7 @@
 @implementation BookViewController {
     CGFloat _toolBarFrameHeight;
     CGFloat _sideBarViewWidth;
+    NSMutableArray* foundResults;
 }
 
 @synthesize book = _book;
@@ -258,19 +266,7 @@
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         // Do a taks in the background
         __block NSMutableArray* spinedData = [[NSMutableArray alloc] init];
-        NSArray* pages = [[book.pages allObjects] sortedArrayUsingComparator:^NSComparisonResult(Page* obj1, Page* obj2) {
-            NSInteger sortIndex1 = [obj1.sortIndex integerValue];
-            NSInteger sortIndex2 = [obj2.sortIndex integerValue];
-            
-            if (sortIndex1 < sortIndex2) {
-                return NSOrderedAscending;
-            } else if (sortIndex1 > sortIndex2) {
-                return NSOrderedDescending;
-            } else {
-                return NSOrderedSame;
-            }
-        }];
-        [pages enumerateObjectsUsingBlock:^(Page* page, NSUInteger idx, BOOL *stop) {
+        [book.pages enumerateObjectsUsingBlock:^(Page* page, NSUInteger idx, BOOL *stop) {
             [spinedData addObject:page.data];
         }];
         
@@ -287,8 +283,11 @@
 
 - (void)loadBookmark:(Bookmark*)bookmark
 {
-    NSInteger page = [bookmark.page integerValue];
-    self.pageController.selectedIndex = page;
+    NSInteger index = [self.pageController.arrangedObjects indexOfObject:bookmark.page];
+    DDLogDebug(@"index: %li, %@", (long)index, bookmark.page);
+    if (index != NSNotFound) {
+        self.pageController.selectedIndex = index;
+    }
 }
 
 #pragma mark - TabViewControllerProtocol
@@ -332,7 +331,7 @@
     Bookmark* bookmark = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([Bookmark class]) inManagedObjectContext:self.managedObjectContext];
     bookmark.book = self.book;
     bookmark.created = [NSDate date];
-    bookmark.page = [NSNumber numberWithInteger:[self.pageController selectedIndex]];
+    bookmark.page = [self.pageController.arrangedObjects objectAtIndex:self.pageController.selectedIndex];
     
     [[[self appDelegate] undoManager] endUndoGrouping];
 }
@@ -473,6 +472,15 @@
     return 0;
 }
 */
+
+#pragma mark - NSTabViewDelegate
+
+- (void)tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem
+{
+    
+}
+
+
 #pragma mark - NSTableViewDataSource
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView

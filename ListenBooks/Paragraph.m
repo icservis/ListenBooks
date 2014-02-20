@@ -1,22 +1,22 @@
 //
-//  Page.m
+//  Paragraph.m
 //  ListenBooks
 //
 //  Created by Libor Kučera on 03.03.14.
 //  Copyright (c) 2014 IC Servis. All rights reserved.
 //
 
-#import "Page.h"
+#import "Paragraph.h"
 #import "Book.h"
 #import "Bookmark.h"
-#import "Paragraph.h"
+#import "Page.h"
 
 
-@implementation Page
+@implementation Paragraph
 
-@dynamic data;
+@dynamic text;
 @dynamic book;
 @dynamic bookmarks;
-@dynamic paragraphs;
+@dynamic page;
 
 @end
