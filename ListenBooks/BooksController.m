@@ -158,9 +158,9 @@
         [appDelegate.managedObjectContext deleteObject:book];
     }];
     
-    [appDelegate saveAction:nil];
     [appDelegate.managedObjectContext processPendingChanges];
     [[appDelegate.managedObjectContext undoManager] enableUndoRegistration];
+    [appDelegate saveAction:nil];
     
     [self.progressWindowController updateProgressWindowWithInfo:NSLocalizedString(@"Completed", nil)];
     [self.progressWindowController updateProgressWindowWithIndeterminate:YES animating:NO];
