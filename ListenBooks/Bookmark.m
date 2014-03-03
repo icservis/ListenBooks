@@ -29,7 +29,7 @@
             
             NSDictionary *userInfo = @{
                                        NSLocalizedDescriptionKey:
-                                           NSLocalizedString(@"Title can not be empty", nil),
+                                           NSLocalizedString(@"Title can not be empty!", nil),
                                        NSLocalizedRecoverySuggestionErrorKey:
                                            NSLocalizedString(@"Please supply correct value.", nil)
                                        };

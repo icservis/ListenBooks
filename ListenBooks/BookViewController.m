@@ -454,7 +454,7 @@
 
 - (void)tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem
 {
-    
+    DDLogVerbose(@"tabViewItem: %@", tabViewItem);
 }
 
 
@@ -462,13 +462,26 @@
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
-    return [self.book.bookmarks count];
+    if ([tableView isEqualTo:self.bookBookmarksView]) {
+        return [self.book.bookmarks count];
+    }
+    if ([tableView isEqualTo:self.bookSearchView]) {
+        return [self.book.paragraphs count];
+    }
+    return 0;
 }
 
 - (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
-    NSArray* bookmarks = [[self.book.bookmarks allObjects] sortedArrayUsingDescriptors:[tableView sortDescriptors]];
-    return bookmarks[row];
+    if ([tableView isEqualTo:self.bookBookmarksView]) {
+        NSArray* bookmarks = [[self.book.bookmarks allObjects] sortedArrayUsingDescriptors:[tableView sortDescriptors]];
+        return bookmarks[row];
+    }
+    if ([tableView isEqualTo:self.bookSearchView]) {
+        
+        return self.book.paragraphs[row];
+    }
+    return nil;
 }
 
 - (void)tableView:(NSTableView *)tableView sortDescriptorsDidChange:(NSArray *)oldDescriptors

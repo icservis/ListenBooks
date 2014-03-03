@@ -734,10 +734,9 @@ CA
                                                                                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                                                 </textFieldCell>
                                                                                                                 <connections>
-                                                                                                                    <binding destination="3UO-0c-IOl" name="value" keyPath="objectValue.title" id="XaF-ES-hgg">
+                                                                                                                    <binding destination="3UO-0c-IOl" name="value" keyPath="objectValue.title" id="ODH-Kh-WPb">
                                                                                                                         <dictionary key="options">
-                                                                                                                            <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                                                                                                                            <bool key="NSValidatesImmediately" value="YES"/>
+                                                                                                                            <bool key="NSConditionallySetsEditable" value="YES"/>
                                                                                                                         </dictionary>
                                                                                                                     </binding>
                                                                                                                 </connections>
@@ -785,10 +784,9 @@ CA
                                                                                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                                                 </textFieldCell>
                                                                                                                 <connections>
-                                                                                                                    <binding destination="b0h-9v-ymI" name="value" keyPath="objectValue.created" id="vBd-Yj-ngt">
+                                                                                                                    <binding destination="b0h-9v-ymI" name="value" keyPath="objectValue.created" id="53s-Bj-gSu">
                                                                                                                         <dictionary key="options">
-                                                                                                                            <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                                                                                                                            <bool key="NSValidatesImmediately" value="YES"/>
+                                                                                                                            <bool key="NSConditionallySetsEditable" value="YES"/>
                                                                                                                         </dictionary>
                                                                                                                     </binding>
                                                                                                                 </connections>

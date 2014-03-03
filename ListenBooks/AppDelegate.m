@@ -16,6 +16,7 @@
 #import "Book.h"
 #import "Bookmark.h"
 #import "Page.h"
+#import "Paragraph.h"
 
 #import "ListViewController.h"
 #import "BookViewController.h"
@@ -795,6 +796,23 @@
                     page.data = attributedString;
                     
                     // process paragraphs
+                    
+                    NSString *string = [attributedString string];
+                    unsigned long length = [string length];
+                    unsigned long paraStart = 0, paraEnd = 0, contentsEnd = 0;
+                    
+                    NSRange currentRange;
+                    while (paraEnd < length) {
+                        [string getParagraphStart:&paraStart end:&paraEnd
+                                      contentsEnd:&contentsEnd forRange:NSMakeRange(paraEnd, 0)];
+                        currentRange = NSMakeRange(paraStart, contentsEnd - paraStart);
+                        
+                        Paragraph *paragraph = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([Paragraph class]) inManagedObjectContext:self.managedObjectContext];
+                        paragraph.book = book;
+                        paragraph.page = page;
+                        paragraph.text = [string substringWithRange:currentRange];
+                    }
+                    
                 }
             }
         }];

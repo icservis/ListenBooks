@@ -8,6 +8,8 @@
         <customObject id="-2" userLabel="File's Owner" customClass="BookViewController">
             <connections>
                 <outlet property="bookBookmarksView" destination="vFy-ae-W7f" id="GYl-D0-1qT"/>
+                <outlet property="bookSearchField" destination="PMi-Fh-vC8" id="Bb7-nz-3CS"/>
+                <outlet property="bookSearchView" destination="Exb-Ma-GHz" id="kO2-Zs-SsM"/>
                 <outlet property="contentView" destination="jiw-a8-aDw" id="hkL-Ld-Fwy"/>
                 <outlet property="fontControl" destination="T3E-Ta-yKa" id="FFF-eG-mDZ"/>
                 <outlet property="fontNamePopup" destination="RIM-6y-nAD" id="d2k-vR-1qJ"/>
@@ -188,9 +190,105 @@
                                             <view key="view" id="tY1-Tr-w3c">
                                                 <rect key="frame" x="10" y="25" width="213" height="430"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <subviews>
+                                                    <searchField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PMi-Fh-vC8">
+                                                        <rect key="frame" x="2" y="408" width="209" height="19"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="19" id="LiI-2v-eMK"/>
+                                                        </constraints>
+                                                        <searchFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="9Yl-pc-off">
+                                                            <font key="font" metaFont="smallSystem"/>
+                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        </searchFieldCell>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="-2" id="gWl-wM-KdN"/>
+                                                        </connections>
+                                                    </searchField>
+                                                    <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3qd-5Z-Vc1">
+                                                        <rect key="frame" x="0.0" y="0.0" width="213" height="406"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                        <clipView key="contentView" id="LAq-wn-Yb7">
+                                                            <rect key="frame" x="0.0" y="0.0" width="213" height="406"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <subviews>
+                                                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="Exb-Ma-GHz" customClass="BookSearchView">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="213" height="406"/>
+                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                    <size key="intercellSpacing" width="3" height="2"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                                                    <tableColumns>
+                                                                        <tableColumn editable="NO" width="210" minWidth="40" maxWidth="1000" id="Uzw-TO-NlY">
+                                                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
+                                                                                <font key="font" metaFont="smallSystem"/>
+                                                                                <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                                                <color key="backgroundColor" white="0.33333298560000002" alpha="1" colorSpace="calibratedWhite"/>
+                                                                            </tableHeaderCell>
+                                                                            <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="0jz-8I-Hgg">
+                                                                                <font key="font" metaFont="system"/>
+                                                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                            </textFieldCell>
+                                                                            <prototypeCellViews>
+                                                                                <tableCellView id="dLc-f3-Ysu">
+                                                                                    <rect key="frame" x="1" y="1" width="210" height="17"/>
+                                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                                    <subviews>
+                                                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d5e-bq-ST2">
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="210" height="17"/>
+                                                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="QFk-o8-CJc">
+                                                                                                <font key="font" metaFont="system"/>
+                                                                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                            </textFieldCell>
+                                                                                            <connections>
+                                                                                                <binding destination="dLc-f3-Ysu" name="value" keyPath="objectValue.text" id="gd4-zt-ghL"/>
+                                                                                            </connections>
+                                                                                        </textField>
+                                                                                    </subviews>
+                                                                                    <connections>
+                                                                                        <outlet property="textField" destination="d5e-bq-ST2" id="SgN-hz-epD"/>
+                                                                                    </connections>
+                                                                                </tableCellView>
+                                                                            </prototypeCellViews>
+                                                                        </tableColumn>
+                                                                    </tableColumns>
+                                                                    <connections>
+                                                                        <outlet property="dataSource" destination="-2" id="KYk-je-AWK"/>
+                                                                        <outlet property="delegate" destination="-2" id="D8O-9P-uW1"/>
+                                                                    </connections>
+                                                                </tableView>
+                                                            </subviews>
+                                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        </clipView>
+                                                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="Ha7-Qg-fCg">
+                                                            <rect key="frame" x="1" y="119" width="223" height="15"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </scroller>
+                                                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="YGK-hb-L8a">
+                                                            <rect key="frame" x="224" y="17" width="15" height="102"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </scroller>
+                                                    </scrollView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="3qd-5Z-Vc1" firstAttribute="top" secondItem="PMi-Fh-vC8" secondAttribute="bottom" constant="2" id="217-qh-BsQ"/>
+                                                    <constraint firstAttribute="bottom" secondItem="3qd-5Z-Vc1" secondAttribute="bottom" id="OuC-8w-Voj"/>
+                                                    <constraint firstAttribute="trailing" secondItem="3qd-5Z-Vc1" secondAttribute="trailing" id="Pff-Q7-4Cq"/>
+                                                    <constraint firstItem="PMi-Fh-vC8" firstAttribute="top" secondItem="tY1-Tr-w3c" secondAttribute="top" constant="3" id="WmP-zJ-P1o"/>
+                                                    <constraint firstAttribute="trailing" secondItem="PMi-Fh-vC8" secondAttribute="trailing" constant="2" id="dom-fa-6ZE"/>
+                                                    <constraint firstItem="3qd-5Z-Vc1" firstAttribute="leading" secondItem="tY1-Tr-w3c" secondAttribute="leading" id="qH3-Lk-2KC"/>
+                                                    <constraint firstItem="PMi-Fh-vC8" firstAttribute="leading" secondItem="tY1-Tr-w3c" secondAttribute="leading" constant="2" id="zTg-qu-OAM"/>
+                                                </constraints>
                                             </view>
                                         </tabViewItem>
                                     </tabViewItems>
+                                    <connections>
+                                        <outlet property="delegate" destination="-2" id="mba-x3-Hgp"/>
+                                    </connections>
                                 </tabView>
                             </subviews>
                             <constraints>
