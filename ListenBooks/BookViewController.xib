@@ -7,7 +7,6 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="BookViewController">
             <connections>
-                <outlet property="bookBookmarksSearchField" destination="9NF-Eq-fFF" id="rsd-0e-ewN"/>
                 <outlet property="bookBookmarksView" destination="vFy-ae-W7f" id="GYl-D0-1qT"/>
                 <outlet property="contentView" destination="jiw-a8-aDw" id="hkL-Ld-Fwy"/>
                 <outlet property="fontControl" destination="T3E-Ta-yKa" id="FFF-eG-mDZ"/>
@@ -62,14 +61,14 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JZd-lk-2Ev">
-                                                        <rect key="frame" x="0.0" y="0.0" width="213" height="406"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="213" height="430"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <clipView key="contentView" id="K0j-uF-RH9">
-                                                            <rect key="frame" x="0.0" y="17" width="213" height="389"/>
+                                                            <rect key="frame" x="0.0" y="17" width="213" height="413"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="ck7-q7-wCu" viewBased="YES" id="vFy-ae-W7f" customClass="BookBookmarksView">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="213" height="389"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="213" height="413"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <size key="intercellSpacing" width="3" height="2"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -97,13 +96,12 @@
                                                                                             <rect key="frame" x="0.0" y="0.0" width="113" height="17"/>
                                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="xHC-tn-AlB">
-                                                                                                <dateFormatter key="formatter" dateStyle="short" timeStyle="short" doesRelativeDateFormatting="YES" id="UDA-ta-zL3"/>
                                                                                                 <font key="font" metaFont="system"/>
                                                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                             </textFieldCell>
                                                                                             <connections>
-                                                                                                <binding destination="id7-kE-zps" name="value" keyPath="objectValue.title" id="xft-27-y6p"/>
+                                                                                                <binding destination="id7-kE-zps" name="value" keyPath="objectValue.title" id="6jk-MV-f2k"/>
                                                                                             </connections>
                                                                                         </textField>
                                                                                     </subviews>
@@ -125,7 +123,7 @@
                                                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
                                                                             <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="created" ascending="NO"/>
-                                                                            <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                                            <tableColumnResizingMask key="resizingMask" userResizable="YES"/>
                                                                             <prototypeCellViews>
                                                                                 <tableCellView id="0Uh-hn-zvQ">
                                                                                     <rect key="frame" x="117" y="1" width="94" height="17"/>
@@ -134,7 +132,7 @@
                                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8hg-bn-rxR">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="94" height="17"/>
                                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="pB5-RC-SYd">
+                                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="pB5-RC-SYd">
                                                                                                 <dateFormatter key="formatter" dateStyle="short" timeStyle="short" doesRelativeDateFormatting="YES" id="q3B-mP-7pF"/>
                                                                                                 <font key="font" metaFont="system"/>
                                                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -173,26 +171,11 @@
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </tableHeaderView>
                                                     </scrollView>
-                                                    <searchField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9NF-Eq-fFF">
-                                                        <rect key="frame" x="2" y="408" width="209" height="19"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="19" id="36B-mx-CuL"/>
-                                                        </constraints>
-                                                        <searchFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="PD6-CL-8Ve">
-                                                            <font key="font" metaFont="smallSystem"/>
-                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                        </searchFieldCell>
-                                                    </searchField>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstItem="JZd-lk-2Ev" firstAttribute="top" secondItem="9NF-Eq-fFF" secondAttribute="bottom" constant="2" id="14K-Nj-ceS"/>
                                                     <constraint firstItem="JZd-lk-2Ev" firstAttribute="leading" secondItem="hc5-Zc-9Jc" secondAttribute="leading" id="8Jz-mK-ecO"/>
-                                                    <constraint firstItem="9NF-Eq-fFF" firstAttribute="leading" secondItem="hc5-Zc-9Jc" secondAttribute="leading" constant="2" id="GT9-Mk-obc"/>
-                                                    <constraint firstItem="9NF-Eq-fFF" firstAttribute="top" secondItem="hc5-Zc-9Jc" secondAttribute="top" constant="3" id="LDY-fS-VBL"/>
-                                                    <constraint firstAttribute="trailing" secondItem="9NF-Eq-fFF" secondAttribute="trailing" constant="2" id="N25-Xe-K7I"/>
                                                     <constraint firstAttribute="trailing" secondItem="JZd-lk-2Ev" secondAttribute="trailing" id="RAu-bh-Rjg"/>
+                                                    <constraint firstItem="JZd-lk-2Ev" firstAttribute="top" secondItem="hc5-Zc-9Jc" secondAttribute="top" id="ZuZ-rV-BOR"/>
                                                     <constraint firstAttribute="bottom" secondItem="JZd-lk-2Ev" secondAttribute="bottom" id="tnU-qe-cPX"/>
                                                 </constraints>
                                             </view>

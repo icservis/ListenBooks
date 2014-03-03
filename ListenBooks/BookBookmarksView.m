@@ -57,8 +57,10 @@
     DDLogVerbose(@"sender: %@", sender);
     BookViewController* bookViewController = (BookViewController*)self.dataSource;
     NSInteger selectedRow = [self selectedRow];
-    Bookmark* bookmark = [self.dataSource tableView:self objectValueForTableColumn:nil row:selectedRow];
-    bookViewController.bookmark = bookmark;
+    if (selectedRow >= 0) {
+        Bookmark* bookmark = [self.dataSource tableView:self objectValueForTableColumn:nil row:selectedRow];
+        bookViewController.bookmark = bookmark;
+    }
 }
 
 - (IBAction)export:(id)sender
@@ -102,6 +104,12 @@
         return NO;
     }
     
+    return YES;
+}
+
+-(BOOL) validateValue: (id*)ioValue forKeyPath: (NSString*)inKeyPath error: (NSError **)outError
+{
+    DDLogDebug(@"ioValue: %@", *ioValue);
     return YES;
 }
 

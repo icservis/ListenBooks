@@ -26,8 +26,13 @@
 
 - (void)contextDidChange:(NSNotification*)notification
 {
-    DDLogVerbose(@"count: %lu", (unsigned long)[[self arrangedObjects] count]);
+
 }
 
+- (BOOL)validateTitle:(id *)ioValue error:(NSError * __autoreleasing *)outError
+{
+    DDLogDebug(@"newValue: %@", *ioValue);
+    return YES;
+}
 
 @end

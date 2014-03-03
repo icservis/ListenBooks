@@ -30,7 +30,7 @@
 
 - (void)contextDidChange:(NSNotification*)notification
 {
-    DDLogVerbose(@"count: %lu", (unsigned long)[[self arrangedObjects] count]);
+
 }
 
 

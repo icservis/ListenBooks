@@ -38,10 +38,9 @@
 @property (weak) IBOutlet NSTabView *sideBarTabView;
 @property (weak) IBOutlet NSTabViewItem *sideBarTabViewBookmarksTab;
 @property (weak) IBOutlet BookBookmarksView *bookBookmarksView;
-@property (weak) IBOutlet NSSearchField *bookBookmarksSearchField;
 @property (weak) IBOutlet NSTabViewItem *sideBarTabViewSearchTab;
 @property (weak) IBOutlet BookSearchView *bookSearchView;
-@property (weak) IBOutlet NSSearchField *bookSearchSearchField;
+@property (weak) IBOutlet NSSearchField *bookSearchField;
 
 #pragma mark - Internal Outlets
 
@@ -128,7 +127,6 @@
 
 - (void)contextDidChange:(NSNotification*)notification
 {
-    DDLogVerbose(@"v: %@", notification.object);
     [self.bookBookmarksView reloadData];
 }
 
@@ -272,7 +270,7 @@
         
         dispatch_async(dispatch_get_main_queue(), ^{
             // Finish in main queue
-            [self.pageController setArrangedObjects:[[NSMutableArray alloc] initWithArray:spinedData]];
+            [self.pageController setArrangedObjects:spinedData];
             if (self.bookmark != nil) {
                 [self loadBookmark:self.bookmark];
             }
@@ -283,11 +281,14 @@
 
 - (void)loadBookmark:(Bookmark*)bookmark
 {
-    NSInteger index = [self.pageController.arrangedObjects indexOfObject:bookmark.page];
-    DDLogDebug(@"index: %li, %@", (long)index, bookmark.page);
-    if (index != NSNotFound) {
-        self.pageController.selectedIndex = index;
-    }
+    [self.pageController.arrangedObjects enumerateObjectsUsingBlock:^(NSAttributedString* data, NSUInteger idx, BOOL *stop) {
+        
+        if ([data isEqualToAttributedString:bookmark.page.data]) {
+            *stop = YES;
+            bookmark.timestamp = [NSDate date];
+            self.pageController.selectedIndex = idx;
+        };
+    }];
 }
 
 #pragma mark - TabViewControllerProtocol
@@ -331,7 +332,9 @@
     Bookmark* bookmark = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([Bookmark class]) inManagedObjectContext:self.managedObjectContext];
     bookmark.book = self.book;
     bookmark.created = [NSDate date];
-    bookmark.page = [self.pageController.arrangedObjects objectAtIndex:self.pageController.selectedIndex];
+    NSInteger index = self.pageController.selectedIndex;
+    Page* page = [self.book.pages objectAtIndex:index];
+    bookmark.page = page;
     
     [[[self appDelegate] undoManager] endUndoGrouping];
 }
@@ -359,7 +362,6 @@
 - (IBAction)export:(id)sender
 {
     DDLogVerbose(@"sender: %@", sender);
-    
     [[self appDelegate] exportBook:self.book];
 }
 
@@ -447,31 +449,6 @@
         }
     }
 }
-/*
-- (CGFloat)splitView:(NSSplitView *)splitView constrainMaxCoordinate:(CGFloat)proposedMaximumPosition ofSubviewAt:(NSInteger)dividerIndex
-{
-    if ([splitView isEqualTo:self.splitView]) {
-        CGFloat max = self.splitView.frame.size.width/3;
-        if (proposedMaximumPosition > max) {
-            proposedMaximumPosition = max;
-        }
-        return proposedMaximumPosition;
-    }
-    return CGFLOAT_MAX;
-}
-
-- (CGFloat)splitView:(NSSplitView *)splitView constrainMinCoordinate:(CGFloat)proposedMinimumPosition ofSubviewAt:(NSInteger)dividerIndex
-{
-    if ([splitView isEqualTo:self.splitView]) {
-        CGFloat min = self.splitView.frame.size.width/5;
-        if (proposedMinimumPosition < min) {
-            proposedMinimumPosition = min;
-        }
-        return proposedMinimumPosition;
-    }
-    return 0;
-}
-*/
 
 #pragma mark - NSTabViewDelegate
 
