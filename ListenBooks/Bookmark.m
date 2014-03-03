@@ -22,4 +22,23 @@
 @dynamic page;
 @dynamic paragraph;
 
+-(BOOL)validateValue:(__autoreleasing id *)value forKey:(NSString *)key error:(NSError *__autoreleasing *)error
+{
+    if ([key isEqualToString:@"title"]) {
+        if ([*value length] == 0) {
+            
+            NSDictionary *userInfo = @{
+                                       NSLocalizedDescriptionKey:
+                                           NSLocalizedString(@"Title can not be empty", nil),
+                                       NSLocalizedRecoverySuggestionErrorKey:
+                                           NSLocalizedString(@"Please supply correct value.", nil)
+                                       };
+            *error = [NSError errorWithDomain:ListenBooksErrorDomain code:-1 userInfo:userInfo];
+            
+            return NO;
+        }
+    }
+    return YES;
+}
+
 @end

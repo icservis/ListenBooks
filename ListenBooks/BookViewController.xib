@@ -101,7 +101,11 @@
                                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                             </textFieldCell>
                                                                                             <connections>
-                                                                                                <binding destination="id7-kE-zps" name="value" keyPath="objectValue.title" id="6jk-MV-f2k"/>
+                                                                                                <binding destination="id7-kE-zps" name="value" keyPath="objectValue.title" id="hOK-op-RdV">
+                                                                                                    <dictionary key="options">
+                                                                                                        <bool key="NSValidatesImmediately" value="YES"/>
+                                                                                                    </dictionary>
+                                                                                                </binding>
                                                                                             </connections>
                                                                                         </textField>
                                                                                     </subviews>

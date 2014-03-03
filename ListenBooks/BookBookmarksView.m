@@ -107,10 +107,4 @@
     return YES;
 }
 
--(BOOL) validateValue: (id*)ioValue forKeyPath: (NSString*)inKeyPath error: (NSError **)outError
-{
-    DDLogDebug(@"ioValue: %@", *ioValue);
-    return YES;
-}
-
 @end

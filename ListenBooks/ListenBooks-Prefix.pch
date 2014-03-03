@@ -24,4 +24,6 @@
     #import "NSTreeController_Extensions.h"
     #import "NSTreeNode_Extensions.h"
 
+    #define ListenBooksErrorDomain @"cc.andyapps.ListenBooks"
+
 #endif
