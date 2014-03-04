@@ -40,12 +40,7 @@
     BookViewController* bookViewController = (BookViewController*)self.dataSource;
     NSInteger selectedRow = [self selectedRow];
     if (selectedRow >= 0) {
-        Paragraph* paragraph = [self.dataSource tableView:self objectValueForTableColumn:nil row:selectedRow];
-        SearchResult* searchResult = [[SearchResult alloc] init];
-        searchResult.title = paragraph.text;
-        searchResult.paragraph = paragraph;
-        searchResult.page = paragraph.page;
-        searchResult.position = 0;
+        SearchResult* searchResult = [self.dataSource tableView:self objectValueForTableColumn:nil row:selectedRow];
         bookViewController.searchResult = searchResult;
     }
 }

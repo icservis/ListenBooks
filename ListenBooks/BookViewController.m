@@ -113,6 +113,7 @@
     _sideBarViewWidth = self.sideBarView.frame.size.width;
     
     [self.bookBookmarksView setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"created" ascending:NO]]];
+    [self.bookSearchView setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"pageIndex" ascending:YES]]];
     [self.pageView setDelegate:self];
 }
 
@@ -510,7 +511,7 @@
         return bookmarks[row];
     }
     if ([tableView isEqualTo:self.bookSearchView]) {
-        
+        [searchResults sortUsingDescriptors:[tableView sortDescriptors]];
         return searchResults[row];
     }
     return nil;
@@ -531,10 +532,44 @@
     
     [self.book.paragraphs enumerateObjectsUsingBlock:^(Paragraph* paragraph, NSUInteger idx, BOOL *stop) {
         
-        NSInteger location = [paragraph.text rangeOfString:[searchField stringValue]].location;
-        if (location != NSNotFound) {
-            [searchResults addObject:paragraph];
-            DDLogDebug(@"found: %@", paragraph);
+        
+        NSString* string = paragraph.text;
+        NSString* subString = [searchField stringValue];
+        NSRange searchRange = NSMakeRange(0,string.length);
+        NSRange foundRange;
+        while (searchRange.location < string.length) {
+            searchRange.length = string.length-searchRange.location;
+            foundRange = [string rangeOfString:subString options:NSCaseInsensitiveSearch|NSDiacriticInsensitiveSearch range:searchRange];
+            if (foundRange.location != NSNotFound) {
+                // found an occurrence of the substring! do stuff here
+                SearchResult* searchResult = [[SearchResult alloc] init];
+                
+                NSMutableAttributedString* title;
+                NSInteger proposedLeght = 42;
+                NSInteger suggestedLenght = ([string length] > proposedLeght) ? proposedLeght : [string length];
+                NSInteger location = (foundRange.location > suggestedLenght/3) ? foundRange.location - suggestedLenght/3: 0;
+                NSRange extendedRange = NSMakeRange(location, suggestedLenght);
+                
+                title = [[NSMutableAttributedString alloc] initWithString:[string substringWithRange:extendedRange] attributes:@{NSForegroundColorAttributeName:[NSColor lightGrayColor]}];
+                
+                NSRange boldedRange = NSMakeRange(foundRange.location-extendedRange.location, foundRange.length);
+                
+                [title beginEditing];
+                [title addAttribute:NSForegroundColorAttributeName value:[NSColor blackColor] range:boldedRange];
+                [title endEditing];
+                
+                searchResult.title = title;
+                searchResult.paragraph = paragraph;
+                searchResult.page = paragraph.page;
+                searchResult.positionInParagraph = [NSNumber numberWithInteger:foundRange.location];
+                NSInteger pageIndex = [self.book.pages indexOfObject:paragraph.page];
+                searchResult.pageIndex = [NSNumber numberWithInteger:pageIndex];
+                [searchResults addObject:searchResult];
+                searchRange.location = foundRange.location+foundRange.length;
+            } else {
+                // no more substring to find
+                break;
+            }
         }
     }];
     

@@ -12,10 +12,11 @@
 
 @interface SearchResult : NSObject
 
-@property (nonatomic, copy) NSString* title;
+@property (nonatomic, copy) NSAttributedString* title;
 @property (nonatomic, strong) Paragraph* paragraph;
 @property (nonatomic, strong) Page* page;
-@property (nonatomic, strong) NSNumber* position;
-
+@property (nonatomic, strong) NSNumber* positionInParagraph;
+@property (nonatomic, strong) NSNumber* positionInPage;
+@property (nonatomic, strong) NSNumber* pageIndex;
 
 @end
