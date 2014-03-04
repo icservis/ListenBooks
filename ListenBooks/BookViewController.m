@@ -14,6 +14,7 @@
 #import "Book.h"
 #import "Bookmark.h"
 #import "Page.h"
+#import "Paragraph.h"
 #import "ProgressWindowController.h"
 #import "KFToolbar.h"
 #import "KFToolbarItem.h"
@@ -23,6 +24,7 @@
 #import "BookBookmarksView.h"
 #import "BookSearchView.h"
 #import "BookPageView.h"
+#import "SearchResult.h"
 
 @interface BookViewController () <NSTabViewDelegate>
 
@@ -41,6 +43,7 @@
 @property (weak) IBOutlet NSTabViewItem *sideBarTabViewSearchTab;
 @property (weak) IBOutlet BookSearchView *bookSearchView;
 @property (weak) IBOutlet NSSearchField *bookSearchField;
+- (IBAction)searchAction:(id)sender;
 
 #pragma mark - Internal Outlets
 
@@ -83,11 +86,12 @@
 @implementation BookViewController {
     CGFloat _toolBarFrameHeight;
     CGFloat _sideBarViewWidth;
-    NSMutableArray* foundResults;
+    NSMutableArray* searchResults;
 }
 
 @synthesize book = _book;
 @synthesize bookmark = _bookmark;
+@synthesize searchResult = _searchResult;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -189,6 +193,19 @@
     return _bookmark;
 }
 
+- (void)setSearchResult:(SearchResult *)searchResult
+{
+    if ([self.pageController.arrangedObjects count] > 0) {
+        [self loadSearchResult:searchResult];
+    }
+    _searchResult = searchResult;
+}
+
+- (SearchResult*)searchResult
+{
+    return _searchResult;
+}
+
 - (FontControl*)fontControl
 {
     if (_fontControl == nil) {
@@ -281,11 +298,26 @@
 
 - (void)loadBookmark:(Bookmark*)bookmark
 {
+    DDLogDebug(@"bookmark: %@", bookmark.title);
+    
     [self.pageController.arrangedObjects enumerateObjectsUsingBlock:^(NSAttributedString* data, NSUInteger idx, BOOL *stop) {
         
         if ([data isEqualToAttributedString:bookmark.page.data]) {
             *stop = YES;
             bookmark.timestamp = [NSDate date];
+            self.pageController.selectedIndex = idx;
+        };
+    }];
+}
+
+- (void)loadSearchResult:(SearchResult*)searchResult
+{
+    DDLogDebug(@"searchResult: %@", searchResult.title);
+    
+    [self.pageController.arrangedObjects enumerateObjectsUsingBlock:^(NSAttributedString* data, NSUInteger idx, BOOL *stop) {
+        
+        if ([data isEqualToAttributedString:searchResult.page.data]) {
+            *stop = YES;
             self.pageController.selectedIndex = idx;
         };
     }];
@@ -466,7 +498,7 @@
         return [self.book.bookmarks count];
     }
     if ([tableView isEqualTo:self.bookSearchView]) {
-        return [self.book.paragraphs count];
+        return [searchResults count];
     }
     return 0;
 }
@@ -479,7 +511,7 @@
     }
     if ([tableView isEqualTo:self.bookSearchView]) {
         
-        return self.book.paragraphs[row];
+        return searchResults[row];
     }
     return nil;
 }
@@ -489,4 +521,24 @@
     [tableView reloadData];
 }
 
+#pragma mark - NSSearchField Delegate
+
+- (IBAction)searchAction:(id)sender
+{
+    NSSearchField* searchField = (NSSearchField*)sender;
+    DDLogDebug(@"sender: %@", [searchField stringValue]);
+    searchResults = [NSMutableArray array];
+    
+    [self.book.paragraphs enumerateObjectsUsingBlock:^(Paragraph* paragraph, NSUInteger idx, BOOL *stop) {
+        
+        NSInteger location = [paragraph.text rangeOfString:[searchField stringValue]].location;
+        if (location != NSNotFound) {
+            [searchResults addObject:paragraph];
+            DDLogDebug(@"found: %@", paragraph);
+        }
+    }];
+    
+    [self.bookSearchView reloadData];
+    
+}
 @end

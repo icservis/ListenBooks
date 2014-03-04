@@ -12,6 +12,7 @@
 
 @class Book;
 @class Bookmark;
+@class SearchResult;
 
 static NSString* const FontNameDidChangeNotificaton = @"FONT_NAME_DID_CHANGE_NOTIFICATION";
 static NSString* const FontSizeDidChangeNotificaton = @"FONT_SIZE_DID_CHANGE_NOTIFICATION";
@@ -24,6 +25,7 @@ static NSString* const VoiceSpeedDidChangeNotificaton = @"VOICE_SPEED_DID_CHANGE
 
 @property (nonatomic, strong) Book* book;
 @property (nonatomic, strong) Bookmark* bookmark;
+@property (nonatomic, strong) SearchResult* searchResult;
 @property (nonatomic, strong) NSManagedObjectContext* managedObjectContext;
 @property (nonatomic, strong) NSTabViewItem* tabViewItem;
 

@@ -16,6 +16,8 @@
 		840ED27918C4BC1F00342386 /* Page.m in Sources */ = {isa = PBXBuildFile; fileRef = 840ED27718C4BC1F00342386 /* Page.m */; };
 		840ED28418C4C84B00342386 /* Bookmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 840ED28318C4C84B00342386 /* Bookmark.m */; };
 		840ED28518C4C84B00342386 /* Bookmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 840ED28318C4C84B00342386 /* Bookmark.m */; };
+		840ED28918C5266200342386 /* SearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 840ED28818C5266200342386 /* SearchResult.m */; };
+		840ED28A18C5266200342386 /* SearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 840ED28818C5266200342386 /* SearchResult.m */; };
 		8412B05D18B393C900D14AAE /* BookBookmarksView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8412B05C18B393C900D14AAE /* BookBookmarksView.m */; };
 		8412B06118B3C33400D14AAE /* BookPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8412B06018B3C33400D14AAE /* BookPageView.m */; };
 		8416258118A827CE00C42723 /* TabBarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8416258018A827CE00C42723 /* TabBarModel.m */; };
@@ -189,6 +191,8 @@
 		840ED27718C4BC1F00342386 /* Page.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Page.m; sourceTree = "<group>"; };
 		840ED28218C4C84B00342386 /* Bookmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bookmark.h; sourceTree = "<group>"; };
 		840ED28318C4C84B00342386 /* Bookmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bookmark.m; sourceTree = "<group>"; };
+		840ED28718C5266200342386 /* SearchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResult.h; sourceTree = "<group>"; };
+		840ED28818C5266200342386 /* SearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResult.m; sourceTree = "<group>"; };
 		8412B05B18B393C900D14AAE /* BookBookmarksView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookBookmarksView.h; sourceTree = "<group>"; };
 		8412B05C18B393C900D14AAE /* BookBookmarksView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookBookmarksView.m; sourceTree = "<group>"; };
 		8412B05F18B3C33400D14AAE /* BookPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookPageView.h; sourceTree = "<group>"; };
@@ -438,6 +442,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		840ED28618C5264900342386 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				840ED28718C5266200342386 /* SearchResult.h */,
+				840ED28818C5266200342386 /* SearchResult.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		842A12231865E4F700AAAD42 /* Books */ = {
 			isa = PBXGroup;
 			children = (
@@ -999,6 +1012,7 @@
 		84E27E7D186249D100317411 /* BookView */ = {
 			isa = PBXGroup;
 			children = (
+				840ED28618C5264900342386 /* Models */,
 				842B61F018B00C3700DC1A08 /* Classes */,
 				84DA8DAB18A688AD0079BD7C /* Controllers */,
 				847A005F18702B2100039910 /* Views */,
@@ -1284,6 +1298,7 @@
 				84DA8DAA18A686A50079BD7C /* ListController.m in Sources */,
 				8444EAB7185F840800F90B48 /* unzip.c in Sources */,
 				848C956C186647010020FDC9 /* NSArrayController_Extensions.m in Sources */,
+				840ED28918C5266200342386 /* SearchResult.m in Sources */,
 				847A005B186F9B5D00039910 /* NSTextView+Extensions.m in Sources */,
 				8444EA94185F83A400F90B48 /* KFToolbarItem.m in Sources */,
 				848C9576186647010020FDC9 /* NSTreeNode_Extensions.m in Sources */,
@@ -1332,6 +1347,7 @@
 				848C956F186647010020FDC9 /* NSDate+Extensions.m in Sources */,
 				848C958A186647240020FDC9 /* NSImageToData.m in Sources */,
 				840ED28518C4C84B00342386 /* Bookmark.m in Sources */,
+				840ED28A18C5266200342386 /* SearchResult.m in Sources */,
 				848C9586186647240020FDC9 /* ArrayCountIsZero.m in Sources */,
 				848C9573186647010020FDC9 /* NSManagedObject_Extensions.m in Sources */,
 				840ED27418C4BC1F00342386 /* Book.m in Sources */,
