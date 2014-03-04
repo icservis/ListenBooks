@@ -38,7 +38,6 @@ static NSTimeInterval const kModalSheetDelay = 1.0f;
     self = [super initWithWindow:window];
     if (self) {
         // Initialization code here.
-        NSLog(@"initWithWindow");
         self.inProgress = NO;
     }
     return self;

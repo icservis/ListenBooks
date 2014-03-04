@@ -13,5 +13,6 @@
 - (double)sliderMinValue;
 - (double)sliderMaxValue;
 - (double)sliderDefaultValue;
+- (NSArray*)arrangedObjects;
 
 @end

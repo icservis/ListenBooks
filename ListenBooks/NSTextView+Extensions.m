@@ -108,7 +108,6 @@
                                       NSRange range,
                                       BOOL * stop)
      {
-         NSLog(@"color: %@", [color description]);
          if (color != nil) {
              [textStorage removeAttribute:NSForegroundColorAttributeName
                                     range:range];

@@ -97,5 +97,16 @@
 }
 
 
+#pragma mark - NSTextViewDelegate
+
+- (void)textViewDidChangeSelection:(NSNotification *)notification
+{
+    if (self.delegate != nil) {
+        NSArray* selectionRanges = self.textView.selectedRanges;
+        NSValue* rangeObject = [selectionRanges firstObject];
+        [self.delegate bookPageController:self textViewSelectionDidChange:[rangeObject rangeValue]];
+    }
+}
+
 
 @end

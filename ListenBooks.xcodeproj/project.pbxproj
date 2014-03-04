@@ -251,6 +251,7 @@
 		8444EAC9185F841700F90B48 /* DDXMLPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLPrivate.h; sourceTree = "<group>"; };
 		8444EACF185F847500F90B48 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		8444EAD1185F8D2300F90B48 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		84467CC818C66DB40011DC23 /* ListenBooks 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ListenBooks 6.xcdatamodel"; sourceTree = "<group>"; };
 		844C0AA618ACDDD600656A28 /* ProgressWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgressWindowController.h; path = ListenBooks/ProgressWindowController.h; sourceTree = "<group>"; };
 		844C0AA718ACDDD600656A28 /* ProgressWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProgressWindowController.m; path = ListenBooks/ProgressWindowController.m; sourceTree = "<group>"; };
 		844C0AA818ACDDD600656A28 /* ProgressWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProgressWindowController.xib; path = ListenBooks/ProgressWindowController.xib; sourceTree = "<group>"; };
@@ -359,7 +360,7 @@
 		84AB04AD1868733B007106F4 /* Lumberjack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Lumberjack.h; sourceTree = "<group>"; };
 		84AB04B11868A6C5007106F4 /* ListArrayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListArrayController.h; sourceTree = "<group>"; };
 		84AB04B21868A6C5007106F4 /* ListArrayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListArrayController.m; sourceTree = "<group>"; };
-		84B3627918C61D5800CDF755 /* ListenBooks 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ListenBooks 5.xcdatamodel"; sourceTree = "<group>"; };
+		84B3627918C61D5800CDF755 /* ListenBooks 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ListenBooks 5.xcdatamodel"; sourceTree = "<group>"; };
 		84B3627B18C61E3F00CDF755 /* Book.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Book.h; sourceTree = "<group>"; };
 		84B3627C18C61E3F00CDF755 /* Book.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Book.m; sourceTree = "<group>"; };
 		84B3627F18C61E4000CDF755 /* Bookmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bookmark.h; sourceTree = "<group>"; };
@@ -1668,13 +1669,14 @@
 		8478C3FA185CA73F00B06779 /* ListenBooks.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				84467CC818C66DB40011DC23 /* ListenBooks 6.xcdatamodel */,
 				840ED26B18C4BB7F00342386 /* ListenBooks 4.xcdatamodel */,
 				84B3627918C61D5800CDF755 /* ListenBooks 5.xcdatamodel */,
 				848E57E318AB93B3004D72A3 /* ListenBooks 2.xcdatamodel */,
 				842B61E918AFFA2B00DC1A08 /* ListenBooks 3.xcdatamodel */,
 				8478C3FB185CA73F00B06779 /* ListenBooks.xcdatamodel */,
 			);
-			currentVersion = 84B3627918C61D5800CDF755 /* ListenBooks 5.xcdatamodel */;
+			currentVersion = 84467CC818C66DB40011DC23 /* ListenBooks 6.xcdatamodel */;
 			path = ListenBooks.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

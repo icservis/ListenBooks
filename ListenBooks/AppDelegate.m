@@ -1270,8 +1270,11 @@
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
 {
     // Save changes in the application's managed object context before the application terminates.
+    NSLog(@"applicationShouldTerminate: %@", sender);
+    [self saveAction:self];
     
     if (!_managedObjectContext) {
+        NSLog(@"terminate");
         return NSTerminateNow;
     }
     
@@ -1285,6 +1288,7 @@
     }
     
     NSError *error = nil;
+    NSLog(@"Going to save");
     if (![[self managedObjectContext] save:&error]) {
         
         // Customize this code block to include application-specific recovery steps.
@@ -1308,6 +1312,8 @@
         if (answer == NSAlertAlternateReturn) {
             return NSTerminateCancel;
         }
+    } else {
+        NSLog(@"Data saved");
     }
     
     return NSTerminateNow;
