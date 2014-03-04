@@ -25,6 +25,9 @@
 #import "BookSearchView.h"
 #import "BookPageView.h"
 #import "SearchResult.h"
+#import "SpinnerSearchField.h"
+
+static NSInteger const ProposedLeght = 42;
 
 @interface BookViewController () <NSTabViewDelegate>
 
@@ -42,7 +45,7 @@
 @property (weak) IBOutlet BookBookmarksView *bookBookmarksView;
 @property (weak) IBOutlet NSTabViewItem *sideBarTabViewSearchTab;
 @property (weak) IBOutlet BookSearchView *bookSearchView;
-@property (weak) IBOutlet NSSearchField *bookSearchField;
+@property (weak) IBOutlet SpinnerSearchField *bookSearchField;
 - (IBAction)searchAction:(id)sender;
 
 #pragma mark - Internal Outlets
@@ -362,17 +365,41 @@
     [[[self appDelegate] undoManager] beginUndoGrouping];
     [[[self appDelegate] undoManager] setActionName:NSLocalizedString(@"New Bookmark", nil)];
     
-    Bookmark* bookmark = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([Bookmark class]) inManagedObjectContext:self.managedObjectContext];
-    bookmark.book = self.book;
-    bookmark.created = [NSDate date];
-    NSInteger index = self.pageController.selectedIndex;
-    Page* page = [self.book.pages objectAtIndex:index];
-    bookmark.page = page;
-    
     BookPageViewController* selectedBookPageViewController = (BookPageViewController*)self.pageController.selectedViewController;
     NSTextView* selectedTextView = selectedBookPageViewController.textView;
-    DDLogDebug(@"selectedTextView: %@", selectedTextView.selectedRanges);
-    
+    [selectedTextView.selectedRanges enumerateObjectsUsingBlock:^(NSValue* rangeObject, NSUInteger idx, BOOL *stop) {
+        NSRange range = [rangeObject rangeValue];
+        
+        Bookmark* bookmark = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([Bookmark class]) inManagedObjectContext:self.managedObjectContext];
+        bookmark.book = self.book;
+        bookmark.created = [NSDate date];
+        NSInteger index = self.pageController.selectedIndex;
+        Page* page = [self.book.pages objectAtIndex:index];
+        bookmark.page = page;
+        bookmark.pageIndex = [NSNumber numberWithInteger:index];
+        NSString* title;
+        
+        if (range.location != NSNotFound && range.location != [[page.data string] length]) {
+            bookmark.rangeLocation = [NSNumber numberWithInteger:range.location];
+            bookmark.rangeLength = [NSNumber numberWithInteger:range.length];
+            if (range.length > 0) {
+                title = [[page.data string] substringWithRange:range];
+            } else {
+                range.length = ProposedLeght;
+                title = [[page.data string] substringWithRange:range];
+            }
+            
+        } else {
+            NSRange range = NSMakeRange(0, ProposedLeght);
+            title = [[page.data string] substringWithRange:range];
+        }
+        title = [title stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        if ([title length] == 0){
+            title = NSLocalizedString(@"Unnamed Bookmark", nil);
+        }
+        bookmark.title = title;
+    }];
+
     [[[self appDelegate] undoManager] endUndoGrouping];
 }
 
@@ -531,53 +558,68 @@
 - (IBAction)searchAction:(id)sender
 {
     NSSearchField* searchField = (NSSearchField*)sender;
+    
+    NSString* subString = [searchField stringValue];
     DDLogDebug(@"sender: %@", [searchField stringValue]);
     searchResults = [NSMutableArray array];
+    if ([subString length] == 0) {
+        [self.bookSearchView reloadData];
+        return;
+    }
     
-    [self.book.paragraphs enumerateObjectsUsingBlock:^(Paragraph* paragraph, NSUInteger idx, BOOL *stop) {
+    [self.bookSearchField showProgressIndicator];
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        // Do a taks in the background
         
-        
-        NSString* string = paragraph.text;
-        NSString* subString = [searchField stringValue];
-        NSRange searchRange = NSMakeRange(0,string.length);
-        NSRange foundRange;
-        while (searchRange.location < string.length) {
-            searchRange.length = string.length-searchRange.location;
-            foundRange = [string rangeOfString:subString options:NSCaseInsensitiveSearch|NSDiacriticInsensitiveSearch range:searchRange];
-            if (foundRange.location != NSNotFound) {
-                // found an occurrence of the substring! do stuff here
-                SearchResult* searchResult = [[SearchResult alloc] init];
-                
-                NSMutableAttributedString* title;
-                NSInteger proposedLeght = 42;
-                NSInteger suggestedLenght = ([string length] > proposedLeght) ? proposedLeght : [string length];
-                NSInteger location = (foundRange.location > suggestedLenght/3) ? foundRange.location - suggestedLenght/3: 0;
-                NSRange extendedRange = NSMakeRange(location, suggestedLenght);
-                
-                title = [[NSMutableAttributedString alloc] initWithString:[string substringWithRange:extendedRange] attributes:@{NSForegroundColorAttributeName:[NSColor lightGrayColor]}];
-                
-                NSRange boldedRange = NSMakeRange(foundRange.location-extendedRange.location, foundRange.length);
-                
-                [title beginEditing];
-                [title addAttribute:NSForegroundColorAttributeName value:[NSColor blackColor] range:boldedRange];
-                [title endEditing];
-                
-                searchResult.title = title;
-                searchResult.paragraph = paragraph;
-                searchResult.page = paragraph.page;
-                searchResult.positionInParagraph = [NSNumber numberWithInteger:foundRange.location];
-                NSInteger pageIndex = [self.book.pages indexOfObject:paragraph.page];
-                searchResult.pageIndex = [NSNumber numberWithInteger:pageIndex];
-                [searchResults addObject:searchResult];
-                searchRange.location = foundRange.location+foundRange.length;
-            } else {
-                // no more substring to find
-                break;
+        [self.book.paragraphs enumerateObjectsUsingBlock:^(Paragraph* paragraph, NSUInteger idx, BOOL *stop) {
+            
+            NSString* string = paragraph.text;
+            NSRange searchRange = NSMakeRange(0,string.length);
+            NSRange foundRange;
+            while (searchRange.location < string.length) {
+                searchRange.length = string.length - searchRange.location;
+                foundRange = [string rangeOfString:subString options:NSCaseInsensitiveSearch|NSDiacriticInsensitiveSearch range:searchRange];
+                if (foundRange.location != NSNotFound) {
+                    // found an occurrence of the substring! do stuff here
+                    SearchResult* searchResult = [[SearchResult alloc] init];
+                    
+                    NSMutableAttributedString* title;
+                    
+                    NSInteger location = (foundRange.location > ProposedLeght/3) ? foundRange.location - ProposedLeght/3: 0;
+                    NSInteger suggestedLenght = ([string length] - location > ProposedLeght) ? ProposedLeght : [string length] - location;
+                    
+                    NSRange extendedRange = NSMakeRange(location, suggestedLenght);
+                    DDLogVerbose(@"extendedRange: %@", NSStringFromRange(extendedRange));
+                    
+                    title = [[NSMutableAttributedString alloc] initWithString:[string substringWithRange:extendedRange] attributes:@{NSForegroundColorAttributeName:[NSColor lightGrayColor]}];
+                    
+                    NSRange boldedRange = NSMakeRange(foundRange.location-extendedRange.location, foundRange.length);
+                    
+                    [title beginEditing];
+                    [title addAttribute:NSForegroundColorAttributeName value:[NSColor blackColor] range:boldedRange];
+                    [title endEditing];
+                    
+                    searchResult.title = title;
+                    searchResult.paragraph = paragraph;
+                    searchResult.page = paragraph.page;
+                    searchResult.positionInParagraph = [NSNumber numberWithInteger:foundRange.location];
+                    NSInteger pageIndex = [self.book.pages indexOfObject:paragraph.page];
+                    searchResult.pageIndex = [NSNumber numberWithInteger:pageIndex];
+                    [searchResults addObject:searchResult];
+                    
+                    searchRange.location = foundRange.location + foundRange.length;
+                } else {
+                    // no more substring to find
+                    break;
+                }
             }
-        }
-    }];
-    
-    [self.bookSearchView reloadData];
-    
+        }];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // Finish in main queue
+            [self.bookSearchView reloadData];
+            [self.bookSearchField hideProgressIndicator];
+        });
+    });
 }
 @end

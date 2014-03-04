@@ -2,7 +2,7 @@
 //  Book.h
 //  ListenBooks
 //
-//  Created by Libor Kučera on 03.03.14.
+//  Created by Libor Kučera on 04.03.14.
 //  Copyright (c) 2014 IC Servis. All rights reserved.
 //
 
@@ -21,7 +21,7 @@
 @property (nonatomic, retain) NSString * creator;
 @property (nonatomic, retain) NSDate * date;
 @property (nonatomic, retain) NSNumber * encryption;
-@property (nonatomic, retain) NSURL * fileUrl;
+@property (nonatomic, retain) id fileUrl;
 @property (nonatomic, retain) NSString * fontName;
 @property (nonatomic, retain) NSNumber * fontSizeDelta;
 @property (nonatomic, retain) NSString * identifier;

@@ -8,14 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		840ED26418C4821200342386 /* BookSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 840ED26318C4821200342386 /* BookSearchView.m */; };
-		840ED26F18C4BC1F00342386 /* Paragraph.m in Sources */ = {isa = PBXBuildFile; fileRef = 840ED26E18C4BC1F00342386 /* Paragraph.m */; };
-		840ED27018C4BC1F00342386 /* Paragraph.m in Sources */ = {isa = PBXBuildFile; fileRef = 840ED26E18C4BC1F00342386 /* Paragraph.m */; };
-		840ED27318C4BC1F00342386 /* Book.m in Sources */ = {isa = PBXBuildFile; fileRef = 840ED27218C4BC1F00342386 /* Book.m */; };
-		840ED27418C4BC1F00342386 /* Book.m in Sources */ = {isa = PBXBuildFile; fileRef = 840ED27218C4BC1F00342386 /* Book.m */; };
-		840ED27818C4BC1F00342386 /* Page.m in Sources */ = {isa = PBXBuildFile; fileRef = 840ED27718C4BC1F00342386 /* Page.m */; };
-		840ED27918C4BC1F00342386 /* Page.m in Sources */ = {isa = PBXBuildFile; fileRef = 840ED27718C4BC1F00342386 /* Page.m */; };
-		840ED28418C4C84B00342386 /* Bookmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 840ED28318C4C84B00342386 /* Bookmark.m */; };
-		840ED28518C4C84B00342386 /* Bookmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 840ED28318C4C84B00342386 /* Bookmark.m */; };
 		840ED28918C5266200342386 /* SearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 840ED28818C5266200342386 /* SearchResult.m */; };
 		840ED28A18C5266200342386 /* SearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 840ED28818C5266200342386 /* SearchResult.m */; };
 		8412B05D18B393C900D14AAE /* BookBookmarksView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8412B05C18B393C900D14AAE /* BookBookmarksView.m */; };
@@ -124,6 +116,16 @@
 		84AB0493186871E9007106F4 /* LumberjackFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AB0451186871E9007106F4 /* LumberjackFormatter.m */; };
 		84AB04AB186871E9007106F4 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 84AB048A186871E9007106F4 /* README.md */; };
 		84AB04B31868A6C5007106F4 /* ListArrayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AB04B21868A6C5007106F4 /* ListArrayController.m */; };
+		84B3627D18C61E3F00CDF755 /* Book.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B3627C18C61E3F00CDF755 /* Book.m */; };
+		84B3627E18C61E3F00CDF755 /* Book.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B3627C18C61E3F00CDF755 /* Book.m */; };
+		84B3628118C61E4000CDF755 /* Bookmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B3628018C61E4000CDF755 /* Bookmark.m */; };
+		84B3628218C61E4000CDF755 /* Bookmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B3628018C61E4000CDF755 /* Bookmark.m */; };
+		84B3628518C61E4000CDF755 /* Page.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B3628418C61E4000CDF755 /* Page.m */; };
+		84B3628618C61E4000CDF755 /* Page.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B3628418C61E4000CDF755 /* Page.m */; };
+		84B3628918C61E4000CDF755 /* Paragraph.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B3628818C61E4000CDF755 /* Paragraph.m */; };
+		84B3628A18C61E4000CDF755 /* Paragraph.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B3628818C61E4000CDF755 /* Paragraph.m */; };
+		84B3628D18C62D1D00CDF755 /* SpinnerSearchField.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B3628C18C62D1D00CDF755 /* SpinnerSearchField.m */; };
+		84B3628E18C62D1D00CDF755 /* SpinnerSearchField.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B3628C18C62D1D00CDF755 /* SpinnerSearchField.m */; };
 		84DA8DAA18A686A50079BD7C /* ListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DA8DA918A686A50079BD7C /* ListController.m */; };
 		84DA8DB218A7640C0079BD7C /* InformationWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DA8DB018A7640C0079BD7C /* InformationWindowController.m */; };
 		84DA8DB318A7640C0079BD7C /* InformationWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84DA8DB118A7640C0079BD7C /* InformationWindowController.xib */; };
@@ -183,14 +185,6 @@
 		840ED26218C4821200342386 /* BookSearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookSearchView.h; sourceTree = "<group>"; };
 		840ED26318C4821200342386 /* BookSearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookSearchView.m; sourceTree = "<group>"; };
 		840ED26B18C4BB7F00342386 /* ListenBooks 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ListenBooks 4.xcdatamodel"; sourceTree = "<group>"; };
-		840ED26D18C4BC1F00342386 /* Paragraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Paragraph.h; sourceTree = "<group>"; };
-		840ED26E18C4BC1F00342386 /* Paragraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Paragraph.m; sourceTree = "<group>"; };
-		840ED27118C4BC1F00342386 /* Book.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Book.h; sourceTree = "<group>"; };
-		840ED27218C4BC1F00342386 /* Book.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Book.m; sourceTree = "<group>"; };
-		840ED27618C4BC1F00342386 /* Page.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Page.h; sourceTree = "<group>"; };
-		840ED27718C4BC1F00342386 /* Page.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Page.m; sourceTree = "<group>"; };
-		840ED28218C4C84B00342386 /* Bookmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bookmark.h; sourceTree = "<group>"; };
-		840ED28318C4C84B00342386 /* Bookmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bookmark.m; sourceTree = "<group>"; };
 		840ED28718C5266200342386 /* SearchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResult.h; sourceTree = "<group>"; };
 		840ED28818C5266200342386 /* SearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResult.m; sourceTree = "<group>"; };
 		8412B05B18B393C900D14AAE /* BookBookmarksView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookBookmarksView.h; sourceTree = "<group>"; };
@@ -365,6 +359,17 @@
 		84AB04AD1868733B007106F4 /* Lumberjack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Lumberjack.h; sourceTree = "<group>"; };
 		84AB04B11868A6C5007106F4 /* ListArrayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListArrayController.h; sourceTree = "<group>"; };
 		84AB04B21868A6C5007106F4 /* ListArrayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListArrayController.m; sourceTree = "<group>"; };
+		84B3627918C61D5800CDF755 /* ListenBooks 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ListenBooks 5.xcdatamodel"; sourceTree = "<group>"; };
+		84B3627B18C61E3F00CDF755 /* Book.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Book.h; sourceTree = "<group>"; };
+		84B3627C18C61E3F00CDF755 /* Book.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Book.m; sourceTree = "<group>"; };
+		84B3627F18C61E4000CDF755 /* Bookmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bookmark.h; sourceTree = "<group>"; };
+		84B3628018C61E4000CDF755 /* Bookmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bookmark.m; sourceTree = "<group>"; };
+		84B3628318C61E4000CDF755 /* Page.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Page.h; sourceTree = "<group>"; };
+		84B3628418C61E4000CDF755 /* Page.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Page.m; sourceTree = "<group>"; };
+		84B3628718C61E4000CDF755 /* Paragraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Paragraph.h; sourceTree = "<group>"; };
+		84B3628818C61E4000CDF755 /* Paragraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Paragraph.m; sourceTree = "<group>"; };
+		84B3628B18C62D1D00CDF755 /* SpinnerSearchField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpinnerSearchField.h; sourceTree = "<group>"; };
+		84B3628C18C62D1D00CDF755 /* SpinnerSearchField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpinnerSearchField.m; sourceTree = "<group>"; };
 		84DA8DA818A686A50079BD7C /* ListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListController.h; sourceTree = "<group>"; };
 		84DA8DA918A686A50079BD7C /* ListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListController.m; sourceTree = "<group>"; };
 		84DA8DAF18A7640C0079BD7C /* InformationWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationWindowController.h; sourceTree = "<group>"; };
@@ -657,7 +662,7 @@
 				84DA8DB418A764140079BD7C /* InfoWindow */,
 				847EF68318AABE9300A0DC04 /* PreferencesWindow */,
 				844C0AA518ACDCED00656A28 /* ProgressWindow */,
-				84DA8DB518A76D060079BD7C /* Classes */,
+				84DA8DB518A76D060079BD7C /* Extensions */,
 				84E27E7F186249E400317411 /* Resources */,
 				8478C3E9185CA73F00B06779 /* Supporting Files */,
 			);
@@ -795,7 +800,7 @@
 			name = PreferencesWindow;
 			sourceTree = "<group>";
 		};
-		848C955B186646E50020FDC9 /* Categories Extensions */ = {
+		848C955B186646E50020FDC9 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
 				848C955C186647010020FDC9 /* NSArray_Extensions.h */,
@@ -815,7 +820,7 @@
 				847A0059186F9B5D00039910 /* NSTextView+Extensions.h */,
 				847A005A186F9B5D00039910 /* NSTextView+Extensions.m */,
 			);
-			name = "Categories Extensions";
+			name = Categories;
 			sourceTree = "<group>";
 		};
 		848C95781866470A0020FDC9 /* Transformers */ = {
@@ -963,23 +968,25 @@
 			name = InfoWindow;
 			sourceTree = "<group>";
 		};
-		84DA8DB518A76D060079BD7C /* Classes */ = {
+		84DA8DB518A76D060079BD7C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				84DA8DB618A76D180079BD7C /* Alerts */,
-				848C955B186646E50020FDC9 /* Categories Extensions */,
+				84DA8DB618A76D180079BD7C /* Classes */,
+				848C955B186646E50020FDC9 /* Categories */,
 				848C95781866470A0020FDC9 /* Transformers */,
 			);
-			name = Classes;
+			name = Extensions;
 			sourceTree = "<group>";
 		};
-		84DA8DB618A76D180079BD7C /* Alerts */ = {
+		84DA8DB618A76D180079BD7C /* Classes */ = {
 			isa = PBXGroup;
 			children = (
 				84DA8DB718A76D540079BD7C /* BlockAlert.h */,
 				84DA8DB818A76D540079BD7C /* BlockAlert.m */,
+				84B3628B18C62D1D00CDF755 /* SpinnerSearchField.h */,
+				84B3628C18C62D1D00CDF755 /* SpinnerSearchField.m */,
 			);
-			name = Alerts;
+			name = Classes;
 			sourceTree = "<group>";
 		};
 		84DA8DBD18A77A450079BD7C /* Products */ = {
@@ -1023,14 +1030,14 @@
 		84E27E7E186249DA00317411 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				840ED27118C4BC1F00342386 /* Book.h */,
-				840ED27218C4BC1F00342386 /* Book.m */,
-				840ED28218C4C84B00342386 /* Bookmark.h */,
-				840ED28318C4C84B00342386 /* Bookmark.m */,
-				840ED27618C4BC1F00342386 /* Page.h */,
-				840ED27718C4BC1F00342386 /* Page.m */,
-				840ED26D18C4BC1F00342386 /* Paragraph.h */,
-				840ED26E18C4BC1F00342386 /* Paragraph.m */,
+				84B3628718C61E4000CDF755 /* Paragraph.h */,
+				84B3628818C61E4000CDF755 /* Paragraph.m */,
+				84B3628318C61E4000CDF755 /* Page.h */,
+				84B3628418C61E4000CDF755 /* Page.m */,
+				84B3627F18C61E4000CDF755 /* Bookmark.h */,
+				84B3628018C61E4000CDF755 /* Bookmark.m */,
+				84B3627B18C61E3F00CDF755 /* Book.h */,
+				84B3627C18C61E3F00CDF755 /* Book.m */,
 				8416257F18A827CE00C42723 /* TabBarModel.h */,
 				8416258018A827CE00C42723 /* TabBarModel.m */,
 				8416258618A94C0300C42723 /* TabBarControllerProtocol.h */,
@@ -1243,6 +1250,7 @@
 				848C9593186647370020FDC9 /* BookmarksController.m in Sources */,
 				84AB0427186871DD007106F4 /* DDASLLogger.m in Sources */,
 				848C95481866405F0020FDC9 /* BooksController.m in Sources */,
+				84B3628118C61E4000CDF755 /* Bookmark.m in Sources */,
 				84AB042C186871DD007106F4 /* DDDispatchQueueLogFormatter.m in Sources */,
 				8444EACE185F841700F90B48 /* DDXMLNode.m in Sources */,
 				84AB042D186871DD007106F4 /* DDMultiFormatter.m in Sources */,
@@ -1255,6 +1263,7 @@
 				8478C3F6185CA73F00B06779 /* AppDelegate.m in Sources */,
 				84AB0428186871DD007106F4 /* DDFileLogger.m in Sources */,
 				848C9574186647010020FDC9 /* NSTreeController_Extensions.m in Sources */,
+				84B3628918C61E4000CDF755 /* Paragraph.m in Sources */,
 				8444EAA5185F83D900F90B48 /* KFEpubExtractor.m in Sources */,
 				848C9589186647240020FDC9 /* NSImageToData.m in Sources */,
 				84AB04B31868A6C5007106F4 /* ListArrayController.m in Sources */,
@@ -1274,6 +1283,7 @@
 				84F5C8AB18AB43630082B3C5 /* PreferencesWindowController.m in Sources */,
 				84DA8DB218A7640C0079BD7C /* InformationWindowController.m in Sources */,
 				848C9587186647240020FDC9 /* ArrayCountToString.m in Sources */,
+				84B3628D18C62D1D00CDF755 /* SpinnerSearchField.m in Sources */,
 				84AB0426186871DD007106F4 /* DDAbstractDatabaseLogger.m in Sources */,
 				848C958D186647240020FDC9 /* NumberValueIsOne.m in Sources */,
 				84AB042B186871DD007106F4 /* DDContextFilterLogFormatter.m in Sources */,
@@ -1284,11 +1294,10 @@
 				84AB042A186871DD007106F4 /* DDTTYLogger.m in Sources */,
 				8416258118A827CE00C42723 /* TabBarModel.m in Sources */,
 				8444EA93185F83A400F90B48 /* KFToolbar.m in Sources */,
+				84B3628518C61E4000CDF755 /* Page.m in Sources */,
 				844C0AA918ACDDD600656A28 /* ProgressWindowController.m in Sources */,
-				840ED26F18C4BC1F00342386 /* Paragraph.m in Sources */,
 				848C956A186647010020FDC9 /* NSArray_Extensions.m in Sources */,
 				842B61EC18AFFAA300DC1A08 /* VoiceControl.m in Sources */,
-				840ED28418C4C84B00342386 /* Bookmark.m in Sources */,
 				842B61F618B0BBB700DC1A08 /* ThemeControl.m in Sources */,
 				8444EAB5185F840800F90B48 /* ioapi.c in Sources */,
 				848C956E186647010020FDC9 /* NSDate+Extensions.m in Sources */,
@@ -1316,10 +1325,9 @@
 				84722BE1186DDDB600FA7973 /* ListCollectionViewItem.m in Sources */,
 				8444EACA185F841700F90B48 /* DDXMLElementAdditions.m in Sources */,
 				842B61E818AFE22C00DC1A08 /* FontControl.m in Sources */,
-				840ED27818C4BC1F00342386 /* Page.m in Sources */,
 				848C9570186647010020FDC9 /* NSIndexPath_Extensions.m in Sources */,
 				8444EAA4185F83D900F90B48 /* KFEpubController.m in Sources */,
-				840ED27318C4BC1F00342386 /* Book.m in Sources */,
+				84B3627D18C61E3F00CDF755 /* Book.m in Sources */,
 				8478C3FC185CA73F00B06779 /* ListenBooks.xcdatamodeld in Sources */,
 				8444EAB6185F840800F90B48 /* mztools.c in Sources */,
 			);
@@ -1329,10 +1337,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84B3628E18C62D1D00CDF755 /* SpinnerSearchField.m in Sources */,
+				84B3628618C61E4000CDF755 /* Page.m in Sources */,
 				848C95491866405F0020FDC9 /* BooksController.m in Sources */,
 				8478C410185CA74000B06779 /* ListenBooksTests.m in Sources */,
-				840ED27918C4BC1F00342386 /* Page.m in Sources */,
 				848C954518663FF60020FDC9 /* BookmarksArrayController.m in Sources */,
+				84B3627E18C61E3F00CDF755 /* Book.m in Sources */,
 				848C956B186647010020FDC9 /* NSArray_Extensions.m in Sources */,
 				848C9577186647010020FDC9 /* NSTreeNode_Extensions.m in Sources */,
 				848C958E186647240020FDC9 /* NumberValueIsOne.m in Sources */,
@@ -1342,15 +1352,14 @@
 				848C956D186647010020FDC9 /* NSArrayController_Extensions.m in Sources */,
 				848C9588186647240020FDC9 /* ArrayCountToString.m in Sources */,
 				848C9571186647010020FDC9 /* NSIndexPath_Extensions.m in Sources */,
-				840ED27018C4BC1F00342386 /* Paragraph.m in Sources */,
 				848C9594186647370020FDC9 /* BookmarksController.m in Sources */,
 				848C956F186647010020FDC9 /* NSDate+Extensions.m in Sources */,
 				848C958A186647240020FDC9 /* NSImageToData.m in Sources */,
-				840ED28518C4C84B00342386 /* Bookmark.m in Sources */,
+				84B3628218C61E4000CDF755 /* Bookmark.m in Sources */,
 				840ED28A18C5266200342386 /* SearchResult.m in Sources */,
 				848C9586186647240020FDC9 /* ArrayCountIsZero.m in Sources */,
 				848C9573186647010020FDC9 /* NSManagedObject_Extensions.m in Sources */,
-				840ED27418C4BC1F00342386 /* Book.m in Sources */,
+				84B3628A18C61E4000CDF755 /* Paragraph.m in Sources */,
 				848C954118663FD00020FDC9 /* BooksTreeController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1660,11 +1669,12 @@
 			isa = XCVersionGroup;
 			children = (
 				840ED26B18C4BB7F00342386 /* ListenBooks 4.xcdatamodel */,
+				84B3627918C61D5800CDF755 /* ListenBooks 5.xcdatamodel */,
 				848E57E318AB93B3004D72A3 /* ListenBooks 2.xcdatamodel */,
 				842B61E918AFFA2B00DC1A08 /* ListenBooks 3.xcdatamodel */,
 				8478C3FB185CA73F00B06779 /* ListenBooks.xcdatamodel */,
 			);
-			currentVersion = 840ED26B18C4BB7F00342386 /* ListenBooks 4.xcdatamodel */;
+			currentVersion = 84B3627918C61D5800CDF755 /* ListenBooks 5.xcdatamodel */;
 			path = ListenBooks.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

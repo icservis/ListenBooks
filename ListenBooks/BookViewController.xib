@@ -94,7 +94,7 @@
                                                                                     <rect key="frame" x="1" y="1" width="113" height="17"/>
                                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                     <subviews>
-                                                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hXS-sU-Okd">
+                                                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="hXS-sU-Okd">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="113" height="17"/>
                                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="xHC-tn-AlB">
@@ -111,6 +111,12 @@
                                                                                             </connections>
                                                                                         </textField>
                                                                                     </subviews>
+                                                                                    <constraints>
+                                                                                        <constraint firstItem="hXS-sU-Okd" firstAttribute="top" secondItem="id7-kE-zps" secondAttribute="top" id="8en-2K-VuZ"/>
+                                                                                        <constraint firstAttribute="bottom" secondItem="hXS-sU-Okd" secondAttribute="bottom" id="Bg2-Oa-HXr"/>
+                                                                                        <constraint firstItem="hXS-sU-Okd" firstAttribute="leading" secondItem="id7-kE-zps" secondAttribute="leading" constant="2" id="IOX-17-D5u"/>
+                                                                                        <constraint firstAttribute="trailing" secondItem="hXS-sU-Okd" secondAttribute="trailing" constant="2" id="gc3-vI-PkI"/>
+                                                                                    </constraints>
                                                                                     <connections>
                                                                                         <outlet property="textField" destination="hXS-sU-Okd" id="LnI-8l-0iX"/>
                                                                                     </connections>
@@ -135,7 +141,7 @@
                                                                                     <rect key="frame" x="117" y="1" width="94" height="17"/>
                                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                     <subviews>
-                                                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8hg-bn-rxR">
+                                                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="8hg-bn-rxR">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="94" height="17"/>
                                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="pB5-RC-SYd">
@@ -149,6 +155,12 @@
                                                                                             </connections>
                                                                                         </textField>
                                                                                     </subviews>
+                                                                                    <constraints>
+                                                                                        <constraint firstAttribute="trailing" secondItem="8hg-bn-rxR" secondAttribute="trailing" constant="2" id="8n4-f2-7O6"/>
+                                                                                        <constraint firstItem="8hg-bn-rxR" firstAttribute="leading" secondItem="0Uh-hn-zvQ" secondAttribute="leading" constant="2" id="AhD-pr-hA0"/>
+                                                                                        <constraint firstItem="8hg-bn-rxR" firstAttribute="top" secondItem="0Uh-hn-zvQ" secondAttribute="top" id="Tjo-12-DIN"/>
+                                                                                        <constraint firstAttribute="bottom" secondItem="8hg-bn-rxR" secondAttribute="bottom" id="xcJ-Vn-723"/>
+                                                                                    </constraints>
                                                                                     <connections>
                                                                                         <outlet property="textField" destination="8hg-bn-rxR" id="zfI-84-BmM"/>
                                                                                     </connections>
@@ -191,7 +203,7 @@
                                                 <rect key="frame" x="10" y="25" width="213" height="430"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
-                                                    <searchField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PMi-Fh-vC8">
+                                                    <searchField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PMi-Fh-vC8" customClass="SpinnerSearchField">
                                                         <rect key="frame" x="2" y="408" width="209" height="19"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <constraints>

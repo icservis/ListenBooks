@@ -725,7 +725,7 @@ CA
                                                                                                         <rect key="frame" x="1" y="1" width="114" height="17"/>
                                                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                                         <subviews>
-                                                                                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Oic-7O-tLP">
+                                                                                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Oic-7O-tLP">
                                                                                                                 <rect key="frame" x="0.0" y="0.0" width="114" height="17"/>
                                                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="gfD-qn-NsX">
@@ -742,6 +742,12 @@ CA
                                                                                                                 </connections>
                                                                                                             </textField>
                                                                                                         </subviews>
+                                                                                                        <constraints>
+                                                                                                            <constraint firstAttribute="trailing" secondItem="Oic-7O-tLP" secondAttribute="trailing" constant="2" id="HcA-N7-KZB"/>
+                                                                                                            <constraint firstItem="Oic-7O-tLP" firstAttribute="top" secondItem="3UO-0c-IOl" secondAttribute="top" id="SLA-PC-EhT"/>
+                                                                                                            <constraint firstAttribute="bottom" secondItem="Oic-7O-tLP" secondAttribute="bottom" id="Z28-r3-Yj4"/>
+                                                                                                            <constraint firstItem="Oic-7O-tLP" firstAttribute="leading" secondItem="3UO-0c-IOl" secondAttribute="leading" constant="2" id="qJJ-VC-rAx"/>
+                                                                                                        </constraints>
                                                                                                         <connections>
                                                                                                             <outlet property="textField" destination="Oic-7O-tLP" id="qbG-L1-3gX"/>
                                                                                                         </connections>
@@ -774,7 +780,7 @@ CA
                                                                                                         <rect key="frame" x="118" y="1" width="90" height="17"/>
                                                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                                         <subviews>
-                                                                                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ymg-mI-aPZ">
+                                                                                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="ymg-mI-aPZ">
                                                                                                                 <rect key="frame" x="0.0" y="0.0" width="90" height="17"/>
                                                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="center" title="Table View Cell" id="AV8-bF-69t">
@@ -792,6 +798,12 @@ CA
                                                                                                                 </connections>
                                                                                                             </textField>
                                                                                                         </subviews>
+                                                                                                        <constraints>
+                                                                                                            <constraint firstAttribute="bottom" secondItem="ymg-mI-aPZ" secondAttribute="bottom" id="63l-Xl-V7M"/>
+                                                                                                            <constraint firstAttribute="trailing" secondItem="ymg-mI-aPZ" secondAttribute="trailing" constant="2" id="OfK-MN-IVe"/>
+                                                                                                            <constraint firstItem="ymg-mI-aPZ" firstAttribute="top" secondItem="b0h-9v-ymI" secondAttribute="top" id="r85-Nx-hyi"/>
+                                                                                                            <constraint firstItem="ymg-mI-aPZ" firstAttribute="leading" secondItem="b0h-9v-ymI" secondAttribute="leading" constant="2" id="twj-dU-1LG"/>
+                                                                                                        </constraints>
                                                                                                         <connections>
                                                                                                             <outlet property="textField" destination="ymg-mI-aPZ" id="Zs9-3v-hMF"/>
                                                                                                         </connections>
