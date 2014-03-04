@@ -59,18 +59,18 @@
                                     <tabViewItems>
                                         <tabViewItem label="Bookmarks" identifier="1" id="w0g-wC-dKx">
                                             <view key="view" id="hc5-Zc-9Jc">
-                                                <rect key="frame" x="10" y="25" width="213" height="430"/>
+                                                <rect key="frame" x="10" y="29" width="213" height="426"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JZd-lk-2Ev">
-                                                        <rect key="frame" x="0.0" y="0.0" width="213" height="430"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="213" height="426"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <clipView key="contentView" id="K0j-uF-RH9">
-                                                            <rect key="frame" x="0.0" y="17" width="213" height="413"/>
+                                                            <rect key="frame" x="0.0" y="17" width="213" height="409"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="ck7-q7-wCu" viewBased="YES" id="vFy-ae-W7f" customClass="BookBookmarksView">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="213" height="413"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="213" height="409"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <size key="intercellSpacing" width="3" height="2"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -252,7 +252,7 @@
                                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                     <subviews>
                                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="s6E-85-xUS">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="37" height="17"/>
+                                                                                            <rect key="frame" x="0.0" y="-51" width="37" height="68"/>
                                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                                             <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Table View Cell" id="zvW-oS-661">
                                                                                                 <font key="font" metaFont="system"/>
@@ -269,7 +269,7 @@
                                                                                         </textField>
                                                                                     </subviews>
                                                                                     <constraints>
-                                                                                        <constraint firstAttribute="bottom" secondItem="s6E-85-xUS" secondAttribute="bottom" id="Ijg-de-RfG"/>
+                                                                                        <constraint firstAttribute="bottom" secondItem="s6E-85-xUS" secondAttribute="bottom" constant="-51" id="Ijg-de-RfG"/>
                                                                                         <constraint firstItem="s6E-85-xUS" firstAttribute="leading" secondItem="caV-dY-3qp" secondAttribute="leading" constant="2" id="Ljv-Nl-nzz"/>
                                                                                         <constraint firstItem="s6E-85-xUS" firstAttribute="top" secondItem="caV-dY-3qp" secondAttribute="top" id="tDE-14-EYM"/>
                                                                                         <constraint firstAttribute="trailing" secondItem="s6E-85-xUS" secondAttribute="trailing" constant="2" id="v4G-vk-3t9"/>
@@ -300,7 +300,7 @@
                                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="d5e-bq-ST2">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="170" height="17"/>
                                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                                                                            <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Table View Cell" allowsEditingTextAttributes="YES" usesSingleLineMode="YES" id="QFk-o8-CJc">
+                                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="left" title="Table View Cell" allowsEditingTextAttributes="YES" id="QFk-o8-CJc">
                                                                                                 <font key="font" metaFont="system"/>
                                                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
