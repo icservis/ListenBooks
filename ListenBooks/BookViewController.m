@@ -83,6 +83,8 @@ static NSInteger const ProposedLeght = 42;
 - (IBAction)voiceSpeedSliderChanged:(id)sender;
 @property (weak) IBOutlet NSPopUpButton *voiceNamePopup;
 - (IBAction)voiceNamePopupChanged:(id)sender;
+@property (weak) IBOutlet NSButton *playButton;
+- (IBAction)playButtonClicked:(id)sender;
 
 @end
 
@@ -306,7 +308,13 @@ static NSInteger const ProposedLeght = 42;
     
     NSInteger pageIndex = [bookmark.pageIndex integerValue];
     if (pageIndex >= 0 && pageIndex < [self.pageController.arrangedObjects count]) {
+        
+        [self.managedObjectContext processPendingChanges];
+        [[self.managedObjectContext undoManager] disableUndoRegistration];
         bookmark.timestamp = [NSDate date];
+        [self.managedObjectContext processPendingChanges];
+        [[self.managedObjectContext undoManager] enableUndoRegistration];
+        
         self.pageController.selectedIndex = pageIndex;
         
         BookPageViewController* bookPageViewController = (BookPageViewController*)self.pageController.selectedViewController;
@@ -628,4 +636,12 @@ static NSInteger const ProposedLeght = 42;
         });
     });
 }
+
+#pragma mark - Playback
+
+- (IBAction)playButtonClicked:(id)sender
+{
+    
+}
+
 @end

@@ -19,6 +19,7 @@
                 <outlet property="pageController" destination="SXf-7F-t5Y" id="US4-se-grS"/>
                 <outlet property="pageLabel" destination="yBx-Ex-R0j" id="wcv-73-a2v"/>
                 <outlet property="pageView" destination="BX8-OB-RG3" id="N6f-UQ-Wix"/>
+                <outlet property="playButton" destination="N4R-Hw-3FH" id="Xhf-CN-flB"/>
                 <outlet property="progressIndicator" destination="stc-5D-7nD" id="XYp-np-XjX"/>
                 <outlet property="sideBarTabView" destination="Pdi-zx-ldY" id="uXI-TI-Jro"/>
                 <outlet property="sideBarTabViewBookmarksTab" destination="w0g-wC-dKx" id="2Iu-u8-Jbe"/>
@@ -618,15 +619,15 @@
         <window identifier="BookVoicePanel" title="Voice" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="VoicePanel" animationBehavior="default" id="CJO-i9-er4" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" utility="YES" HUD="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="120" y="65" width="250" height="105"/>
+            <rect key="contentRect" x="120" y="65" width="250" height="152"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1280" height="778"/>
             <value key="minSize" type="size" width="250" height="105"/>
             <view key="contentView" identifier="BookVoicePanelMainView" id="8yI-0q-fOe">
-                <rect key="frame" x="0.0" y="0.0" width="250" height="105"/>
+                <rect key="frame" x="0.0" y="0.0" width="250" height="152"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <popUpButton identifier="BookVoicePanelVoicePopup" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Lwf-mm-ADm">
-                        <rect key="frame" x="18" y="61" width="215" height="26"/>
+                        <rect key="frame" x="18" y="108" width="215" height="26"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="jcc-D3-gCg"/>
@@ -657,7 +658,7 @@
                         </connections>
                     </popUpButton>
                     <slider identifier="BookVoicePanelSpeedSlider" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LyV-qO-bCQ">
-                        <rect key="frame" x="18" y="18" width="214" height="26"/>
+                        <rect key="frame" x="18" y="65" width="214" height="26"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <sliderCell key="cell" state="on" alignment="left" minValue="-100" maxValue="100" tickMarkPosition="above" numberOfTickMarks="5" sliderType="linear" id="bfn-RM-n0w"/>
                         <connections>
@@ -672,10 +673,27 @@
                             <binding destination="rJS-Ke-05G" name="minValue" keyPath="sliderMinValue" previousBinding="LUS-A9-wPF" id="wYD-Zz-kMa"/>
                         </connections>
                     </slider>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="N4R-Hw-3FH">
+                        <rect key="frame" x="64" y="19" width="123" height="19"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="18" id="OUD-E0-moH"/>
+                        </constraints>
+                        <buttonCell key="cell" type="roundRect" title="Play" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Wpa-DN-uCX">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="controlContent"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="playButtonClicked:" target="-2" id="vHj-v4-ADC"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="LyV-qO-bCQ" secondAttribute="bottom" constant="20" id="NZq-TR-CWj"/>
+                    <constraint firstAttribute="bottom" secondItem="N4R-Hw-3FH" secondAttribute="bottom" constant="20" id="1oB-2o-kPv"/>
+                    <constraint firstItem="N4R-Hw-3FH" firstAttribute="leading" secondItem="8yI-0q-fOe" secondAttribute="leading" constant="64" id="Gs2-Vp-Hhs"/>
+                    <constraint firstItem="LyV-qO-bCQ" firstAttribute="top" secondItem="Lwf-mm-ADm" secondAttribute="bottom" constant="20" id="fj1-Iq-KuY"/>
                     <constraint firstAttribute="trailing" secondItem="Lwf-mm-ADm" secondAttribute="trailing" constant="20" id="kaX-Vu-nr7"/>
+                    <constraint firstAttribute="trailing" secondItem="N4R-Hw-3FH" secondAttribute="trailing" constant="63" id="lBL-4x-d3G"/>
                     <constraint firstAttribute="trailing" secondItem="LyV-qO-bCQ" secondAttribute="trailing" constant="20" id="p1G-bQ-AwY"/>
                     <constraint firstItem="LyV-qO-bCQ" firstAttribute="leading" secondItem="8yI-0q-fOe" secondAttribute="leading" constant="20" id="pTc-zE-sCv"/>
                     <constraint firstItem="Lwf-mm-ADm" firstAttribute="leading" secondItem="8yI-0q-fOe" secondAttribute="leading" constant="20" id="pbQ-za-GTR"/>

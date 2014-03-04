@@ -10,4 +10,6 @@
 
 @interface AutoSizingTextView : NSTextView
 
+
+
 @end

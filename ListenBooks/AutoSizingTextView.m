@@ -39,14 +39,24 @@
 
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
-    /*
+    
     SEL theAction = [menuItem action];
     
-    if (theAction == @selector(export:)) {
+    if (theAction == @selector(cut:)) {
         
         return NO;
     }
-     */
+    
+    if (theAction == @selector(paste:)) {
+        
+        return NO;
+    }
+    
+    if (theAction == @selector(delete:)) {
+        
+        return NO;
+    }
+    
     
     return YES;
 }
