@@ -369,6 +369,10 @@
     Page* page = [self.book.pages objectAtIndex:index];
     bookmark.page = page;
     
+    BookPageViewController* selectedBookPageViewController = (BookPageViewController*)self.pageController.selectedViewController;
+    NSTextView* selectedTextView = selectedBookPageViewController.textView;
+    DDLogDebug(@"selectedTextView: %@", selectedTextView.selectedRanges);
+    
     [[[self appDelegate] undoManager] endUndoGrouping];
 }
 
