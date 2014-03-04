@@ -100,7 +100,7 @@ static NSInteger const ProposedLeght = 42;
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Initialization code here.        
+        // Initialization code here.
     }
     return self;
 }
@@ -304,27 +304,29 @@ static NSInteger const ProposedLeght = 42;
 {
     DDLogDebug(@"bookmark: %@", bookmark.title);
     
-    [self.pageController.arrangedObjects enumerateObjectsUsingBlock:^(NSAttributedString* data, NSUInteger idx, BOOL *stop) {
+    NSInteger pageIndex = [bookmark.pageIndex integerValue];
+    if (pageIndex >= 0 && pageIndex < [self.pageController.arrangedObjects count]) {
+        bookmark.timestamp = [NSDate date];
+        self.pageController.selectedIndex = pageIndex;
         
-        if ([data isEqualToAttributedString:bookmark.page.data]) {
-            *stop = YES;
-            bookmark.timestamp = [NSDate date];
-            self.pageController.selectedIndex = idx;
-        };
-    }];
+        BookPageViewController* bookPageViewController = (BookPageViewController*)self.pageController.selectedViewController;
+        NSTextView* textView = bookPageViewController.textView;
+        NSRange range = NSMakeRange([bookmark.rangeLocation integerValue], [bookmark.rangeLength integerValue]);
+        textView.selectedRanges = @[[NSValue valueWithRange:range]];
+        [textView scrollRangeToVisible:range];
+    }
 }
 
 - (void)loadSearchResult:(SearchResult*)searchResult
 {
     DDLogDebug(@"searchResult: %@", searchResult.title);
-    
-    [self.pageController.arrangedObjects enumerateObjectsUsingBlock:^(NSAttributedString* data, NSUInteger idx, BOOL *stop) {
-        
-        if ([data isEqualToAttributedString:searchResult.page.data]) {
-            *stop = YES;
-            self.pageController.selectedIndex = idx;
-        };
-    }];
+    if (searchResult.pageIndex >= 0 && searchResult.pageIndex < [self.pageController.arrangedObjects count]) {
+        self.pageController.selectedIndex = searchResult.pageIndex;
+        BookPageViewController* bookPageViewController = (BookPageViewController*)self.pageController.selectedViewController;
+        NSTextView* textView = bookPageViewController.textView;
+        textView.selectedRanges = @[[NSValue valueWithRange:searchResult.range]];
+        [textView scrollRangeToVisible:searchResult.range];
+    }
 }
 
 #pragma mark - TabViewControllerProtocol
@@ -385,7 +387,12 @@ static NSInteger const ProposedLeght = 42;
             if (range.length > 0) {
                 title = [[page.data string] substringWithRange:range];
             } else {
-                range.length = ProposedLeght;
+                if (range.location + ProposedLeght < [[page.data string] length]) {
+                    range.length = ProposedLeght;
+                } else {
+                    range.length = [[page.data string] length] - range.location;
+                }
+                
                 title = [[page.data string] substringWithRange:range];
             }
             
@@ -399,7 +406,7 @@ static NSInteger const ProposedLeght = 42;
         }
         bookmark.title = title;
     }];
-
+    
     [[[self appDelegate] undoManager] endUndoGrouping];
 }
 
@@ -438,7 +445,7 @@ static NSInteger const ProposedLeght = 42;
 }
 
 - (NSViewController *)pageController:(NSPageController *)pageController viewControllerForIdentifier:(NSString *)identifier
-{    
+{
     BookPageViewController* bookPageViewController = [[BookPageViewController alloc] initWithNibName:@"BookPageViewController" bundle:nil];
     
     return bookPageViewController;
@@ -571,9 +578,9 @@ static NSInteger const ProposedLeght = 42;
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         // Do a taks in the background
         
-        [self.book.paragraphs enumerateObjectsUsingBlock:^(Paragraph* paragraph, NSUInteger idx, BOOL *stop) {
+        [self.book.pages enumerateObjectsUsingBlock:^(Page* page, NSUInteger idx, BOOL *stop) {
             
-            NSString* string = paragraph.text;
+            NSString* string = [page.data string];
             NSRange searchRange = NSMakeRange(0,string.length);
             NSRange foundRange;
             while (searchRange.location < string.length) {
@@ -600,11 +607,10 @@ static NSInteger const ProposedLeght = 42;
                     [title endEditing];
                     
                     searchResult.title = title;
-                    searchResult.paragraph = paragraph;
-                    searchResult.page = paragraph.page;
-                    searchResult.positionInParagraph = [NSNumber numberWithInteger:foundRange.location];
-                    NSInteger pageIndex = [self.book.pages indexOfObject:paragraph.page];
-                    searchResult.pageIndex = [NSNumber numberWithInteger:pageIndex];
+                    searchResult.page = page;
+                    NSInteger pageIndex = [self.book.pages indexOfObject:page];
+                    searchResult.pageIndex = pageIndex;
+                    searchResult.range = foundRange;
                     [searchResults addObject:searchResult];
                     
                     searchRange.location = foundRange.location + foundRange.length;
