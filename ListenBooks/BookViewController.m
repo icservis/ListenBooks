@@ -641,7 +641,7 @@ static NSInteger const DefaultSpeed = 200;
     NSString* subString = [searchField stringValue];
     DDLogDebug(@"sender: %@", [searchField stringValue]);
     _searchResults = [NSMutableArray array];
-    if ([subString length] == 0) {
+    if ([subString length] < 3) {
         [self.bookSearchView reloadData];
         return;
     }
@@ -655,7 +655,8 @@ static NSInteger const DefaultSpeed = 200;
             NSString* string = [page.data string];
             string = [[string componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@" "];
             
-            NSRange searchRange = NSMakeRange(0,string.length);
+            NSInteger stringLength = string.length;
+            NSRange searchRange = NSMakeRange(0, stringLength);
             NSRange foundRange;
             
             while (searchRange.location < string.length) {
@@ -680,12 +681,17 @@ static NSInteger const DefaultSpeed = 200;
                     rightEndIndex = rightRange.location + rightRange.length;
                     
                     rightBeginIndex = [page.data nextWordFromIndex:rightRange.location+rightRange.length forward:YES];
-                    rightRange = [page.data doubleClickAtIndex:rightBeginIndex];
-                    rightEndIndex = rightRange.location + rightRange.length;
+                    if (rightBeginIndex < stringLength) {
+                        rightRange = [page.data doubleClickAtIndex:rightBeginIndex];
+                        rightEndIndex = rightRange.location + rightRange.length;
+                    }
                     
                     NSRange extendedRange = NSMakeRange(leftBeginIndex, rightEndIndex-leftBeginIndex);
                     
-                    title = [[NSMutableAttributedString alloc] initWithString:[string substringWithRange:extendedRange] attributes:@{NSForegroundColorAttributeName:[NSColor lightGrayColor]}];
+                    NSMutableParagraphStyle *mutParaStyle=[[NSMutableParagraphStyle alloc] init];
+                    [mutParaStyle setAlignment:NSCenterTextAlignment];
+                    
+                    title = [[NSMutableAttributedString alloc] initWithString:[string substringWithRange:extendedRange] attributes:@{NSForegroundColorAttributeName:[NSColor lightGrayColor], NSParagraphStyleAttributeName:mutParaStyle}];
                     
                     NSRange boldedRange = NSMakeRange(foundRange.location-extendedRange.location, foundRange.length);
                     
