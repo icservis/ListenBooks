@@ -34,6 +34,31 @@
     [super awakeFromNib];
 }
 
+- (NSRange)selectionRangeForProposedRange:(NSRange)proposedSelRange granularity:(NSSelectionGranularity)granularity
+{
+    if (granularity == NSSelectByCharacter || granularity == NSSelectByWord) {
+        
+        if (proposedSelRange.length > 0) {
+            
+            NSRange doubleRange = [[self textStorage] doubleClickAtIndex:proposedSelRange.location];
+            
+            if (doubleRange.location != NSNotFound)
+            {
+                NSInteger nextWordLocation = [[self textStorage] nextWordFromIndex:(proposedSelRange.location + proposedSelRange.length) forward:YES];
+                
+                return NSMakeRange(doubleRange.location, nextWordLocation - doubleRange.location);
+            }
+            
+            return proposedSelRange;
+        } else {
+            return [[self textStorage] doubleClickAtIndex:proposedSelRange.location];
+        }
+        
+    } else {
+        return [super selectionRangeForProposedRange:proposedSelRange granularity:granularity];
+    }
+}
+
 
 #pragma mark - Validation menus
 

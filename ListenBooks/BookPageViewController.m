@@ -12,7 +12,7 @@
 #import "FontControl.h"
 #import "ThemeControl.h"
 
-@interface BookPageViewController ()
+@interface BookPageViewController ()  <NSTextViewDelegate>
 
 @property (strong, nonatomic) FontControl* fontControl;
 @property (strong, nonatomic) ThemeControl *themeControl;
@@ -107,6 +107,5 @@
         [self.delegate bookPageController:self textViewSelectionDidChange:[rangeObject rangeValue]];
     }
 }
-
 
 @end

@@ -17,7 +17,7 @@
 
 @end
 
-@interface BookPageViewController : NSViewController <NSTextViewDelegate>
+@interface BookPageViewController : NSViewController
 
 @property (nonatomic, weak) id <BookPageViewControllerDelegate> delegate;
 @property (unsafe_unretained) IBOutlet NSTextView *textView;

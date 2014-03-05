@@ -351,6 +351,7 @@ static NSInteger const DefaultSpeed = 200;
                 self.pageController.selectedIndex = index;
                 NSTextView* textView = [self bookPageViewControllerTextView];
                 textView.selectedRange = range;
+                [[self appDelegate].window makeFirstResponder:textView];
                 [textView scrollRangeToVisible:range];
             }
             [self.progressIndicator stopAnimation:nil];
@@ -375,6 +376,7 @@ static NSInteger const DefaultSpeed = 200;
         NSTextView* textView = [self bookPageViewControllerTextView];
         NSRange range = NSMakeRange([bookmark.rangeLocation integerValue], [bookmark.rangeLength integerValue]);
         textView.selectedRange = range;
+        [[self appDelegate].window makeFirstResponder:textView];
         [textView scrollRangeToVisible:range];
     }
 }
@@ -386,6 +388,7 @@ static NSInteger const DefaultSpeed = 200;
         self.pageController.selectedIndex = searchResult.pageIndex;
         NSTextView* textView = [self bookPageViewControllerTextView];
         textView.selectedRange = searchResult.range;
+        [[self appDelegate].window makeFirstResponder:textView];
         [textView scrollRangeToVisible:searchResult.range];
     }
 }
@@ -697,7 +700,7 @@ static NSInteger const DefaultSpeed = 200;
 
 - (void)bookPageController:(id)controller textViewSelectionDidChange:(NSRange)range
 {
-    DDLogVerbose(@"range: %@", NSStringFromRange(range));
+    //DDLogVerbose(@"range: %@", NSStringFromRange(range));
 }
 
 - (NSRange)bookPageViewControllerCurrentSelectionRange
@@ -762,8 +765,11 @@ static NSInteger const DefaultSpeed = 200;
 {
     DDLogVerbose(@"range: %@", NSStringFromRange(characterRange));
     NSTextView* textView = [self bookPageViewControllerTextView];
-    textView.selectedRange = characterRange;
-    [textView scrollRangeToVisible:characterRange];
+    Page* page = [self.book.pages objectAtIndex:[self.book.pageIndex integerValue]];
+    NSRange origRange = [[page.data string]rangeOfString:string];
+    NSRange range = NSMakeRange(origRange.location + characterRange.location, characterRange.length);
+    textView.selectedRange = range;
+    [textView scrollRangeToVisible:range];
     [self saveTextViewCurrentSelection:YES];
     
     if (self.reading == NO) {
