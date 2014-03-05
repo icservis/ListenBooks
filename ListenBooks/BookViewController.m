@@ -349,8 +349,8 @@ static NSInteger const DefaultSpeed = 200;
                 [self loadBookmark:self.bookmark];
             } else {
                 self.pageController.selectedIndex = index;
-                NSTextView* textView = [self bookPageViewControolerTextView];
-                textView.selectedRanges = @[[NSValue valueWithRange:range]];
+                NSTextView* textView = [self bookPageViewControllerTextView];
+                textView.selectedRange = range;
                 [textView scrollRangeToVisible:range];
             }
             [self.progressIndicator stopAnimation:nil];
@@ -372,11 +372,9 @@ static NSInteger const DefaultSpeed = 200;
         [[self.managedObjectContext undoManager] enableUndoRegistration];
         
         self.pageController.selectedIndex = pageIndex;
-        
-        BookPageViewController* bookPageViewController = (BookPageViewController*)self.pageController.selectedViewController;
-        NSTextView* textView = bookPageViewController.textView;
+        NSTextView* textView = [self bookPageViewControllerTextView];
         NSRange range = NSMakeRange([bookmark.rangeLocation integerValue], [bookmark.rangeLength integerValue]);
-        textView.selectedRanges = @[[NSValue valueWithRange:range]];
+        textView.selectedRange = range;
         [textView scrollRangeToVisible:range];
     }
 }
@@ -386,9 +384,8 @@ static NSInteger const DefaultSpeed = 200;
     DDLogDebug(@"searchResult: %@", searchResult.title);
     if (searchResult.pageIndex >= 0 && searchResult.pageIndex < [self.pageController.arrangedObjects count]) {
         self.pageController.selectedIndex = searchResult.pageIndex;
-        BookPageViewController* bookPageViewController = (BookPageViewController*)self.pageController.selectedViewController;
-        NSTextView* textView = bookPageViewController.textView;
-        textView.selectedRanges = @[[NSValue valueWithRange:searchResult.range]];
+        NSTextView* textView = [self bookPageViewControllerTextView];
+        textView.selectedRange = searchResult.range;
         [textView scrollRangeToVisible:searchResult.range];
     }
 }
@@ -461,7 +458,7 @@ static NSInteger const DefaultSpeed = 200;
             }
             
         } else {
-            NSRange range = NSMakeRange(0, ProposedLeght);
+            range = NSMakeRange(0, ProposedLeght);
             title = [[page.data string] substringWithRange:range];
         }
         title = [title stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -469,6 +466,8 @@ static NSInteger const DefaultSpeed = 200;
             title = NSLocalizedString(@"Unnamed Bookmark", nil);
         }
         bookmark.title = title;
+        self.book.pageIndex = [NSNumber numberWithInteger:index];
+        self.book.pagePosition = [NSNumber numberWithInteger:(range.location)];
     }];
     
     [[[self appDelegate] undoManager] endUndoGrouping];
@@ -662,7 +661,6 @@ static NSInteger const DefaultSpeed = 200;
                     NSInteger suggestedLenght = ([string length] - location > ProposedLeght) ? ProposedLeght : [string length] - location;
                     
                     NSRange extendedRange = NSMakeRange(location, suggestedLenght);
-                    DDLogVerbose(@"extendedRange: %@", NSStringFromRange(extendedRange));
                     
                     title = [[NSMutableAttributedString alloc] initWithString:[string substringWithRange:extendedRange] attributes:@{NSForegroundColorAttributeName:[NSColor lightGrayColor]}];
                     
@@ -702,7 +700,7 @@ static NSInteger const DefaultSpeed = 200;
     DDLogVerbose(@"range: %@", NSStringFromRange(range));
 }
 
-- (NSRange)bookPageViewControolerCurrentSelectionRange
+- (NSRange)bookPageViewControllerCurrentSelectionRange
 {
     BookPageViewController* bookPageViewController = (BookPageViewController*)self.pageController.selectedViewController;
     NSTextView* textView = bookPageViewController.textView;
@@ -710,7 +708,7 @@ static NSInteger const DefaultSpeed = 200;
     return range;
 }
 
-- (NSTextView*)bookPageViewControolerTextView
+- (NSTextView*)bookPageViewControllerTextView
 {
     BookPageViewController* bookPageViewController = (BookPageViewController*)self.pageController.selectedViewController;
     NSTextView* textView = bookPageViewController.textView;
@@ -725,20 +723,24 @@ static NSInteger const DefaultSpeed = 200;
         [self.speechSynthetizer stopSpeaking];
         
     } else {
-        [self saveTextViewCurrentSelection];
+        [self saveTextViewCurrentSelection:NO];
         [self startReading];
     }
 }
 
-- (void)saveTextViewCurrentSelection
+- (void)saveTextViewCurrentSelection:(BOOL)addLenghtToLocation
 {
-    NSRange range = [self bookPageViewControolerCurrentSelectionRange];
+    NSRange range = [self bookPageViewControllerCurrentSelectionRange];
     NSInteger index = self.pageController.selectedIndex;
     
     [self.managedObjectContext processPendingChanges];
     [[self.managedObjectContext undoManager] disableUndoRegistration];
     self.book.pageIndex = [NSNumber numberWithInteger:index];
-    self.book.pagePosition = [NSNumber numberWithInteger:(range.location+range.length)];
+    if (addLenghtToLocation) {
+        self.book.pagePosition = [NSNumber numberWithInteger:(range.location+range.length)];
+    } else {
+        self.book.pagePosition = [NSNumber numberWithInteger:(range.location)];
+    }
     [self.managedObjectContext processPendingChanges];
     [[self.managedObjectContext undoManager] enableUndoRegistration];
 }
@@ -759,9 +761,10 @@ static NSInteger const DefaultSpeed = 200;
 - (void)speechSynthesizer:(NSSpeechSynthesizer *)sender willSpeakWord:(NSRange)characterRange ofString:(NSString *)string
 {
     DDLogVerbose(@"range: %@", NSStringFromRange(characterRange));
-    NSTextView* textView = [self bookPageViewControolerTextView];
+    NSTextView* textView = [self bookPageViewControllerTextView];
     textView.selectedRange = characterRange;
-    [self saveTextViewCurrentSelection];
+    [textView scrollRangeToVisible:characterRange];
+    [self saveTextViewCurrentSelection:YES];
     
     if (self.reading == NO) {
         self.reading = YES;
