@@ -44,9 +44,13 @@
             
             if (doubleRange.location != NSNotFound)
             {
-                NSInteger nextWordLocation = [[self textStorage] nextWordFromIndex:(proposedSelRange.location + proposedSelRange.length) forward:YES];
-                
-                return NSMakeRange(doubleRange.location, nextWordLocation - doubleRange.location);
+                NSInteger nextWordIndex = [[self textStorage] nextWordFromIndex:(proposedSelRange.location + proposedSelRange.length) forward:NO];
+                NSRange lastWordRange = [[self textStorage] doubleClickAtIndex:nextWordIndex];
+                if (lastWordRange.location != NSNotFound) {
+                    return NSMakeRange(doubleRange.location, lastWordRange.location + lastWordRange.length - doubleRange.location);
+                } else {
+                    return NSMakeRange(doubleRange.location, nextWordIndex - doubleRange.location);
+                }
             }
             
             return proposedSelRange;
