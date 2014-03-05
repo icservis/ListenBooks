@@ -301,7 +301,7 @@
                                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="d5e-bq-ST2">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="170" height="17"/>
                                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="left" title="Table View Cell" allowsEditingTextAttributes="YES" id="QFk-o8-CJc">
+                                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="center" title="Table View Cell" allowsEditingTextAttributes="YES" id="QFk-o8-CJc">
                                                                                                 <font key="font" metaFont="system"/>
                                                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -681,7 +681,7 @@
                         </constraints>
                         <buttonCell key="cell" type="roundRect" title="Play" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Wpa-DN-uCX">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="controlContent"/>
+                            <font key="font" metaFont="cellTitle"/>
                         </buttonCell>
                         <connections>
                             <action selector="playButtonClicked:" target="-2" id="vHj-v4-ADC"/>

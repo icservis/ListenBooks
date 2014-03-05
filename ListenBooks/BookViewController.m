@@ -331,6 +331,7 @@ static NSInteger const DefaultSpeed = 200;
 {
     DDLogInfo(@"loadBookPageControllerContent");
     
+    [self.speechSynthetizer stopSpeaking];
     [self.progressIndicator startAnimation:nil];
     NSRange range = NSMakeRange([book.pagePosition integerValue], 0);
     NSInteger index = [book.pageIndex integerValue];
@@ -469,8 +470,6 @@ static NSInteger const DefaultSpeed = 200;
             title = NSLocalizedString(@"Unnamed Bookmark", nil);
         }
         bookmark.title = title;
-        self.book.pageIndex = [NSNumber numberWithInteger:index];
-        self.book.pagePosition = [NSNumber numberWithInteger:(range.location)];
     }];
     
     [[[self appDelegate] undoManager] endUndoGrouping];
@@ -500,6 +499,11 @@ static NSInteger const DefaultSpeed = 200;
 {
     DDLogVerbose(@"sender: %@", sender);
     [[self appDelegate] exportBook:self.book];
+}
+
+- (IBAction)savePosition:(id)sender
+{
+    [self saveTextViewCurrentSelection:NO];
 }
 
 #pragma mark - PageControllerDelegate
@@ -649,21 +653,37 @@ static NSInteger const DefaultSpeed = 200;
         [self.book.pages enumerateObjectsUsingBlock:^(Page* page, NSUInteger idx, BOOL *stop) {
             
             NSString* string = [page.data string];
+            string = [[string componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@" "];
+            
             NSRange searchRange = NSMakeRange(0,string.length);
             NSRange foundRange;
+            
             while (searchRange.location < string.length) {
                 searchRange.length = string.length - searchRange.location;
                 foundRange = [string rangeOfString:subString options:NSCaseInsensitiveSearch|NSDiacriticInsensitiveSearch range:searchRange];
+                
                 if (foundRange.location != NSNotFound) {
-                    // found an occurrence of the substring! do stuff here
-                    SearchResult* searchResult = [[SearchResult alloc] init];
                     
+                    SearchResult* searchResult = [[SearchResult alloc] init];
                     NSMutableAttributedString* title;
                     
-                    NSInteger location = (foundRange.location > ProposedLeght/3) ? foundRange.location - ProposedLeght/3: 0;
-                    NSInteger suggestedLenght = ([string length] - location > ProposedLeght) ? ProposedLeght : [string length] - location;
+                    NSInteger leftBeginIndex;
+                    leftBeginIndex = [page.data nextWordFromIndex:foundRange.location forward:NO];
+                    leftBeginIndex = [page.data nextWordFromIndex:leftBeginIndex forward:NO];
                     
-                    NSRange extendedRange = NSMakeRange(location, suggestedLenght);
+                    NSInteger rightBeginIndex;
+                    NSRange rightRange;
+                    NSInteger rightEndIndex;
+                    
+                    rightBeginIndex = [page.data nextWordFromIndex:foundRange.location+foundRange.length forward:YES];
+                    rightRange = [page.data doubleClickAtIndex:rightBeginIndex];
+                    rightEndIndex = rightRange.location + rightRange.length;
+                    
+                    rightBeginIndex = [page.data nextWordFromIndex:rightRange.location+rightRange.length forward:YES];
+                    rightRange = [page.data doubleClickAtIndex:rightBeginIndex];
+                    rightEndIndex = rightRange.location + rightRange.length;
+                    
+                    NSRange extendedRange = NSMakeRange(leftBeginIndex, rightEndIndex-leftBeginIndex);
                     
                     title = [[NSMutableAttributedString alloc] initWithString:[string substringWithRange:extendedRange] attributes:@{NSForegroundColorAttributeName:[NSColor lightGrayColor]}];
                     
@@ -679,6 +699,7 @@ static NSInteger const DefaultSpeed = 200;
                     searchResult.pageIndex = pageIndex;
                     searchResult.range = foundRange;
                     [_searchResults addObject:searchResult];
+                    DDLogDebug(@"searchResult: %@", [searchResult.title string]);
                     
                     searchRange.location = foundRange.location + foundRange.length;
                 } else {
@@ -764,14 +785,24 @@ static NSInteger const DefaultSpeed = 200;
 - (void)speechSynthesizer:(NSSpeechSynthesizer *)sender willSpeakWord:(NSRange)characterRange ofString:(NSString *)string
 {
     DDLogVerbose(@"range: %@", NSStringFromRange(characterRange));
-    NSTextView* textView = [self bookPageViewControllerTextView];
-    Page* page = [self.book.pages objectAtIndex:[self.book.pageIndex integerValue]];
+    
+    NSInteger pageIndex = [self.book.pageIndex integerValue];
+    Page* page = [self.book.pages objectAtIndex:pageIndex];
     NSRange origRange = [[page.data string]rangeOfString:string];
     NSRange range = NSMakeRange(origRange.location + characterRange.location, characterRange.length);
-    textView.selectedRange = range;
-    [textView scrollRangeToVisible:range];
-    [self saveTextViewCurrentSelection:YES];
     
+    [self.managedObjectContext processPendingChanges];
+    [[self.managedObjectContext undoManager] disableUndoRegistration];
+    self.book.pagePosition = [NSNumber numberWithInteger:(range.location+range.length)];
+    [self.managedObjectContext processPendingChanges];
+    [[self.managedObjectContext undoManager] enableUndoRegistration];
+    
+    if (self.pageController.selectedIndex == pageIndex) {
+        NSTextView* textView = [self bookPageViewControllerTextView];
+        textView.selectedRange = range;
+        [textView scrollRangeToVisible:range];
+    }
+
     if (self.reading == NO) {
         self.reading = YES;
     }
