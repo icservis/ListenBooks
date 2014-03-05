@@ -89,13 +89,17 @@ static NSInteger const DefaultSpeed = 200;
 @property (weak) IBOutlet NSButton *playButton;
 - (IBAction)playButtonClicked:(id)sender;
 
+#pragma mark - Reading;
+
+@property (nonatomic, assign) BOOL reading;
+@property (nonatomic, assign) NSRange readingRange;
+
 @end
 
 @implementation BookViewController {
     CGFloat _toolBarFrameHeight;
     CGFloat _sideBarViewWidth;
-    NSMutableArray* searchResults;
-    BOOL isSpeaking;
+    NSMutableArray* _searchResults;
 }
 
 @synthesize book = _book;
@@ -122,7 +126,8 @@ static NSInteger const DefaultSpeed = 200;
     _toolBarFrameHeight = self.toolBarView.frame.size.height;
     _sideBarViewWidth = self.sideBarView.frame.size.width;
     
-    isSpeaking = NO;
+    self.reading = NO;
+    self.readingRange = NSMakeRange(0, 0);
     
     [self.bookBookmarksView setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"created" ascending:NO]]];
     [self.bookSearchView setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"pageIndex" ascending:YES]]];
@@ -268,6 +273,18 @@ static NSInteger const DefaultSpeed = 200;
     return _speechSynthetizer;
 }
 
+- (void)setReading:(BOOL)reading
+{
+    if (_reading != reading) {
+        if (reading) {
+            [self.playButton setTitle:NSLocalizedString(@"Stop Speaking", nil)];
+        } else {
+            [self.playButton setTitle:NSLocalizedString(@"Start Speaking", nil)];
+        }
+    }
+    _reading = reading;
+}
+
 #pragma mark - Actions
 
 - (IBAction)fontPanelButtonClicked:(id)sender
@@ -332,11 +349,7 @@ static NSInteger const DefaultSpeed = 200;
                 [self loadBookmark:self.bookmark];
             } else {
                 self.pageController.selectedIndex = index;
-                
-                BookPageViewController* bookPageViewController = (BookPageViewController*)self.pageController.selectedViewController;
-                NSTextView* textView = bookPageViewController.textView;
-                
-                DDLogVerbose(@"Initial range: %@", NSStringFromRange(range));
+                NSTextView* textView = [self bookPageViewControolerTextView];
                 textView.selectedRanges = @[[NSValue valueWithRange:range]];
                 [textView scrollRangeToVisible:range];
             }
@@ -590,7 +603,7 @@ static NSInteger const DefaultSpeed = 200;
         return [self.book.bookmarks count];
     }
     if ([tableView isEqualTo:self.bookSearchView]) {
-        return [searchResults count];
+        return [_searchResults count];
     }
     return 0;
 }
@@ -602,8 +615,8 @@ static NSInteger const DefaultSpeed = 200;
         return bookmarks[row];
     }
     if ([tableView isEqualTo:self.bookSearchView]) {
-        [searchResults sortUsingDescriptors:[tableView sortDescriptors]];
-        return searchResults[row];
+        [_searchResults sortUsingDescriptors:[tableView sortDescriptors]];
+        return _searchResults[row];
     }
     return nil;
 }
@@ -621,7 +634,7 @@ static NSInteger const DefaultSpeed = 200;
     
     NSString* subString = [searchField stringValue];
     DDLogDebug(@"sender: %@", [searchField stringValue]);
-    searchResults = [NSMutableArray array];
+    _searchResults = [NSMutableArray array];
     if ([subString length] == 0) {
         [self.bookSearchView reloadData];
         return;
@@ -664,7 +677,7 @@ static NSInteger const DefaultSpeed = 200;
                     NSInteger pageIndex = [self.book.pages indexOfObject:page];
                     searchResult.pageIndex = pageIndex;
                     searchResult.range = foundRange;
-                    [searchResults addObject:searchResult];
+                    [_searchResults addObject:searchResult];
                     
                     searchRange.location = foundRange.location + foundRange.length;
                 } else {
@@ -686,30 +699,48 @@ static NSInteger const DefaultSpeed = 200;
 
 - (void)bookPageController:(id)controller textViewSelectionDidChange:(NSRange)range
 {
-    BookPageViewController* bookPageViewController = (BookPageViewController*)controller;
     DDLogVerbose(@"range: %@", NSStringFromRange(range));
-    DDLogVerbose(@"index: %li", (long)bookPageViewController.index);
-    
-    [self.managedObjectContext processPendingChanges];
-    [[self.managedObjectContext undoManager] disableUndoRegistration];
-    self.book.pageIndex = [NSNumber numberWithInteger:bookPageViewController.index];
-    self.book.pagePosition = [NSNumber numberWithInteger:range.location];
-    [self.managedObjectContext processPendingChanges];
-    [[self.managedObjectContext undoManager] enableUndoRegistration];
+}
+
+- (NSRange)bookPageViewControolerCurrentSelectionRange
+{
+    BookPageViewController* bookPageViewController = (BookPageViewController*)self.pageController.selectedViewController;
+    NSTextView* textView = bookPageViewController.textView;
+    NSRange range = textView.selectedRange;
+    return range;
+}
+
+- (NSTextView*)bookPageViewControolerTextView
+{
+    BookPageViewController* bookPageViewController = (BookPageViewController*)self.pageController.selectedViewController;
+    NSTextView* textView = bookPageViewController.textView;
+    return textView;
 }
 
 #pragma mark - Playback
 
 - (IBAction)playButtonClicked:(id)sender
 {
-    if (isSpeaking) {
+    if (self.reading) {
         [self.speechSynthetizer stopSpeaking];
         
     } else {
-        isSpeaking = YES;
-        [self.playButton setTitle:NSLocalizedString(@"Stop Speaking", nil)];
+        [self saveTextViewCurrentSelection];
         [self startReading];
     }
+}
+
+- (void)saveTextViewCurrentSelection
+{
+    NSRange range = [self bookPageViewControolerCurrentSelectionRange];
+    NSInteger index = self.pageController.selectedIndex;
+    
+    [self.managedObjectContext processPendingChanges];
+    [[self.managedObjectContext undoManager] disableUndoRegistration];
+    self.book.pageIndex = [NSNumber numberWithInteger:index];
+    self.book.pagePosition = [NSNumber numberWithInteger:(range.location+range.length)];
+    [self.managedObjectContext processPendingChanges];
+    [[self.managedObjectContext undoManager] enableUndoRegistration];
 }
 
 - (void)startReading
@@ -721,7 +752,6 @@ static NSInteger const DefaultSpeed = 200;
     NSRange range = NSMakeRange(location, lenght);
     DDLogVerbose(@"range: %@", NSStringFromRange(range));
     NSString* text = [string substringWithRange:range];
-    DDLogVerbose(@"text: %@", text);
     
     [self.speechSynthetizer startSpeakingString:text];
 }
@@ -729,21 +759,25 @@ static NSInteger const DefaultSpeed = 200;
 - (void)speechSynthesizer:(NSSpeechSynthesizer *)sender willSpeakWord:(NSRange)characterRange ofString:(NSString *)string
 {
     DDLogVerbose(@"range: %@", NSStringFromRange(characterRange));
+    NSTextView* textView = [self bookPageViewControolerTextView];
+    textView.selectedRange = characterRange;
+    [self saveTextViewCurrentSelection];
     
+    if (self.reading == NO) {
+        self.reading = YES;
+    }
 }
 
 - (void)speechSynthesizer:(NSSpeechSynthesizer *)sender didFinishSpeaking:(BOOL)finishedSpeaking
 {
     DDLogVerbose(@"sender: %@", sender);
-    [self.playButton setTitle:NSLocalizedString(@"Start Speaking", nil)];
-    isSpeaking = NO;
+    self.reading = NO;
 }
 
 - (void)speechSynthesizer:(NSSpeechSynthesizer *)sender didEncounterErrorAtIndex:(NSUInteger)characterIndex ofString:(NSString *)string message:(NSString *)message
 {
     DDLogError(@"message: %@", message);
-    [self.playButton setTitle:NSLocalizedString(@"Start Speaking", nil)];
-    isSpeaking = NO;
+    self.reading = NO;
 }
 
 @end
