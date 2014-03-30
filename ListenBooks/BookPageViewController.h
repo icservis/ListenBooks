@@ -9,6 +9,8 @@
 #import <Cocoa/Cocoa.h>
 #import "BookPageViewController.h"
 
+@class CustomDelegateScrollView;
+
 @protocol BookPageViewControllerDelegate <NSObject>
 
 @optional
@@ -21,6 +23,7 @@
 
 @property (nonatomic, weak) id <BookPageViewControllerDelegate> delegate;
 @property (unsafe_unretained) IBOutlet NSTextView *textView;
+@property (nonatomic, weak) IBOutlet CustomDelegateScrollView *scrollView;
 @property (nonatomic, assign) NSInteger index;
 
 @end

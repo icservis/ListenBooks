@@ -126,6 +126,7 @@
 		84B3628A18C61E4000CDF755 /* Paragraph.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B3628818C61E4000CDF755 /* Paragraph.m */; };
 		84B3628D18C62D1D00CDF755 /* SpinnerSearchField.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B3628C18C62D1D00CDF755 /* SpinnerSearchField.m */; };
 		84B3628E18C62D1D00CDF755 /* SpinnerSearchField.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B3628C18C62D1D00CDF755 /* SpinnerSearchField.m */; };
+		84CA91E918E7411400AE9BA0 /* CustomDelegateScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CA91E818E7411400AE9BA0 /* CustomDelegateScrollView.m */; };
 		84DA8DAA18A686A50079BD7C /* ListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DA8DA918A686A50079BD7C /* ListController.m */; };
 		84DA8DB218A7640C0079BD7C /* InformationWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DA8DB018A7640C0079BD7C /* InformationWindowController.m */; };
 		84DA8DB318A7640C0079BD7C /* InformationWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84DA8DB118A7640C0079BD7C /* InformationWindowController.xib */; };
@@ -251,7 +252,7 @@
 		8444EAC9185F841700F90B48 /* DDXMLPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLPrivate.h; sourceTree = "<group>"; };
 		8444EACF185F847500F90B48 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		8444EAD1185F8D2300F90B48 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		84467CC818C66DB40011DC23 /* ListenBooks 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ListenBooks 6.xcdatamodel"; sourceTree = "<group>"; };
+		84467CC818C66DB40011DC23 /* ListenBooks 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ListenBooks 6.xcdatamodel"; sourceTree = "<group>"; };
 		844C0AA618ACDDD600656A28 /* ProgressWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgressWindowController.h; path = ListenBooks/ProgressWindowController.h; sourceTree = "<group>"; };
 		844C0AA718ACDDD600656A28 /* ProgressWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProgressWindowController.m; path = ListenBooks/ProgressWindowController.m; sourceTree = "<group>"; };
 		844C0AA818ACDDD600656A28 /* ProgressWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProgressWindowController.xib; path = ListenBooks/ProgressWindowController.xib; sourceTree = "<group>"; };
@@ -371,6 +372,8 @@
 		84B3628818C61E4000CDF755 /* Paragraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Paragraph.m; sourceTree = "<group>"; };
 		84B3628B18C62D1D00CDF755 /* SpinnerSearchField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpinnerSearchField.h; sourceTree = "<group>"; };
 		84B3628C18C62D1D00CDF755 /* SpinnerSearchField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpinnerSearchField.m; sourceTree = "<group>"; };
+		84CA91E718E7411400AE9BA0 /* CustomDelegateScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomDelegateScrollView.h; sourceTree = "<group>"; };
+		84CA91E818E7411400AE9BA0 /* CustomDelegateScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomDelegateScrollView.m; sourceTree = "<group>"; };
 		84DA8DA818A686A50079BD7C /* ListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListController.h; sourceTree = "<group>"; };
 		84DA8DA918A686A50079BD7C /* ListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListController.m; sourceTree = "<group>"; };
 		84DA8DAF18A7640C0079BD7C /* InformationWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationWindowController.h; sourceTree = "<group>"; };
@@ -760,6 +763,8 @@
 				84DD96081864B29A00B9BD5A /* BookPageViewController.xib */,
 				84DD960E1865B8A900B9BD5A /* AutoSizingTextView.h */,
 				84DD960F1865B8A900B9BD5A /* AutoSizingTextView.m */,
+				84CA91E718E7411400AE9BA0 /* CustomDelegateScrollView.h */,
+				84CA91E818E7411400AE9BA0 /* CustomDelegateScrollView.m */,
 				8412B05F18B3C33400D14AAE /* BookPageView.h */,
 				8412B06018B3C33400D14AAE /* BookPageView.m */,
 				8412B05B18B393C900D14AAE /* BookBookmarksView.h */,
@@ -1260,6 +1265,7 @@
 				842B61DB18AE633000DC1A08 /* BookObjectController.m in Sources */,
 				842B61EF18B00A6F00DC1A08 /* VoiceControlLanguageToPredicateTransformer.m in Sources */,
 				84AB0429186871DD007106F4 /* DDLog.m in Sources */,
+				84CA91E918E7411400AE9BA0 /* CustomDelegateScrollView.m in Sources */,
 				8444EAA7185F83D900F90B48 /* KFEpubParser.m in Sources */,
 				8478C3F6185CA73F00B06779 /* AppDelegate.m in Sources */,
 				84AB0428186871DD007106F4 /* DDFileLogger.m in Sources */,

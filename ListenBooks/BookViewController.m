@@ -100,6 +100,7 @@ static NSInteger const DefaultSpeed = 200;
     CGFloat _toolBarFrameHeight;
     CGFloat _sideBarViewWidth;
     NSMutableArray* _searchResults;
+    NSTimer* refreshBookmarksTableTimer;
 }
 
 @synthesize book = _book;
@@ -149,27 +150,76 @@ static NSInteger const DefaultSpeed = 200;
 
 - (void)contextDidChange:(NSNotification*)notification
 {
+    NSSet *updatedObjects = [[notification userInfo] objectForKey:NSUpdatedObjectsKey];
+    NSSet *deletedObjects = [[notification userInfo] objectForKey:NSDeletedObjectsKey];
+    NSSet *insertedObjects = [[notification userInfo] objectForKey:NSInsertedObjectsKey];
+    
+    __block BOOL bookmarksFound = NO;
+    
+    [[updatedObjects allObjects] enumerateObjectsUsingBlock:^(NSManagedObject* obj, NSUInteger idx, BOOL *stop) {
+        if ([obj isKindOfClass:[Bookmark class]]) {
+            bookmarksFound = YES;
+            *stop = YES;
+        }
+    }];
+    
+    [[deletedObjects allObjects] enumerateObjectsUsingBlock:^(NSManagedObject* obj, NSUInteger idx, BOOL *stop) {
+        if ([obj isKindOfClass:[Bookmark class]]) {
+            bookmarksFound = YES;
+            *stop = YES;
+        }
+    }];
+    
+    [[insertedObjects allObjects] enumerateObjectsUsingBlock:^(NSManagedObject* obj, NSUInteger idx, BOOL *stop) {
+        if ([obj isKindOfClass:[Bookmark class]]) {
+            bookmarksFound = YES;
+            *stop = YES;
+        }
+    }];
+    
+    if (bookmarksFound) {
+        [self checkRefreshBookmarksTable];
+    }
+}
+
+- (void)checkRefreshBookmarksTable
+{
+    [refreshBookmarksTableTimer invalidate];
+    refreshBookmarksTableTimer = nil;
+    refreshBookmarksTableTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(refreshBookmarksTable) userInfo:nil repeats:NO];
+}
+
+- (void)refreshBookmarksTable
+{
+    DDLogVerbose(@"refreshBookmarksTable: %@", refreshBookmarksTableTimer);
     [self.bookBookmarksView reloadData];
 }
+
+#pragma mark - IBActions
 
 - (IBAction)fontSizeSliderChange:(id)sender
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:FontSizeDidChangeNotificaton object:sender];
+    [self makeBookPageViewControllerTextViewFirstResponder];
 }
 
 - (IBAction)fontNamePopupChanged:(id)sender
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:FontNameDidChangeNotificaton object:sender];
+    [self makeBookPageViewControllerTextViewFirstResponder];
 }
 
 - (IBAction)themeSegmentedControlDidChange:(id)sender
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:ThemeDidChangeNotificaton object:sender];
+    [self makeBookPageViewControllerTextViewFirstResponder];
 }
 
 - (IBAction)voiceSpeedSliderChanged:(id)sender
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:VoiceSpeedDidChangeNotificaton object:sender];
+    [self makeBookPageViewControllerTextViewFirstResponder];
+    
     NSSlider* speedSlider = (NSSlider*)sender;
     float rate = (float)[speedSlider doubleValue] + DefaultSpeed;
     
@@ -180,6 +230,8 @@ static NSInteger const DefaultSpeed = 200;
 - (IBAction)voiceNamePopupChanged:(id)sender
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:VoiceNameDidChangeNotificaton object:sender];
+    [self makeBookPageViewControllerTextViewFirstResponder];
+    
     NSPopUpButton* voicePopup = (NSPopUpButton*)sender;
     NSInteger voiceIndex = [voicePopup.objectValue integerValue];
     NSArray* availableVoices = [self.voiceControl arrangedObjects];
@@ -537,15 +589,16 @@ static NSInteger const DefaultSpeed = 200;
     if (!isRepreparingOriginalView) {
         NSScrollView* scrollView = (NSScrollView*)bookPageViewController.view;
         scrollView.magnification = 1;
-        
-        [bookPageViewController.textView changeFontSize:[self.book.fontSizeDelta doubleValue]];
-        [bookPageViewController.textView setFontFamily:self.book.fontName];
-        NSDictionary* selectedTheme = [[self.themeControl arrangedObjects] objectAtIndex:[self.book.themeIndex integerValue]];
-        [bookPageViewController.textView setBackgroundColor:[selectedTheme valueForKey:@"BackgroundColor"]];
-        [bookPageViewController.textView setForegroundColor:[selectedTheme valueForKey:@"ForegroundColor"]];
-        bookPageViewController.delegate = self;
-        bookPageViewController.index = pageController.selectedIndex;
     }
+    
+    [bookPageViewController.textView changeFontSize:[self.book.fontSizeDelta doubleValue]];
+    [bookPageViewController.textView setFontFamily:self.book.fontName];
+    NSDictionary* selectedTheme = [[self.themeControl arrangedObjects] objectAtIndex:[self.book.themeIndex integerValue]];
+    [bookPageViewController.textView setBackgroundColor:[selectedTheme valueForKey:@"BackgroundColor"]];
+    [bookPageViewController.textView setForegroundColor:[selectedTheme valueForKey:@"ForegroundColor"]];
+    
+    bookPageViewController.delegate = self;
+    bookPageViewController.index = pageController.selectedIndex;
 }
 
 - (void)pageControllerWillStartLiveTransition:(NSPageController *)pageController
@@ -727,7 +780,7 @@ static NSInteger const DefaultSpeed = 200;
 
 - (void)bookPageController:(id)controller textViewSelectionDidChange:(NSRange)range
 {
-    //DDLogVerbose(@"range: %@", NSStringFromRange(range));
+    DDLogVerbose(@"range: %@", NSStringFromRange(range));
 }
 
 - (NSRange)bookPageViewControllerCurrentSelectionRange
@@ -743,6 +796,13 @@ static NSInteger const DefaultSpeed = 200;
     BookPageViewController* bookPageViewController = (BookPageViewController*)self.pageController.selectedViewController;
     NSTextView* textView = bookPageViewController.textView;
     return textView;
+}
+
+- (void)makeBookPageViewControllerTextViewFirstResponder
+{
+    DDLogVerbose(@"makeBookPageViewControllerTextViewFirstResponder");
+    
+    [[self appDelegate].window makeKeyWindow];
 }
 
 #pragma mark - Playback

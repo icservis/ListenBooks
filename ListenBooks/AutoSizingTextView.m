@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "AutoSizingTextView.h"
+#import "CustomDelegateScrollView.h"
 
 @implementation AutoSizingTextView
 
@@ -32,6 +33,10 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
+    
+    CustomDelegateScrollView *scrollView = (CustomDelegateScrollView*)[self enclosingScrollView];
+    DDLogVerbose(@"scrollView.magnification: %.0f", scrollView.magnification);
+    
 }
 
 - (NSRange)selectionRangeForProposedRange:(NSRange)proposedSelRange granularity:(NSSelectionGranularity)granularity

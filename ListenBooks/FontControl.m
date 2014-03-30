@@ -31,4 +31,9 @@
     return 0.0f;
 }
 
+- (double)sliderMagnifiedValue
+{
+    return 4.0f;
+}
+
 @end

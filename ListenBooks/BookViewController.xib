@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1080" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5053"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="BookViewController">
@@ -526,7 +526,6 @@
                         <sliderCell key="cell" state="on" alignment="left" minValue="-3" maxValue="7" tickMarkPosition="above" numberOfTickMarks="11" allowsTickMarkValuesOnly="YES" sliderType="linear" id="GtO-oZ-Dgc"/>
                         <connections>
                             <action selector="fontSizeSliderChange:" target="-2" id="Wec-CS-YPU"/>
-                            <binding destination="-2" name="value" keyPath="book.fontSizeDelta" previousBinding="kvE-PM-Xya" id="cXS-Wb-jjJ"/>
                             <binding destination="-2" name="toolTip" keyPath="book.fontSizeDelta" id="q5R-Hz-I8l">
                                 <dictionary key="options">
                                     <string key="NSValueTransformerName">NumberToString</string>
@@ -534,6 +533,7 @@
                             </binding>
                             <binding destination="T3E-Ta-yKa" name="maxValue" keyPath="sliderMaxValue" id="1ZU-8m-OSP"/>
                             <binding destination="T3E-Ta-yKa" name="minValue" keyPath="sliderMinValue" previousBinding="1ZU-8m-OSP" id="kvE-PM-Xya"/>
+                            <binding destination="-2" name="value" keyPath="book.fontSizeDelta" previousBinding="kvE-PM-Xya" id="UOW-cF-Xxn"/>
                         </connections>
                     </slider>
                     <popUpButton identifier="BookFontPanelNamePopup" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RIM-6y-nAD">

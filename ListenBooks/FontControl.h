@@ -13,5 +13,6 @@
 - (double)sliderMinValue;
 - (double)sliderMaxValue;
 - (double)sliderDefaultValue;
+- (double)sliderMagnifiedValue;
 
 @end
