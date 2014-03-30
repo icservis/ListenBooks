@@ -21,7 +21,7 @@
 #import "ListViewController.h"
 #import "BookViewController.h"
 #import "ImageViewController.h"
-#import "PDFViewController.h"
+#import "BookPDFViewController.h"
 
 #import "BooksTreeController.h"
 #import "BookmarksArrayController.h"
@@ -393,7 +393,7 @@
     [self.tabView selectTabViewItem:newItem];
     */
     
-    PDFViewController* pdfViewController = [[PDFViewController alloc] initWithNibName:@"PDFViewController" bundle:nil];
+    BookPDFViewController* pdfViewController = [[BookPDFViewController alloc] initWithNibName:@"BookPDFViewController" bundle:nil];
     [self.tabViewControllers addObject:pdfViewController];
     pdfViewController.managedObjectContext = self.managedObjectContext;
     pdfViewController.tabViewItem = newItem;

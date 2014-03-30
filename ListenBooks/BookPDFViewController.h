@@ -11,7 +11,7 @@
 
 @class Book;
 
-@interface PDFViewController : NSViewController <TabBarControllerProtocol>
+@interface BookPDFViewController : NSViewController <TabBarControllerProtocol>
 
 @property (nonatomic, strong) Book* book;
 @property (strong, nonatomic) NSManagedObjectContext* managedObjectContext;

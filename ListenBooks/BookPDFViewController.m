@@ -7,13 +7,13 @@
 //
 
 #import "AppDelegate.h"
-#import "PDFViewController.h"
+#import "BookPDFViewController.h"
 #import "ProgressWindowController.h"
 #import "KFToolbar.h"
 #import "KFToolbarItem.h"
 #import "BookPDFView.h"
 
-@interface PDFViewController () 
+@interface BookPDFViewController () <NSSplitViewDelegate, NSOutlineViewDataSource, NSOutlineViewDelegate>
 
 @property (weak) IBOutlet NSSplitView *splitView;
 @property (weak) IBOutlet NSView *sideBarView;
@@ -22,12 +22,15 @@
 @property (weak) IBOutlet NSTextField *pageLabel;
 @property (weak) IBOutlet NSProgressIndicator *progressIndicatior;
 @property (weak) IBOutlet BookPDFView *pdfView;
+@property (weak) IBOutlet NSOutlineView *outlineView;
 
 @property (weak) IBOutlet NSLayoutConstraint *toolBarHeightConstraint;
 
+@property (nonatomic, strong) PDFOutline* outline;
+
 @end
 
-@implementation PDFViewController {
+@implementation BookPDFViewController {
         CGFloat _toolBarFrameHeight;
         CGFloat _sideBarViewWidth;
 }
@@ -46,9 +49,22 @@
     [super awakeFromNib];
     [self loadPageContent];
     
+    [self.pdfView setDelegate:self];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(pageChanged:)
+                                                 name:PDFViewPageChangedNotification
+                                               object:self.pdfView];
+    
     _toolBarFrameHeight = self.toolBarView.frame.size.height;
     _sideBarViewWidth = self.sideBarView.frame.size.width;
 }
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)loadPageContent
 {
     DDLogVerbose(@"setupPdfPageControllerContent");
@@ -56,8 +72,6 @@
     NSURL *pdfURL = [dirURL URLByAppendingPathComponent:@"MobileHIG.pdf"];
     DDLogVerbose(@"pdfURL: %@", pdfURL);
     
-    // load all the necessary image files by enumerating through the bundle's Resources folder,
-    // this will only load images of type "kUTTypeImage"
     //
     [self.progressIndicatior startAnimation:nil];
     
@@ -71,9 +85,26 @@
             
             [self.pdfView setDocument: pdfDoc];
             
+            if (self.outline == nil) {
+                if ([self isSideBarOpened]) {
+                    [self toggleSideBar];
+                }
+            } else {
+                [self.pageLabel setStringValue:[NSString stringWithFormat:@"%@: %i / %li", NSLocalizedString(@"Page", nil), 1, [[self.pdfView document] pageCount]]];
+                [self.outlineView reloadData];
+            }
+            
             [self.progressIndicatior stopAnimation:nil];
         });
     });
+}
+
+- (PDFOutline*)outline
+{
+    if (_outline == nil) {
+        _outline = [[self.pdfView document] outlineRoot];
+    }
+    return _outline;
 }
 
 #pragma mark - TabViewControllerProtocol
@@ -184,6 +215,114 @@
         return proposedMinimumPosition;
     }
     return 0;
+}
+
+#pragma mark - OutlineViewDataSource
+
+- (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item
+{
+    NSInteger numberOfChildrenOfItem = 0;
+    if (item == nil) {
+        if (self.outline)
+            numberOfChildrenOfItem = [self.outline numberOfChildren];
+        else
+            numberOfChildrenOfItem = 0;
+    } else {
+        numberOfChildrenOfItem = [(PDFOutline *)item numberOfChildren];
+    }
+    
+    return numberOfChildrenOfItem;
+}
+
+- (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item
+{
+    if (item == nil) {
+        
+        if (self.outline) {
+            return [self.outline childAtIndex:index];
+        } else {
+            return nil;
+        }
+        
+    } else {
+        return [(PDFOutline *)item childAtIndex: index];
+    }
+}
+
+- (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item
+{
+    if (item == nil) {
+        if (self.outline)
+            return ([self.outline numberOfChildren] > 0);
+        else
+            return NO;
+    } else {
+        return ([(PDFOutline *)item numberOfChildren] > 0);
+    }
+}
+
+- (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
+{
+    return [(PDFOutline *)item label];
+}
+
+- (IBAction) takeDestinationFromOutline: (id) sender
+{
+    PDFDestination* destination = [[sender itemAtRow:[sender selectedRow]] destination];
+    DDLogVerbose(@"destination: %@", destination);
+    [self.pdfView goToDestination: destination];
+}
+
+- (void) pageChanged: (NSNotification *) notification
+{
+    NSUInteger    newPageIndex;
+    NSInteger     numRows;
+    NSInteger     i;
+    NSInteger     newlySelectedRow;
+    
+    if (self.outline == nil) return;
+    
+    newPageIndex = [[self.pdfView document] indexForPage: [self.pdfView currentPage]];
+    
+    [self.pageLabel setStringValue:[NSString stringWithFormat:@"%@: %li / %li", NSLocalizedString(@"Page", nil), newPageIndex+1, [[self.pdfView document] pageCount]]];
+    
+    
+    // Walk outline view looking for best firstpage number match.
+    newlySelectedRow = -1;
+    numRows = [_outlineView numberOfRows];
+    for (i = 0; i < numRows; i++)// 3
+    {
+        PDFOutline  *outlineItem;
+        
+        // Get the destination of the given row....
+        outlineItem = (PDFOutline *)[_outlineView itemAtRow: i];
+        
+        if ([[_pdfView document] indexForPage:
+             [[outlineItem destination] page]] == newPageIndex)
+        {
+            newlySelectedRow = i;
+            NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:newlySelectedRow];
+            [self.outlineView selectRowIndexes:indexSet byExtendingSelection:NO];
+            break;
+        }
+        else if ([[self.pdfView document] indexForPage:
+                  [[outlineItem destination] page]] > newPageIndex)
+        {
+            newlySelectedRow = i - 1;
+            NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:newlySelectedRow];
+            [self.outlineView selectRowIndexes:indexSet byExtendingSelection:NO];
+            break;
+        }
+    }
+    
+    if (newlySelectedRow != -1)// 4
+        [self.outlineView scrollRowToVisible: newlySelectedRow];
+}
+
+- (void)outlineViewSelectionDidChange:(NSNotification *)notification
+{
+    DDLogVerbose(@"notification: %@", notification);
+    [self takeDestinationFromOutline:notification.object];
 }
 
 @end
