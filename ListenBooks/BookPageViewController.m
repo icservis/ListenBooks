@@ -153,7 +153,14 @@ static CGFloat const kTextContainerMargin = 20.0f;
     BookViewController* bookViewController = (BookViewController*)self.delegate;
     Book* book = bookViewController.book;
     Page* page = [book.pages objectAtIndex:self.index];
+    
+    NSLayoutManager *layoutManager = self.textView.layoutManager;
+    NSRange glyphRange = [layoutManager glyphRangeForBoundingRect: [self.textView visibleRect] inTextContainer: self.textView.textContainer];
+    NSRange charRange = [layoutManager characterRangeForGlyphRange: glyphRange actualGlyphRange: &glyphRange];
+    
     self.representedObject = page.data;
+    
+    [self.textView scrollRangeToVisible: charRange];
     
     [self.textView changeFontSize:[book.fontSizeDelta doubleValue]];
     [self.textView setFontFamily:book.fontName];
