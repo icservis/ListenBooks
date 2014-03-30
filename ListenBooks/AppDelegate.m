@@ -21,6 +21,7 @@
 #import "ListViewController.h"
 #import "BookViewController.h"
 #import "ImageViewController.h"
+#import "PDFViewController.h"
 
 #import "BooksTreeController.h"
 #import "BookmarksArrayController.h"
@@ -371,7 +372,7 @@
 
 - (IBAction)addNewTab:(id)sender {
     static NSInteger counter = 1;
-    [self addNewTabWithTitle:[NSString stringWithFormat:@"%@ %ld", NSLocalizedString(@"New Image", nil), (long)counter++]];
+    [self addNewTabWithTitle:[NSString stringWithFormat:@"%@ %ld", NSLocalizedString(@"New Page", nil), (long)counter++]];
 }
 
 - (void)addNewTabWithTitle:(NSString *)aTitle
@@ -380,12 +381,24 @@
     [newModel setTitle:aTitle];
 	NSTabViewItem *newItem = [[NSTabViewItem alloc] initWithIdentifier:newModel];
     
+    /*
     ImageViewController* imageViewController = [[ImageViewController alloc] initWithNibName:@"ImageViewController" bundle:nil];;
     [self.tabViewControllers addObject:imageViewController];
     imageViewController.managedObjectContext = self.managedObjectContext;
     imageViewController.tabViewItem = newItem;
     
     NSView* mainView = [imageViewController view];
+    [newItem setView:mainView];
+	[self.tabView addTabViewItem:newItem];
+    [self.tabView selectTabViewItem:newItem];
+    */
+    
+    PDFViewController* pdfViewController = [[PDFViewController alloc] initWithNibName:@"PDFViewController" bundle:nil];
+    [self.tabViewControllers addObject:pdfViewController];
+    pdfViewController.managedObjectContext = self.managedObjectContext;
+    pdfViewController.tabViewItem = newItem;
+    
+    NSView* mainView = [pdfViewController view];
     [newItem setView:mainView];
 	[self.tabView addTabViewItem:newItem];
     [self.tabView selectTabViewItem:newItem];
@@ -860,31 +873,31 @@
 	[self.tabBar setStyleNamed:[sender titleOfSelectedItem]];
 }
 
-- (void)configOnlyShowCloseOnHover:(id)sender {
+- (void)configOnlyShowCloseOnHover:(KFToolbarItem*)sender {
 	[self.tabBar setOnlyShowCloseOnHover:[sender state]];
 }
 
-- (void)configCanCloseOnlyTab:(id)sender {
+- (void)configCanCloseOnlyTab:(KFToolbarItem*)sender {
 	[self.tabBar setCanCloseOnlyTab:[sender state]];
 }
 
-- (void)configDisableTabClose:(id)sender {
+- (void)configDisableTabClose:(KFToolbarItem*)sender {
 	[self.tabBar setDisableTabClose:[sender state]];
 }
 
-- (void)configAllowBackgroundClosing:(id)sender {
+- (void)configAllowBackgroundClosing:(KFToolbarItem*)sender {
 	[self.tabBar setAllowsBackgroundTabClosing:[sender state]];
 }
 
-- (void)configHideForSingleTab:(id)sender {
+- (void)configHideForSingleTab:(KFToolbarItem*)sender {
 	[self.tabBar setHideForSingleTab:[sender state]];
 }
 
-- (void)configAddTabButton:(id)sender {
+- (void)configAddTabButton:(KFToolbarItem*)sender {
 	[self.tabBar setShowAddTabButton:[sender state]];
 }
 
-- (void)configTabMinWidth:(id)sender {
+- (void)configTabMinWidth:(KFToolbarItem*)sender {
 	if ([self.tabBar buttonOptimumWidth] < [sender integerValue]) {
 		[self.tabBar setButtonMinWidth:[self.tabBar buttonOptimumWidth]];
 		[sender setIntegerValue:[self.tabBar buttonOptimumWidth]];
@@ -894,7 +907,7 @@
 	[self.tabBar setButtonMinWidth:[sender integerValue]];
 }
 
-- (void)configTabMaxWidth:(id)sender {
+- (void)configTabMaxWidth:(KFToolbarItem*)sender {
 	if ([self.tabBar buttonOptimumWidth] > [sender integerValue]) {
 		[self.tabBar setButtonMaxWidth:[self.tabBar buttonOptimumWidth]];
 		[sender setIntegerValue:[self.tabBar buttonOptimumWidth]];
@@ -904,7 +917,7 @@
 	[self.tabBar setButtonMaxWidth:[sender integerValue]];
 }
 
-- (void)configTabOptimumWidth:(id)sender {
+- (void)configTabOptimumWidth:(KFToolbarItem*)sender {
 	if ([self.tabBar buttonMaxWidth] < [sender integerValue]) {
 		[self.tabBar setButtonOptimumWidth:[self.tabBar buttonMaxWidth]];
 		[sender setIntegerValue:[self.tabBar buttonMaxWidth]];
@@ -920,7 +933,7 @@
 	[self.tabBar setButtonOptimumWidth:[sender integerValue]];
 }
 
-- (void)configTabSizeToFit:(id)sender {
+- (void)configTabSizeToFit:(KFToolbarItem*)sender {
 	[self.tabBar setSizeButtonsToFit:[sender state]];
 }
 
@@ -928,15 +941,15 @@
 	[self.tabBar setTearOffStyle:([sender indexOfSelectedItem] == 0) ? MMTabBarTearOffAlphaWindow : MMTabBarTearOffMiniwindow];
 }
 
-- (void)configUseOverflowMenu:(id)sender {
+- (void)configUseOverflowMenu:(KFToolbarItem*)sender {
 	[self.tabBar setUseOverflowMenu:[sender state]];
 }
 
-- (void)configAutomaticallyAnimates:(id)sender {
+- (void)configAutomaticallyAnimates:(KFToolbarItem*)sender {
 	[self.tabBar setAutomaticallyAnimates:[sender state]];
 }
 
-- (void)configAllowsScrubbing:(id)sender {
+- (void)configAllowsScrubbing:(KFToolbarItem*)sender {
 	[self.tabBar setAllowsScrubbing:[sender state]];
 }
 
