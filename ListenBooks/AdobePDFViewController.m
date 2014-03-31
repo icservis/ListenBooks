@@ -355,15 +355,15 @@
     
     // Walk outline view looking for best firstpage number match.
     newlySelectedRow = -1;
-    numRows = [_outlineView numberOfRows];
-    for (i = 0; i < numRows; i++)// 3
+    numRows = [self.outlineView numberOfRows];
+    for (i = 0; i < numRows; i++)
     {
         PDFOutline  *outlineItem;
         
         // Get the destination of the given row....
-        outlineItem = (PDFOutline *)[_outlineView itemAtRow: i];
+        outlineItem = (PDFOutline *)[self.outlineView itemAtRow: i];
         
-        if ([[_pdfView document] indexForPage:
+        if ([[self.pdfView document] indexForPage:
              [[outlineItem destination] page]] == newPageIndex)
         {
             newlySelectedRow = i;
