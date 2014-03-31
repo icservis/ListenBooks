@@ -75,6 +75,7 @@
     _toolBarFrameHeight = self.toolBarView.frame.size.height;
     _sideBarViewWidth = self.sideBarView.frame.size.width;
     
+    [self.pageLabel setStringValue:@""];
     [self.pdfView setDelegate:self];
 }
 

@@ -132,6 +132,8 @@ static NSInteger const DefaultSpeed = 200;
     
     [self.bookBookmarksView setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"created" ascending:NO]]];
     [self.bookSearchView setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"pageIndex" ascending:YES]]];
+    
+    [self.pageLabel setStringValue:@""];
     [self.pageView setDelegate:self];
 }
 

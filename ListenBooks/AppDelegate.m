@@ -695,8 +695,19 @@
         CFRelease(s);
     }
     
-    
     CGPDFDocumentRelease(document);
+    
+    if ([book.title length] == 0) {
+        book.title = NSLocalizedString(@"No Title", nil);
+    }
+    
+    if ([book.author length] == 0) {
+        book.author = NSLocalizedString(@"No Author", nil);
+    }
+    
+    if ([book.subject length] == 0) {
+        book.subject = @"";
+    }
     
     
     book.language = @"";
@@ -857,6 +868,7 @@
     DDLogVerbose(@"epubContentBaseURL %@", [controller.epubContentBaseURL path]);
     DDLogVerbose(@"meta %@", [self.contentModel.metaData description]);
     DDLogVerbose(@"coverPath %@", [self.contentModel.coverPath description]);
+    DDLogVerbose(@"guide %@", [self.contentModel.guide description]);
     
     [self.managedObjectContext processPendingChanges];
     [[self.managedObjectContext undoManager] disableUndoRegistration];
@@ -881,6 +893,22 @@
     if (self.contentModel.coverPath != nil) {
         NSURL* coverPath = [controller.epubContentBaseURL URLByAppendingPathComponent:self.contentModel.coverPath];
         book.cover = [[NSImage alloc] initWithContentsOfURL:coverPath];
+    }
+    
+    if ([book.title length] == 0) {
+        book.title = NSLocalizedString(@"No Title", nil);
+    }
+    
+    if ([book.author length] == 0) {
+        if ([book.creator length] > 0) {
+            book.author = book.creator;
+        } else {
+            book.author = NSLocalizedString(@"No Author", nil);
+        }
+    }
+    
+    if ([book.subject length] == 0) {
+        book.subject = @"";
     }
     
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
