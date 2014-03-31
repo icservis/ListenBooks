@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 IC Servis. All rights reserved.
 //
 
-#import "BookPDFView.h"
+#import "AdobePDFView.h"
 
-@implementation BookPDFView
+@implementation AdobePDFView
 
 - (id)initWithFrame:(NSRect)frame
 {

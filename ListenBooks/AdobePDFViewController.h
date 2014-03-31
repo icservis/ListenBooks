@@ -12,7 +12,7 @@
 @class Book;
 @class Bookmark;
 
-@interface BookPDFViewController : NSViewController <TabBarControllerProtocol>
+@interface AdobePDFViewController : NSViewController <TabBarControllerProtocol>
 
 @property (nonatomic, strong) Book* book;
 @property (nonatomic, strong) Bookmark* bookmark;

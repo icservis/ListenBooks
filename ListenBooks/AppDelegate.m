@@ -21,7 +21,7 @@
 #import "ListViewController.h"
 #import "BookViewController.h"
 #import "ImageViewController.h"
-#import "BookPDFViewController.h"
+#import "AdobePDFViewController.h"
 
 #import "BooksTreeController.h"
 #import "BookmarksArrayController.h"
@@ -402,7 +402,7 @@
     
     if ([book.mediaKind isEqualToNumber:@(MediaKindPdf)]) {
         
-        BookPDFViewController* pdfViewController = [[BookPDFViewController alloc] initWithNibName:NSStringFromClass([BookPDFViewController class]) bundle:nil];
+        AdobePDFViewController* pdfViewController = [[AdobePDFViewController alloc] initWithNibName:NSStringFromClass([AdobePDFViewController class]) bundle:nil];
         [self.tabViewControllers addObject:pdfViewController];
         pdfViewController.managedObjectContext = self.managedObjectContext;
         pdfViewController.tabViewItem = newItem;
@@ -487,8 +487,8 @@
                 [self.listArrayController setSelectedObjects:@[bookViewController.book]];
                 [controller.tabViewItem setLabel:bookViewController.book.title];
             }
-            if ([controller isKindOfClass:[BookPDFViewController class]]) {
-                BookPDFViewController* bookPdfViewController = (BookPDFViewController*)controller;
+            if ([controller isKindOfClass:[AdobePDFViewController class]]) {
+                AdobePDFViewController* bookPdfViewController = (AdobePDFViewController*)controller;
                 [self.booksTreeController setSelectedObject:bookPdfViewController.book];
                 [self.listArrayController setSelectedObjects:@[bookPdfViewController.book]];
                 [controller.tabViewItem setLabel:bookPdfViewController.book.title];

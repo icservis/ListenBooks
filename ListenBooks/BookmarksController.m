@@ -11,7 +11,7 @@
 #import "Bookmark.h"
 #import "BookmarksController.h"
 #import "BookViewController.h"
-#import "BookPDFViewController.h"
+#import "AdobePDFViewController.h"
 #import "BookmarksView.h"
 #import "BooksView.h"
 #import "BooksTreeController.h"
@@ -40,8 +40,8 @@
                     *stop = YES;
                 }
             }
-            if ([controller isKindOfClass:[BookPDFViewController class]]) {
-                BookPDFViewController* bookPdfViewController = (BookPDFViewController*)controller;
+            if ([controller isKindOfClass:[AdobePDFViewController class]]) {
+                AdobePDFViewController* bookPdfViewController = (AdobePDFViewController*)controller;
                 if ([bookPdfViewController.book isEqualTo:bookmark.book]) {
                     [appDelegate.tabBar selectTabViewItem:bookPdfViewController.tabViewItem];
                     bookPdfViewController.bookmark = bookmark;

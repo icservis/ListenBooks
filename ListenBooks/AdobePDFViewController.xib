@@ -6,7 +6,7 @@
         <plugIn identifier="com.apple.pdfkit.ibplugin" version="5053"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="BookPDFViewController">
+        <customObject id="-2" userLabel="File's Owner" customClass="AdobePDFViewController">
             <connections>
                 <outlet property="contentView" destination="0U3-Bg-7ig" id="tN5-qh-xzq"/>
                 <outlet property="outlineView" destination="Hhy-xH-uf5" id="AOQ-Kf-dnV"/>
@@ -110,7 +110,7 @@
                                         <constraint firstAttribute="centerY" secondItem="kkg-Pg-VWv" secondAttribute="centerY" id="X5g-hU-UBA"/>
                                     </constraints>
                                 </customView>
-                                <pdfView autoresizesSubviews="NO" wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M11-wC-ssP" customClass="BookPDFView">
+                                <pdfView autoresizesSubviews="NO" wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M11-wC-ssP" customClass="AdobePDFView">
                                     <rect key="frame" x="0.0" y="0.0" width="329" height="236"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 </pdfView>

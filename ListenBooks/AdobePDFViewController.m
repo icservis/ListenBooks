@@ -7,18 +7,18 @@
 //
 
 #import "AppDelegate.h"
-#import "BookPDFViewController.h"
+#import "AdobePDFViewController.h"
 #import "ProgressWindowController.h"
 #import "KFToolbar.h"
 #import "KFToolbarItem.h"
-#import "BookPDFView.h"
+#import "AdobePDFView.h"
 #import "Book.h"
 #import "Bookmark.h"
 #import "BookBookmarksView.h"
 #import "BookSearchView.h"
 #import "SpinnerSearchField.h"
 
-@interface BookPDFViewController () <NSSplitViewDelegate, NSOutlineViewDataSource, NSOutlineViewDelegate>
+@interface AdobePDFViewController () <NSSplitViewDelegate, NSOutlineViewDataSource, NSOutlineViewDelegate>
 
 @property (weak) IBOutlet NSSplitView *splitView;
 @property (weak) IBOutlet NSView *sideBarView;
@@ -26,7 +26,7 @@
 @property (weak) IBOutlet NSView *toolBarView;
 @property (weak) IBOutlet NSTextField *pageLabel;
 @property (weak) IBOutlet NSProgressIndicator *progressIndicatior;
-@property (weak) IBOutlet BookPDFView *pdfView;
+@property (weak) IBOutlet AdobePDFView *pdfView;
 @property (weak) IBOutlet NSOutlineView *outlineView;
 
 @property (weak) IBOutlet NSTabView *sideBarTabView;
@@ -43,7 +43,7 @@
 
 @end
 
-@implementation BookPDFViewController {
+@implementation AdobePDFViewController {
         CGFloat _toolBarFrameHeight;
         CGFloat _sideBarViewWidth;
 }

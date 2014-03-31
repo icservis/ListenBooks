@@ -126,9 +126,9 @@
 		84B3628A18C61E4000CDF755 /* Paragraph.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B3628818C61E4000CDF755 /* Paragraph.m */; };
 		84B3628D18C62D1D00CDF755 /* SpinnerSearchField.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B3628C18C62D1D00CDF755 /* SpinnerSearchField.m */; };
 		84B3628E18C62D1D00CDF755 /* SpinnerSearchField.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B3628C18C62D1D00CDF755 /* SpinnerSearchField.m */; };
-		84BFE00618E87B7700AF8DCD /* BookPDFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BFE00418E87B7700AF8DCD /* BookPDFViewController.m */; };
-		84BFE00718E87B7700AF8DCD /* BookPDFViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84BFE00518E87B7700AF8DCD /* BookPDFViewController.xib */; };
-		84BFE00A18E8850D00AF8DCD /* BookPDFView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BFE00918E8850D00AF8DCD /* BookPDFView.m */; };
+		84BFE00618E87B7700AF8DCD /* AdobePDFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BFE00418E87B7700AF8DCD /* AdobePDFViewController.m */; };
+		84BFE00718E87B7700AF8DCD /* AdobePDFViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84BFE00518E87B7700AF8DCD /* AdobePDFViewController.xib */; };
+		84BFE00A18E8850D00AF8DCD /* AdobePDFView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BFE00918E8850D00AF8DCD /* AdobePDFView.m */; };
 		84BFE00C18E888ED00AF8DCD /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84BFE00B18E888ED00AF8DCD /* Quartz.framework */; };
 		84BFE00F18E8948500AF8DCD /* MobileHIG.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 84BFE00E18E8948500AF8DCD /* MobileHIG.pdf */; };
 		84CA91E918E7411400AE9BA0 /* CustomDelegateScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CA91E818E7411400AE9BA0 /* CustomDelegateScrollView.m */; };
@@ -378,11 +378,11 @@
 		84B3628818C61E4000CDF755 /* Paragraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Paragraph.m; sourceTree = "<group>"; };
 		84B3628B18C62D1D00CDF755 /* SpinnerSearchField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpinnerSearchField.h; sourceTree = "<group>"; };
 		84B3628C18C62D1D00CDF755 /* SpinnerSearchField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpinnerSearchField.m; sourceTree = "<group>"; };
-		84BFE00318E87B7700AF8DCD /* BookPDFViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookPDFViewController.h; sourceTree = "<group>"; };
-		84BFE00418E87B7700AF8DCD /* BookPDFViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookPDFViewController.m; sourceTree = "<group>"; };
-		84BFE00518E87B7700AF8DCD /* BookPDFViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookPDFViewController.xib; sourceTree = "<group>"; };
-		84BFE00818E8850D00AF8DCD /* BookPDFView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookPDFView.h; sourceTree = "<group>"; };
-		84BFE00918E8850D00AF8DCD /* BookPDFView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookPDFView.m; sourceTree = "<group>"; };
+		84BFE00318E87B7700AF8DCD /* AdobePDFViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdobePDFViewController.h; sourceTree = "<group>"; };
+		84BFE00418E87B7700AF8DCD /* AdobePDFViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdobePDFViewController.m; sourceTree = "<group>"; };
+		84BFE00518E87B7700AF8DCD /* AdobePDFViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdobePDFViewController.xib; sourceTree = "<group>"; };
+		84BFE00818E8850D00AF8DCD /* AdobePDFView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdobePDFView.h; sourceTree = "<group>"; };
+		84BFE00918E8850D00AF8DCD /* AdobePDFView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdobePDFView.m; sourceTree = "<group>"; };
 		84BFE00B18E888ED00AF8DCD /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		84BFE00E18E8948500AF8DCD /* MobileHIG.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = MobileHIG.pdf; path = Resources/pdfs/MobileHIG.pdf; sourceTree = SOURCE_ROOT; };
 		84CA91E718E7411400AE9BA0 /* CustomDelegateScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomDelegateScrollView.h; sourceTree = "<group>"; };
@@ -962,8 +962,8 @@
 		84BFE00018E87AF900AF8DCD /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				84BFE00318E87B7700AF8DCD /* BookPDFViewController.h */,
-				84BFE00418E87B7700AF8DCD /* BookPDFViewController.m */,
+				84BFE00318E87B7700AF8DCD /* AdobePDFViewController.h */,
+				84BFE00418E87B7700AF8DCD /* AdobePDFViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -971,9 +971,9 @@
 		84BFE00118E87B0200AF8DCD /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				84BFE00518E87B7700AF8DCD /* BookPDFViewController.xib */,
-				84BFE00818E8850D00AF8DCD /* BookPDFView.h */,
-				84BFE00918E8850D00AF8DCD /* BookPDFView.m */,
+				84BFE00518E87B7700AF8DCD /* AdobePDFViewController.xib */,
+				84BFE00818E8850D00AF8DCD /* AdobePDFView.h */,
+				84BFE00918E8850D00AF8DCD /* AdobePDFView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1278,7 +1278,7 @@
 				84AB04AB186871E9007106F4 /* README.md in Resources */,
 				84DD963A1865C98B00B9BD5A /* image3.jpg in Resources */,
 				8478C3FE185CA73F00B06779 /* Images.xcassets in Resources */,
-				84BFE00718E87B7700AF8DCD /* BookPDFViewController.xib in Resources */,
+				84BFE00718E87B7700AF8DCD /* AdobePDFViewController.xib in Resources */,
 				84DD963D1865C98B00B9BD5A /* image6.jpg in Resources */,
 				8478C3F3185CA73F00B06779 /* Credits.rtf in Resources */,
 				84DD963B1865C98B00B9BD5A /* image4.jpg in Resources */,
@@ -1342,7 +1342,7 @@
 				8444EACB185F841700F90B48 /* NSString+DDXML.m in Sources */,
 				8444EAB8185F840800F90B48 /* zip.c in Sources */,
 				848C958B186647240020FDC9 /* NumberToString.m in Sources */,
-				84BFE00A18E8850D00AF8DCD /* BookPDFView.m in Sources */,
+				84BFE00A18E8850D00AF8DCD /* AdobePDFView.m in Sources */,
 				8444EAB9185F840800F90B48 /* SSZipArchive.m in Sources */,
 				84722BDE186DD76200FA7973 /* ListCollectionItemView.m in Sources */,
 				84E27E9718624D6000317411 /* BookViewController.m in Sources */,
@@ -1358,7 +1358,7 @@
 				84AB0426186871DD007106F4 /* DDAbstractDatabaseLogger.m in Sources */,
 				848C958D186647240020FDC9 /* NumberValueIsOne.m in Sources */,
 				84AB042B186871DD007106F4 /* DDContextFilterLogFormatter.m in Sources */,
-				84BFE00618E87B7700AF8DCD /* BookPDFViewController.m in Sources */,
+				84BFE00618E87B7700AF8DCD /* AdobePDFViewController.m in Sources */,
 				8444EAA6185F83D900F90B48 /* KFEpubKit.m in Sources */,
 				8444EACD185F841700F90B48 /* DDXMLElement.m in Sources */,
 				84E27E7C1862466F00317411 /* BooksView.m in Sources */,

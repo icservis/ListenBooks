@@ -7,6 +7,6 @@
 //
 
 
-@interface BookPDFView : PDFView
+@interface AdobePDFView : PDFView
 
 @end
