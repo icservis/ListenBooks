@@ -474,6 +474,26 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
+		841DA45F18E9A202006530FB /* Windows */ = {
+			isa = PBXGroup;
+			children = (
+				84DA8DB418A764140079BD7C /* InfoWindow */,
+				847EF68318AABE9300A0DC04 /* PreferencesWindow */,
+				844C0AA518ACDCED00656A28 /* ProgressWindow */,
+			);
+			name = Windows;
+			sourceTree = "<group>";
+		};
+		841DA46018E9A215006530FB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				84E27E7D186249D100317411 /* BookView */,
+				84BFDFFE18E87AEB00AF8DCD /* PDFView */,
+				84E27E8118624B3800317411 /* ImageView */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		842A12231865E4F700AAAD42 /* Books */ = {
 			isa = PBXGroup;
 			children = (
@@ -647,7 +667,6 @@
 		8478C3E1185CA73F00B06779 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				84BFE00B18E888ED00AF8DCD /* Quartz.framework */,
 				8444EAD1185F8D2300F90B48 /* libz.dylib */,
 				8444EACF185F847500F90B48 /* libxml2.dylib */,
 				8478C3E2185CA73F00B06779 /* Cocoa.framework */,
@@ -656,6 +675,7 @@
 				8478C41B185CA74000B06779 /* CoreFoundation.framework */,
 				8478C41D185CA74000B06779 /* CoreData.framework */,
 				8478C41F185CA74000B06779 /* Foundation.framework */,
+				84BFE00B18E888ED00AF8DCD /* Quartz.framework */,
 				8478C3E4185CA73F00B06779 /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -676,12 +696,8 @@
 			children = (
 				84E27E80186249F200317411 /* Application */,
 				847A006218702B8B00039910 /* MainWindow */,
-				84E27E7D186249D100317411 /* BookView */,
-				84BFDFFE18E87AEB00AF8DCD /* PDFView */,
-				84E27E8118624B3800317411 /* ImageView */,
-				84DA8DB418A764140079BD7C /* InfoWindow */,
-				847EF68318AABE9300A0DC04 /* PreferencesWindow */,
-				844C0AA518ACDCED00656A28 /* ProgressWindow */,
+				841DA46018E9A215006530FB /* Views */,
+				841DA45F18E9A202006530FB /* Windows */,
 				84DA8DB518A76D060079BD7C /* Extensions */,
 				84E27E7F186249E400317411 /* Resources */,
 				8478C3E9185CA73F00B06779 /* Supporting Files */,
