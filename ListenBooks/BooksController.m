@@ -14,6 +14,8 @@
 #import "BooksTreeController.h"
 #import "BookmarksArrayController.h"
 #import "BookViewController.h"
+#import "BookPDFViewController.h"
+#import "BookPDFViewController.h"
 #import "ListArrayController.h"
 #import "NSArrayController_Extensions.h"
 #import "InformationWindowController.h"
@@ -98,6 +100,14 @@
                     *stop = YES;
                 }
             }
+            if ([controller isKindOfClass:[BookPDFViewController class]]) {
+                BookPDFViewController* bookPdfViewController = (BookPDFViewController*)controller;
+                if ([bookPdfViewController.book isEqualTo:book]) {
+                    [appDelegate.tabBar selectTabViewItem:bookPdfViewController.tabViewItem];
+                    bookFound = YES;
+                    *stop = YES;
+                }
+            }
         }];
         if (bookFound == NO) {
             [appDelegate addNewTabWithBook:book];
@@ -153,6 +163,14 @@
                     [self.progressWindowController updateProgressWindowWithInfo:bookViewController.book.title];
                 }
             }
+            if ([controller isKindOfClass:[BookPDFViewController class]]) {
+                BookPDFViewController* bookPdfViewController = (BookPDFViewController*)controller;
+                if ([bookPdfViewController.book isEqualTo:book]) {
+                    [appDelegate closeTabWithItem:bookPdfViewController.tabViewItem];
+                    [self.progressWindowController updateProgressWindowWithInfo:bookPdfViewController.book.title];
+                }
+            }
+
         }];
         
         [appDelegate.managedObjectContext deleteObject:book];

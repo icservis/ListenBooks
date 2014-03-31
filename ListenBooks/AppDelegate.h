@@ -24,6 +24,12 @@
 @class ListCollectionView;
 @class ProgressWindowController;
 
+typedef NS_ENUM(NSUInteger, MediaKind) {
+    MediaKindEpub,
+    MediaKindPdf,
+    MediaKindAudio
+};
+
 extern NSString* const TabBarSelectionDidChangeNotification;
 extern NSString* const TabBarCountDidChangeNotification;
 

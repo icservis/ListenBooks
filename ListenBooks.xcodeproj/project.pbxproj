@@ -340,6 +340,7 @@
 		848E57E318AB93B3004D72A3 /* ListenBooks 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ListenBooks 2.xcdatamodel"; sourceTree = "<group>"; };
 		848E57E518AB997F004D72A3 /* NSAttributedStringToData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSAttributedStringToData.h; sourceTree = "<group>"; };
 		848E57E618AB997F004D72A3 /* NSAttributedStringToData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSAttributedStringToData.m; sourceTree = "<group>"; };
+		84A33E6518E9869F005C1062 /* ListenBooks 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ListenBooks 7.xcdatamodel"; sourceTree = "<group>"; };
 		84AB0413186871DD007106F4 /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
 		84AB0414186871DD007106F4 /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
 		84AB0415186871DD007106F4 /* DDASLLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDASLLogger.h; sourceTree = "<group>"; };
@@ -1739,6 +1740,7 @@
 		8478C3FA185CA73F00B06779 /* ListenBooks.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				84A33E6518E9869F005C1062 /* ListenBooks 7.xcdatamodel */,
 				84467CC818C66DB40011DC23 /* ListenBooks 6.xcdatamodel */,
 				840ED26B18C4BB7F00342386 /* ListenBooks 4.xcdatamodel */,
 				84B3627918C61D5800CDF755 /* ListenBooks 5.xcdatamodel */,
@@ -1746,7 +1748,7 @@
 				842B61E918AFFA2B00DC1A08 /* ListenBooks 3.xcdatamodel */,
 				8478C3FB185CA73F00B06779 /* ListenBooks.xcdatamodel */,
 			);
-			currentVersion = 84467CC818C66DB40011DC23 /* ListenBooks 6.xcdatamodel */;
+			currentVersion = 84A33E6518E9869F005C1062 /* ListenBooks 7.xcdatamodel */;
 			path = ListenBooks.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

@@ -12,6 +12,7 @@
 #import "KFToolbar.h"
 #import "KFToolbarItem.h"
 #import "BookPDFView.h"
+#import "Book.h"
 
 @interface BookPDFViewController () <NSSplitViewDelegate, NSOutlineViewDataSource, NSOutlineViewDelegate>
 
@@ -67,18 +68,14 @@
 
 - (void)loadPageContent
 {
-    DDLogVerbose(@"setupPdfPageControllerContent");
-    NSURL *dirURL = [[NSBundle mainBundle] resourceURL];
-    NSURL *pdfURL = [dirURL URLByAppendingPathComponent:@"MobileHIG.pdf"];
-    DDLogVerbose(@"pdfURL: %@", pdfURL);
-    
-    //
     [self.progressIndicatior startAnimation:nil];
     
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         // Do a taks in the background
         
-        PDFDocument* pdfDoc = [[PDFDocument alloc] initWithURL: pdfURL];
+        DDLogVerbose(@"self.book.fileUrl: %@", self.book.fileUrl);
+        
+        PDFDocument* pdfDoc = [[PDFDocument alloc] initWithURL: self.book.fileUrl];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             // Finish in main queue

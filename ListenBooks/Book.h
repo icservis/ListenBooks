@@ -32,6 +32,7 @@
 @property (nonatomic, retain) NSNumber * isSmart;
 @property (nonatomic, retain) NSNumber * isSpecialGroup;
 @property (nonatomic, retain) NSString * language;
+@property (nonatomic, retain) NSNumber * mediaKind;
 @property (nonatomic, retain) NSNumber * pageIndex;
 @property (nonatomic, retain) NSNumber * pagePosition;
 @property (nonatomic, retain) NSString * publisher;

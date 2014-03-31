@@ -34,6 +34,7 @@
 @dynamic isSmart;
 @dynamic isSpecialGroup;
 @dynamic language;
+@dynamic mediaKind;
 @dynamic pageIndex;
 @dynamic pagePosition;
 @dynamic publisher;

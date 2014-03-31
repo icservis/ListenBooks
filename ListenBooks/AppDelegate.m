@@ -178,7 +178,7 @@
 
 - (NSArray*)allowedFileTypes
 {
-    return [[NSArray alloc] initWithObjects:@"epub", @"ibook", @"opf", nil];
+    return [[NSArray alloc] initWithObjects:@"epub", @"ibook", @"opf", @"pdf", nil];
 }
 
 #pragma mark - User Interface
@@ -381,8 +381,8 @@
     [newModel setTitle:aTitle];
 	NSTabViewItem *newItem = [[NSTabViewItem alloc] initWithIdentifier:newModel];
     
-    /*
-    ImageViewController* imageViewController = [[ImageViewController alloc] initWithNibName:@"ImageViewController" bundle:nil];;
+    
+    ImageViewController* imageViewController = [[ImageViewController alloc] initWithNibName:NSStringFromClass([ImageViewController class]) bundle:nil];;
     [self.tabViewControllers addObject:imageViewController];
     imageViewController.managedObjectContext = self.managedObjectContext;
     imageViewController.tabViewItem = newItem;
@@ -391,38 +391,44 @@
     [newItem setView:mainView];
 	[self.tabView addTabViewItem:newItem];
     [self.tabView selectTabViewItem:newItem];
-    */
-    
-    BookPDFViewController* pdfViewController = [[BookPDFViewController alloc] initWithNibName:@"BookPDFViewController" bundle:nil];
-    [self.tabViewControllers addObject:pdfViewController];
-    pdfViewController.managedObjectContext = self.managedObjectContext;
-    pdfViewController.tabViewItem = newItem;
-    
-    NSView* mainView = [pdfViewController view];
-    [newItem setView:mainView];
-	[self.tabView addTabViewItem:newItem];
-    [self.tabView selectTabViewItem:newItem];
 }
 
-- (BookViewController*)addNewTabWithBook:(Book*)book
+- (id<TabBarControllerProtocol>)addNewTabWithBook:(Book*)book
 {
     TabBarModel *newModel = [[TabBarModel alloc] init];
     [newModel setTitle:book.title];
 	NSTabViewItem *newItem = [[NSTabViewItem alloc] initWithIdentifier:newModel];
-    
-    BookViewController* bookViewController = [[BookViewController alloc] initWithNibName:@"BookViewController" bundle:nil];
-    
-    [self.tabViewControllers addObject:bookViewController];
-    bookViewController.managedObjectContext = self.managedObjectContext;
-    bookViewController.tabViewItem = newItem;
-    bookViewController.book = book;
-    
-    NSView* mainView = [bookViewController view];
-    [newItem setView:mainView];
-	[self.tabView addTabViewItem:newItem];
-    [self.tabView selectTabViewItem:newItem];
 
-    return bookViewController;
+    
+    if ([book.mediaKind isEqualToNumber:@(MediaKindPdf)]) {
+        
+        BookPDFViewController* pdfViewController = [[BookPDFViewController alloc] initWithNibName:NSStringFromClass([BookPDFViewController class]) bundle:nil];
+        [self.tabViewControllers addObject:pdfViewController];
+        pdfViewController.managedObjectContext = self.managedObjectContext;
+        pdfViewController.tabViewItem = newItem;
+        pdfViewController.book = book;
+        NSView* mainView = [pdfViewController view];
+        [newItem setView:mainView];
+        [self.tabView addTabViewItem:newItem];
+        [self.tabView selectTabViewItem:newItem];
+        
+        return pdfViewController;
+        
+    } else {
+        
+        BookViewController* bookViewController = [[BookViewController alloc] initWithNibName:NSStringFromClass([BookViewController class]) bundle:nil];
+        
+        [self.tabViewControllers addObject:bookViewController];
+        bookViewController.managedObjectContext = self.managedObjectContext;
+        bookViewController.tabViewItem = newItem;
+        bookViewController.book = book;
+        NSView* mainView = [bookViewController view];
+        [newItem setView:mainView];
+        [self.tabView addTabViewItem:newItem];
+        [self.tabView selectTabViewItem:newItem];
+        
+        return bookViewController;
+    }
 }
 
 - (IBAction)closeTab:(id)sender
@@ -433,8 +439,6 @@
 
 - (void)closeTabWithItem:(NSTabViewItem*)tabViewItem
 {
-    DDLogVerbose(@"tabViewItem: %@", tabViewItem);
-    
     if (([self.tabBar delegate]) && ([[self.tabBar delegate] respondsToSelector:@selector(tabView:shouldCloseTabViewItem:)])) {
         if (![[self.tabBar delegate] tabView:self.tabView shouldCloseTabViewItem:tabViewItem]) {
             return;
@@ -474,7 +478,6 @@
 
 - (void)updateSelectionWithTabBarViewItem:(NSTabViewItem*)tabViewItem
 {
-    DDLogVerbose(@"tabViewItem: %@", tabViewItem);
     [self.tabViewControllers enumerateObjectsUsingBlock:^(id <TabBarControllerProtocol>controller, NSUInteger idx, BOOL *stop) {
         if ([controller.tabViewItem isEqualTo:tabViewItem]) {
             *stop = YES;
@@ -483,6 +486,12 @@
                 [self.booksTreeController setSelectedObject:bookViewController.book];
                 [self.listArrayController setSelectedObjects:@[bookViewController.book]];
                 [controller.tabViewItem setLabel:bookViewController.book.title];
+            }
+            if ([controller isKindOfClass:[BookPDFViewController class]]) {
+                BookPDFViewController* bookPdfViewController = (BookPDFViewController*)controller;
+                [self.booksTreeController setSelectedObject:bookPdfViewController.book];
+                [self.listArrayController setSelectedObjects:@[bookPdfViewController.book]];
+                [controller.tabViewItem setLabel:bookPdfViewController.book.title];
             }
         }
     }];
@@ -575,7 +584,6 @@
     [self processImportedFiles];
 }
 
-#pragma mark - Importing Book
 
 - (void)processImportedFiles
 {
@@ -585,8 +593,32 @@
     [self.progressWindowController updateProgressWindowWithMinValue:0];
     [self.progressWindowController updateProgressWindowWithMaxValue:self.importedFilesCount];
     
-    [self importBookWithUrl:[self.importedUrls firstObject]];
+    [self processNextFiles];
 }
+
+- (void)processNextFiles
+{
+    if ([self.importedUrls count] == 0) {
+        
+        AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
+        [appDelegate saveAction:nil];
+        
+        [self.progressWindowController updateProgressWindowWithInfo:NSLocalizedString(@"Importing File(s) completed", nil)];
+        [self.progressWindowController closeProgressWindow];
+        
+    } else {
+        
+        NSURL* importUrl = [self.importedUrls firstObject];
+        
+        if ([[importUrl pathExtension] isEqualToString:@"pdf"]) {
+            [self importPdfWithUrl:importUrl];
+        } else {
+            [self importBookWithUrl:importUrl];
+        }
+    }
+}
+
+#pragma mark - Importing Book
 
 - (void)importBookWithUrl:(NSURL*)sandboxedFileUrl
 {
@@ -594,6 +626,107 @@
     self.epubController = [[KFEpubController alloc] initWithEpubURL:sandboxedFileUrl andDestinationFolder:[self applicationCacheDirectory]];
     self.epubController.delegate = self;
     [self.epubController openAsynchronous:YES];
+}
+
+- (void)importPdfWithUrl:(NSURL*)sandboxedFileUrl
+{
+    DDLogVerbose(@"sandboxedFileUrl: %@", [sandboxedFileUrl absoluteString]);
+    [self.importedUrls removeObject:sandboxedFileUrl];
+    
+    [self.managedObjectContext processPendingChanges];
+    [[self.managedObjectContext undoManager] disableUndoRegistration];
+    
+    Book *book = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([Book class]) inManagedObjectContext:self.managedObjectContext];
+    
+    CGPDFDocumentRef document = CGPDFDocumentCreateWithURL((__bridge CFURLRef)sandboxedFileUrl);
+    CGPDFStringRef string;
+    CGPDFDictionaryRef infoDict;
+    infoDict = CGPDFDocumentGetInfo(document);
+    
+    if (CGPDFDictionaryGetString(infoDict, "Title", &string)) {
+        
+        CFStringRef s;
+        
+        s = CGPDFStringCopyTextString(string);
+        if (s != NULL) {
+            //need something in here in case it cant find anything
+            NSLog(@"Title: %@", s);
+            book.title = (__bridge NSString *)(s);
+        }
+        CFRelease(s);
+    }
+    
+    if (CGPDFDictionaryGetString(infoDict, "Author", &string)) {
+        
+        CFStringRef s;
+        
+        s = CGPDFStringCopyTextString(string);
+        if (s != NULL) {
+            //need something in here in case it cant find anything
+            NSLog(@"Author: %@", s);
+            book.author = (__bridge NSString *)(s);
+        }
+        CFRelease(s);
+    }
+    
+    if (CGPDFDictionaryGetString(infoDict, "Subject", &string)) {
+        
+        CFStringRef s;
+        
+        s = CGPDFStringCopyTextString(string);
+        if (s != NULL) {
+            //need something in here in case it cant find anything
+            NSLog(@"Subject: %@", s);
+            book.subject = (__bridge NSString *)(s);
+        }
+        CFRelease(s);
+    }
+    
+    if (CGPDFDictionaryGetString(infoDict, "CreationDate", &string)) {
+        
+        CFStringRef s;
+        
+        s = CGPDFStringCopyTextString(string);
+        if (s != NULL) {
+            //need something in here in case it cant find anything
+            NSLog(@"CreationDate: %@", s);
+            book.identifier = (__bridge NSString *)(s);
+        }
+        CFRelease(s);
+    }
+    
+    
+    CGPDFDocumentRelease(document);
+    
+    
+    book.language = @"";
+    book.publisher = @"";
+    book.creator = @"";
+    book.rights = @"";
+    book.source = @"";
+    book.fileUrl = sandboxedFileUrl;
+    book.mediaKind = @(MediaKindPdf);
+    book.type = @0;
+    book.encryption = @0;
+    book.date = nil;
+    
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        // Do a taks in the background
+        
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // Finish in main queue
+            
+            [self.managedObjectContext processPendingChanges];
+            [[self.managedObjectContext undoManager] enableUndoRegistration];
+            
+            DDLogVerbose(@"inserted book: %@", [book description]);
+            [self.progressWindowController updateProgressWindowWithDoubleValue:(self.importedFilesCount - [self.importedUrls count])];
+            [self addNewTabWithBook:book];
+            [self processNextFiles];
+        });
+    });
 }
 
 #pragma mark - Deleting Book
@@ -707,43 +840,7 @@
         }
     }
 }
-/*
-- (CGFloat)splitView:(NSSplitView *)splitView constrainMaxCoordinate:(CGFloat)proposedMaximumPosition ofSubviewAt:(NSInteger)dividerIndex
-{
-    if ([splitView isEqualTo:self.splitView]) {
-        CGFloat max = self.splitView.frame.size.width/3;
-        if (proposedMaximumPosition > max) {
-            proposedMaximumPosition = max;
-        }
-        return proposedMaximumPosition;
-    } else if ([splitView isEqualTo:self.subSplitView]) {
-        CGFloat max = self.subSplitView.frame.size.height*4/5;
-        if (proposedMaximumPosition > max) {
-            proposedMaximumPosition = max;
-        }
-        return proposedMaximumPosition;
-    }
-    return CGFLOAT_MAX;
-}
 
-- (CGFloat)splitView:(NSSplitView *)splitView constrainMinCoordinate:(CGFloat)proposedMinimumPosition ofSubviewAt:(NSInteger)dividerIndex
-{
-    if ([splitView isEqualTo:self.splitView]) {
-        CGFloat min = self.splitView.frame.size.width/5;
-        if (proposedMinimumPosition < min) {
-            proposedMinimumPosition = min;
-        }
-        return proposedMinimumPosition;
-    } else if ([splitView isEqualTo:self.subSplitView]) {
-        CGFloat min = self.subSplitView.frame.size.height*1/2;
-        if (proposedMinimumPosition < min) {
-            proposedMinimumPosition = min;
-        }
-        return proposedMinimumPosition;
-    }
-    return 0;
-}
-*/
 #pragma mark - KFEpubDelegate
 
 - (void)epubController:(KFEpubController *)controller willOpenEpub:(NSURL *)epubURL
@@ -752,7 +849,6 @@
     [self.progressWindowController updateProgressWindowWithInfo:[epubURL lastPathComponent]];
     [self.importedUrls removeObject:epubURL];
 }
-
 
 - (void)epubController:(KFEpubController *)controller didOpenEpub:(KFEpubContentModel *)contentModel
 {
@@ -776,6 +872,7 @@
     book.rights = [self.contentModel.metaData objectForKey:@"rights"];
     book.source = [self.contentModel.metaData objectForKey:@"source"];
     book.fileUrl = controller.epubURL;
+    book.mediaKind = @(MediaKindEpub);
     book.type = [NSNumber numberWithInteger:self.contentModel.bookType];
     book.encryption = [NSNumber numberWithInteger:self.contentModel.bookEncryption];
     book.date = [self.dateFormatter dateFromString:[self.contentModel.metaData objectForKey:@"date"]];
@@ -851,20 +948,6 @@
     [self.progressWindowController updateProgressWindowWithDoubleValue:(self.importedFilesCount - [self.importedUrls count])];
     [self unlinkBookWithUrl:controller.epubURL];
     [self processNextFiles];
-}
-
-- (void)processNextFiles
-{
-    if ([self.importedUrls count] == 0) {
-        
-        AppDelegate* appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
-        [appDelegate saveAction:nil];
-        
-        [self.progressWindowController updateProgressWindowWithInfo:NSLocalizedString(@"Importing File(s) completed", nil)];
-        [self.progressWindowController closeProgressWindow];
-    } else {
-        [self importBookWithUrl:[self.importedUrls firstObject]];
-    }
 }
 
 #pragma mark - TabBar Config
