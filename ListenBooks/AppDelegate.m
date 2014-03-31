@@ -869,6 +869,7 @@
     DDLogVerbose(@"meta %@", [self.contentModel.metaData description]);
     DDLogVerbose(@"coverPath %@", [self.contentModel.coverPath description]);
     DDLogVerbose(@"guide %@", [self.contentModel.guide description]);
+    DDLogVerbose(@"manifest %@", [self.contentModel.manifest description]);
     
     [self.managedObjectContext processPendingChanges];
     [[self.managedObjectContext undoManager] disableUndoRegistration];
