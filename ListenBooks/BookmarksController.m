@@ -11,6 +11,7 @@
 #import "Bookmark.h"
 #import "BookmarksController.h"
 #import "BookViewController.h"
+#import "BookPDFViewController.h"
 #import "BookmarksView.h"
 #import "BooksView.h"
 #import "BooksTreeController.h"
@@ -39,10 +40,19 @@
                     *stop = YES;
                 }
             }
+            if ([controller isKindOfClass:[BookPDFViewController class]]) {
+                BookPDFViewController* bookPdfViewController = (BookPDFViewController*)controller;
+                if ([bookPdfViewController.book isEqualTo:bookmark.book]) {
+                    [appDelegate.tabBar selectTabViewItem:bookPdfViewController.tabViewItem];
+                    bookPdfViewController.bookmark = bookmark;
+                    bookFound = YES;
+                    *stop = YES;
+                }
+            }
         }];
         if (bookFound == NO) {
-            BookViewController* bookViewController = [appDelegate addNewTabWithBook:bookmark.book];
-            bookViewController.bookmark = bookmark;
+            id<TabBarControllerProtocol> controller = [appDelegate addNewTabWithBook:bookmark.book];
+            controller.bookmark = bookmark;
         }
     }];
 }

@@ -8,8 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+@class Book;
+@class Bookmark;
+
 @protocol TabBarControllerProtocol <NSObject>
 
+@property (nonatomic, strong) Book* book;
+@property (nonatomic, strong) Bookmark* bookmark;
 @property (nonatomic, strong) NSTabViewItem* tabViewItem;
 @property (nonatomic, strong) NSManagedObjectContext* managedObjectContext;
 

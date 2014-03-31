@@ -246,7 +246,6 @@ static NSInteger const DefaultSpeed = 200;
 
 - (void)setBook:(Book *)book
 {
-    DDLogVerbose(@"self: %@", self);
     if (![book isEqual:_book]) {
         _bookmark = nil;
         [self resetPageView];
@@ -366,6 +365,8 @@ static NSInteger const DefaultSpeed = 200;
     }
 }
 
+#pragma mark - Load Content
+
 - (void)resetPageView
 {
     DDLogVerbose(@"resetPageView");
@@ -381,7 +382,7 @@ static NSInteger const DefaultSpeed = 200;
 
 - (void)loadPageContent:(Book*)book
 {
-    DDLogInfo(@"loadBookPageControllerContent");
+    DDLogInfo(@"loadPageContent: %@", book.title);
     
     [self.speechSynthetizer stopSpeaking];
     [self.progressIndicator startAnimation:nil];
@@ -414,7 +415,7 @@ static NSInteger const DefaultSpeed = 200;
 
 - (void)loadBookmark:(Bookmark*)bookmark
 {
-    DDLogDebug(@"bookmark: %@", bookmark.title);
+    DDLogDebug(@"loadBookmark: %@", bookmark.title);
     
     NSInteger pageIndex = [bookmark.pageIndex integerValue];
     if (pageIndex >= 0 && pageIndex < [self.pageController.arrangedObjects count]) {

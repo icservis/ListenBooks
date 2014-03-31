@@ -13,6 +13,10 @@
 #import "KFToolbarItem.h"
 #import "BookPDFView.h"
 #import "Book.h"
+#import "Bookmark.h"
+#import "BookBookmarksView.h"
+#import "BookSearchView.h"
+#import "SpinnerSearchField.h"
 
 @interface BookPDFViewController () <NSSplitViewDelegate, NSOutlineViewDataSource, NSOutlineViewDelegate>
 
@@ -25,6 +29,14 @@
 @property (weak) IBOutlet BookPDFView *pdfView;
 @property (weak) IBOutlet NSOutlineView *outlineView;
 
+@property (weak) IBOutlet NSTabView *sideBarTabView;
+@property (weak) IBOutlet NSTabViewItem *sideBarTabViewBookmarksTab;
+@property (weak) IBOutlet BookBookmarksView *bookBookmarksView;
+@property (weak) IBOutlet NSTabViewItem *sideBarTabViewSearchTab;
+@property (weak) IBOutlet BookSearchView *bookSearchView;
+@property (weak) IBOutlet SpinnerSearchField *bookSearchField;
+- (IBAction)searchAction:(id)sender;
+
 @property (weak) IBOutlet NSLayoutConstraint *toolBarHeightConstraint;
 
 @property (nonatomic, strong) PDFOutline* outline;
@@ -35,6 +47,9 @@
         CGFloat _toolBarFrameHeight;
         CGFloat _sideBarViewWidth;
 }
+
+@synthesize book = _book;
+@synthesize bookmark = _bookmark;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -48,9 +63,9 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    [self loadPageContent];
     
-    [self.pdfView setDelegate:self];
+    AppDelegate* appDelegate = [self appDelegate];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(contextDidChange:) name:NSManagedObjectContextObjectsDidChangeNotification object:appDelegate.managedObjectContext];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(pageChanged:)
@@ -59,6 +74,8 @@
     
     _toolBarFrameHeight = self.toolBarView.frame.size.height;
     _sideBarViewWidth = self.sideBarView.frame.size.width;
+    
+    [self.pdfView setDelegate:self];
 }
 
 - (void)dealloc
@@ -66,16 +83,66 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)loadPageContent
+- (AppDelegate*)appDelegate
 {
+    return (AppDelegate*)[[NSApplication sharedApplication] delegate];
+}
+
+#pragma mark - Setters
+
+- (void)setBook:(Book *)book
+{
+    if (![book isEqual:_book]) {
+        _bookmark = nil;
+        [self resetPageView];
+        [self loadPageContent:book];
+    }
+    _book = book;
+    [self.bookBookmarksView reloadData];
+}
+
+- (Book*)book
+{
+    return _book;
+}
+
+- (void)setBookmark:(Bookmark *)bookmark
+{
+    [self loadBookmark:bookmark];
+    _bookmark = bookmark;
+}
+
+- (Bookmark*)bookmark
+{
+    return _bookmark;
+}
+
+- (PDFOutline*)outline
+{
+    if (_outline == nil) {
+        _outline = [[self.pdfView document] outlineRoot];
+    }
+    return _outline;
+}
+
+#pragma mark - Load Content
+
+- (void)resetPageView
+{
+    DDLogVerbose(@"resetPageView");
+}
+
+- (void)loadPageContent:(Book*)book
+{
+    DDLogVerbose(@"loadPageContent");
     [self.progressIndicatior startAnimation:nil];
     
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         // Do a taks in the background
         
-        DDLogVerbose(@"self.book.fileUrl: %@", self.book.fileUrl);
+        DDLogVerbose(@"self.book.fileUrl: %@", book.fileUrl);
         
-        PDFDocument* pdfDoc = [[PDFDocument alloc] initWithURL: self.book.fileUrl];
+        PDFDocument* pdfDoc = [[PDFDocument alloc] initWithURL: book.fileUrl];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             // Finish in main queue
@@ -95,13 +162,9 @@
         });
     });
 }
-
-- (PDFOutline*)outline
+- (void)loadBookmark:(Bookmark*)bookmark
 {
-    if (_outline == nil) {
-        _outline = [[self.pdfView document] outlineRoot];
-    }
-    return _outline;
+    DDLogDebug(@"loadBookmark: %@", bookmark.title);
 }
 
 #pragma mark - TabViewControllerProtocol
@@ -266,8 +329,14 @@
 - (IBAction) takeDestinationFromOutline: (id) sender
 {
     PDFDestination* destination = [[sender itemAtRow:[sender selectedRow]] destination];
-    DDLogVerbose(@"destination: %@", destination);
     [self.pdfView goToDestination: destination];
+}
+
+#pragma mark - Notifications
+
+- (void)contextDidChange:(NSNotification*)notification
+{
+    
 }
 
 - (void) pageChanged: (NSNotification *) notification
@@ -318,8 +387,14 @@
 
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification
 {
-    DDLogVerbose(@"notification: %@", notification);
     [self takeDestinationFromOutline:notification.object];
+}
+
+#pragma mark - IBActions
+
+- (IBAction)searchAction:(id)sender
+{
+    
 }
 
 @end

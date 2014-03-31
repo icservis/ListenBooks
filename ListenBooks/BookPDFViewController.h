@@ -10,10 +10,12 @@
 #import "TabBarControllerProtocol.h"
 
 @class Book;
+@class Bookmark;
 
 @interface BookPDFViewController : NSViewController <TabBarControllerProtocol>
 
 @property (nonatomic, strong) Book* book;
+@property (nonatomic, strong) Bookmark* bookmark;
 @property (strong, nonatomic) NSManagedObjectContext* managedObjectContext;
 @property (nonatomic, strong) NSTabViewItem* tabViewItem;
 
