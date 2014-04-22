@@ -954,6 +954,13 @@
                     
                 }
             }
+            
+            if ([media isEqualToString:@"application/x-dtbncx+xml"]) {
+                // TOC
+                NSString *contentFile = contentModel.manifest[contentModel.spine[idx]][@"href"];
+                NSURL *contentURL = [controller.epubContentBaseURL URLByAppendingPathComponent:contentFile];
+                DDLogVerbose(@"TOC urlPath: %@", [contentURL absoluteURL]);
+            }
         }];
         
         dispatch_async(dispatch_get_main_queue(), ^{
