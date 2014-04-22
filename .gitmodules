@@ -3,7 +3,7 @@
 	url = https://github.com/sbooth/SFBAudioEngine.git
 [submodule "Vendor/KFEpubKit"]
 	path = Vendor/KFEpubKit
-	url = https://github.com/ricobeck/KFEpubKit.git
+	url = https://icservis@github.com/icservis/KFEpubKit.git
 [submodule "Vendor/KissXML"]
 	path = Vendor/KissXML
 	url = https://github.com/robbiehanson/KissXML.git
