@@ -23,12 +23,6 @@
 		842B61F918B16D5C00DC1A08 /* StringTrimedWhiteSpacesTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 842B61F818B16D5C00DC1A08 /* StringTrimedWhiteSpacesTransformer.m */; };
 		8444EA93185F83A400F90B48 /* KFToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8444EA90185F83A400F90B48 /* KFToolbar.m */; };
 		8444EA94185F83A400F90B48 /* KFToolbarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8444EA92185F83A400F90B48 /* KFToolbarItem.m */; };
-		8444EAA2185F83D900F90B48 /* KFEpubConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 8444EA97185F83D900F90B48 /* KFEpubConstants.m */; };
-		8444EAA3185F83D900F90B48 /* KFEpubContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8444EA99185F83D900F90B48 /* KFEpubContentModel.m */; };
-		8444EAA4185F83D900F90B48 /* KFEpubController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8444EA9B185F83D900F90B48 /* KFEpubController.m */; };
-		8444EAA5185F83D900F90B48 /* KFEpubExtractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8444EA9D185F83D900F90B48 /* KFEpubExtractor.m */; };
-		8444EAA6185F83D900F90B48 /* KFEpubKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 8444EA9F185F83D900F90B48 /* KFEpubKit.m */; };
-		8444EAA7185F83D900F90B48 /* KFEpubParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8444EAA1185F83D900F90B48 /* KFEpubParser.m */; };
 		8444EAB5185F840800F90B48 /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 8444EAAB185F840800F90B48 /* ioapi.c */; };
 		8444EAB6185F840800F90B48 /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = 8444EAAD185F840800F90B48 /* mztools.c */; };
 		8444EAB7185F840800F90B48 /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = 8444EAAF185F840800F90B48 /* unzip.c */; };
@@ -68,6 +62,18 @@
 		8478C42D185CA74000B06779 /* MySpotlightImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8478C42C185CA74000B06779 /* MySpotlightImporter.m */; };
 		847A005B186F9B5D00039910 /* NSTextView+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 847A005A186F9B5D00039910 /* NSTextView+Extensions.m */; };
 		847EF68B18AAC7F800A0DC04 /* MainWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 847EF68A18AAC7F800A0DC04 /* MainWindow.m */; };
+		84859933191AAF3B00598978 /* KFEpubConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 84859928191AAF3B00598978 /* KFEpubConstants.m */; };
+		84859934191AAF3B00598978 /* KFEpubConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 84859928191AAF3B00598978 /* KFEpubConstants.m */; };
+		84859935191AAF3B00598978 /* KFEpubContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8485992A191AAF3B00598978 /* KFEpubContentModel.m */; };
+		84859936191AAF3B00598978 /* KFEpubContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8485992A191AAF3B00598978 /* KFEpubContentModel.m */; };
+		84859937191AAF3B00598978 /* KFEpubController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8485992C191AAF3B00598978 /* KFEpubController.m */; };
+		84859938191AAF3B00598978 /* KFEpubController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8485992C191AAF3B00598978 /* KFEpubController.m */; };
+		84859939191AAF3B00598978 /* KFEpubExtractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8485992E191AAF3B00598978 /* KFEpubExtractor.m */; };
+		8485993A191AAF3B00598978 /* KFEpubExtractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8485992E191AAF3B00598978 /* KFEpubExtractor.m */; };
+		8485993B191AAF3B00598978 /* KFEpubKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 84859930191AAF3B00598978 /* KFEpubKit.m */; };
+		8485993C191AAF3B00598978 /* KFEpubKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 84859930191AAF3B00598978 /* KFEpubKit.m */; };
+		8485993D191AAF3B00598978 /* KFEpubParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 84859932191AAF3B00598978 /* KFEpubParser.m */; };
+		8485993E191AAF3B00598978 /* KFEpubParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 84859932191AAF3B00598978 /* KFEpubParser.m */; };
 		848C954018663FD00020FDC9 /* BooksTreeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 848C953F18663FD00020FDC9 /* BooksTreeController.m */; };
 		848C954118663FD00020FDC9 /* BooksTreeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 848C953F18663FD00020FDC9 /* BooksTreeController.m */; };
 		848C954418663FF60020FDC9 /* BookmarksArrayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 848C954318663FF60020FDC9 /* BookmarksArrayController.m */; };
@@ -220,18 +226,6 @@
 		8444EA90185F83A400F90B48 /* KFToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFToolbar.m; sourceTree = "<group>"; };
 		8444EA91185F83A400F90B48 /* KFToolbarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFToolbarItem.h; sourceTree = "<group>"; };
 		8444EA92185F83A400F90B48 /* KFToolbarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFToolbarItem.m; sourceTree = "<group>"; };
-		8444EA96185F83D900F90B48 /* KFEpubConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFEpubConstants.h; sourceTree = "<group>"; };
-		8444EA97185F83D900F90B48 /* KFEpubConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFEpubConstants.m; sourceTree = "<group>"; };
-		8444EA98185F83D900F90B48 /* KFEpubContentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFEpubContentModel.h; sourceTree = "<group>"; };
-		8444EA99185F83D900F90B48 /* KFEpubContentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFEpubContentModel.m; sourceTree = "<group>"; };
-		8444EA9A185F83D900F90B48 /* KFEpubController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFEpubController.h; sourceTree = "<group>"; };
-		8444EA9B185F83D900F90B48 /* KFEpubController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFEpubController.m; sourceTree = "<group>"; };
-		8444EA9C185F83D900F90B48 /* KFEpubExtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFEpubExtractor.h; sourceTree = "<group>"; };
-		8444EA9D185F83D900F90B48 /* KFEpubExtractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFEpubExtractor.m; sourceTree = "<group>"; };
-		8444EA9E185F83D900F90B48 /* KFEpubKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFEpubKit.h; sourceTree = "<group>"; };
-		8444EA9F185F83D900F90B48 /* KFEpubKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFEpubKit.m; sourceTree = "<group>"; };
-		8444EAA0185F83D900F90B48 /* KFEpubParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFEpubParser.h; sourceTree = "<group>"; };
-		8444EAA1185F83D900F90B48 /* KFEpubParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFEpubParser.m; sourceTree = "<group>"; };
 		8444EAAA185F840800F90B48 /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
 		8444EAAB185F840800F90B48 /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
 		8444EAAC185F840800F90B48 /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
@@ -303,6 +297,18 @@
 		847A005A186F9B5D00039910 /* NSTextView+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTextView+Extensions.m"; sourceTree = "<group>"; };
 		847EF68918AAC7F800A0DC04 /* MainWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainWindow.h; sourceTree = "<group>"; };
 		847EF68A18AAC7F800A0DC04 /* MainWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainWindow.m; sourceTree = "<group>"; };
+		84859927191AAF3B00598978 /* KFEpubConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFEpubConstants.h; sourceTree = "<group>"; };
+		84859928191AAF3B00598978 /* KFEpubConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFEpubConstants.m; sourceTree = "<group>"; };
+		84859929191AAF3B00598978 /* KFEpubContentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFEpubContentModel.h; sourceTree = "<group>"; };
+		8485992A191AAF3B00598978 /* KFEpubContentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFEpubContentModel.m; sourceTree = "<group>"; };
+		8485992B191AAF3B00598978 /* KFEpubController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFEpubController.h; sourceTree = "<group>"; };
+		8485992C191AAF3B00598978 /* KFEpubController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFEpubController.m; sourceTree = "<group>"; };
+		8485992D191AAF3B00598978 /* KFEpubExtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFEpubExtractor.h; sourceTree = "<group>"; };
+		8485992E191AAF3B00598978 /* KFEpubExtractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFEpubExtractor.m; sourceTree = "<group>"; };
+		8485992F191AAF3B00598978 /* KFEpubKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFEpubKit.h; sourceTree = "<group>"; };
+		84859930191AAF3B00598978 /* KFEpubKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFEpubKit.m; sourceTree = "<group>"; };
+		84859931191AAF3B00598978 /* KFEpubParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFEpubParser.h; sourceTree = "<group>"; };
+		84859932191AAF3B00598978 /* KFEpubParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFEpubParser.m; sourceTree = "<group>"; };
 		848C953E18663FD00020FDC9 /* BooksTreeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BooksTreeController.h; sourceTree = "<group>"; };
 		848C953F18663FD00020FDC9 /* BooksTreeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BooksTreeController.m; sourceTree = "<group>"; };
 		848C954218663FF60020FDC9 /* BookmarksArrayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarksArrayController.h; sourceTree = "<group>"; };
@@ -517,11 +523,11 @@
 		8444EA8D185F838100F90B48 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				84859926191AAF3B00598978 /* KFEpubKit */,
 				84AB042F186871E9007106F4 /* Libraries */,
 				84AB0412186871DD007106F4 /* Lumberjack */,
 				8444EABA185F841700F90B48 /* KissXML */,
 				8444EAA8185F840800F90B48 /* SSZipArchive */,
-				8444EA95185F83D900F90B48 /* KFEpubParser */,
 				8444EA8E185F83A400F90B48 /* KFToolBar */,
 			);
 			name = Vendor;
@@ -537,26 +543,6 @@
 			);
 			name = KFToolBar;
 			path = Vendor/KFToolbar/KFToolbar/Sources;
-			sourceTree = "<group>";
-		};
-		8444EA95185F83D900F90B48 /* KFEpubParser */ = {
-			isa = PBXGroup;
-			children = (
-				8444EA96185F83D900F90B48 /* KFEpubConstants.h */,
-				8444EA97185F83D900F90B48 /* KFEpubConstants.m */,
-				8444EA98185F83D900F90B48 /* KFEpubContentModel.h */,
-				8444EA99185F83D900F90B48 /* KFEpubContentModel.m */,
-				8444EA9A185F83D900F90B48 /* KFEpubController.h */,
-				8444EA9B185F83D900F90B48 /* KFEpubController.m */,
-				8444EA9C185F83D900F90B48 /* KFEpubExtractor.h */,
-				8444EA9D185F83D900F90B48 /* KFEpubExtractor.m */,
-				8444EA9E185F83D900F90B48 /* KFEpubKit.h */,
-				8444EA9F185F83D900F90B48 /* KFEpubKit.m */,
-				8444EAA0185F83D900F90B48 /* KFEpubParser.h */,
-				8444EAA1185F83D900F90B48 /* KFEpubParser.m */,
-			);
-			name = KFEpubParser;
-			path = Vendor/KFEpubKit/KFEpubKit/Sources;
 			sourceTree = "<group>";
 		};
 		8444EAA8185F840800F90B48 /* SSZipArchive */ = {
@@ -836,6 +822,26 @@
 				84F5C8AA18AB43630082B3C5 /* PreferencesWindowController.xib */,
 			);
 			name = PreferencesWindow;
+			sourceTree = "<group>";
+		};
+		84859926191AAF3B00598978 /* KFEpubKit */ = {
+			isa = PBXGroup;
+			children = (
+				84859927191AAF3B00598978 /* KFEpubConstants.h */,
+				84859928191AAF3B00598978 /* KFEpubConstants.m */,
+				84859929191AAF3B00598978 /* KFEpubContentModel.h */,
+				8485992A191AAF3B00598978 /* KFEpubContentModel.m */,
+				8485992B191AAF3B00598978 /* KFEpubController.h */,
+				8485992C191AAF3B00598978 /* KFEpubController.m */,
+				8485992D191AAF3B00598978 /* KFEpubExtractor.h */,
+				8485992E191AAF3B00598978 /* KFEpubExtractor.m */,
+				8485992F191AAF3B00598978 /* KFEpubKit.h */,
+				84859930191AAF3B00598978 /* KFEpubKit.m */,
+				84859931191AAF3B00598978 /* KFEpubParser.h */,
+				84859932191AAF3B00598978 /* KFEpubParser.m */,
+			);
+			name = KFEpubKit;
+			path = Vendor/KFEpubKit/KFEpubKit/Sources;
 			sourceTree = "<group>";
 		};
 		848C955B186646E50020FDC9 /* Categories */ = {
@@ -1345,20 +1351,21 @@
 				842B61EF18B00A6F00DC1A08 /* VoiceControlLanguageToPredicateTransformer.m in Sources */,
 				84AB0429186871DD007106F4 /* DDLog.m in Sources */,
 				84CA91E918E7411400AE9BA0 /* CustomDelegateScrollView.m in Sources */,
-				8444EAA7185F83D900F90B48 /* KFEpubParser.m in Sources */,
+				84859939191AAF3B00598978 /* KFEpubExtractor.m in Sources */,
 				8478C3F6185CA73F00B06779 /* AppDelegate.m in Sources */,
 				84AB0428186871DD007106F4 /* DDFileLogger.m in Sources */,
 				848C9574186647010020FDC9 /* NSTreeController_Extensions.m in Sources */,
 				84B3628918C61E4000CDF755 /* Paragraph.m in Sources */,
-				8444EAA5185F83D900F90B48 /* KFEpubExtractor.m in Sources */,
 				848C9589186647240020FDC9 /* NSImageToData.m in Sources */,
 				84AB04B31868A6C5007106F4 /* ListArrayController.m in Sources */,
 				842A12211865DC0E00AAAD42 /* ImageViewController.m in Sources */,
 				84E27E791862465600317411 /* BookmarksView.m in Sources */,
 				8444EACB185F841700F90B48 /* NSString+DDXML.m in Sources */,
+				84859933191AAF3B00598978 /* KFEpubConstants.m in Sources */,
 				8444EAB8185F840800F90B48 /* zip.c in Sources */,
 				848C958B186647240020FDC9 /* NumberToString.m in Sources */,
 				84BFE00A18E8850D00AF8DCD /* AdobePDFView.m in Sources */,
+				8485993D191AAF3B00598978 /* KFEpubParser.m in Sources */,
 				8444EAB9185F840800F90B48 /* SSZipArchive.m in Sources */,
 				84722BDE186DD76200FA7973 /* ListCollectionItemView.m in Sources */,
 				84E27E9718624D6000317411 /* BookViewController.m in Sources */,
@@ -1367,15 +1374,16 @@
 				8412B06118B3C33400D14AAE /* BookPageView.m in Sources */,
 				84E27EA21863010800317411 /* ListCollectionView.m in Sources */,
 				8478C3EF185CA73F00B06779 /* main.m in Sources */,
+				84859935191AAF3B00598978 /* KFEpubContentModel.m in Sources */,
 				84F5C8AB18AB43630082B3C5 /* PreferencesWindowController.m in Sources */,
 				84DA8DB218A7640C0079BD7C /* InformationWindowController.m in Sources */,
 				848C9587186647240020FDC9 /* ArrayCountToString.m in Sources */,
 				84B3628D18C62D1D00CDF755 /* SpinnerSearchField.m in Sources */,
 				84AB0426186871DD007106F4 /* DDAbstractDatabaseLogger.m in Sources */,
 				848C958D186647240020FDC9 /* NumberValueIsOne.m in Sources */,
+				84859937191AAF3B00598978 /* KFEpubController.m in Sources */,
 				84AB042B186871DD007106F4 /* DDContextFilterLogFormatter.m in Sources */,
 				84BFE00618E87B7700AF8DCD /* AdobePDFViewController.m in Sources */,
-				8444EAA6185F83D900F90B48 /* KFEpubKit.m in Sources */,
 				8444EACD185F841700F90B48 /* DDXMLElement.m in Sources */,
 				84E27E7C1862466F00317411 /* BooksView.m in Sources */,
 				848C9585186647240020FDC9 /* ArrayCountIsZero.m in Sources */,
@@ -1384,6 +1392,7 @@
 				8444EA93185F83A400F90B48 /* KFToolbar.m in Sources */,
 				84B3628518C61E4000CDF755 /* Page.m in Sources */,
 				844C0AA918ACDDD600656A28 /* ProgressWindowController.m in Sources */,
+				8485993B191AAF3B00598978 /* KFEpubKit.m in Sources */,
 				848C956A186647010020FDC9 /* NSArray_Extensions.m in Sources */,
 				842B61EC18AFFAA300DC1A08 /* VoiceControl.m in Sources */,
 				842B61F618B0BBB700DC1A08 /* ThemeControl.m in Sources */,
@@ -1391,7 +1400,6 @@
 				848C956E186647010020FDC9 /* NSDate+Extensions.m in Sources */,
 				8444EACC185F841700F90B48 /* DDXMLDocument.m in Sources */,
 				84DA8DB918A76D540079BD7C /* BlockAlert.m in Sources */,
-				8444EAA3185F83D900F90B48 /* KFEpubContentModel.m in Sources */,
 				84DA8DAA18A686A50079BD7C /* ListController.m in Sources */,
 				8444EAB7185F840800F90B48 /* unzip.c in Sources */,
 				848C956C186647010020FDC9 /* NSArrayController_Extensions.m in Sources */,
@@ -1409,12 +1417,10 @@
 				842B61F918B16D5C00DC1A08 /* StringTrimedWhiteSpacesTransformer.m in Sources */,
 				848E57E718AB997F004D72A3 /* NSAttributedStringToData.m in Sources */,
 				84AB0493186871E9007106F4 /* LumberjackFormatter.m in Sources */,
-				8444EAA2185F83D900F90B48 /* KFEpubConstants.m in Sources */,
 				84722BE1186DDDB600FA7973 /* ListCollectionViewItem.m in Sources */,
 				8444EACA185F841700F90B48 /* DDXMLElementAdditions.m in Sources */,
 				842B61E818AFE22C00DC1A08 /* FontControl.m in Sources */,
 				848C9570186647010020FDC9 /* NSIndexPath_Extensions.m in Sources */,
-				8444EAA4185F83D900F90B48 /* KFEpubController.m in Sources */,
 				84B3627D18C61E3F00CDF755 /* Book.m in Sources */,
 				8478C3FC185CA73F00B06779 /* ListenBooks.xcdatamodeld in Sources */,
 				8444EAB6185F840800F90B48 /* mztools.c in Sources */,
@@ -1427,19 +1433,25 @@
 			files = (
 				84B3628E18C62D1D00CDF755 /* SpinnerSearchField.m in Sources */,
 				84B3628618C61E4000CDF755 /* Page.m in Sources */,
+				84859936191AAF3B00598978 /* KFEpubContentModel.m in Sources */,
 				848C95491866405F0020FDC9 /* BooksController.m in Sources */,
 				8478C410185CA74000B06779 /* ListenBooksTests.m in Sources */,
 				848C954518663FF60020FDC9 /* BookmarksArrayController.m in Sources */,
 				84B3627E18C61E3F00CDF755 /* Book.m in Sources */,
 				848C956B186647010020FDC9 /* NSArray_Extensions.m in Sources */,
 				848C9577186647010020FDC9 /* NSTreeNode_Extensions.m in Sources */,
+				8485993C191AAF3B00598978 /* KFEpubKit.m in Sources */,
 				848C958E186647240020FDC9 /* NumberValueIsOne.m in Sources */,
+				84859934191AAF3B00598978 /* KFEpubConstants.m in Sources */,
 				848C958C186647240020FDC9 /* NumberToString.m in Sources */,
 				848C9590186647240020FDC9 /* StringToPredicateTransformer.m in Sources */,
+				8485993A191AAF3B00598978 /* KFEpubExtractor.m in Sources */,
+				8485993E191AAF3B00598978 /* KFEpubParser.m in Sources */,
 				848C9575186647010020FDC9 /* NSTreeController_Extensions.m in Sources */,
 				848C956D186647010020FDC9 /* NSArrayController_Extensions.m in Sources */,
 				848C9588186647240020FDC9 /* ArrayCountToString.m in Sources */,
 				848C9571186647010020FDC9 /* NSIndexPath_Extensions.m in Sources */,
+				84859938191AAF3B00598978 /* KFEpubController.m in Sources */,
 				848C9594186647370020FDC9 /* BookmarksController.m in Sources */,
 				848C956F186647010020FDC9 /* NSDate+Extensions.m in Sources */,
 				848C958A186647240020FDC9 /* NSImageToData.m in Sources */,

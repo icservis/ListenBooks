@@ -1,9 +1,6 @@
 [submodule "Vendor/SFBAudioEngine"]
 	path = Vendor/SFBAudioEngine
 	url = https://github.com/sbooth/SFBAudioEngine.git
-[submodule "Vendor/KFEpubKit"]
-	path = Vendor/KFEpubKit
-	url = https://icservis@github.com/icservis/KFEpubKit.git
 [submodule "Vendor/KissXML"]
 	path = Vendor/KissXML
 	url = https://github.com/robbiehanson/KissXML.git
@@ -22,3 +19,6 @@
 [submodule "Vendor/MMTabBarView"]
 	path = Vendor/MMTabBarView
 	url = https://github.com/MiMo42/MMTabBarView.git
+[submodule "Vendor/KFEpubKit"]
+	path = Vendor/KFEpubKit
+	url = https://icservis@github.com/icservis/KFEpubKit.git
