@@ -238,7 +238,7 @@
                  break;
                  
              case 1:
-                 [actionItem.button setMenu:self.actionMenu];
+                 [actionItem setMenu:self.actionMenu];
                  break;
                  
              case 2:
@@ -842,12 +842,14 @@
     }
     
     if ([splitView isEqualTo:self.subSplitView]) {
-        KFToolbarItem *bookmarksItem = self.toolBar.leftItems[2];
-        if ([self.subSplitView isSubviewCollapsed:self.bookmarksSplitPane]) {
-            bookmarksItem.state = NSOffState;
-        } else {
-            _bookmarksSplitPaneHeight = self.bookmarksSplitPane.frame.size.height;
-            bookmarksItem.state = NSOnState;
+        if ([self.toolBar.leftItems count] > 2) {
+            KFToolbarItem *bookmarksItem = self.toolBar.leftItems[2];
+            if ([self.subSplitView isSubviewCollapsed:self.bookmarksSplitPane]) {
+                bookmarksItem.state = NSOffState;
+            } else {
+                _bookmarksSplitPaneHeight = self.bookmarksSplitPane.frame.size.height;
+                bookmarksItem.state = NSOnState;
+            }
         }
     }
 }

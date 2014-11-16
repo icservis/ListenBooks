@@ -189,7 +189,8 @@
 
 - (NSView*)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item
 {
-    if ([[(Book *)[item representedObject] isLeaf] boolValue]) {
+    Book* book = (Book *)[item representedObject];
+    if ([[book isLeaf] boolValue]) {
         return [outlineView makeViewWithIdentifier:@"DataCell" owner:self];
     } else {
         return [outlineView makeViewWithIdentifier:@"HeaderCell" owner:self];
@@ -197,39 +198,44 @@
 }
 
 // Returns a Boolean that indicates whether a given row should be drawn in the “group row” style. Off by default.
-- (BOOL)outlineView:(NSOutlineView *)outlineView isGroupItem:(id)item;
+- (BOOL)outlineView:(NSOutlineView *)outlineView isGroupItem:(NSTreeNode *)item;
 {
-	if ([[(Book *)[item representedObject] isLeaf] boolValue] || [(NSTreeNode *)item isLeaf])
+    Book* book = (Book *)[item representedObject];
+	if ([[book isLeaf] boolValue] || [item isLeaf])
 		return NO;
-    return [[[item representedObject] isSpecialGroup] boolValue];
+    return [[book isSpecialGroup] boolValue];
 }
 
 
-- (BOOL)outlineView:(NSOutlineView *)outlineView shouldCollapseItem:(id)item;
+- (BOOL)outlineView:(NSOutlineView *)outlineView shouldCollapseItem:(NSTreeNode *)item;
 {
-    if ([[(Book *)[item representedObject] isLeaf] boolValue] || [(NSTreeNode *)item isLeaf])
+    Book* book = (Book *)[item representedObject];
+    if ([[book isLeaf] boolValue] || [item isLeaf])
 		return NO;
-	return [[[item representedObject] canCollapse] boolValue];
+	return [[book canCollapse] boolValue];
 }
 
 
-- (BOOL)outlineView:(NSOutlineView *)outlineView shouldExpandItem:(id)item;
+- (BOOL)outlineView:(NSOutlineView *)outlineView shouldExpandItem:(NSTreeNode *)item;
 {
-	if ([[(Book *)[item representedObject] isLeaf] boolValue] || [(NSTreeNode *)item isLeaf])
+    Book* book = (Book *)[item representedObject];
+	if ([[book isLeaf] boolValue] || [item isLeaf])
 		return NO;
-	return [[[item representedObject] canExpand] boolValue];
+	return [[book canExpand] boolValue];
 }
 
 
-- (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item;
+- (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(NSTreeNode *)item;
 {
-	return [[(Book *)[item representedObject] isSelectable] boolValue];
+    Book* book = (Book *)[item representedObject];
+	return [[book isSelectable] boolValue];
 }
 
 
-- (BOOL)outlineView:(NSOutlineView *)outlineView shouldEditTableColumn:(NSTableColumn *)tableColumn item:(id)item
+- (BOOL)outlineView:(NSOutlineView *)outlineView shouldEditTableColumn:(NSTableColumn *)tableColumn item:(NSTreeNode *)item
 {
-    return [[(Book *)[item representedObject] isEditable] boolValue];
+    Book* book = (Book *)[item representedObject];
+    return [[book isEditable] boolValue];
 }
 
 

@@ -10,6 +10,12 @@
 		840ED26418C4821200342386 /* BookSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 840ED26318C4821200342386 /* BookSearchView.m */; };
 		840ED28918C5266200342386 /* SearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 840ED28818C5266200342386 /* SearchResult.m */; };
 		840ED28A18C5266200342386 /* SearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 840ED28818C5266200342386 /* SearchResult.m */; };
+		840F927D1A18F8A00008BD39 /* KFItemConstraintBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 840F92711A18F8A00008BD39 /* KFItemConstraintBuilder.m */; };
+		840F927E1A18F8A00008BD39 /* KFToolBarConstraintBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 840F92731A18F8A00008BD39 /* KFToolBarConstraintBuilder.m */; };
+		840F927F1A18F8A00008BD39 /* KFToolbarItemButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 840F92751A18F8A00008BD39 /* KFToolbarItemButtonCell.m */; };
+		840F92801A18F8A00008BD39 /* KFViewBindingsBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 840F92781A18F8A00008BD39 /* KFViewBindingsBuilder.m */; };
+		840F92811A18F8A00008BD39 /* KFViewNameBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 840F927A1A18F8A00008BD39 /* KFViewNameBuilder.m */; };
+		840F92821A18F8A00008BD39 /* NSArray+KFIAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 840F927C1A18F8A00008BD39 /* NSArray+KFIAdditions.m */; };
 		8412B05D18B393C900D14AAE /* BookBookmarksView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8412B05C18B393C900D14AAE /* BookBookmarksView.m */; };
 		8412B06118B3C33400D14AAE /* BookPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8412B06018B3C33400D14AAE /* BookPageView.m */; };
 		8416258118A827CE00C42723 /* TabBarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8416258018A827CE00C42723 /* TabBarModel.m */; };
@@ -199,6 +205,19 @@
 		840ED26B18C4BB7F00342386 /* ListenBooks 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ListenBooks 4.xcdatamodel"; sourceTree = "<group>"; };
 		840ED28718C5266200342386 /* SearchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResult.h; sourceTree = "<group>"; };
 		840ED28818C5266200342386 /* SearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResult.m; sourceTree = "<group>"; };
+		840F92701A18F8A00008BD39 /* KFItemConstraintBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFItemConstraintBuilder.h; sourceTree = "<group>"; };
+		840F92711A18F8A00008BD39 /* KFItemConstraintBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFItemConstraintBuilder.m; sourceTree = "<group>"; };
+		840F92721A18F8A00008BD39 /* KFToolBarConstraintBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFToolBarConstraintBuilder.h; sourceTree = "<group>"; };
+		840F92731A18F8A00008BD39 /* KFToolBarConstraintBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFToolBarConstraintBuilder.m; sourceTree = "<group>"; };
+		840F92741A18F8A00008BD39 /* KFToolbarItemButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFToolbarItemButtonCell.h; sourceTree = "<group>"; };
+		840F92751A18F8A00008BD39 /* KFToolbarItemButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFToolbarItemButtonCell.m; sourceTree = "<group>"; };
+		840F92761A18F8A00008BD39 /* KFToolBarPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFToolBarPrivate.h; sourceTree = "<group>"; };
+		840F92771A18F8A00008BD39 /* KFViewBindingsBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFViewBindingsBuilder.h; sourceTree = "<group>"; };
+		840F92781A18F8A00008BD39 /* KFViewBindingsBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFViewBindingsBuilder.m; sourceTree = "<group>"; };
+		840F92791A18F8A00008BD39 /* KFViewNameBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFViewNameBuilder.h; sourceTree = "<group>"; };
+		840F927A1A18F8A00008BD39 /* KFViewNameBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFViewNameBuilder.m; sourceTree = "<group>"; };
+		840F927B1A18F8A00008BD39 /* NSArray+KFIAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+KFIAdditions.h"; sourceTree = "<group>"; };
+		840F927C1A18F8A00008BD39 /* NSArray+KFIAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+KFIAdditions.m"; sourceTree = "<group>"; };
 		8412B05B18B393C900D14AAE /* BookBookmarksView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookBookmarksView.h; sourceTree = "<group>"; };
 		8412B05C18B393C900D14AAE /* BookBookmarksView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookBookmarksView.m; sourceTree = "<group>"; };
 		8412B05F18B3C33400D14AAE /* BookPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookPageView.h; sourceTree = "<group>"; };
@@ -536,6 +555,19 @@
 		8444EA8E185F83A400F90B48 /* KFToolBar */ = {
 			isa = PBXGroup;
 			children = (
+				840F92701A18F8A00008BD39 /* KFItemConstraintBuilder.h */,
+				840F92711A18F8A00008BD39 /* KFItemConstraintBuilder.m */,
+				840F92721A18F8A00008BD39 /* KFToolBarConstraintBuilder.h */,
+				840F92731A18F8A00008BD39 /* KFToolBarConstraintBuilder.m */,
+				840F92741A18F8A00008BD39 /* KFToolbarItemButtonCell.h */,
+				840F92751A18F8A00008BD39 /* KFToolbarItemButtonCell.m */,
+				840F92761A18F8A00008BD39 /* KFToolBarPrivate.h */,
+				840F92771A18F8A00008BD39 /* KFViewBindingsBuilder.h */,
+				840F92781A18F8A00008BD39 /* KFViewBindingsBuilder.m */,
+				840F92791A18F8A00008BD39 /* KFViewNameBuilder.h */,
+				840F927A1A18F8A00008BD39 /* KFViewNameBuilder.m */,
+				840F927B1A18F8A00008BD39 /* NSArray+KFIAdditions.h */,
+				840F927C1A18F8A00008BD39 /* NSArray+KFIAdditions.m */,
 				8444EA8F185F83A400F90B48 /* KFToolbar.h */,
 				8444EA90185F83A400F90B48 /* KFToolbar.m */,
 				8444EA91185F83A400F90B48 /* KFToolbarItem.h */,
@@ -1344,7 +1376,9 @@
 				84B3628118C61E4000CDF755 /* Bookmark.m in Sources */,
 				84AB042C186871DD007106F4 /* DDDispatchQueueLogFormatter.m in Sources */,
 				8444EACE185F841700F90B48 /* DDXMLNode.m in Sources */,
+				840F92811A18F8A00008BD39 /* KFViewNameBuilder.m in Sources */,
 				84AB042D186871DD007106F4 /* DDMultiFormatter.m in Sources */,
+				840F927E1A18F8A00008BD39 /* KFToolBarConstraintBuilder.m in Sources */,
 				848C954418663FF60020FDC9 /* BookmarksArrayController.m in Sources */,
 				840ED26418C4821200342386 /* BookSearchView.m in Sources */,
 				842B61DB18AE633000DC1A08 /* BookObjectController.m in Sources */,
@@ -1366,8 +1400,10 @@
 				848C958B186647240020FDC9 /* NumberToString.m in Sources */,
 				84BFE00A18E8850D00AF8DCD /* AdobePDFView.m in Sources */,
 				8485993D191AAF3B00598978 /* KFEpubParser.m in Sources */,
+				840F92801A18F8A00008BD39 /* KFViewBindingsBuilder.m in Sources */,
 				8444EAB9185F840800F90B48 /* SSZipArchive.m in Sources */,
 				84722BDE186DD76200FA7973 /* ListCollectionItemView.m in Sources */,
+				840F927D1A18F8A00008BD39 /* KFItemConstraintBuilder.m in Sources */,
 				84E27E9718624D6000317411 /* BookViewController.m in Sources */,
 				8412B05D18B393C900D14AAE /* BookBookmarksView.m in Sources */,
 				848C9572186647010020FDC9 /* NSManagedObject_Extensions.m in Sources */,
@@ -1378,6 +1414,7 @@
 				84F5C8AB18AB43630082B3C5 /* PreferencesWindowController.m in Sources */,
 				84DA8DB218A7640C0079BD7C /* InformationWindowController.m in Sources */,
 				848C9587186647240020FDC9 /* ArrayCountToString.m in Sources */,
+				840F927F1A18F8A00008BD39 /* KFToolbarItemButtonCell.m in Sources */,
 				84B3628D18C62D1D00CDF755 /* SpinnerSearchField.m in Sources */,
 				84AB0426186871DD007106F4 /* DDAbstractDatabaseLogger.m in Sources */,
 				848C958D186647240020FDC9 /* NumberValueIsOne.m in Sources */,
@@ -1406,6 +1443,7 @@
 				840ED28918C5266200342386 /* SearchResult.m in Sources */,
 				847A005B186F9B5D00039910 /* NSTextView+Extensions.m in Sources */,
 				8444EA94185F83A400F90B48 /* KFToolbarItem.m in Sources */,
+				840F92821A18F8A00008BD39 /* NSArray+KFIAdditions.m in Sources */,
 				848C9576186647010020FDC9 /* NSTreeNode_Extensions.m in Sources */,
 				847EF68B18AAC7F800A0DC04 /* MainWindow.m in Sources */,
 				84DD96091864B29A00B9BD5A /* BookPageViewController.m in Sources */,
@@ -1570,7 +1608,7 @@
 					/usr/include/libxml2,
 					"Vendor/**",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-lxml2";
 				SDKROOT = macosx;
@@ -1609,7 +1647,7 @@
 					/usr/include/libxml2,
 					"Vendor/**",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OTHER_LDFLAGS = "-lxml2";
 				SDKROOT = macosx;
 			};
@@ -1656,7 +1694,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ListenBooks/ListenBooks.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ListenBooks/ListenBooks-Prefix.pch";
@@ -1672,7 +1710,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ListenBooks/ListenBooks.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ListenBooks/ListenBooks-Prefix.pch";
