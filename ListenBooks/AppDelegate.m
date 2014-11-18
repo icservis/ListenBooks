@@ -1186,7 +1186,7 @@
 	tabOrigin.x += 10;
 	tabOrigin.y += _tabBarFrameHeight/2+2;
     [tabViewImage drawAtPoint:tabOrigin fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
-    [tabViewImage compositeToPoint:tabOrigin operation:NSCompositeSourceOver];
+    //[tabViewImage compositeToPoint:tabOrigin operation:NSCompositeSourceOver];
 	[viewImage unlockFocus];
     
     MMTabBarView *tabBarView = (MMTabBarView *)[aTabView delegate];
